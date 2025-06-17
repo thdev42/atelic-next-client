@@ -5,7 +5,7 @@ import BgPattern from "../../../assets/HeroWebRight.png";
 
 const HeroSection = () => {
   return (
-    <section className="py-10 lg:py-20 relative overflow-hidden">
+    <section className="py-10 lg:py-5 2xl:py-20 relative overflow-hidden">
       <div className="mx-auto flex flex-col lg:flex-row items-center justify-between gap-12">
         {/* LEFT SIDE */}
         <div className="flex flex-row w-full ">
@@ -30,23 +30,23 @@ const HeroSection = () => {
 
           {/* Text Content */}
           <div>
-            <h1 className="text-4xl md:text-5xl font-sora font-normal text-black space-y-5 flex flex-col">
+            <h1 className="text-4xl md:text-4xl font-sora font-normal text-black space-y-5 flex flex-col">
               <span>Simplifying AI.</span>
               <span>Building Trust.</span>
               <span className="text-[#F02C2C] font-bold">Delivering ROI.</span>
             </h1>
 
-            <p className="text-gray-600 mt-6 max-w-lg">
+            <p className="font-sora text-gray-600 mt-6 max-w-lg">
               Atelic AI helps enterprises unlock real value from AI by solving
               complex challenges with secure, customized, industry-specific
               solutions.
             </p>
 
-            <div className="mt-8 flex gap-4 flex-wrap">
-              <button className="bg-[#0A3C66] text-white px-6 py-3 rounded-md hover:bg-[#082c4e]">
+            <div className="font-poppins mt-8 flex gap-4 flex-wrap">
+              <button className="text-xs  bg-[#0A3C66] text-white px-4 py-2 rounded-md hover:bg-[#082c4e]">
                 Book a Consultation
               </button>
-              <button className="bg-[#E5EAF0] text-[#0A3C66] px-6 py-3 rounded-md hover:bg-[#d3dbe3]">
+              <button className="text-xs bg-[#E5EAF0] text-[#0A3C66] px-4 py-2 rounded-md hover:bg-[#d3dbe3]">
                 Explore Our Approach
               </button>
             </div>
@@ -54,20 +54,21 @@ const HeroSection = () => {
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="w-full lg:w-1/2 relative">
+        <div className="w-full relative">
           {/* Optional Pattern Background */}
           <Image
             src={BgPattern}
             alt="Background Pattern"
-            className="absolute -z-10 top-0 right-0 opacity-50 max-w-full"
+            className="absolute"
+            // width="1290px"
           />
-
-          {/* Robot Image */}
           <Image
             src={Robot}
             alt="AI Robot"
-            className="w-full h-auto object-contain"
+            className="w-full h-auto z-10 object-contain"
           />
+
+          {/* Robot Image */}
 
           {/* Floating Stat Card Top Right */}
           <div className="font-poppins absolute  w-[210px] h-[170px] top-6 right-6 bg-white/40 rounded-[30px] shadow-[0_4px_60px_rgba(0,0,0,0.05)] backdrop-blur-[10px] px-9 py-4  flex flex-col justify-center">

@@ -27,7 +27,7 @@ const Navbar = () => {
             <Image src={NavIcon} alt="Logo" width={145} />
 
             {/* CENTER: Navigation Links */}
-            <ul className="hidden lg:flex xl:gap-5 lg:gap-3 text-base font text-black font-sora font-normal">
+            <ul className="hidden lg:flex 2xl:gap-5 lg:gap-1 2xl:text-base lg:text-sm font text-black font-sora font-normal">
               {navLinks.map((link) => {
                 const isActive = router.pathname === link.path;
 
