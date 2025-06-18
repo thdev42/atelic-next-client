@@ -20,11 +20,12 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 @keyframes floatUpDown {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-7px); /* or +15px if you want reverse */
+    transform: translateY(30px); /* or +15px if you want reverse */
   }
 }
 @font-face {

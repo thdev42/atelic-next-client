@@ -79,7 +79,7 @@ const HeroSection = () => {
             />
 
             <div
-              style={{ animation: "floatUpDown 5s ease-in-out infinite" }}
+              style={{ animation: "floatUpDown 11s ease-in-out infinite" }}
               className="font-poppins absolute xs:w-[180px] xs:h-[140px] w-[210px] h-[170px] 2xl:w-[240px] 2xl:h-[190px] top-6 -right-6 lg:top-14 lg:-right-6 bg-white/40 rounded-[30px] shadow-[0_4px_60px_rgba(0,0,0,0.05)] backdrop-blur-[10px] px-9 py-4 flex flex-col "
             >
               <p className="text-4xl 2xl:text-[50px] font-normal 2xl:mt-2 mb-2 text-black">
@@ -92,7 +92,7 @@ const HeroSection = () => {
             </div>
 
             <div
-              style={{ animation: "floatUpDown 5s ease-in-out infinite" }}
+              style={{ animation: "floatUpDown 11s ease-in-out infinite" }}
               className="font-poppins absolute w-[210px] h-[170px] 2xl:w-[240px] 2xl:h-[190px] bottom-0 left-0 2xl:bottom-40 2xl:-left-20 bg-white/40 rounded-[30px] shadow-[0_4px_60px_rgba(0,0,0,0.05)] backdrop-blur-[10px] px-9 py-4 flex flex-col"
             >
               <p className="text-4xl 2xl:text-[50px] font-normal text-black 2xl:mt-2  mb-2">

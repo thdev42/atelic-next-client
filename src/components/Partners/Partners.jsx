@@ -15,32 +15,28 @@ export const Partners = () => {
 
   return (
     <section className="bg-[#f3f3f3] max-w-[1920px] mx-auto w-full py-10 lg:py-20 relative overflow-hidden">
-      {/* Background Shape */}
-      <div className="absolute left-0 bottom-0 z-0 translate-y-[40%] sm:translate-y-[50%]">
+      {/* Background Image Left  */}
+      <div className="absolute -left-[420px] top-5 overflow-hidden z-0 pointer-events-none select-none">
         <Image
           src={BgShape}
-          alt="Decorative shape"
-          className="w-[250px] sm:w-[400px] md:w-[500px] lg:w-[600px] xl:w-[700px] object-contain pointer-events-none select-none"
+          alt="Decorative Shape"
+          width={1184}
+          height={900}
+          className="w-[1184px] h-[900px] object-none object-[top_right]"
         />
       </div>
 
       <div className="relative z-10 px-4 sm:px-8 md:px-12 xl:px-[178px] mx-auto w-full">
-        {/* Heading */}
-        <h2 className="text-center text-2xl md:text-3xl 2xl:text-4xl font-semibold text-black mb-10 font-sora">
-          Our Global Partners
+        <h2 className="text-center py-10 text-2xl md:text-3xl 2xl:text-[60px] font-normal text-black mb-10 font-sora">
+          Our Global <span className="font-extrabold">Partners</span>
         </h2>
 
-        {/* Infinite Scroll */}
         <div className="overflow-hidden w-full">
           <div className="flex gap-8 animate-marquee whitespace-nowrap">
             {[...logos, ...logos].map((logo, idx) => (
               <div
                 key={idx}
                 className="inline-flex items-center justify-center my-3 px-8 py-4 min-w-[287px] h-[165.39px] bg-[rgba(233,233,233,1)] border border-[rgba(0,0,0,0.18)] transition-all duration-300 hover:bg-white hover:shadow-[3px_4px_9.4px_1px_rgba(0,0,0,0.14)]"
-                // style={{
-                //   backgroundColor: "rgba(233, 233, 233, 1)",
-                //   border: "1px solid rgba(0, 0, 0, 0.18)",
-                // }}
               >
                 <Image
                   src={logo}
