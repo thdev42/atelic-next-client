@@ -19,15 +19,29 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+@keyframes floatUpDown {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px); /* or +15px if you want reverse */
+  }
+}
 @font-face {
   font-family: "Sora";
   src: url("/fonts/Sora-VariableFont_wght.ttf") format("truetype");
-  font-weight: normal;
+  font-weight: 300;
   font-style: normal;
 }
 @font-face {
   font-family: "Poppins";
-  src: url("/fonts/Poppins-Medium.ttf") format("truetype");
-  font-weight: normal;
+  src: url("/fonts/Poppins-Regular.ttf") format("truetype");
+  font-weight: bold;
   font-style: normal;
 }
+/* @font-face {
+  font-family: "Poppins";
+  src: url("/fonts/Poppins-Medium.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+} */

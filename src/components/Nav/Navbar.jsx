@@ -1,7 +1,7 @@
 // components/Navbar.jsx
 import { useRouter } from "next/router";
 import Container from "../container/container";
-import NavIcon from "../../../assets/NavIcon3.png";
+import NavIcon from "../../../assets/AtelicNavLogo.png";
 import MenuButton from "../../../assets/menu1.png";
 import Image from "next/image";
 import { Sora } from "next/font/google";
@@ -20,14 +20,14 @@ const Navbar = () => {
   console.log(router?.pathname);
   return (
     <header className="w-full bg-transparent">
-      <nav className="py-7">
+      <nav className="py-0">
         <Container>
-          <div className="flex items-center justify-between w-full relative">
+          <div className="px-4 sm:px-8 md:px-12 xl:px-[178px] flex items-center justify-between w-full relative">
             {/* LEFT: Logo */}
-            <Image src={NavIcon} alt="Logo" width={145} />
+            <Image src={NavIcon} alt="Logo" width={173} />
 
             {/* CENTER: Navigation Links */}
-            <ul className="hidden lg:flex 2xl:gap-5 lg:gap-1 2xl:text-base lg:text-sm font text-black font-sora font-normal">
+            <ul className="hidden lg:flex 2xl:gap-5 lg:gap-1 2xl:text-[20px] lg:text-sm font text-black font-sora font-normal">
               {navLinks.map((link) => {
                 const isActive = router.pathname === link.path;
 
@@ -50,7 +50,7 @@ const Navbar = () => {
 
             {/* RIGHT: Menu Icon */}
             <button className="cursor-pointer">
-              <Image src={MenuButton} alt="Menu" width={35} />
+              <Image src={MenuButton} alt="Menu" width={38} />
             </button>
           </div>
         </Container>
