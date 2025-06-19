@@ -28,6 +28,7 @@ body {
     transform: translateY(30px); /* or +15px if you want reverse */
   }
 }
+
 @font-face {
   font-family: "Sora";
   src: url("/fonts/Sora-VariableFont_wght.ttf") format("truetype");

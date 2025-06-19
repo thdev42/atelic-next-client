@@ -5,9 +5,12 @@ import NavIcon from "../../../assets/AtelicNavLogo.png";
 import MenuButton from "../../../assets/menu1.png";
 import Image from "next/image";
 import { Sora } from "next/font/google";
-
+import { useBackground } from "@/context/BackgroundContext";
 const Navbar = () => {
   const router = useRouter();
+  const { activeHeroIndex } = useBackground();
+  const isDarkHero = activeHeroIndex === 2;
+
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "About Us", path: "/about" },
@@ -20,14 +23,18 @@ const Navbar = () => {
   console.log(router?.pathname);
   return (
     <header className="w-full bg-transparent">
-      <nav className="py-0">
+      <nav className="z-50 py-0">
         <Container>
           <div className="px-4 sm:px-8 md:px-12 xl:px-[178px] flex items-center justify-between w-full relative">
             {/* LEFT: Logo */}
             <Image src={NavIcon} alt="Logo" width={173} />
 
             {/* CENTER: Navigation Links */}
-            <ul className="hidden lg:flex 2xl:gap-5 lg:gap-1 2xl:text-[20px] lg:text-sm font text-black font-sora font-normal">
+            <ul
+              className={`hidden lg:flex 2xl:gap-5 lg:gap-1 2xl:text-[20px] lg:text-sm font ${
+                isDarkHero ? "text-white" : "text-black"
+              }  font-sora font-normal`}
+            >
               {navLinks.map((link) => {
                 const isActive = router.pathname === link.path;
 

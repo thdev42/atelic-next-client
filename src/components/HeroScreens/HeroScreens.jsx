@@ -1,0 +1,343 @@
+"use client";
+
+import { useRef, useState, useEffect } from "react";
+import {
+  useScroll,
+  useTransform,
+  motion,
+  AnimatePresence,
+} from "framer-motion";
+import Image from "next/image";
+
+// Import all your images - you'll need to add these
+// import Robot1 from "../../../assets/AtelicRobot.png";
+// import Robot2 from "../../../assets/Robot2.png";
+// import Robot3 from "../../../assets/Robot3.png";
+// import Robot4 from "../../../assets/Robot4.png";
+// import BgPattern1 from "../../../assets/HeroWebRight1.png";
+// import BgPattern2 from "../../../assets/HeroWebRight2.png";
+// import BgPattern3 from "../../../assets/HeroWebRight3.png";
+// import BgPattern4 from "../../../assets/HeroWebRight4.png";
+import Robot1 from "../../../assets/AtelicRobot.png";
+import BgPattern1 from "../../../assets/HeroWebRight1.png";
+import AiChip from "../../../assets/AiChip (2).png";
+
+export const HeroComponent1 = ({ sectionY, backgroundY, robotY, textY }) => (
+  <section className="max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 relative overflow-hidden min-h-[600px] lg:min-h-[700px] 2xl:min-h-[800px]">
+    <div className="px-4 sm:px-8 md:px-12 xl:px-[178px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 h-full">
+      <div className="absolute right-0 top-0 translate-x-1/2 2xl:translate-x-1/4 hidden lg:block z-0">
+        <div className="w-[1282px] h-[915px]">
+          <Image
+            src={BgPattern1}
+            alt="Background Pattern"
+            width={1282}
+            height={915}
+          />
+        </div>
+      </div>
+      <div className="flex flex-row w-full">
+        <motion.div style={{ y: textY }}>
+          <h1 className="text-4xl 2xl:text-[60px] md:text-4xl font-sora font-normal text-black space-y-5 2xl:space-y-10 flex flex-col">
+            <span>Simplifying AI.</span>
+            <span>Building Trust.</span>
+            <span className="text-[#F02C2C] font-bold">
+              Delivering ROI<span className="text-black font-bold">.</span>
+            </span>
+          </h1>
+
+          <p className="2xl:text-[22px] text-base font-sora 2xl:leading-normal text-gray-600 mt-6 2xl:mt-14 max-w-lg">
+            Atelic AI helps enterprises unlock real value from AI by solving
+            complex challenges with secure, customized, industry-specific
+            solutions.
+          </p>
+
+          <div className="font-poppins mt-8 flex gap-4 flex-wrap">
+            <button className="text-xs 2xl:text-[16px] bg-[#335F86] text-white px-6 py-4 rounded-md hover:bg-[#082c4e] transition-all duration-300">
+              Book a Consultation
+            </button>
+            <button className="text-xs 2xl:text-[16px] bg-[#E5EAF0] text-[#0A3C66] px-6 py-4 rounded-md hover:bg-[#d3dbe3] transition-all duration-300">
+              Explore Our Approach
+            </button>
+          </div>
+        </motion.div>
+      </div>
+
+      <motion.div
+        style={{ y: robotY }}
+        className="w-full relative flex justify-end"
+      >
+        <div className="relative w-full 2xl:max-w-max lg:max-w-[600px] max-w-[500px] 2xl:h-[850px]">
+          <Image src={Robot1} alt="AI Robot" className="w-full " />
+
+          <div
+            style={{ animation: "floatUpDown 11s ease-in-out infinite" }}
+            className="font-poppins absolute xs:w-[180px] xs:h-[140px] w-[210px] h-[170px] 2xl:w-[240px] 2xl:h-[190px] top-6 -right-6 lg:top-14 lg:-right-6 bg-white/40 rounded-[30px] shadow-[0_4px_60px_rgba(0,0,0,0.05)] backdrop-blur-[10px] px-9 py-4 flex flex-col"
+          >
+            <p className="text-4xl 2xl:text-[50px] font-normal 2xl:mt-2 mb-2 text-black">
+              30%
+            </p>
+            <p className="text-xs 2xl:text-[16px] mt-2 font-thin text-black/60 leading-snug">
+              of GenAI projects will be abandoned after proof{" "}
+              <span className="underline cursor-pointer">Learn More</span>
+            </p>
+          </div>
+
+          <div
+            style={{ animation: "floatUpDown 11s ease-in-out infinite" }}
+            className="font-poppins absolute w-[210px] h-[170px] 2xl:w-[240px] 2xl:h-[190px] bottom-0 left-0 2xl:bottom-40 2xl:-left-20 bg-white/40 rounded-[30px] shadow-[0_4px_60px_rgba(0,0,0,0.05)] backdrop-blur-[10px] px-9 py-4 flex flex-col"
+          >
+            <p className="text-4xl 2xl:text-[50px] font-normal text-black 2xl:mt-2 mb-2">
+              42%
+            </p>
+            <p className="text-xs 2xl:text-[16px] mt-2 font-thin text-black/60 leading-snug">
+              of respondents don't fully understand the benefits of AI.
+            </p>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  </section>
+);
+export const HeroComponent2 = ({ sectionY, backgroundY, robotY, textY }) => (
+  <section className="max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 relative overflow-visible min-h-[600px] lg:min-h-[700px] 2xl:min-h-[800px]">
+    <div className="px-4 sm:px-8 md:px-12 xl:px-[178px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 h-full">
+      {/* Background Pattern */}
+      <div className="absolute right-0 -top-32 translate-x-1/2 2xl:translate-x-1/4 hidden lg:block z-10">
+        <div className="w-[1282px] h-[915px]">
+          <Image
+            src={BgPattern1}
+            alt="Background Pattern"
+            width={1282}
+            height={915}
+          />
+        </div>
+      </div>
+
+      {/* AI Chip Image - Absolute positioned for breaking container */}
+      <div className="hidden lg:block absolute right-0 top-20 z-10 -translate-x-2 sm:translate-x-0 md:translate-x-4 lg:translate-x-8 xl:translate-x-12 2xl:translate-x-16 translate-y-4 sm:translate-y-6 md:translate-y-8 lg:translate-y-0">
+        <div className="2xl:max-w-max xl:max-w-[700px] lg:max-w-[650px]">
+          <Image
+            src={AiChip}
+            alt="AI Robot"
+            className="w-full h-full object-contain"
+          />
+        </div>
+      </div>
+
+      {/* Text Content */}
+      <div className="flex flex-row w-full relative z-20">
+        <motion.div style={{ y: textY }} className="w-full lg:w-auto">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-[60px] font-sora font-normal text-black space-y-2 sm:space-y-3 md:space-y-4 lg:space-y-5 2xl:space-y-10 flex flex-col">
+            <span>Simplifying AI.</span>
+            <span>Building Trust.</span>
+            <span className="text-[#F02C2C] font-bold">
+              Delivering ROI<span className="text-black font-bold">.</span>
+            </span>
+          </h1>
+
+          <p className="text-sm sm:text-base md:text-lg lg:text-base xl:text-xl 2xl:text-[22px] font-sora 2xl:leading-normal text-gray-600 mt-4 sm:mt-5 md:mt-6 lg:mt-6 xl:mt-10 2xl:mt-14 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
+            Atelic AI helps enterprises unlock real value from AI by solving
+            complex challenges with secure, customized, industry-specific
+            solutions.
+          </p>
+
+          <div className="font-poppins mt-6 sm:mt-7 md:mt-8 lg:mt-8 xl:mt-10 flex gap-3 sm:gap-4 flex-wrap">
+            <button className="text-xs sm:text-sm md:text-base lg:text-xs xl:text-sm 2xl:text-[16px] bg-[#335F86] text-white px-4 py-3 sm:px-5 sm:py-3 md:px-6 md:py-4 lg:px-6 lg:py-4 rounded-md hover:bg-[#082c4e] transition-all duration-300">
+              Book a Consultation
+            </button>
+            <button className="text-xs sm:text-sm md:text-base lg:text-xs xl:text-sm 2xl:text-[16px] bg-[#E5EAF0] text-[#0A3C66] px-4 py-3 sm:px-5 sm:py-3 md:px-6 md:py-4 lg:px-6 lg:py-4 rounded-md hover:bg-[#d3dbe3] transition-all duration-300">
+              Explore Our Approach
+            </button>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Robot Motion Container - Hidden on smaller screens since image is absolute */}
+      <motion.div
+        style={{ y: robotY }}
+        className="w-full relative flex justify-end"
+      >
+        <div className="relative w-full 2xl:max-w-max lg:max-w-[600px] max-w-[500px] 2xl:h-[850px]">
+          <div className="block lg:hidden">
+            <Image src={AiChip} alt="AI Robot" className="w-full " />
+          </div>
+        </div>
+      </motion.div>
+    </div>
+
+    {/* CSS for floating animation */}
+    <style jsx>{`
+      @keyframes floatUpDown {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+    `}</style>
+  </section>
+);
+
+// Hero Component 3 - Innovation Focus
+export const HeroComponent3 = ({ sectionY, backgroundY, robotY, textY }) => (
+  <section
+    className="max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 relative overflow-hidden min-h-[600px] lg:min-h-[700px] 2xl:min-h-[800px]"
+    style={{
+      background:
+        "linear-gradient(180deg, #03080E 1.61%, #09111C 24.4%, #101D26 50.12%, #131D29 64.35%, #121D29 75.72%, #121C26 87.16%, #0D1620 98.06%)",
+    }}
+  >
+    <div className="px-4 sm:px-8 md:px-12 xl:px-[178px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 h-full">
+      <div className="absolute right-0 top-0 translate-x-1/2 2xl:translate-x-1/4 hidden lg:block z-0">
+        <div className="w-[1282px] h-[915px]">
+          <Image
+            src={BgPattern1}
+            alt="Background Pattern"
+            width={1282}
+            height={915}
+          />
+        </div>
+      </div>
+      <div className="flex flex-row w-full">
+        <motion.div style={{ y: textY }}>
+          <h1 className="text-4xl 2xl:text-[60px] md:text-4xl font-sora font-normal text-white space-y-5 2xl:space-y-10 flex flex-col">
+            <span>Simplifying AI.</span>
+            <span>Building Trust.</span>
+            <span className="text-[#F02C2C] font-bold">
+              Delivering ROI<span className="text-white font-bold">.</span>
+            </span>
+          </h1>
+
+          <p className="2xl:text-[22px] text-base font-sora 2xl:leading-normal text-gray-300 mt-6 2xl:mt-14 max-w-lg">
+            Atelic AI helps enterprises unlock real value from AI by solving
+            complex challenges with secure, customized, industry-specific
+            solutions.
+          </p>
+
+          <div className="font-poppins mt-8 flex gap-4 flex-wrap">
+            <button className="text-xs 2xl:text-[16px] bg-[#335F86] text-white px-6 py-4 rounded-md hover:bg-[#082c4e] transition-all duration-300">
+              Book a Consultation
+            </button>
+            <button className="text-xs 2xl:text-[16px] bg-[#E5EAF0] text-[#0A3C66] px-6 py-4 rounded-md hover:bg-[#d3dbe3] transition-all duration-300">
+              Explore Our Approach
+            </button>
+          </div>
+        </motion.div>
+      </div>
+
+      <motion.div
+        style={{ y: robotY }}
+        className="w-full relative flex justify-end"
+      >
+        <div className="relative w-full 2xl:max-w-max lg:max-w-[600px] max-w-[500px] 2xl:h-[850px]">
+          <Image src={Robot1} alt="AI Robot" className="w-full " />
+
+          <div
+            style={{ animation: "floatUpDown 11s ease-in-out infinite" }}
+            className="font-poppins absolute xs:w-[180px] xs:h-[140px] w-[210px] h-[170px] 2xl:w-[240px] 2xl:h-[190px] top-6 -right-6 lg:top-14 lg:-right-6 bg-white/40 rounded-[30px] shadow-[0_4px_60px_rgba(0,0,0,0.05)] backdrop-blur-[10px] px-9 py-4 flex flex-col"
+          >
+            <p className="text-4xl 2xl:text-[50px] font-normal 2xl:mt-2 mb-2 text-black">
+              30%
+            </p>
+            <p className="text-xs 2xl:text-[16px] mt-2 font-thin text-black/60 leading-snug">
+              of GenAI projects will be abandoned after proof{" "}
+              <span className="underline cursor-pointer">Learn More</span>
+            </p>
+          </div>
+
+          <div
+            style={{ animation: "floatUpDown 11s ease-in-out infinite" }}
+            className="font-poppins absolute w-[210px] h-[170px] 2xl:w-[240px] 2xl:h-[190px] bottom-0 left-0 2xl:bottom-40 2xl:-left-20 bg-white/40 rounded-[30px] shadow-[0_4px_60px_rgba(0,0,0,0.05)] backdrop-blur-[10px] px-9 py-4 flex flex-col"
+          >
+            <p className="text-4xl 2xl:text-[50px] font-normal text-black 2xl:mt-2 mb-2">
+              42%
+            </p>
+            <p className="text-xs 2xl:text-[16px] mt-2 font-thin text-black/60 leading-snug">
+              of respondents don't fully understand the benefits of AI.
+            </p>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  </section>
+);
+
+// Hero Component 4 - Results Focus
+export const HeroComponent4 = ({ sectionY, backgroundY, robotY, textY }) => (
+  <>
+    <div className="absolute right-0 top-0 translate-x-1/4 hidden lg:block">
+      <div className="w-[1282px] h-[915px] bg-gradient-to-br from-orange-100/30 to-red-200/30 rounded-full blur-3xl">
+        {/* <Image src={BgPattern4} alt="Background Pattern" width={1282} height={915} /> */}
+      </div>
+    </div>
+
+    <div className="relative z-10 px-4 sm:px-8 md:px-12 xl:px-[178px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-12">
+      <div className="flex flex-row w-full">
+        <motion.div style={{ y: textY }}>
+          <h1 className="text-4xl 2xl:text-[60px] md:text-4xl font-sora font-normal text-black space-y-5 2xl:space-y-10 flex flex-col">
+            <span>Accelerating Success.</span>
+            <span>Driving Results.</span>
+            <span className="text-[#F59E0B] font-bold">
+              Measuring Value<span className="text-black font-bold">.</span>
+            </span>
+          </h1>
+
+          <p className="2xl:text-[22px] text-base font-sora 2xl:leading-normal text-gray-600 mt-6 2xl:mt-14 max-w-lg">
+            Experience the power of AI that delivers tangible results through
+            our proven methodology and industry-leading expertise in machine
+            learning.
+          </p>
+
+          <div className="font-poppins mt-8 flex gap-4 flex-wrap">
+            <button className="text-xs 2xl:text-[16px] bg-[#F59E0B] text-white px-6 py-4 rounded-md hover:bg-[#D97706] transition-all duration-300">
+              Measure Results
+            </button>
+            <button className="text-xs 2xl:text-[16px] bg-[#FFFBEB] text-[#F59E0B] px-6 py-4 rounded-md hover:bg-[#FEF3C7] transition-all duration-300">
+              Success Stories
+            </button>
+          </div>
+        </motion.div>
+      </div>
+
+      <motion.div
+        style={{ y: robotY }}
+        className="w-full relative flex justify-end"
+      >
+        <div className="relative w-full lg:max-w-[600px] max-w-[500px]">
+          <div className="w-full h-auto z-10 object-contain">
+            <div className="w-full aspect-square bg-gradient-to-br from-orange-200/50 to-red-300/50 rounded-3xl flex items-center justify-center">
+              <div className="text-8xl">📊</div>
+              {/* <Image src={Robot4} alt="Results Robot" className="w-full h-auto z-10 object-contain" /> */}
+            </div>
+          </div>
+
+          <div
+            style={{ animation: "floatUpDown 11s ease-in-out infinite" }}
+            className="font-poppins absolute xs:w-[180px] xs:h-[140px] w-[210px] h-[170px] 2xl:w-[240px] 2xl:h-[190px] top-6 -right-6 lg:top-14 lg:-right-6 bg-white/40 rounded-[30px] shadow-[0_4px_60px_rgba(0,0,0,0.05)] backdrop-blur-[10px] px-9 py-4 flex flex-col"
+          >
+            <p className="text-4xl 2xl:text-[50px] font-normal 2xl:mt-2 mb-2 text-black">
+              24/7
+            </p>
+            <p className="text-xs 2xl:text-[16px] mt-2 font-thin text-black/60 leading-snug">
+              AI monitoring and optimization services
+            </p>
+          </div>
+
+          <div
+            style={{ animation: "floatUpDown 11s ease-in-out infinite" }}
+            className="font-poppins absolute w-[210px] h-[170px] 2xl:w-[240px] 2xl:h-[190px] bottom-0 left-0 2xl:bottom-40 2xl:-left-20 bg-white/40 rounded-[30px] shadow-[0_4px_60px_rgba(0,0,0,0.05)] backdrop-blur-[10px] px-9 py-4 flex flex-col"
+          >
+            <p className="text-4xl 2xl:text-[50px] font-normal text-black 2xl:mt-2 mb-2">
+              99%
+            </p>
+            <p className="text-xs 2xl:text-[16px] mt-2 font-thin text-black/60 leading-snug">
+              uptime guarantee for all deployed solutions
+            </p>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  </>
+);

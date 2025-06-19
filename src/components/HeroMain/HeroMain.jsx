@@ -1,111 +1,176 @@
-// components/HeroSection.jsx
+"use client";
+
+import { useRef, useState, useEffect } from "react";
+import {
+  useScroll,
+  useTransform,
+  motion,
+  AnimatePresence,
+} from "framer-motion";
 import Image from "next/image";
-import Robot from "../../../assets/AtelicRobot.png";
-import BgPattern from "../../../assets/HeroWebRight1.png";
+
+import {
+  HeroComponent1,
+  HeroComponent2,
+  HeroComponent3,
+} from "../HeroScreens/HeroScreens";
+import { useBackground } from "@/context/BackgroundContext";
 
 const HeroSection = () => {
+  const sectionRef = useRef(null);
+  const [activeSection, setActiveSection] = useState(0);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+  const { setBackground, setActiveHeroIndex } = useBackground();
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  // Parallax layers
+  const sectionY = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]);
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
+  const robotY = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "-50%"]);
+
+  // Hero components array
+  const heroComponents = [
+    HeroComponent1,
+    HeroComponent2,
+    HeroComponent3,
+    // HeroComponent4
+  ];
+  const bgColors = [
+    "#e9e9e9",
+    "#e9e9e9",
+    "linear-gradient(180deg, #03080E 1.61%, #09111C 24.4%, #101D26 50.12%, #131D29 64.35%, #121D29 75.72%, #121C26 87.16%, #0D1620 98.06%)",
+  ];
+
+  // Touch handlers
+  const handleTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe && activeSection < heroComponents.length - 1) {
+      setActiveSection(activeSection + 1);
+    }
+    if (isRightSwipe && activeSection > 0) {
+      setActiveSection(activeSection - 1);
+    }
+  };
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "ArrowLeft" && activeSection > 0) {
+        setActiveSection(activeSection - 1);
+      }
+      if (e.key === "ArrowRight" && activeSection < heroComponents.length - 1) {
+        setActiveSection(activeSection + 1);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [activeSection]);
+
+  useEffect(() => {
+    // Whenever slide changes, update layout bg
+    setBackground(bgColors[activeSection]);
+    setActiveHeroIndex(activeSection);
+  }, [activeSection, setBackground, setActiveHeroIndex]);
+
+  const CurrentHeroComponent = heroComponents[activeSection];
+
   return (
-    <section className=" max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 relative overflow-hidden">
-      <div className="px-4 sm:px-8 md:px-12 xl:px-[178px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-12">
-        <div className="flex flex-row w-full ">
-          <div className="font-poppins hidden xl:flex flex-col gap-4 2xl:ml-20 xl:ml-10 ml-0 items-center absolute left-0 top-1/2 -translate-y-1/2 z-20">
-            {[1, 2, 3, 4].map((num, idx) => (
-              <div
-                key={num}
-                className={`relative ${
-                  idx === 0 ? "w-14 h-14" : "w-11 h-11"
-                } flex items-center justify-center`}
-              >
-                <span className={`text-sm font-semibold z-10 ${"text-black"}`}>
-                  {num < 10 ? `0${num}` : num}
-                </span>
-
-                {idx === 0 ? (
-                  <span className="absolute w-14 h-14 rounded-full border-[2px] border-black rotate-[45deg] border-t-transparent"></span>
-                ) : (
-                  <></>
-                )}
-              </div>
-            ))}
+    <motion.section
+      ref={sectionRef}
+      style={{ y: sectionY }}
+      className="max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 relative overflow-hidden transition-all duration-1000 ease-in-out"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
+      {/* Left Vertical Numbers */}
+      <div className="font-poppins hidden xl:flex flex-col gap-4 2xl:ml-20 xl:ml-10 ml-0 items-center absolute left-0 top-1/2 -translate-y-1/2 z-20">
+        {heroComponents.map((component, idx) => (
+          <div
+            key={idx + 1}
+            className={`relative cursor-pointer transition-all duration-300 ${
+              idx === activeSection ? "w-14 h-14" : "w-11 h-11"
+            } flex items-center justify-center`}
+            onClick={() => setActiveSection(idx)}
+          >
+            <span className={`text-sm font-semibold z-10 text-black`}>
+              {idx + 1 < 10 ? `0${idx + 1}` : idx + 1}
+            </span>
+            {idx === activeSection && (
+              <motion.span
+                className="absolute w-14 h-14 rounded-full border-[2px] border-black rotate-[45deg] border-t-transparent"
+                initial={{ scale: 0, rotate: 0 }}
+                animate={{ scale: 1, rotate: 45 }}
+                transition={{ duration: 0.5, ease: "backOut" }}
+              />
+            )}
           </div>
-
-          <div>
-            <h1 className="text-4xl 2xl:text-[60px] md:text-4xl font-sora font-normal text-black space-y-5 2xl:space-y-10 flex flex-col">
-              <span>Simplifying AI.</span>
-              <span>Building Trust.</span>
-              <span className="text-[#F02C2C] font-bold">
-                Delivering ROI<span className="text-black font-bold">.</span>{" "}
-              </span>
-            </h1>
-
-            <p className="2xl:text-[22px] text-base font-sora 2xl:leading-normal text-gray-600 mt-6 2xl:mt-14 max-w-lg">
-              Atelic AI helps enterprises unlock real value from AI by solving
-              complex challenges with secure, customized, industry-specific
-              solutions.
-            </p>
-
-            <div className="font-poppins mt-8 flex gap-4 flex-wrap">
-              <button className="text-xs 2xl:text-[16px]  bg-[#335F86] text-white px-6 py-4 rounded-md hover:bg-[#082c4e]">
-                Book a Consultation
-              </button>
-              <button className="text-xs 2xl:text-[16px]   bg-[#E5EAF0] text-[#0A3C66] px-6 py-4 rounded-md hover:bg-[#d3dbe3]">
-                Explore Our Approach
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="w-full relative flex justify-end">
-          <div className="absolute right-0 top-0 2xl:w-full lg:w-[600px] h-full translate-x-1/4 ">
-            <Image
-              src={BgPattern}
-              alt="Background Pattern"
-              className="w-full h-full object-cover pointer-events-none select-none"
-            />
-          </div>
-          <div className="absolute right-0 top-0 h-full translate-x-15 hidden lg:block">
-            <Image
-              src={BgPattern}
-              alt="Background Pattern"
-              className="w-full h-full object-cover"
-            />
-          </div>
-
-          <div className="relative w-full lg:max-w-[600px] max-w-[500px]">
-            <Image
-              src={Robot}
-              alt="AI Robot"
-              className="w-full h-auto z-10 object-contain"
-            />
-
-            <div
-              style={{ animation: "floatUpDown 11s ease-in-out infinite" }}
-              className="font-poppins absolute xs:w-[180px] xs:h-[140px] w-[210px] h-[170px] 2xl:w-[240px] 2xl:h-[190px] top-6 -right-6 lg:top-14 lg:-right-6 bg-white/40 rounded-[30px] shadow-[0_4px_60px_rgba(0,0,0,0.05)] backdrop-blur-[10px] px-9 py-4 flex flex-col "
-            >
-              <p className="text-4xl 2xl:text-[50px] font-normal 2xl:mt-2 mb-2 text-black">
-                30%
-              </p>
-              <p className="text-xs 2xl:text-[16px] mt-2 font-thin text-black/60 leading-snug">
-                of GenAI projects will be abandoned after proof{" "}
-                <span className="underline cursor-pointer">Learn More</span>
-              </p>
-            </div>
-
-            <div
-              style={{ animation: "floatUpDown 11s ease-in-out infinite" }}
-              className="font-poppins absolute w-[210px] h-[170px] 2xl:w-[240px] 2xl:h-[190px] bottom-0 left-0 2xl:bottom-40 2xl:-left-20 bg-white/40 rounded-[30px] shadow-[0_4px_60px_rgba(0,0,0,0.05)] backdrop-blur-[10px] px-9 py-4 flex flex-col"
-            >
-              <p className="text-4xl 2xl:text-[50px] font-normal text-black 2xl:mt-2  mb-2">
-                42%
-              </p>
-              <p className="text-xs 2xl:text-[16px] mt-2 font-thin text-black/60 leading-snug">
-                of respondents don’t fully understand the benefits of AI.
-              </p>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
-    </section>
+
+      {/* Hero Components with Smooth Transitions */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeSection}
+          initial={{ opacity: 0, x: 100 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -100 }}
+          transition={{ duration: 0.6, ease: "easeInOut" }}
+        >
+          <CurrentHeroComponent
+            sectionY={sectionY}
+            backgroundY={backgroundY}
+            robotY={robotY}
+            textY={textY}
+          />
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Swipe Indicators */}
+      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
+        {heroComponents.map((_, idx) => (
+          <div
+            key={idx}
+            className={`w-2 h-2 rounded-full cursor-pointer transition-all duration-300 ${
+              idx === activeSection ? "bg-black w-8" : "bg-gray-400"
+            }`}
+            onClick={() => setActiveSection(idx)}
+          />
+        ))}
+      </div>
+
+      <style jsx>{`
+        @keyframes floatUpDown {
+          0%,
+          100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-20px);
+          }
+        }
+      `}</style>
+    </motion.section>
   );
 };
 
