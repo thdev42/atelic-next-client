@@ -24,7 +24,24 @@ const HeroSection = ({ scrollYSProgress }) => {
   const { setBackground, setActiveHeroIndex } = useBackground();
 
   const [isMobile, setIsMobile] = useState(false);
+  const intervalRef = useRef(null);
+  useEffect(() => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
 
+    intervalRef.current = setInterval(() => {
+      setActiveSection((prev) => {
+        if (prev < heroComponents.length - 1) {
+          return prev + 1;
+        } else {
+          return 0;
+        }
+      });
+    }, 10000);
+
+    return () => clearInterval(intervalRef.current);
+  }, []); // Empty dependency: run once only
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768); // Adjust breakpoint as needed
@@ -35,16 +52,16 @@ const HeroSection = ({ scrollYSProgress }) => {
   }, []);
 
   // Parallax layers
-  const sectionY = useTransform(scrollYSProgress, [0, 1], ["0%", "-10%"]);
-  const backgroundY = useTransform(scrollYSProgress, [0, 1], ["0%", "-20%"]);
+  const sectionY = useTransform(scrollYSProgress, [0, 1], [90, -50]);
+  const backgroundY = useTransform(scrollYSProgress, [0, 1], ["0%", "-50%"]);
   const robotY = useTransform(scrollYSProgress, [0, 1], ["0%", "-30%"]);
-  const textY = useTransform(scrollYSProgress, [0, 1], ["0%", "-50%"]);
+  const textY = useTransform(scrollYSProgress, [0, 1], ["0%", "-90%"]);
 
   // Hero components array
   const heroComponents = [
     HeroComponent1,
     HeroComponent2,
-    HeroComponent3,
+    // HeroComponent3,
     // HeroComponent4
   ];
   const bgColors = [
@@ -113,7 +130,7 @@ const HeroSection = ({ scrollYSProgress }) => {
         rotate: isMobile ? 0 : rotate,
         willChange: "transform", // GPU acceleration
       }}
-      className="sticky top-0 max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 overflow-hidden transition-all duration-1000 ease-in-out"
+      className="overflow-y-visible sticky top-0 max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 overflow-hidden transition-all duration-1000 ease-in-out"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}

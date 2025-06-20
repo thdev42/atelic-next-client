@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
   return (
     <main
       className="min-h-screen text-black"
-      style={{ background: background }}
+      style={{ background: background ? background : "black" }}
     >
       <ParallaxProvider>
         <Navbar />
