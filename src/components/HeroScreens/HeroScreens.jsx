@@ -23,9 +23,14 @@ import BgPattern1 from "../../../assets/HeroWebRight1.png";
 import AiChip from "../../../assets/AiChip (2).png";
 
 export const HeroComponent1 = ({ sectionY, backgroundY, robotY, textY }) => (
-  <section className="max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 relative overflow-hidden min-h-[600px] lg:min-h-[700px] 2xl:min-h-[800px]">
+  <motion.section
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.5 }}
+    className="max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 relative overflow-hidden min-h-[600px] lg:min-h-[700px] 2xl:min-h-[800px]"
+  >
     <div className="px-4 sm:px-8 md:px-12 xl:px-[178px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 h-full">
-      <div className="absolute right-0 top-0 translate-x-1/2 2xl:translate-x-1/4 hidden lg:block z-0">
+      <motion.div className="absolute right-0 top-0 translate-x-1/2 2xl:translate-x-1/4 hidden lg:block z-0">
         <div className="w-[1282px] h-[915px]">
           <Image
             src={BgPattern1}
@@ -34,9 +39,14 @@ export const HeroComponent1 = ({ sectionY, backgroundY, robotY, textY }) => (
             height={915}
           />
         </div>
-      </div>
+      </motion.div>
       <div className="flex flex-row w-full">
-        <motion.div style={{ y: textY }}>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="space-y-5 2xl:space-y-10"
+        >
           <h1 className="text-4xl 2xl:text-[60px] md:text-4xl font-sora font-normal text-black space-y-5 2xl:space-y-10 flex flex-col">
             <span>Simplifying AI.</span>
             <span>Building Trust.</span>
@@ -45,20 +55,40 @@ export const HeroComponent1 = ({ sectionY, backgroundY, robotY, textY }) => (
             </span>
           </h1>
 
-          <p className="2xl:text-[22px] text-base font-sora 2xl:leading-normal text-gray-600 mt-6 2xl:mt-14 max-w-lg">
+          <motion.p
+            className="2xl:text-[22px] text-base font-sora 2xl:leading-normal text-gray-600 mt-6 2xl:mt-14 max-w-lg"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+          >
             Atelic AI helps enterprises unlock real value from AI by solving
             complex challenges with secure, customized, industry-specific
             solutions.
-          </p>
+          </motion.p>
 
-          <div className="font-poppins mt-8 flex gap-4 flex-wrap">
-            <button className="text-xs 2xl:text-[16px] bg-[#335F86] text-white px-6 py-4 rounded-md hover:bg-[#082c4e] transition-all duration-300">
+          <motion.div
+            className="font-poppins mt-8 flex gap-4 flex-wrap"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+          >
+            <motion.button
+              className="text-xs 2xl:text-[16px] bg-[#335F86] text-white px-6 py-4 rounded-md"
+              whileHover={{ scale: 1.03, backgroundColor: "#082c4e" }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ duration: 0.2 }}
+            >
               Book a Consultation
-            </button>
-            <button className="text-xs 2xl:text-[16px] bg-[#E5EAF0] text-[#0A3C66] px-6 py-4 rounded-md hover:bg-[#d3dbe3] transition-all duration-300">
+            </motion.button>
+            <motion.button
+              className="text-xs 2xl:text-[16px] bg-[#E5EAF0] text-[#0A3C66] px-6 py-4 rounded-md"
+              whileHover={{ scale: 1.03, backgroundColor: "#d3dbe3" }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ duration: 0.2 }}
+            >
               Explore Our Approach
-            </button>
-          </div>
+            </motion.button>
+          </motion.div>
         </motion.div>
       </div>
 
@@ -96,7 +126,7 @@ export const HeroComponent1 = ({ sectionY, backgroundY, robotY, textY }) => (
         </div>
       </motion.div>
     </div>
-  </section>
+  </motion.section>
 );
 export const HeroComponent2 = ({ sectionY, backgroundY, robotY, textY }) => (
   <section className="max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 relative overflow-hidden min-h-[600px] lg:h-[650px] 2xl:h-[730px]">

@@ -111,7 +111,7 @@ const HeroSection = ({ scrollYSProgress }) => {
         y: sectionY,
         scale: isMobile ? 1 : scale,
         rotate: isMobile ? 0 : rotate,
-        willChange: 'transform', // GPU acceleration
+        willChange: "transform", // GPU acceleration
       }}
       className="sticky top-0 max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 overflow-hidden transition-all duration-1000 ease-in-out"
       onTouchStart={handleTouchStart}
