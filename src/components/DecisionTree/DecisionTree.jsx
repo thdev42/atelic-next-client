@@ -12,7 +12,7 @@ import { SelectField } from "../SelectComp/SelectComp";
 
 export const DecisionTree = () => {
   return (
-    <section className="font-sora bg-[#1C1C1C] text-white max-w-[1920px] mx-auto w-full py-16">
+    <section className="z-10 relative font-sora bg-[#1C1C1C] text-white max-w-[1920px] mx-auto w-full py-16">
       <div className="px-4 sm:px-8 md:px-12 xl:px-[178px] mx-auto flex flex-col lg:flex-row justify-between gap-0">
         <div className="flex-1 flex flex-col justify-center items-center lg:items-start text-center lg:text-left mx-auto">
           <h2 className="2xl:text-[55px] text-3xl 2xl:leading-snug md:text-4xl font-light mb-4">

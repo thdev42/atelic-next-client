@@ -66,7 +66,7 @@ export const HeroComponent1 = ({ sectionY, backgroundY, robotY, textY }) => (
         style={{ y: robotY }}
         className="w-full relative flex justify-end"
       >
-        <div className="relative w-full 2xl:max-w-max lg:max-w-[600px] max-w-[500px] 2xl:h-[850px]">
+        <div className="relative w-full 2xl:max-w lg:max-w-[600px] max-w-[500px]">
           <Image src={Robot1} alt="AI Robot" className="w-full " />
 
           <div
@@ -99,7 +99,7 @@ export const HeroComponent1 = ({ sectionY, backgroundY, robotY, textY }) => (
   </section>
 );
 export const HeroComponent2 = ({ sectionY, backgroundY, robotY, textY }) => (
-  <section className="max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 relative overflow-visible min-h-[600px] lg:min-h-[700px] 2xl:min-h-[800px]">
+  <section className="max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 relative overflow-visible min-h-[600px] lg:h-[650px] 2xl:h-[730px]">
     <div className="px-4 sm:px-8 md:px-12 xl:px-[178px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 h-full">
       {/* Background Pattern */}
       <div className="absolute right-0 -top-32 translate-x-1/2 2xl:translate-x-1/4 hidden lg:block z-10">
@@ -115,19 +115,15 @@ export const HeroComponent2 = ({ sectionY, backgroundY, robotY, textY }) => (
 
       {/* AI Chip Image - Absolute positioned for breaking container */}
       <div className="hidden lg:block absolute right-0 top-20 z-10 -translate-x-2 sm:translate-x-0 md:translate-x-4 lg:translate-x-8 xl:translate-x-12 2xl:translate-x-16 translate-y-4 sm:translate-y-6 md:translate-y-8 lg:translate-y-0">
-        <div className="2xl:max-w-max xl:max-w-[700px] lg:max-w-[650px]">
-          <Image
-            src={AiChip}
-            alt="AI Robot"
-            className="w-full h-full object-contain"
-          />
+        <div className="2xl:max-w-[900px] xl:max-w-[700px] lg:max-w-[650px]">
+          <Image src={AiChip} alt="AI Robot" className="" />
         </div>
       </div>
 
       {/* Text Content */}
-      <div className="flex flex-row w-full relative z-20">
-        <motion.div style={{ y: textY }} className="w-full lg:w-auto">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-[60px] font-sora font-normal text-black space-y-2 sm:space-y-3 md:space-y-4 lg:space-y-5 2xl:space-y-10 flex flex-col">
+      <div className="flex flex-row w-full">
+        <motion.div style={{ y: textY }}>
+          <h1 className="text-4xl 2xl:text-[60px] md:text-4xl font-sora font-normal text-black space-y-5 2xl:space-y-10 flex flex-col">
             <span>Simplifying AI.</span>
             <span>Building Trust.</span>
             <span className="text-[#F02C2C] font-bold">
@@ -135,17 +131,17 @@ export const HeroComponent2 = ({ sectionY, backgroundY, robotY, textY }) => (
             </span>
           </h1>
 
-          <p className="text-sm sm:text-base md:text-lg lg:text-base xl:text-xl 2xl:text-[22px] font-sora 2xl:leading-normal text-gray-600 mt-4 sm:mt-5 md:mt-6 lg:mt-6 xl:mt-10 2xl:mt-14 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
+          <p className="2xl:text-[22px] text-base font-sora 2xl:leading-normal text-gray-600 mt-6 2xl:mt-14 max-w-lg">
             Atelic AI helps enterprises unlock real value from AI by solving
             complex challenges with secure, customized, industry-specific
             solutions.
           </p>
 
-          <div className="font-poppins mt-6 sm:mt-7 md:mt-8 lg:mt-8 xl:mt-10 flex gap-3 sm:gap-4 flex-wrap">
-            <button className="text-xs sm:text-sm md:text-base lg:text-xs xl:text-sm 2xl:text-[16px] bg-[#335F86] text-white px-4 py-3 sm:px-5 sm:py-3 md:px-6 md:py-4 lg:px-6 lg:py-4 rounded-md hover:bg-[#082c4e] transition-all duration-300">
+          <div className="font-poppins mt-8 flex gap-4 flex-wrap">
+            <button className="text-xs 2xl:text-[16px] bg-[#335F86] text-white px-6 py-4 rounded-md hover:bg-[#082c4e] transition-all duration-300">
               Book a Consultation
             </button>
-            <button className="text-xs sm:text-sm md:text-base lg:text-xs xl:text-sm 2xl:text-[16px] bg-[#E5EAF0] text-[#0A3C66] px-4 py-3 sm:px-5 sm:py-3 md:px-6 md:py-4 lg:px-6 lg:py-4 rounded-md hover:bg-[#d3dbe3] transition-all duration-300">
+            <button className="text-xs 2xl:text-[16px] bg-[#E5EAF0] text-[#0A3C66] px-6 py-4 rounded-md hover:bg-[#d3dbe3] transition-all duration-300">
               Explore Our Approach
             </button>
           </div>
@@ -157,7 +153,7 @@ export const HeroComponent2 = ({ sectionY, backgroundY, robotY, textY }) => (
         style={{ y: robotY }}
         className="w-full relative flex justify-end"
       >
-        <div className="relative w-full 2xl:max-w-max lg:max-w-[600px] max-w-[500px] 2xl:h-[850px]">
+        <div className="relative w-full 2xl:max-w lg:max-w-[600px] max-w-[500px]">
           <div className="block lg:hidden">
             <Image src={AiChip} alt="AI Robot" className="w-full " />
           </div>
@@ -182,13 +178,7 @@ export const HeroComponent2 = ({ sectionY, backgroundY, robotY, textY }) => (
 
 // Hero Component 3 - Innovation Focus
 export const HeroComponent3 = ({ sectionY, backgroundY, robotY, textY }) => (
-  <section
-    className="max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 relative overflow-hidden min-h-[600px] lg:min-h-[700px] 2xl:min-h-[800px]"
-    style={{
-      background:
-        "linear-gradient(180deg, #03080E 1.61%, #09111C 24.4%, #101D26 50.12%, #131D29 64.35%, #121D29 75.72%, #121C26 87.16%, #0D1620 98.06%)",
-    }}
-  >
+  <section className="max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 relative overflow-hidden min-h-[600px] lg:min-h-[700px] 2xl:min-h-[800px]">
     <div className="px-4 sm:px-8 md:px-12 xl:px-[178px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 h-full">
       <div className="absolute right-0 top-0 translate-x-1/2 2xl:translate-x-1/4 hidden lg:block z-0">
         <div className="w-[1282px] h-[915px]">
@@ -202,15 +192,15 @@ export const HeroComponent3 = ({ sectionY, backgroundY, robotY, textY }) => (
       </div>
       <div className="flex flex-row w-full">
         <motion.div style={{ y: textY }}>
-          <h1 className="text-4xl 2xl:text-[60px] md:text-4xl font-sora font-normal text-white space-y-5 2xl:space-y-10 flex flex-col">
+          <h1 className="text-4xl 2xl:text-[60px] md:text-4xl font-sora font-normal text-black space-y-5 2xl:space-y-10 flex flex-col">
             <span>Simplifying AI.</span>
             <span>Building Trust.</span>
             <span className="text-[#F02C2C] font-bold">
-              Delivering ROI<span className="text-white font-bold">.</span>
+              Delivering ROI<span className="text-black font-bold">.</span>
             </span>
           </h1>
 
-          <p className="2xl:text-[22px] text-base font-sora 2xl:leading-normal text-gray-300 mt-6 2xl:mt-14 max-w-lg">
+          <p className="2xl:text-[22px] text-base font-sora 2xl:leading-normal text-gray-600 mt-6 2xl:mt-14 max-w-lg">
             Atelic AI helps enterprises unlock real value from AI by solving
             complex challenges with secure, customized, industry-specific
             solutions.
@@ -231,7 +221,7 @@ export const HeroComponent3 = ({ sectionY, backgroundY, robotY, textY }) => (
         style={{ y: robotY }}
         className="w-full relative flex justify-end"
       >
-        <div className="relative w-full 2xl:max-w-max lg:max-w-[600px] max-w-[500px] 2xl:h-[850px]">
+        <div className="relative w-full 2xl:max-w lg:max-w-[600px] max-w-[500px]">
           <Image src={Robot1} alt="AI Robot" className="w-full " />
 
           <div
