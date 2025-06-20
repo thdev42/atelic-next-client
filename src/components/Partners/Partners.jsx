@@ -18,7 +18,7 @@ export const Partners = () => {
       className="max-w-[1920px] mx-auto w-full py-10 lg:py-20 relative overflow-hidden"
       style={{
         backgroundColor: "#f3f3f3",
-        backgroundAttachment: "fixed",
+        backgroundAttachment: typeof window !== 'undefined' && window.innerWidth <= 768 ? 'scroll' : 'fixed',
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
@@ -42,7 +42,7 @@ export const Partners = () => {
         </h2>
 
         <div className="overflow-hidden w-full">
-          <div className="flex gap-8 animate-marquee whitespace-nowrap">
+          <div className="flex gap-8 animate-marquee whitespace-nowrap" style={{ willChange: 'transform' }}>
             {[...logos, ...logos].map((logo, idx) => (
               <div
                 key={idx}

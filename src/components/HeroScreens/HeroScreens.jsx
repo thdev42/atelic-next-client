@@ -99,7 +99,7 @@ export const HeroComponent1 = ({ sectionY, backgroundY, robotY, textY }) => (
   </section>
 );
 export const HeroComponent2 = ({ sectionY, backgroundY, robotY, textY }) => (
-  <section className="max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 relative overflow-visible min-h-[600px] lg:h-[650px] 2xl:h-[730px]">
+  <section className="max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 relative overflow-hidden min-h-[600px] lg:h-[650px] 2xl:h-[730px]">
     <div className="px-4 sm:px-8 md:px-12 xl:px-[178px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 h-full">
       {/* Background Pattern */}
       <div className="absolute right-0 -top-32 translate-x-1/2 2xl:translate-x-1/4 hidden lg:block z-10">

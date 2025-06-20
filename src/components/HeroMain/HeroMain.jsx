@@ -16,24 +16,29 @@ import {
 } from "../HeroScreens/HeroScreens";
 import { useBackground } from "@/context/BackgroundContext";
 
-const HeroSection = ({ scrollYProgress }) => {
+const HeroSection = ({ scrollYSProgress }) => {
   const sectionRef = useRef(null);
   const [activeSection, setActiveSection] = useState(0);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
   const { setBackground, setActiveHeroIndex } = useBackground();
-  // const { scrollYProgress } = useScroll({
-  //   target: sectionRef,
-  //   offset: ["start start", "end start"],
-  // });
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
-  const rotate = useTransform(scrollYProgress, [0, 1], [0, -5]);
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); // Adjust breakpoint as needed
+    };
+    handleResize(); // initial check
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Parallax layers
-  // const sectionY = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]);
-  // const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
-  // const robotY = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
-  // const textY = useTransform(scrollYProgress, [0, 1], ["0%", "-50%"]);
+  const sectionY = useTransform(scrollYSProgress, [0, 1], ["0%", "-10%"]);
+  const backgroundY = useTransform(scrollYSProgress, [0, 1], ["0%", "-20%"]);
+  const robotY = useTransform(scrollYSProgress, [0, 1], ["0%", "-30%"]);
+  const textY = useTransform(scrollYSProgress, [0, 1], ["0%", "-50%"]);
 
   // Hero components array
   const heroComponents = [
@@ -96,14 +101,22 @@ const HeroSection = ({ scrollYProgress }) => {
 
   const CurrentHeroComponent = heroComponents[activeSection];
 
+  const scale = useTransform(scrollYSProgress, [0, 1], [1, 0.8]);
+  const rotate = useTransform(scrollYSProgress, [0, 1], [0, -5]);
+
   return (
-    <motion.div
-      // ref={sectionRef}
-      style={{ scale, rotate }}
+    <motion.section
+      ref={sectionRef}
+      style={{
+        y: sectionY,
+        scale: isMobile ? 1 : scale,
+        rotate: isMobile ? 0 : rotate,
+        willChange: 'transform', // GPU acceleration
+      }}
       className="sticky top-0 max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 overflow-hidden transition-all duration-1000 ease-in-out"
-      // onTouchStart={handleTouchStart}
-      // onTouchMove={handleTouchMove}
-      // onTouchEnd={handleTouchEnd}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
       {/* Left Vertical Numbers */}
       <div className="font-poppins hidden xl:flex flex-col gap-4 2xl:ml-20 xl:ml-10 ml-0 items-center absolute left-0 top-1/2 -translate-y-1/2 z-20">
@@ -140,10 +153,10 @@ const HeroSection = ({ scrollYProgress }) => {
           transition={{ duration: 0.6, ease: "easeInOut" }}
         >
           <CurrentHeroComponent
-          // sectionY={sectionY}
-          // backgroundY={backgroundY}
-          // robotY={robotY}
-          // textY={textY}
+            sectionY={sectionY}
+            backgroundY={backgroundY}
+            robotY={robotY}
+            textY={textY}
           />
         </motion.div>
       </AnimatePresence>
@@ -172,7 +185,7 @@ const HeroSection = ({ scrollYProgress }) => {
           }
         }
       `}</style>
-    </motion.div>
+    </motion.section>
   );
 };
 

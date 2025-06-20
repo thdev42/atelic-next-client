@@ -9,24 +9,31 @@ const HomePage = () => {
 
   const { scrollYProgress } = useScroll({
     target: container,
-
     offset: ["start start", "end end"],
   });
 
   useEffect(() => {
     const lenis = new Lenis();
+    let animationFrameId;
 
     function raf(time) {
       lenis.raf(time);
-
-      requestAnimationFrame(raf);
+      animationFrameId = requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
+    animationFrameId = requestAnimationFrame(raf);
+
+    // Cleanup to prevent memory leaks and double loops
+    return () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+      lenis.destroy && lenis.destroy();
+    };
   }, []);
 
   return (
     <main ref={container} className="relative h-[200vh]">
-      <HeroSection scrollYProgress={scrollYProgress} />
+      <HeroSection scrollYSProgress={scrollYProgress} />
       <Section scrollYProgress={scrollYProgress} />
     </main>
   );

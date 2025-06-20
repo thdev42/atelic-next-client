@@ -4,7 +4,7 @@ import IceBergBg from "../../../assets/red-pattern-bg.png";
 import Image from "next/image";
 export const Services = () => {
   return (
-    <section className=" max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 relative bg-gray-100 px-6 lg:px-8">
+    <section className=" max-w-[1920px] overflow-hidden mx-auto w-full py-10 lg:py-5 2xl:py-5 relative bg-gray-100 px-6 lg:px-8" style={{ willChange: 'transform' }}>
       {/* Background Pattern - positioned in bottom right */}
       <div className="absolute bottom-0 right-0 w-1/2 h-1/2 opacity-100">
         <Image
