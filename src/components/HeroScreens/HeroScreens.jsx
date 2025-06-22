@@ -296,11 +296,11 @@ export const HeroComponent3 = ({ sectionY, backgroundY, robotY, textY }) => (
       </div>
       <div className="flex flex-row w-full">
         <motion.div style={{ y: textY }}>
-          <h1 className="text-4xl 2xl:text-[60px] md:text-4xl font-sora font-normal text-black space-y-5 2xl:space-y-10 flex flex-col">
+          <h1 className="text-4xl 2xl:text-[60px] md:text-4xl font-sora font-normal text-white space-y-5 2xl:space-y-10 flex flex-col">
             <span>Simplifying AI.</span>
             <span>Building Trust.</span>
-            <span className="text-[#F02C2C] font-bold">
-              Delivering ROI<span className="text-black font-bold">.</span>
+            <span className="text-white font-bold">
+              Delivering ROI<span className="text-white font-bold">.</span>
             </span>
           </h1>
 

@@ -1,15 +1,17 @@
 // components/Navbar.jsx
 import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 import Container from "../container/container";
 import NavIcon from "../../../assets/AtelicNavLogo.png";
 import MenuButton from "../../../assets/menu1.png";
 import Image from "next/image";
 import { Sora } from "next/font/google";
 import { useBackground } from "@/context/BackgroundContext";
+
 const Navbar = () => {
   const router = useRouter();
-  const { activeHeroIndex } = useBackground();
-  const isDarkHero = activeHeroIndex === 2;
+  const { activeHeroIndex, slideProgress } = useBackground(); // Add slideProgress from context
+  const [textColor, setTextColor] = useState("text-black");
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -20,21 +22,95 @@ const Navbar = () => {
     { name: "Enquire", path: "/enquire" },
     { name: "Our Work", path: "/work" },
   ];
+
+  // Function to interpolate between colors
+  const interpolateTextColor = (progress) => {
+    // Define color stops for smooth transition
+    // 0-1: black to black (first two slides)
+    // 1-2: black to white (transition to dark slide)
+
+    if (progress <= 1) {
+      return "text-black";
+    } else if (progress <= 2) {
+      // Calculate transition factor between slide 1 and 2
+      const transitionFactor = progress - 1;
+
+      // Smooth transition from black to white
+      if (transitionFactor < 0.3) {
+        return "text-black";
+      } else if (transitionFactor < 0.7) {
+        return "text-gray-700";
+      } else if (transitionFactor < 0.9) {
+        return "text-gray-400";
+      } else {
+        return "text-white";
+      }
+    } else {
+      return "text-white";
+    }
+  };
+
+  // Update text color based on slide progress
+  useEffect(() => {
+    if (typeof slideProgress === "number") {
+      const newTextColor = interpolateTextColor(slideProgress);
+      setTextColor(newTextColor);
+    } else if (activeHeroIndex !== undefined) {
+      // Fallback to discrete color changes if slideProgress is not available
+      const isDarkHero = activeHeroIndex === 2;
+      setTextColor(isDarkHero ? "text-white" : "text-black");
+    }
+  }, [slideProgress, activeHeroIndex]);
+
+  const getTextColorStyle = () => {
+    if (typeof slideProgress === "number") {
+      const progress = Math.max(0, Math.min(2, slideProgress));
+
+      let r, g, b;
+
+      if (progress <= 1) {
+        r = g = b = 0;
+      } else {
+        // Black to white transition
+        const transitionFactor = (progress - 1) / 1;
+        const smoothFactor = Math.pow(transitionFactor, 0.8);
+        r = g = b = Math.round(255 * smoothFactor);
+      }
+
+      return {
+        color: `rgb(${r}, ${g}, ${b})`,
+        transition: "color 0s ease-out",
+      };
+    }
+
+    return {};
+  };
+
   console.log(router?.pathname);
+
   return (
-    <header className="w-full bg-transparent">
-      <nav className="z-50 py-0">
+    <header className="w-full bg-transparent ">
+      <nav className="z-50 py-4">
         <Container>
           <div className="px-4 sm:px-8 md:px-12 xl:px-[178px] flex items-center justify-between w-full relative">
             {/* LEFT: Logo */}
-            <Image src={NavIcon} alt="Logo" width={173} />
+            <div style={getTextColorStyle()}>
+              <Image
+                src={NavIcon}
+                alt="Logo"
+                width={173}
+                style={{
+                  filter:
+                    typeof slideProgress === "number" && slideProgress > 1.5
+                      ? "brightness(0) invert(1)" // Make logo white for dark background
+                      : "none",
+                  transition: "filter 0.3s ease-out",
+                }}
+              />
+            </div>
 
             {/* CENTER: Navigation Links */}
-            <ul
-              className={`hidden lg:flex 2xl:gap-5 lg:gap-1 2xl:text-[20px] lg:text-sm font ${
-                isDarkHero ? "text-white" : "text-black"
-              }  font-sora font-normal`}
-            >
+            <ul className="hidden lg:flex 2xl:gap-5 lg:gap-1 2xl:text-[20px] lg:text-sm font-sora font-normal">
               {navLinks.map((link) => {
                 const isActive = router.pathname === link.path;
 
@@ -42,11 +118,12 @@ const Navbar = () => {
                   <li key={link.path}>
                     <a
                       href={link.path}
-                      className={`px-3 py-1 rounded-[20.5px] ${
+                      className={`px-3 py-1 rounded-[20.5px] transition-all duration-200 ease-out ${
                         isActive
                           ? "bg-[#FFDDDD] border border-[rgba(242,27,42,0.26)] text-[#F21B2A]"
                           : "hover:text-primary"
                       }`}
+                      style={!isActive ? getTextColorStyle() : {}}
                     >
                       {link.name}
                     </a>
@@ -57,7 +134,18 @@ const Navbar = () => {
 
             {/* RIGHT: Menu Icon */}
             <button className="cursor-pointer">
-              <Image src={MenuButton} alt="Menu" width={38} />
+              <Image
+                src={MenuButton}
+                alt="Menu"
+                width={38}
+                style={{
+                  filter:
+                    typeof slideProgress === "number" && slideProgress > 1.5
+                      ? "brightness(0) invert(1)" // Make menu icon white for dark background
+                      : "none",
+                  transition: "filter 0.3s ease-out",
+                }}
+              />
             </button>
           </div>
         </Container>

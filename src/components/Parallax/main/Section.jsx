@@ -22,11 +22,11 @@ const Section = ({ scrollYProgress }) => {
     <motion.div
       className=""
       style={{
-        scale: isMobile ? 1 : scale,
-        rotate: isMobile ? 0 : rotate,
-        willChange: 'transform',
-        transformStyle: 'preserve-3d', // Better GPU rendering
-        backfaceVisibility: 'hidden', // Prevent flickering in some browsers
+        // scale: isMobile ? 1 : scale,
+        // rotate: isMobile ? 0 : rotate,
+        willChange: "transform",
+        transformStyle: "preserve-3d", // Better GPU rendering
+        backfaceVisibility: "hidden", // Prevent flickering in some browsers
       }}
     >
       <Partners />
