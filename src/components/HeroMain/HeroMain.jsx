@@ -540,7 +540,7 @@ const HeroSection = ({ scrollYSProgress }) => {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-screen flex flex-col"
+      className=" sticky top-10 h-screen 2xl:h-[800px] lg:h-[600px] w-full flex flex-col"
       style={{
         overflow: "hidden",
         touchAction: "none",
@@ -552,10 +552,10 @@ const HeroSection = ({ scrollYSProgress }) => {
       <motion.section
         ref={sectionRef}
         style={{
-          y: sectionY,
+          // y: sectionY,
           willChange: "transform",
         }}
-        className="sticky top-0 max-w-[1920px] mx-auto w-full h-screen min-h-screen overflow-hidden"
+        className="max-w-[1920px] mx-auto h-screen 2xl:h-[800px] lg:h-[600px] w-full overflow-hidden"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}

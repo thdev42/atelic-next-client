@@ -1,79 +1,322 @@
-import React from "react";
-import IceBergImage from "../../../assets/iceberg-tech.png";
-import IceBergBg from "../../../assets/red-pattern-bg.png";
+"use client";
+
 import Image from "next/image";
-export const Services = () => {
+import React, { useEffect, useState, useRef } from "react";
+
+// Mock images for demonstration
+import davidImage from "../../../assets/David.png";
+import AlvinImage from "../../../assets/AlvinHeib.png";
+import BenImage from "../../../assets/Ben.png";
+import RomanImage from "../../../assets/Roman.png";
+import SimonImage from "../../../assets/Simon.png";
+
+const teamMembers = [
+  {
+    name: "David Chalklen",
+    title: "CTO",
+    description:
+      "David has over 20 years experience in AI/Tech. He's held Senior and Executive roles at Microsoft, Publicis, WPP, and has been a senior tech/strategy led for startups.",
+    image: davidImage,
+  },
+  {
+    name: "Alvin Heib",
+    title: "CPO",
+    description:
+      "As Chief Product Officer, and one of the co-founders of Atelic, Alvin brings 15+ years of experience in AI, cloud, data, product strategy, and technical execution.",
+    image: AlvinImage,
+  },
+  {
+    name: "Ben Owen",
+    title: "Founder & CEO",
+    description:
+      "The Atelic Founder & CEO has over 15 years' experience in enterprise digital/analytics, with a focus on AI adoption & transformation strategy.",
+    image: BenImage,
+  },
+  {
+    name: "Romain Picard",
+    title: "Investor & Advisor",
+    description:
+      "Romain is an expert investor. Founder & ex-key CCO of Dataiku. Now active as a strategic advisor & investor for AI startups.",
+    image: RomanImage,
+  },
+  {
+    name: "Simon Williams",
+    title: "Advisor",
+    description:
+      "Advisor to AI Founders. Simon has led Sales and GTM for top AI platforms, and helped scale multiple AI startups with a strategic network & vision.",
+    image: SimonImage,
+  },
+];
+
+const AboutAtelic = () => {
+  const [visibleElements, setVisibleElements] = useState({
+    header: false,
+    paragraph: false,
+    cards: [],
+  });
+
+  const sectionRef = useRef(null);
+  const headerRef = useRef(null);
+  const paragraphRef = useRef(null);
+  const cardsRef = useRef([]);
+
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "-50px 0px -50px 0px",
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const elementType = entry.target.getAttribute("data-reveal");
+          const elementIndex = entry.target.getAttribute("data-index");
+
+          if (elementType === "header") {
+            setVisibleElements((prev) => ({ ...prev, header: true }));
+          } else if (elementType === "paragraph") {
+            setVisibleElements((prev) => ({ ...prev, paragraph: true }));
+          } else if (elementType === "card") {
+            setVisibleElements((prev) => ({
+              ...prev,
+              cards: [...prev.cards, parseInt(elementIndex)],
+            }));
+          }
+        }
+      });
+    }, observerOptions);
+
+    // Observe header
+    if (headerRef.current) {
+      observer.observe(headerRef.current);
+    }
+
+    // Observe paragraph
+    if (paragraphRef.current) {
+      observer.observe(paragraphRef.current);
+    }
+
+    // Observe cards
+    cardsRef.current.forEach((card) => {
+      if (card) {
+        observer.observe(card);
+      }
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
-    <section className=" max-w-[1920px] overflow-hidden mx-auto w-full py-10 lg:py-5 2xl:py-5 relative bg-gray-100 px-6 lg:px-8" style={{ willChange: 'transform' }}>
-      {/* Background Pattern - positioned in bottom right */}
-      <div className="absolute bottom-0 right-0 w-1/2 h-1/2 opacity-100">
-        <Image
-          src={IceBergBg}
-          alt=""
-          //   width={1184}
-          //   height={900}
-          fill
-          //   className="object-contain object-bottom-right"
-        />
-      </div>
-
-      <div className="px-4 sm:px-8 md:px-12 xl:px-[178px] relative mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left Content */}
-          <div className="space-y-8">
-            {/* How we work heading */}
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-px bg-gray-400"></div>
-              <span className="text-gray-600 text-sm font-medium">
-                How we work
-              </span>
-            </div>
-
-            {/* Main heading */}
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
-              Services & <span className="text-red-500">Solutions</span>
-            </h2>
-
-            {/* Description paragraphs */}
-            <div className="space-y-6 text-gray-600 leading-relaxed">
-              <p>
-                Our SaaS² model flips the script by solving the 5 most common AI
-                adoption barriers: siloed data, untrustworthy outputs, stack
-                incompatibility, lack of expertise, and fear of rapid
-                obsolescence.
-              </p>
-
-              <p>
-                Atelic AI goes beyond traditional software — we provide
-                pre-built agentic AI accelerators tailored to specific
-                industries like Energy, Financial Services, and Healthcare.
-              </p>
-            </div>
-
-            {/* CTA Button */}
-            <button
-              className="bg-slate-600 hover:bg-slate-700 text-white px-8 py-3 rounded-md font-medium"
-              size="lg"
+    <section
+      ref={sectionRef}
+      className="z-10 relative font-sora overflow-hidden bg-[#f3f3f3] max-w-[1920px] mx-auto w-full py-16"
+    >
+      <div className="px-4 sm:px-8 md:px-12 xl:px-[178px]">
+        {/* Heading + Paragraph with different scroll reveal animations */}
+        <div className="md:flex justify-between items-start md:space-x-10 mb-12">
+          {/* Header with slide-in from left and rotation */}
+          <h2
+            ref={headerRef}
+            data-reveal="header"
+            className={`text-3xl md:text-4xl font-semibold whitespace-nowrap transform transition-all duration-1200 ease-out ${
+              visibleElements.header
+                ? "translate-x-0 opacity-100 rotate-0"
+                : "-translate-x-20 opacity-0 -rotate-12"
+            }`}
+          >
+            About{" "}
+            <span
+              className={`text-[#ED254E] inline-block transform transition-all duration-800 ease-bounce delay-0 hover:scale-110 ${
+                visibleElements.header
+                  ? "scale-100 rotate-0"
+                  : "scale-0 rotate-180"
+              }`}
             >
-              Meet The Founders
-            </button>
-          </div>
+              Atelic
+            </span>
+          </h2>
 
-          {/* Right Illustration */}
-          <div className="relative flex justify-center lg:justify-end">
-            <div className="relative w-full max-w-lg">
-              <Image
-                src={IceBergImage}
-                alt="AI Technology Iceberg Illustration"
-                width={500}
-                height={500}
-                className="w-full h-auto object-contain"
-                priority
-              />
+          {/* Paragraph with typewriter effect */}
+          <p
+            ref={paragraphRef}
+            data-reveal="paragraph"
+            className={`text-gray-600 mt-4 md:mt-0 max-w-3xl transform transition-all duration-1000 ease-out delay-0 ${
+              visibleElements.paragraph
+                ? "translate-y-0 opacity-100 blur-0"
+                : "translate-y-8 opacity-0 blur-sm"
+            }`}
+          >
+            Founded by a team of seasoned AI, cloud, and data experts, Atelic AI
+            was created to cut through the noise and hype of generic AI
+            solutions. We exist to deliver true business value through
+            context-aware, ROI-driven implementations that solve real-world
+            problems — not just pilot experiments.
+          </p>
+        </div>
+
+        {/* Team Cards with different scroll reveal effects */}
+        <div className="flex flex-wrap gap-5 justify-center">
+          {teamMembers.map((member, index) => (
+            <div
+              key={index}
+              ref={(el) => (cardsRef.current[index] = el)}
+              data-reveal="card"
+              data-index={index}
+              className={`group w-[495px] h-[834px] 2xl:w-[495px] 2xl:h-[834px] pt-8 px-6 text-center rounded-t-[400px] transition-all duration-700 hover:shadow-xl flex flex-col items-center bg-white hover:bg-gradient-to-b hover:from-[#F21B2A] hover:to-[#335F86] hover:text-white hover:scale-105 hover:-translate-y-2 transform ${
+                visibleElements.cards.includes(index)
+                  ? getCardAnimationClass(index)
+                  : getCardInitialClass(index)
+              }`}
+              style={{
+                transitionDelay: `${index * 0.3}ms`,
+                animation: visibleElements.cards.includes(index)
+                  ? `cardFloat 3s ease-in-out ${1.5 + index * 0.3}s infinite`
+                  : "none",
+              }}
+            >
+              <div
+                className={`w-[444px] h-[444px] rounded-full overflow-hidden border-[5px] border-white transition-all duration-500 group-hover:border-opacity-80 group-hover:shadow-2xl ${
+                  visibleElements.cards.includes(index)
+                    ? "scale-100 rotate-0"
+                    : "scale-0 rotate-45"
+                }`}
+              >
+                <Image
+                  src={member.image}
+                  alt={member.name}
+                  width={444}
+                  height={444}
+                  className="object-cover w-full h-full transition-all duration-500 group-hover:scale-110"
+                />
+              </div>
+              <div className="mt-6 mb-4">
+                <h3
+                  className={`text-xl 2xl:text-[36px] font-bold mb-2 delay-0 group-hover:transform group-hover:scale-105 ${
+                    visibleElements.cards.includes(index)
+                      ? "translate-y-0 opacity-100"
+                      : "translate-y-4 opacity-0"
+                  }`}
+                >
+                  {member.name}
+                </h3>
+                <p
+                  className={`text-md 2xl:text-[18px] mt-14 font-extralight leading-relaxed mb-6 delay-0 `}
+                >
+                  {member.description}
+                </p>
+              </div>
+              <button
+                className={`w-[186px] h-[47px] rounded-[23.5px] font-medium text-sm transition-all duration-400 delay-0 delay-600 bg-[#335F86] text-white group-hover:bg-white group-hover:text-[#335F86] hover:transform hover:scale-110 hover:shadow-lg ${
+                  visibleElements.cards.includes(index)
+                    ? "translate-y-0 opacity-100 scale-100"
+                    : "translate-y-8 opacity-0 scale-75"
+                }`}
+              >
+                Learn More
+              </button>
             </div>
-          </div>
+          ))}
         </div>
       </div>
+
+      {/* Custom CSS for animations */}
+      <style jsx>{`
+        @keyframes cardFloat {
+          0%,
+          100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+
+        @keyframes slideInFromLeft {
+          0% {
+            transform: translateX(-100%) rotate(-15deg);
+            opacity: 0;
+          }
+          100% {
+            transform: translateX(0) rotate(0deg);
+            opacity: 1;
+          }
+        }
+
+        @keyframes slideInFromRight {
+          0% {
+            transform: translateX(100%) scale(0.8);
+            opacity: 0;
+          }
+          100% {
+            transform: translateX(0) scale(1);
+            opacity: 1;
+          }
+        }
+
+        @keyframes zoomIn {
+          0% {
+            transform: scale(0) rotate(180deg);
+            opacity: 0;
+          }
+          100% {
+            transform: scale(1) rotate(0deg);
+            opacity: 1;
+          }
+        }
+
+        @keyframes slideUp {
+          0% {
+            transform: translateY(50px) scale(0.9);
+            opacity: 0;
+          }
+          100% {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+          }
+        }
+
+        @keyframes flipIn {
+          0% {
+            transform: rotateY(-90deg) scale(0.8);
+            opacity: 0;
+          }
+          100% {
+            transform: rotateY(0deg) scale(1);
+            opacity: 1;
+          }
+        }
+
+        .ease-bounce {
+          transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+      `}</style>
     </section>
   );
 };
+
+// Helper functions for different card animations
+const getCardAnimationClass = (index) => {
+  const animations = [
+    "translate-y-0 opacity-100 scale-100 rotate-0", // Default slide up
+    "translate-x-0 opacity-100 scale-100 rotate-0", // Slide from left
+    "translate-y-0 opacity-100 scale-100 rotate-0", // Zoom in
+    "translate-x-0 opacity-100 scale-100 rotate-0", // Slide from right
+    "translate-y-0 opacity-100 scale-100 rotate-0", // Flip in
+  ];
+  return animations[index % animations.length];
+};
+
+const getCardInitialClass = (index) => {
+  const initialStates = [
+    "translate-y-16 opacity-0 scale-95 rotate-3", // Slide up with rotation
+    "-translate-x-16 opacity-0 scale-95 -rotate-6", // Slide from left with rotation
+    "translate-y-12 opacity-0 scale-75 rotate-12", // Zoom with rotation
+    "translate-x-16 opacity-0 scale-95 rotate-6", // Slide from right with rotation
+    "translate-y-20 opacity-0 scale-90 -rotate-12", // Different slide up
+  ];
+  return initialStates[index % initialStates.length];
+};
+
+export default AboutAtelic;
