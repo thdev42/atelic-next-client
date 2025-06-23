@@ -111,16 +111,16 @@ const AboutAtelic = () => {
   return (
     <section
       ref={sectionRef}
-      className="z-10 relative font-sora overflow-hidden bg-[#f3f3f3] max-w-[1920px] mx-auto w-full py-16"
+      className="z-10 font-sora overflow-hidden bg-[#f3f3f3] max-w-[1920px] mx-auto w-full py-16"
     >
       <div className="px-4 sm:px-8 md:px-12 xl:px-[178px]">
         {/* Heading + Paragraph with different scroll reveal animations */}
-        <div className="md:flex justify-between items-start md:space-x-10 mb-12">
+        <div className="md:flex justify-between items-start md:space-x-10 2xl:mb-16 mb-12">
           {/* Header with slide-in from left and rotation */}
           <h2
             ref={headerRef}
             data-reveal="header"
-            className={`text-3xl md:text-4xl font-semibold whitespace-nowrap transform transition-all duration-1200 ease-out ${
+            className={`2xl:text-[60px] text-3xl md:text-4xl font-semibold whitespace-nowrap transform transition-all duration-1200 ease-out ${
               visibleElements.header
                 ? "translate-x-0 opacity-100 rotate-0"
                 : "-translate-x-20 opacity-0 -rotate-12"
@@ -142,7 +142,7 @@ const AboutAtelic = () => {
           <p
             ref={paragraphRef}
             data-reveal="paragraph"
-            className={`text-gray-600 mt-4 md:mt-0 max-w-3xl transform transition-all duration-1000 ease-out delay-0 ${
+            className={`2xl:text-[22px] text-gray-600 mt-4 md:mt-0 max-w-3xl transform transition-all duration-1000 ease-out delay-0 ${
               visibleElements.paragraph
                 ? "translate-y-0 opacity-100 blur-0"
                 : "translate-y-8 opacity-0 blur-sm"
@@ -157,14 +157,14 @@ const AboutAtelic = () => {
         </div>
 
         {/* Team Cards with different scroll reveal effects */}
-        <div className="flex flex-wrap gap-5 justify-center">
+        <div className="flex flex-wrap 2xl:gap-y-10 gap-5 justify-center">
           {teamMembers.map((member, index) => (
             <div
               key={index}
               ref={(el) => (cardsRef.current[index] = el)}
               data-reveal="card"
               data-index={index}
-              className={`group w-[495px] h-[834px] 2xl:w-[495px] 2xl:h-[834px] pt-8 px-6 text-center rounded-t-[400px] transition-all duration-700 hover:shadow-xl flex flex-col items-center bg-white hover:bg-gradient-to-b hover:from-[#F21B2A] hover:to-[#335F86] hover:text-white hover:scale-105 hover:-translate-y-2 transform ${
+              className={`group w-[495px] h-[834px] 2xl:w-[495px] 2xl:h-[834px] pt-8 px-6 text-center  rounded-t-[400px] transition-all duration-700 hover:shadow-xl flex flex-col items-center bg-white hover:bg-gradient-to-b hover:from-[#F21B2A] hover:to-[#335F86] hover:text-white hover:scale-105 hover:-translate-y-2 transform ${
                 visibleElements.cards.includes(index)
                   ? getCardAnimationClass(index)
                   : getCardInitialClass(index)
