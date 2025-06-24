@@ -164,7 +164,7 @@ const AboutAtelic = () => {
               ref={(el) => (cardsRef.current[index] = el)}
               data-reveal="card"
               data-index={index}
-              className={`group w-[495px] h-[834px] 2xl:w-[495px] 2xl:h-[834px] pt-8 px-6 text-center  rounded-t-[400px] transition-all duration-700 hover:shadow-xl flex flex-col items-center bg-white hover:bg-gradient-to-b hover:from-[#F21B2A] hover:to-[#335F86] hover:text-white hover:scale-105 hover:-translate-y-2 transform ${
+              className={`group w-[395px] h-[734px] lg:w-[395px] lg:h-[734px] 2xl:w-[495px] 2xl:h-[834px] pt-8 px-6 text-center  rounded-t-[400px] transition-all duration-700 hover:shadow-xl flex flex-col items-center bg-white hover:bg-gradient-to-b hover:from-[#F21B2A] hover:to-[#335F86] hover:text-white hover:scale-105 hover:-translate-y-2 transform ${
                 visibleElements.cards.includes(index)
                   ? getCardAnimationClass(index)
                   : getCardInitialClass(index)
@@ -177,7 +177,7 @@ const AboutAtelic = () => {
               }}
             >
               <div
-                className={`w-[444px] h-[444px] rounded-full overflow-hidden border-[5px] border-white transition-all duration-500 group-hover:border-opacity-80 group-hover:shadow-2xl ${
+                className={`w-[344px] h-[344px] lg:w-[344px] lg:h-[344px] 2xl:w-[444px] 2xl:h-[444px] rounded-full overflow-hidden border-[5px] border-white transition-all duration-500 group-hover:border-opacity-80 group-hover:shadow-2xl ${
                   visibleElements.cards.includes(index)
                     ? "scale-100 rotate-0"
                     : "scale-0 rotate-45"

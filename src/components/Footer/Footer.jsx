@@ -19,7 +19,7 @@ export default function Footer() {
         </div>
 
         {/* Navigation Links - Centered */}
-        <div className="font-sora font-thin  text-white flex flex-wrap justify-center items-center mb-8">
+        <div className="font-sora font-thin text-white flex flex-wrap justify-center items-center mb-8">
           {[
             "Home",
             "About Us",
@@ -32,7 +32,7 @@ export default function Footer() {
             <div key={text} className="flex items-center">
               <Link
                 href="#"
-                className="2xl:text-[24px] text-sm lg:text-base px-2 sm:px-4 lg:px-12 transition-colors relative"
+                className="2xl:text-[24px] text-sm lg:text-base px-2 sm:px-4 2xl:px-12 lg:px-6 transition-colors relative whitespace-nowrap"
               >
                 {text}
               </Link>
@@ -43,19 +43,27 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Icons and Phone aligned with nav edges */}
-        <div className="flex justify-between items-center mx-16 mb-6">
-          {/* LinkedIn Icon - Left */}
+        {/* Icons and Phone - Simple approach with calculated margins */}
+        <div
+          className="flex justify-between items-center mb-6"
+          style={{
+            marginLeft: "calc(50% - 45vw)",
+            marginRight: "calc(50% - 45vw)",
+            width: "90vw",
+            maxWidth: "1200px",
+          }}
+        >
+          {/* LinkedIn Icon */}
           <Link
             href="#"
             className="text-blue-400 hover:text-blue-300 transition-colors"
             aria-label="LinkedIn"
           >
-            <Linkedin className="w-6 h-6" />
+            <Linkedin className="w-6 h-6 2xl:w-8 2xl:h-8" />
           </Link>
 
-          {/* Phone Number - Right */}
-          <div className="text-gray-300 text-sm lg:text-base 2xl:text-[24px]">
+          {/* Phone Number */}
+          <div className="text-gray-300 text-sm lg:text-base 2xl:text-[24px] whitespace-nowrap">
             <span className="font-medium">Phone:</span>{" "}
             <Link
               href="tel:+971505188431"
