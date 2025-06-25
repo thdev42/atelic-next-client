@@ -29,16 +29,16 @@ export const Partners = () => {
   return (
     <section
       ref={container} // Added ref to section for scroll detection
-      className="max-w-[1920px] mx-auto w-full py-10 lg:py-20 relative overflow-hidden"
+      className="max-w-[1920px] mx-auto w-full py-10 lg:py-20 relative overflow-hidden z-50"
       style={{
         backgroundColor: "#f3f3f3",
-        backgroundAttachment:
-          typeof window !== "undefined" && window.innerWidth <= 768
-            ? "scroll"
-            : "fixed",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
+        // backgroundAttachment:
+        //   typeof window !== "undefined" && window.innerWidth <= 768
+        //     ? "scroll"
+        //     : "fixed",
+        // backgroundPosition: "center",
+        // backgroundRepeat: "no-repeat",
+        // backgroundSize: "cover",
       }}
     >
       {/* Background Image Left */}
