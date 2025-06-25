@@ -8,16 +8,8 @@ import {
   AnimatePresence,
 } from "framer-motion";
 import Image from "next/image";
+import ServicesRobot from "../../../assets/ServicesRobot.png";
 
-// Import all your images - you'll need to add these
-// import Robot1 from "../../../assets/AtelicRobot.png";
-// import Robot2 from "../../../assets/Robot2.png";
-// import Robot3 from "../../../assets/Robot3.png";
-// import Robot4 from "../../../assets/Robot4.png";
-// import BgPattern1 from "../../../assets/HeroWebRight1.png";
-// import BgPattern2 from "../../../assets/HeroWebRight2.png";
-// import BgPattern3 from "../../../assets/HeroWebRight3.png";
-// import BgPattern4 from "../../../assets/HeroWebRight4.png";
 import Robot1 from "../../../assets/AtelicRobot.png";
 import BgPattern1 from "../../../assets/HeroWebRight1.png";
 import AiChip from "../../../assets/AiChip (2).png";
@@ -437,4 +429,93 @@ export const HeroComponent4 = ({ sectionY, backgroundY, robotY, textY }) => (
       </motion.div>
     </div>
   </>
+);
+
+export const HeroServices = ({ sectionY, backgroundY, robotY, textY }) => (
+  <motion.section
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.5 }}
+    className="bg-[#00172B] max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 relative overflow-hidden min-h-[600px] lg:min-h-[700px] 2xl:min-h-[800px] select-none"
+  >
+    <div className="px-4 sm:px-8 md:px-12 xl:px-[178px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-8 h-full">
+      {/* Text Content Section */}
+      <div className="w-full lg:w-[40%]">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="space-y-5 2xl:space-y-10"
+        >
+          <h1 className="text-4xl sm:text-5xl lg:text-4xl xl:text-5xl 2xl:text-[60px] font-sora font-normal text-white leading-tight">
+            Our{" "}
+            <motion.span
+              style={{ y: textY }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 * 0.3 }}
+              className={"font-bold text-white"}
+            >
+              Services
+            </motion.span>
+          </h1>
+
+          <motion.p
+            className="text-base sm:text-lg lg:text-base xl:text-lg 2xl:text-[20px] font-thin font-sora leading-relaxed 2xl:leading-loose text-white mt-6 2xl:mt-14"
+            initial={{ opacity: 0, y: 20 }}
+            style={{ y: textY }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+          >
+            We craft AI Agent specialists designed to blend in & support your
+            organisation through solving complex workflows at a fraction of the
+            time & cost.
+          </motion.p>
+
+          <motion.div
+            className="font-poppins mt-8 flex gap-4 flex-wrap"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+          >
+            <motion.button
+              className="text-xs sm:text-sm lg:text-xs xl:text-sm 2xl:text-[16px] bg-[#335F86] text-white px-6 py-4 rounded-md"
+              whileHover={{ scale: 1.03, backgroundColor: "#082c4e" }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ duration: 0.2 }}
+            >
+              Book a Consultation
+            </motion.button>
+            <motion.button
+              className="text-xs sm:text-sm lg:text-xs xl:text-sm 2xl:text-[16px] bg-[#E5EAF0] text-[#0A3C66] px-6 py-4 rounded-md"
+              whileHover={{ scale: 1.03, backgroundColor: "#d3dbe3" }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ duration: 0.2 }}
+            >
+              Explore Our Approach
+            </motion.button>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* Image Section */}
+      <motion.div
+        style={{ y: robotY }}
+        className="w-full lg:w-[60%] mix-blend-lighten"
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+      >
+        <div className="relative 2xl:w-[1100px] lg:w-[900px] mix-blend-lighten scale-125 mt-12 sm:mt-0 sm:scale-100">
+          <Image
+            // width={1104}
+            // height={736}
+            src={ServicesRobot}
+            alt="AI Robot"
+            className="object-center"
+          />
+        </div>
+      </motion.div>
+    </div>
+  </motion.section>
 );

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Partners } from "@/components/Partners/Partners";
 import { DecisionTree } from "@/components/DecisionTree/DecisionTree";
-import AboutAtelic from "@/components/Services/Services";
+import AboutAtelic from "@/components/AboutAtelic/AboutAtelic";
 import Footer from "@/components/Footer/Footer";
 // import { AboutAt } from "@/components/Services/Services";
 const Section = ({ scrollYProgress }) => {

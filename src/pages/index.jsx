@@ -88,7 +88,7 @@ import { DecisionTree } from "@/components/DecisionTree/DecisionTree";
 import HeroSection from "@/components/HeroMain/HeroMain";
 import HomePage from "@/components/Parallax/main/Pages";
 import { Partners } from "@/components/Partners/Partners";
-import { Services } from "@/components/Services/Services";
+import { Services } from "@/components/AboutAtelic/AboutAtelic";
 
 export default function Home() {
   return (

@@ -7,13 +7,15 @@ export const BackgroundProvider = ({ children }) => {
   const [background, setBackground] = useState("#e9e9e9");
   const [activeHeroIndex, setActiveHeroIndex] = useState(0);
   const [slideProgress, setSlideProgress] = useState(0);
-
+  const [isDark, setIsDark] = useState(false);
   const updateSlideProgress = useCallback((progress) => {
     setSlideProgress(progress);
   }, []);
 
   const value = {
     background,
+    isDark,
+    setIsDark,
     setBackground,
     activeHeroIndex,
     setActiveHeroIndex,

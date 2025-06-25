@@ -10,7 +10,8 @@ import { useBackground } from "@/context/BackgroundContext";
 
 const Navbar = () => {
   const router = useRouter();
-  const { activeHeroIndex, slideProgress } = useBackground(); // Add slideProgress from context
+  const { activeHeroIndex, slideProgress, isDark } = useBackground();
+  console.log(isDark);
   const [textColor, setTextColor] = useState("text-black");
 
   const navLinks = [
@@ -28,7 +29,7 @@ const Navbar = () => {
     // Define color stops for smooth transition
     // 0-1: black to black (first two slides)
     // 1-2: black to white (transition to dark slide)
-
+    if (isDark) return "text-white";
     if (progress <= 1) {
       return "text-black";
     } else if (progress <= 2) {
@@ -63,6 +64,12 @@ const Navbar = () => {
   }, [slideProgress, activeHeroIndex]);
 
   const getTextColorStyle = () => {
+    if (isDark) {
+      return {
+        color: `rgb(255, 255, 255)`,
+        transition: "color 0s ease-out",
+      };
+    }
     if (typeof slideProgress === "number") {
       const progress = Math.max(0, Math.min(2, slideProgress));
 
@@ -101,7 +108,9 @@ const Navbar = () => {
                 width={173}
                 style={{
                   filter:
-                    typeof slideProgress === "number" && slideProgress > 1.5
+                    (typeof slideProgress === "number" &&
+                      slideProgress > 1.5) ||
+                    isDark
                       ? "brightness(0) invert(1)" // Make logo white for dark background
                       : "none",
                   transition: "filter 0.3s ease-out",
@@ -140,7 +149,9 @@ const Navbar = () => {
                 width={38}
                 style={{
                   filter:
-                    typeof slideProgress === "number" && slideProgress > 1.5
+                    (typeof slideProgress === "number" &&
+                      slideProgress > 1.5) ||
+                    isDark
                       ? "brightness(0) invert(1)" // Make menu icon white for dark background
                       : "none",
                   transition: "filter 0.3s ease-out",
