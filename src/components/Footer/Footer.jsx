@@ -6,7 +6,7 @@ import LinkedInLogo from "../../../assets/linkedin 1.png";
 
 export default function Footer() {
   return (
-    <footer className="sticky bottom-0 bg-[#212121] max-w-[1920px] h-[750px] text-white py-12 px-4">
+    <footer className="sticky bottom-0 bg-[#212121] max-w-[1920px] text-white py-12 px-4">
       <div className="max-w-screen-3xl mx-auto px-4 sm:px-8 md:px-12 2xl:px-44">
         {/* Logo Section */}
         <div className="flex justify-center py-16">
@@ -79,12 +79,12 @@ export default function Footer() {
         </div>
 
         {/* Separator Line */}
-        <div className="border-t border-gray-600 mb-6"></div>
+        <div className="border-t border-gray-600 mb-9"></div>
 
         <div className="2xl:text-[24px] text-base font-sora text-center">
-          <p className="2xl:text-[24px] text-gray-400 text-base">
-            Copyright © {new Date().getFullYear()} Atelic.ai - All Rights
-            Reserved.
+          <p className="2xl:text-[24px] font-light text-white text-base">
+            Copyright © {new Date().getFullYear()} Atelic.AI – All rights
+            reserved – Privacy Policy
           </p>
         </div>
       </div>

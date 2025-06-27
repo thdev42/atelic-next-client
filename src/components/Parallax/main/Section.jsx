@@ -4,6 +4,7 @@ import { Partners } from "@/components/Partners/Partners";
 import { DecisionTree } from "@/components/DecisionTree/DecisionTree";
 import AboutAtelic from "@/components/AboutAtelic/AboutAtelic";
 import Footer from "@/components/Footer/Footer";
+import Appointment from "@/components/Appointment/Appointment";
 // import { AboutAt } from "@/components/Services/Services";
 const Section = ({ scrollYProgress }) => {
   const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
@@ -35,6 +36,7 @@ const Section = ({ scrollYProgress }) => {
       <DecisionTree />
       {/* <Services /> */}
       <AboutAtelic />
+      <Appointment />
       <Footer />
     </motion.div>
   );
