@@ -34,7 +34,7 @@ const HeroSection = ({ scrollYSProgress }) => {
 
   const [isMobile, setIsMobile] = useState(false);
 
-  // Motion values for smooth gradual transitions
+  // Motion values for smooth gradual transitions - RESET TO 0 ON MOUNT
   const slideProgress = useMotionValue(0);
   const smoothSlideProgress = useSpring(slideProgress, {
     stiffness: 40,
@@ -45,6 +45,32 @@ const HeroSection = ({ scrollYSProgress }) => {
   // Track accumulated scroll for gradual transitions
   const [accumulatedScroll, setAccumulatedScroll] = useState(0);
   const scrollAccumulator = useRef(0);
+
+  // RESET HERO STATE ON COMPONENT MOUNT/REFRESH
+  useEffect(() => {
+    // Reset all states to initial values
+    setActiveSection(0);
+    setIsHeroComplete(false);
+    setShowScrollIndicator(false);
+    setIsScrolling(false);
+
+    // Reset motion values
+    slideProgress.set(0);
+
+    // Reset scroll lock
+    document.body.style.overflow = "hidden";
+    document.body.style.touchAction = "none";
+    document.body.style.position = "fixed";
+    document.body.style.width = "100%";
+    document.body.style.height = "100%";
+    document.body.style.overscrollBehavior = "none";
+    window.scrollTo(0, 0);
+
+    // Reset background to first slide
+    setBackground && setBackground("#e9e9e9");
+    setActiveHeroIndex && setActiveHeroIndex(0);
+    setSlideProgress && setSlideProgress(0);
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {

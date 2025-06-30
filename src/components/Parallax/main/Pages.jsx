@@ -1,12 +1,13 @@
 import HeroSection from "@/components/HeroMain/HeroMain";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Section from "./Section";
 import Lenis from "@studio-freight/lenis";
 import { useScroll } from "framer-motion";
+import AnimatedPageManager from "./Transition";
 
 const HomePage = () => {
   const container = useRef();
-
+  const [showHero, setShowHero] = useState(true);
   useEffect(() => {
     const lenis = new Lenis();
 
@@ -24,9 +25,12 @@ const HomePage = () => {
   });
 
   return (
-    <main ref={container} className="relative h-[200vh]">
-      <HeroSection scrollYSProgress={scrollYProgress} />
-      <Section scrollYProgress={scrollYProgress} />
+    <main ref={container} className="relative z-50">
+      {showHero && <HeroSection scrollYSProgress={scrollYProgress} />}
+      <AnimatedPageManager
+        scrollYProgress={scrollYProgress}
+        showHero={setShowHero}
+      />
     </main>
   );
 };

@@ -7,6 +7,7 @@ export const BackgroundProvider = ({ children }) => {
   const [background, setBackground] = useState("#e9e9e9");
   const [activeHeroIndex, setActiveHeroIndex] = useState(0);
   const [slideProgress, setSlideProgress] = useState(0);
+  const [isShowNav, setIsShowNav] = useState(true);
   const [isDark, setIsDark] = useState(false);
   const updateSlideProgress = useCallback((progress) => {
     setSlideProgress(progress);
@@ -22,6 +23,8 @@ export const BackgroundProvider = ({ children }) => {
     slideProgress,
     setSlideProgress,
     updateSlideProgress,
+    isShowNav,
+    setIsShowNav,
   };
 
   return (

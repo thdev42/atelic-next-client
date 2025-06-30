@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Select,
   SelectContent,
@@ -6,9 +8,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export const SelectField = ({ placeholder, options = [] }) => {
+export const SelectField = ({
+  placeholder,
+  value = "",
+  onChange = () => {},
+  options = [],
+}) => {
   return (
-    <Select>
+    <Select value={value} onValueChange={onChange}>
       <SelectTrigger className="2xl:text-[20px] font-normal 2xl:min-h-[70px] px-6 py-4 h-auto rounded-full bg-white text-black shadow-md text-sm data-[placeholder]:text-black [&_svg]:text-black [&_svg]:opacity-60 [&_svg]:h-7 [&_svg]:w-7">
         <span className="pl-6 block w-full text-left">
           <SelectValue placeholder={placeholder} />

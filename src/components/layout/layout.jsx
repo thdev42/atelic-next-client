@@ -1,6 +1,7 @@
 import { ParallaxProvider } from "react-scroll-parallax";
 import { BackgroundProvider, useBackground } from "@/context/BackgroundContext";
 import Navbar from "../Nav/Navbar";
+import { Toaster } from "react-hot-toast";
 
 const Layout = ({ children }) => {
   const { background } = useBackground();
@@ -19,6 +20,7 @@ const Layout = ({ children }) => {
 };
 const LayoutWrapper = ({ children }) => (
   <BackgroundProvider>
+    <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
     <Layout>{children}</Layout>
   </BackgroundProvider>
 );
