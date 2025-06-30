@@ -4,14 +4,14 @@ import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Section from "./Section";
 import Results from "@/components/DecisionTree/Results";
-import { useBackground } from "@/context/BackgroundContext";
+import { useNav } from "@/context/NavContext";
 
 export default function AnimatedPageManager({ scrollYProgress, showHero }) {
   const [showNext, setShowNext] = useState(false);
   const [direction, setDirection] = useState(1);
   const [formData, setFormData] = useState([]);
   const formRef = useRef(null);
-  const { setIsShowNav } = useBackground();
+  const { setIsShowNav } = useNav();
   const handleComplete = (data) => {
     showHero(false);
     setDirection(1);

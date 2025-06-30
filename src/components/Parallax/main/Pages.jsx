@@ -25,7 +25,7 @@ const HomePage = () => {
   });
 
   return (
-    <main ref={container} className="relative z-50">
+    <main ref={container} className="relative">
       {showHero && <HeroSection scrollYSProgress={scrollYProgress} />}
       <AnimatedPageManager
         scrollYProgress={scrollYProgress}
