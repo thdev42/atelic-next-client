@@ -7,6 +7,7 @@ import { DecisionTree } from "@/components/DecisionTree/DecisionTree";
 import AboutAtelic from "@/components/AboutAtelic/AboutAtelic";
 import Footer from "@/components/Footer/Footer";
 import Appointment from "@/components/Appointment/Appointment";
+import ServicesSection from "@/components/ServicesSection/ServicesSection";
 
 const Section = ({ scrollYProgress, onComplete, shouldScrollToForm }) => {
   const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
@@ -38,9 +39,11 @@ const Section = ({ scrollYProgress, onComplete, shouldScrollToForm }) => {
       }}
     >
       <Partners />
+
       <div ref={formRef}>
         <DecisionTree onComplete={onComplete} />
       </div>
+      <ServicesSection />
       <AboutAtelic />
       <Appointment />
       <Footer />

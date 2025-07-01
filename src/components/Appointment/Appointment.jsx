@@ -412,10 +412,10 @@ const Appointment = () => {
             <motion.button
               type="button"
               onClick={handleSubmit}
-              style={{
-                x: submitX,
-                y: submitY,
-              }}
+              // style={{
+              //   x: submitX,
+              //   y: submitY,
+              // }}
               className="will-change-transform w-full bg-[#335F86] text-[22px] text-white font-semibold px-6 h-[80px] rounded-[50px] focus:outline-none focus:ring-0"
               initial={{ opacity: 0, y: 50 }}
               animate={

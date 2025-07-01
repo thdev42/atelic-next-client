@@ -97,17 +97,23 @@ const Navbar = () => {
 
   return (
     <>
-      (
-      <header className="w-full bg-transparent ">
-        <nav className="z-50 py-4">
+      <header className="w-full bg-transparent">
+        <nav className="z-50">
+          {" "}
+          {/* Reduced padding from py-4 to py-2 */}
           <Container>
             <div className="px-4 sm:px-8 md:px-12 xl:px-[178px] flex items-center justify-between w-full relative">
-              {/* LEFT: Logo */}
-              <div style={getTextColorStyle()}>
+              {/* LEFT: Logo with controlled height */}
+              <div
+                style={getTextColorStyle()}
+                className="flex-shrink-0 cursor-pointer"
+              >
                 <Image
                   src={NavIcon}
                   alt="Logo"
-                  width={173}
+                  width={173} // Reduced from 173 to 120
+                  // height={120} // Added fixed height
+                  className="object-contain" // Maintain aspect ratio
                   style={{
                     filter:
                       (typeof slideProgress === "number" &&
@@ -144,27 +150,30 @@ const Navbar = () => {
               </ul>
 
               {/* RIGHT: Menu Icon */}
-              <button className="cursor-pointer">
-                <Image
-                  src={MenuButton}
-                  alt="Menu"
-                  width={38}
-                  style={{
-                    filter:
-                      (typeof slideProgress === "number" &&
-                        slideProgress > 1.5) ||
-                      isDark
-                        ? "brightness(0) invert(1)" // Make menu icon white for dark background
-                        : "none",
-                    transition: "filter 0.3s ease-out",
-                  }}
-                />
-              </button>
+              <div className="flex-shrink-0">
+                <button className="cursor-pointer">
+                  <Image
+                    src={MenuButton}
+                    alt="Menu"
+                    width={32} // Reduced from 38 to 32
+                    height={32} // Added fixed height
+                    className="object-contain"
+                    style={{
+                      filter:
+                        (typeof slideProgress === "number" &&
+                          slideProgress > 1.5) ||
+                        isDark
+                          ? "brightness(0) invert(1)" // Make menu icon white for dark background
+                          : "none",
+                      transition: "filter 0.3s ease-out",
+                    }}
+                  />
+                </button>
+              </div>
             </div>
           </Container>
         </nav>
       </header>
-      )
     </>
   );
 };

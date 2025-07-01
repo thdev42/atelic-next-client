@@ -13,6 +13,7 @@ import ServicesRobot from "../../../assets/ServicesRobot.png";
 import Robot1 from "../../../assets/AtelicRobot.png";
 import BgPattern1 from "../../../assets/HeroWebRight1.png";
 import AiChip from "../../../assets/AiChip (2).png";
+import Hero3Bg from "../../../assets/Hero3Bg.jpg";
 
 export const HeroComponent1 = ({ sectionY, backgroundY, robotY, textY }) => (
   <motion.section
@@ -274,19 +275,10 @@ export const HeroComponent2 = ({ sectionY, backgroundY, robotY, textY }) => (
 
 // Hero Component 3 - Innovation Focus
 export const HeroComponent3 = ({ sectionY, backgroundY, robotY, textY }) => (
-  <section className="max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 relative overflow-hidden min-h-[600px] lg:min-h-[700px] 2xl:min-h-[800px] select-none">
-    <div className="px-4 sm:px-8 md:px-12 xl:px-[178px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 h-full">
-      <div className="absolute right-0 top-0 translate-x-1/2 2xl:translate-x-1/4 hidden lg:block z-0">
-        <div className="w-[1282px] h-[915px]">
-          <Image
-            src={BgPattern1}
-            alt="Background Pattern"
-            width={1282}
-            height={915}
-          />
-        </div>
-      </div>
-      <div className="flex flex-row w-full">
+  <section className=" max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 relative min-h-[600px] lg:min-h-[700px] 2xl:min-h-[800px] select-none isolate">
+    <div className="flex flex-col lg:flex-row items-center justify-between gap-12 h-full">
+      {/* Text Content with Padding */}
+      <div className="px-4 sm:px-8 md:px-12 xl:px-[178px] flex flex-row w-full lg:w-1/2 lg:pl-4 lg:pr-0 sm:lg:pl-8 md:lg:pl-12 xl:lg:pl-[178px]">
         <motion.div style={{ y: textY }}>
           <h1 className="text-4xl 2xl:text-[60px] md:text-4xl font-sora font-normal text-white space-y-5 2xl:space-y-10 flex flex-col">
             <span>Simplifying AI.</span>
@@ -316,37 +308,23 @@ export const HeroComponent3 = ({ sectionY, backgroundY, robotY, textY }) => (
         </motion.div>
       </div>
 
+      {/* Image without right padding */}
       <motion.div
         style={{ y: robotY }}
-        className="w-full relative flex justify-end"
+        className="w-full lg:w-1/2 relative px-4 sm:px-8 md:px-12 lg:px-0 lg:pr-0"
       >
-        <div className="relative w-full 2xl:max-w lg:max-w-[600px] max-w-[500px]">
-          <Image src={Robot1} alt="AI Robot" className="w-full " />
-
-          <div
-            style={{ animation: "floatUpDown 11s ease-in-out infinite" }}
-            className="font-poppins absolute xs:w-[180px] xs:h-[140px] w-[210px] h-[170px] 2xl:w-[240px] 2xl:h-[190px] top-6 -right-6 lg:top-14 lg:-right-6 bg-white/40 rounded-[30px] shadow-[0_4px_60px_rgba(0,0,0,0.05)] backdrop-blur-[10px] px-9 py-4 flex flex-col"
-          >
-            <p className="text-4xl 2xl:text-[50px] font-normal 2xl:mt-2 mb-2 text-black">
-              30%
-            </p>
-            <p className="text-xs 2xl:text-[16px] mt-2 font-thin text-black/60 leading-snug">
-              of GenAI projects will be abandoned after proof{" "}
-              <span className="underline cursor-pointer">Learn More</span>
-            </p>
-          </div>
-
-          <div
-            style={{ animation: "floatUpDown 11s ease-in-out infinite" }}
-            className="font-poppins absolute w-[210px] h-[170px] 2xl:w-[240px] 2xl:h-[190px] bottom-0 left-0 2xl:bottom-40 2xl:-left-20 bg-white/40 rounded-[30px] shadow-[0_4px_60px_rgba(0,0,0,0.05)] backdrop-blur-[10px] px-9 py-4 flex flex-col"
-          >
-            <p className="text-4xl 2xl:text-[50px] font-normal text-black 2xl:mt-2 mb-2">
-              42%
-            </p>
-            <p className="text-xs 2xl:text-[16px] mt-2 font-thin text-black/60 leading-snug">
-              of respondents don't fully understand the benefits of AI.
-            </p>
-          </div>
+        <div className="relative w-full">
+          <img
+            src={Hero3Bg.src}
+            alt="AI Robot"
+            className="w-full 2xl:-mt-48 crisp-edges"
+            style={{
+              // imageRendering: "-webkit-optimize-contrast",
+              // imageRendering: "crisp-edges",
+              imageRendering: "pixelated",
+              // mixBlendMode: "lighten",
+            }}
+          />
         </div>
       </motion.div>
     </div>
