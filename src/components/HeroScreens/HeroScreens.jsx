@@ -13,7 +13,7 @@ import ServicesRobot from "../../../assets/ServicesRobot.png";
 import Robot1 from "../../../assets/AtelicRobot.png";
 import BgPattern1 from "../../../assets/HeroWebRight1.png";
 import AiChip from "../../../assets/AiChip (2).png";
-import Hero3Bg from "../../../assets/Hero3Bg.jpg";
+import Hero3Bg from "../../../assets/HeroBg3 (2).png";
 
 export const HeroComponent1 = ({ sectionY, backgroundY, robotY, textY }) => (
   <motion.section
@@ -275,11 +275,11 @@ export const HeroComponent2 = ({ sectionY, backgroundY, robotY, textY }) => (
 
 // Hero Component 3 - Innovation Focus
 export const HeroComponent3 = ({ sectionY, backgroundY, robotY, textY }) => (
-  <section className=" max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 relative min-h-[600px] lg:min-h-[700px] 2xl:min-h-[800px] select-none isolate">
+  <section className="max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 relative min-h-[600px] lg:min-h-[700px] 2xl:min-h-[800px] select-none overflow-x-clip overflow-visible">
     <div className="flex flex-col lg:flex-row items-center justify-between gap-12 h-full">
-      {/* Text Content with Padding */}
-      <div className="px-4 sm:px-8 md:px-12 xl:px-[178px] flex flex-row w-full lg:w-1/2 lg:pl-4 lg:pr-0 sm:lg:pl-8 md:lg:pl-12 xl:lg:pl-[178px]">
-        <motion.div style={{ y: textY }}>
+      {/* Text Content with Better Responsive Width */}
+      <div className="px-4 sm:px-8 md:px-12 xl:px-[178px] flex flex-row w-full lg:w-3/5 2xl:w-2/3">
+        <motion.div style={{ y: textY }} className="w-full">
           <h1 className="text-4xl 2xl:text-[60px] md:text-4xl font-sora font-normal text-white space-y-5 2xl:space-y-10 flex flex-col">
             <span>Simplifying AI.</span>
             <span>Building Trust.</span>
@@ -288,7 +288,7 @@ export const HeroComponent3 = ({ sectionY, backgroundY, robotY, textY }) => (
             </span>
           </h1>
 
-          <p className="2xl:text-[22px] text-base font-sora 2xl:leading-normal text-gray-600 mt-6 2xl:mt-14 max-w-lg">
+          <p className="2xl:text-[22px] text-base font-sora 2xl:leading-normal text-gray-600 mt-6 2xl:mt-14 max-w-none 2xl:max-w-2xl">
             Atelic AI helps enterprises unlock real value from AI by solving
             complex challenges with secure, customized, industry-specific
             solutions.
@@ -308,21 +308,19 @@ export const HeroComponent3 = ({ sectionY, backgroundY, robotY, textY }) => (
         </motion.div>
       </div>
 
-      {/* Image without right padding */}
+      {/* Image with Better Responsive Width */}
       <motion.div
         style={{ y: robotY }}
-        className="w-full lg:w-1/2 relative px-4 sm:px-8 md:px-12 lg:px-0 lg:pr-0"
+        className="w-full lg:w-2/5 2xl:w-1/2 relative px-4 sm:px-8 md:px-12 lg:px-0 lg:mr-28"
       >
         <div className="relative w-full">
           <img
             src={Hero3Bg.src}
             alt="AI Robot"
-            className="w-full 2xl:-mt-48 crisp-edges"
+            className="w-full 2xl:-mt-24 crisp-edges"
             style={{
-              // imageRendering: "-webkit-optimize-contrast",
-              // imageRendering: "crisp-edges",
               imageRendering: "pixelated",
-              // mixBlendMode: "lighten",
+              scale: 1.9,
             }}
           />
         </div>

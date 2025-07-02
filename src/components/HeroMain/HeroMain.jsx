@@ -199,7 +199,7 @@ const HeroSection = ({ scrollYSProgress }) => {
 
       {/* Hero Components - Disable AnimatePresence on mobile */}
       {isMobile ? (
-        <div>
+        <div className="">
           <CurrentHeroComponent
             sectionY={sectionY}
             backgroundY={backgroundY}

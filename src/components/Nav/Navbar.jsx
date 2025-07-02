@@ -98,7 +98,7 @@ const Navbar = () => {
   return (
     <>
       <header className="w-full bg-transparent">
-        <nav className="z-50">
+        <nav className="z-10">
           {" "}
           {/* Reduced padding from py-4 to py-2 */}
           <Container>
