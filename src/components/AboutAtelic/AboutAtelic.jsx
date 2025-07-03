@@ -136,7 +136,13 @@ const AboutAtelic = () => {
     });
 
     const handleResize = () => {
-      const width = window.innerWidth;
+      const width =
+        typeof window !== "undefined"
+          ? window.visualViewport?.width || window.innerWidth
+          : 1024;
+
+      console.log("Viewport width:", width);
+
       const newScreenSize = getScreenSize(width);
       const newMembersPerSlide = getMembersPerSlide(width);
       const newIsMobile = width < 768;
@@ -144,14 +150,9 @@ const AboutAtelic = () => {
       setScreenSize(newScreenSize);
       setMembersPerSlide(newMembersPerSlide);
       setIsMobile(newIsMobile);
-
-      if (newMembersPerSlide !== membersPerSlide) {
-        setCurrentSlide(0);
-      }
     };
 
     handleResize();
-
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [membersPerSlide]);
@@ -215,7 +216,7 @@ const AboutAtelic = () => {
     if (!isMobile) return;
     touchEndX.current = e.touches[0].clientX;
   };
-  console.log(isMobile, "ISMOBILE");
+
   const handleTouchEnd = () => {
     if (!isMobile) return;
     const touchDiff = touchStartX.current - touchEndX.current;
@@ -233,7 +234,7 @@ const AboutAtelic = () => {
   // Fixed styling functions with proper button positioning
   const getCardClasses = () => {
     const baseClasses =
-      "group pt-4 px-6 text-center rounded-t-[400px] transition duration-200 flex flex-col items-center bg-white hover:bg-gradient-to-b hover:from-[#F21B2A] hover:to-[#335F86] hover:text-white relative overflow-hidden";
+      "group pt-4 px-6 text-center rounded-t-[400px] transition duration-200 flex flex-col items-center bg-white hover:bg-gradient-to-b hover:from-[#F21B2A] hover:to-[#335F86] hover:text-white relative overflow-visible";
     const hoverClasses = "hover:scale-105 hover:-translate-y-2";
     switch (screenSize) {
       case "mobile":
@@ -300,6 +301,8 @@ const AboutAtelic = () => {
     }
   };
 
+  console.log(isMobile, "ISMOBILE");
+
   // Enhanced slide animation variants with smoother transitions
   const slideVariants = {
     enter: (direction) => ({
@@ -351,345 +354,240 @@ const AboutAtelic = () => {
   };
 
   // On mobile, we use the slide functionality. On desktop, we use the scroll animation.
-  // if (isMobile) {
-  //   return (
-  //     <section
-  //       className="z-10 font-sora bg-[#f3f3f3] max-w-[1920px] mx-auto w-full py-16 min-h-screen relative"
-  //       // onTouchStart={handleTouchStart}
-  //       onTouchMove={handleTouchMove}
-  //       // onTouchEnd={handleTouchEnd}
-  //     >
-  //       <div className="px-4 sm:px-8 md:px-12 xl:px-[178px]">
-  //         <div className="md:flex justify-between items-start md:space-x-10 2xl:mb-16 mb-12">
-  //           <h2
-  //             className="2xl:text-[60px] text-3xl md:text-4xl font-semibold whitespace-nowrap"
-  //             data-aos="fade-right"
-  //           >
-  //             About <span className="text-[#ED254E]">Atelic</span>
-  //           </h2>
-  //           <p
-  //             className="2xl:text-[22px] text-gray-600 mt-4 md:mt-0 max-w-3xl"
-  //             data-aos="fade-left"
-  //             data-aos-delay="200"
-  //           >
-  //             Founded by a team of seasoned AI, cloud, and data experts, Atelic
-  //             AI was created to cut through the noise and hype of generic AI
-  //             solutions. We exist to deliver true business value through
-  //             context-aware, ROI-driven implementations that solve real-world
-  //             problems — not just pilot experiments.
-  //           </p>
-  //         </div>
+  if (isMobile) {
+    return (
+      <section
+        className="z-10 font-sora bg-[#f3f3f3] max-w-[1920px] mx-auto w-full py-16 min-h-screen relative"
+        // onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        // onTouchEnd={handleTouchEnd}
+      >
+        <div className="px-4 sm:px-8 md:px-12 xl:px-[178px]">
+          <div className="md:flex justify-between items-start md:space-x-10 2xl:mb-16 mb-12">
+            <h2
+              className="2xl:text-[60px] text-3xl md:text-4xl font-semibold whitespace-nowrap"
+              data-aos="fade-right"
+            >
+              About <span className="text-[#ED254E]">Atelic</span>
+            </h2>
+            <p
+              className="2xl:text-[22px] text-gray-600 mt-4 md:mt-0 max-w-3xl"
+              data-aos="fade-left"
+              data-aos-delay="200"
+            >
+              Founded by a team of seasoned AI, cloud, and data experts, Atelic
+              AI was created to cut through the noise and hype of generic AI
+              solutions. We exist to deliver true business value through
+              context-aware, ROI-driven implementations that solve real-world
+              problems — not just pilot experiments.
+            </p>
+          </div>
 
-  //         {/* Mobile Slide Animation */}
-  //         <div className="relative overflow-hidden">
-  //           <AnimatePresence
-  //             initial={false}
-  //             custom={slideDirection}
-  //             mode="popLayout"
-  //           >
-  //             <motion.div
-  //               key={currentSlide}
-  //               custom={slideDirection}
-  //               variants={slideVariants}
-  //               initial="enter"
-  //               animate="center"
-  //               exit="exit"
-  //               transition={{
-  //                 x: { type: "spring", stiffness: 200, damping: 25 },
-  //                 opacity: { duration: 0.3 },
-  //                 scale: { duration: 0.3 },
-  //               }}
-  //               drag="x"
-  //               dragConstraints={{ left: 0, right: 0 }}
-  //               dragElastic={1}
-  //               onDragEnd={(e, { offset, velocity }) => {
-  //                 const swipe = swipePower(offset.x, velocity.x);
-  //                 if (swipe < -swipeConfidenceThreshold) {
-  //                   handleNext();
-  //                 } else if (swipe > swipeConfidenceThreshold) {
-  //                   handlePrevious();
-  //                 }
-  //               }}
-  //               className="flex flex-wrap gap-5 justify-center"
-  //             >
-  //               {getCurrentSlideMembers().map((member, index) => (
-  //                 <motion.div
-  //                   key={`${currentSlide}-${index}`}
-  //                   data-aos="fade-up"
-  //                   data-aos-delay={index * 150}
-  //                   className={getCardClasses()}
-  //                 >
-  //                   <div className={getImageClasses()}>
-  //                     <Image
-  //                       src={member.image}
-  //                       alt={member.name}
-  //                       className="object-cover w-full h-full"
-  //                     />
-  //                   </div>
-  //                   <div className="mt-6 flex-1 mb-4">
-  //                     <h3 className={getTitleClasses()}>{member.name}</h3>
-  //                     <p className="text-[#ED254E] font-semibold mb-4 text-lg group-hover:text-white">
-  //                       {member.title}
-  //                     </p>
-  //                     <p className={getDescriptionClasses()}>
-  //                       {member.description}
-  //                     </p>
-  //                   </div>
-  //                   <button className={getLearnMoreButtonClasses()}>
-  //                     Learn More
-  //                   </button>
-  //                 </motion.div>
-  //               ))}
-  //             </motion.div>
-  //           </AnimatePresence>
-  //         </div>
+          {/* Mobile Slide Animation */}
+          <div className="relative overflow-hidden">
+            <AnimatePresence
+              initial={false}
+              custom={slideDirection}
+              mode="popLayout"
+            >
+              <motion.div
+                key={currentSlide}
+                custom={slideDirection}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{
+                  x: { type: "spring", stiffness: 200, damping: 25 },
+                  opacity: { duration: 0.3 },
+                  scale: { duration: 0.3 },
+                }}
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={1}
+                onDragEnd={(e, { offset, velocity }) => {
+                  const swipe = swipePower(offset.x, velocity.x);
+                  if (swipe < -swipeConfidenceThreshold) {
+                    handleNext();
+                  } else if (swipe > swipeConfidenceThreshold) {
+                    handlePrevious();
+                  }
+                }}
+                className="flex flex-wrap gap-5 justify-center"
+              >
+                {getCurrentSlideMembers().map((member, index) => (
+                  <motion.div
+                    key={`${currentSlide}-${index}`}
+                    data-aos="fade-up"
+                    data-aos-delay={index * 150}
+                    className={getCardClasses()}
+                  >
+                    <div className={getImageClasses()}>
+                      <Image
+                        src={member.image}
+                        alt={member.name}
+                        className="object-cover w-full h-full"
+                      />
+                    </div>
+                    <div className="mt-6 flex-1 mb-4">
+                      <h3 className={getTitleClasses()}>{member.name}</h3>
+                      <p className="text-[#ED254E] font-semibold mb-4 text-lg group-hover:text-white">
+                        {member.title}
+                      </p>
+                      <p className={getDescriptionClasses()}>
+                        {member.description}
+                      </p>
+                    </div>
+                    <button className={getLearnMoreButtonClasses()}>
+                      Learn More
+                    </button>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </AnimatePresence>
+          </div>
 
-  //         {/* Pagination Dots for Mobile */}
-  //         {totalSlides > 1 && (
-  //           <div className="flex gap-2 justify-center items-center mt-8">
-  //             {Array.from({ length: totalSlides }, (_, index) => {
-  //               const isActive = currentSlide === index;
-  //               return (
-  //                 <motion.button
-  //                   key={index}
-  //                   onClick={() => goToSlide(index)}
-  //                   className={`flex items-center justify-center rounded-full transition-all duration-300 ${
-  //                     isActive && "w-[21px] h-[21px] border-[#335F86]"
-  //                   }`}
-  //                   initial={{ scale: 0 }}
-  //                   animate={{ scale: 1 }}
-  //                   style={{ borderWidth: 1 }}
-  //                   transition={{ delay: index * 0.1 }}
-  //                   whileHover={{ scale: 1.2 }}
-  //                   whileTap={{ scale: 0.9 }}
-  //                 >
-  //                   <div
-  //                     className={`rounded-full ${
-  //                       isActive
-  //                         ? "bg-[#335F86]"
-  //                         : "bg-[#335F86] hover:bg-gray-400"
-  //                     } w-[9px] h-[9px]`}
-  //                   />
-  //                 </motion.button>
-  //               );
-  //             })}
-  //           </div>
-  //         )}
-  //       </div>
-  //     </section>
-  //   );
-  // }
+          {/* Pagination Dots for Mobile */}
+          {totalSlides > 1 && (
+            <div className="flex gap-2 justify-center items-center mt-8">
+              {Array.from({ length: totalSlides }, (_, index) => {
+                const isActive = currentSlide === index;
+                return (
+                  <motion.button
+                    key={index}
+                    onClick={() => goToSlide(index)}
+                    className={`flex items-center justify-center rounded-full transition-all duration-300 ${
+                      isActive && "w-[21px] h-[21px] border-[#335F86]"
+                    }`}
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    style={{ borderWidth: 1 }}
+                    transition={{ delay: index * 0.1 }}
+                    whileHover={{ scale: 1.2 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <div
+                      className={`rounded-full ${
+                        isActive
+                          ? "bg-[#335F86]"
+                          : "bg-[#335F86] hover:bg-gray-400"
+                      } w-[9px] h-[9px]`}
+                    />
+                  </motion.button>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      </section>
+    );
+  }
 
   // Desktop JSX with the scroll-reveal effect + enhanced slide animations
   return (
-    <>
-      {!isMobile ? (
-        <section
-          ref={sectionRef}
-          className="z-10 font-sora overflow-visible bg-[#f3f3f3] max-w-[1920px] mx-auto w-full relative"
-          style={{ height: "300vh" }} // Provides the scrollable area
-          onMouseEnter={() => setShowArrows(true)}
-          onMouseLeave={() => setShowArrows(false)}
-        >
-          <div className="sticky top-0 w-full min-h-screen py-0 flex flex-col overflow-visible">
-            <div className="px-4 sm:px-8 md:px-12 xl:px-[178px] flex flex-col flex-grow h-full">
-              <div className="md:flex justify-between items-start pt-10 md:space-x-10 2xl:mb-16 mb-12">
-                <div className="relative">
-                  <h2 className="2xl:text-[60px] text-3xl md:text-4xl font-semibold whitespace-nowrap">
-                    About <span className="text-[#ED254E]">Atelic</span>
-                  </h2>
-
-                  {/* Navigation Arrows below heading - Desktop only */}
-                  <motion.div
-                    className="flex items-center space-x-4 mt-6"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{
-                      opacity: showArrows ? 1 : 0,
-                      y: showArrows ? 0 : 20,
-                    }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <motion.button
-                      onClick={handlePrevious}
-                      className="w-[62px] h-[62px] bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group relative overflow-hidden"
-                      whileHover={{
-                        scale: 1.1,
-                        backgroundImage:
-                          "linear-gradient(150.45deg, #F21B2A 19.81%, #335F86 90.64%)",
-                      }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        className="text-gray-600 group-hover:text-white transition-colors duration-300 relative z-10"
-                      >
-                        <path
-                          d="M15 18L9 12L15 6"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </motion.button>
-
-                    <motion.button
-                      onClick={handleNext}
-                      className="w-[62px] h-[62px] bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group relative overflow-hidden"
-                      whileHover={{
-                        scale: 1.1,
-                        backgroundImage:
-                          "linear-gradient(150.45deg, #F21B2A 19.81%, #335F86 90.64%)",
-                      }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        className="text-gray-600 group-hover:text-white transition-colors duration-300"
-                      >
-                        <path
-                          d="M9 18L15 12L9 6"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </motion.button>
-                  </motion.div>
-                </div>
-
-                <p className="2xl:text-[22px] text-gray-600 mt-4 md:mt-0 max-w-3xl">
-                  Founded by a team of seasoned AI, cloud, and data experts,
-                  Atelic AI was created to cut through the noise and hype of
-                  generic AI solutions. We exist to deliver true business value
-                  through context-aware, ROI-driven implementations that solve
-                  real-world problems — not just pilot experiments.
-                </p>
-              </div>
-
-              {/* Desktop: Enhanced slide animation with horizontal scroll */}
-              <div
-                ref={containerRef}
-                className="flex-grow overflow-x-auto overflow-y-hidden relative"
-                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-              >
-                <style jsx>{`
-                  div::-webkit-scrollbar {
-                    display: none;
-                  }
-                `}</style>
-
-                <div className="relative min-h-full flex items-center pb-16">
-                  <AnimatePresence
-                    initial={false}
-                    custom={slideDirection}
-                    mode="popLayout"
-                  >
-                    <motion.div
-                      key={currentSlide}
-                      custom={slideDirection}
-                      variants={desktopSlideVariants}
-                      initial="enter"
-                      animate="center"
-                      exit="exit"
-                      transition={{
-                        x: { type: "spring", stiffness: 150, damping: 30 },
-                        opacity: { duration: 0.4 },
-                        scale: { duration: 0.4 },
-                        rotateY: { duration: 0.5 },
-                      }}
-                      className="flex flex-wrap gap-5 justify-center items-center w-full"
-                      style={{ perspective: "1000px" }}
-                    >
-                      {getCurrentSlideMembers().map((member, index) => (
-                        <AnimatedTeamCard
-                          key={`${currentSlide}-${member.name}`}
-                          member={member}
-                          index={index}
-                          scrollYProgress={scrollYProgress}
-                          getCardClasses={getCardClasses}
-                          getImageClasses={getImageClasses}
-                          getTitleClasses={getTitleClasses}
-                          getDescriptionClasses={getDescriptionClasses}
-                          getLearnMoreButtonClasses={getLearnMoreButtonClasses}
-                        />
-                      ))}
-                    </motion.div>
-                  </AnimatePresence>
-                </div>
-              </div>
-
-              {/* Pagination Dots for Desktop */}
-              {totalSlides > 1 && (
-                <div className="flex gap-2 justify-center items-center pt-8 mb-8">
-                  {Array.from({ length: totalSlides }, (_, index) => {
-                    const isActive = currentSlide === index;
-                    return (
-                      <motion.button
-                        key={index}
-                        onClick={() => goToSlide(index)}
-                        className={`flex items-center justify-center rounded-full transition-all duration-300 ${
-                          isActive && "w-[21px] h-[21px] border-[#335F86]"
-                        }`}
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        style={{ borderWidth: 1 }}
-                        transition={{ delay: index * 0.1 }}
-                        whileHover={{ scale: 1.2 }}
-                        whileTap={{ scale: 0.9 }}
-                      >
-                        <motion.div
-                          className={`rounded-full ${
-                            isActive
-                              ? "bg-[#335F86]"
-                              : "bg-[#335F86] hover:bg-gray-400"
-                          } w-[9px] h-[9px]`}
-                        />
-                      </motion.button>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
-      ) : (
-        <section
-          className="overflow-hidden z-10 font-sora bg-[#f3f3f3] max-w-[1920px] mx-auto w-full py-16 min-h-screen relative"
-          // onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          // onTouchEnd={handleTouchEnd}
-        >
-          <div className="px-4 sm:px-8 md:px-12 xl:px-[178px]">
-            <div className="md:flex justify-between items-start md:space-x-10 2xl:mb-16 mb-12">
-              <h2
-                className="2xl:text-[60px] text-3xl md:text-4xl font-semibold whitespace-nowrap"
-                data-aos="fade-right"
-              >
+    <section
+      ref={sectionRef}
+      className="z-10 font-sora overflow-visible bg-[#f3f3f3] max-w-[1920px] mx-auto w-full relative"
+      style={{ height: "300vh" }} // Provides the scrollable area
+      onMouseEnter={() => setShowArrows(true)}
+      onMouseLeave={() => setShowArrows(false)}
+    >
+      <div className="sticky top-0 w-full min-h-screen py-0 flex flex-col overflow-visible">
+        <div className="px-4 sm:px-8 md:px-12 xl:px-[178px] flex flex-col flex-grow h-full">
+          <div className="md:flex justify-between items-start pt-10 md:space-x-10 2xl:mb-16 mb-12">
+            <div className="relative">
+              <h2 className="2xl:text-[60px] text-3xl md:text-4xl font-semibold whitespace-nowrap">
                 About <span className="text-[#ED254E]">Atelic</span>
               </h2>
-              <p
-                className="2xl:text-[22px] text-gray-600 mt-4 md:mt-0 max-w-3xl"
-                data-aos="fade-left"
-                data-aos-delay="200"
+
+              {/* Navigation Arrows below heading - Desktop only */}
+              <motion.div
+                className="flex items-center space-x-4 mt-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{
+                  opacity: showArrows ? 1 : 0,
+                  y: showArrows ? 0 : 20,
+                }}
+                transition={{ duration: 0.3 }}
               >
-                Founded by a team of seasoned AI, cloud, and data experts,
-                Atelic AI was created to cut through the noise and hype of
-                generic AI solutions. We exist to deliver true business value
-                through context-aware, ROI-driven implementations that solve
-                real-world problems — not just pilot experiments.
-              </p>
+                <motion.button
+                  onClick={handlePrevious}
+                  className="w-[62px] h-[62px] bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group relative overflow-hidden"
+                  whileHover={{
+                    scale: 1.1,
+                    backgroundImage:
+                      "linear-gradient(150.45deg, #F21B2A 19.81%, #335F86 90.64%)",
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    className="text-gray-600 group-hover:text-white transition-colors duration-300 relative z-10"
+                  >
+                    <path
+                      d="M15 18L9 12L15 6"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </motion.button>
+
+                <motion.button
+                  onClick={handleNext}
+                  className="w-[62px] h-[62px] bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group relative overflow-hidden"
+                  whileHover={{
+                    scale: 1.1,
+                    backgroundImage:
+                      "linear-gradient(150.45deg, #F21B2A 19.81%, #335F86 90.64%)",
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    className="text-gray-600 group-hover:text-white transition-colors duration-300"
+                  >
+                    <path
+                      d="M9 18L15 12L9 6"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </motion.button>
+              </motion.div>
             </div>
 
-            {/* Mobile Slide Animation */}
-            <div className="relative overflow-hidden">
+            <p className="2xl:text-[22px] text-gray-600 mt-4 md:mt-0 max-w-3xl">
+              Founded by a team of seasoned AI, cloud, and data experts, Atelic
+              AI was created to cut through the noise and hype of generic AI
+              solutions. We exist to deliver true business value through
+              context-aware, ROI-driven implementations that solve real-world
+              problems — not just pilot experiments.
+            </p>
+          </div>
+
+          {/* Desktop: Enhanced slide animation with horizontal scroll */}
+          <div
+            ref={containerRef}
+            className="flex-grow overflow-x-auto overflow-y-hidden relative"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          >
+            <style jsx>{`
+              div::-webkit-scrollbar {
+                display: none;
+              }
+            `}</style>
+
+            <div className="relative min-h-full flex items-center pb-16">
               <AnimatePresence
                 initial={false}
                 custom={slideDirection}
@@ -698,95 +596,71 @@ const AboutAtelic = () => {
                 <motion.div
                   key={currentSlide}
                   custom={slideDirection}
-                  variants={slideVariants}
+                  variants={desktopSlideVariants}
                   initial="enter"
                   animate="center"
                   exit="exit"
                   transition={{
-                    x: { type: "spring", stiffness: 200, damping: 25 },
-                    opacity: { duration: 0.3 },
-                    scale: { duration: 0.3 },
+                    x: { type: "spring", stiffness: 150, damping: 30 },
+                    opacity: { duration: 0.4 },
+                    scale: { duration: 0.4 },
+                    rotateY: { duration: 0.5 },
                   }}
-                  drag="x"
-                  dragConstraints={{ left: 0, right: 0 }}
-                  dragElastic={1}
-                  onDragEnd={(e, { offset, velocity }) => {
-                    const swipe = swipePower(offset.x, velocity.x);
-                    if (swipe < -swipeConfidenceThreshold) {
-                      handleNext();
-                    } else if (swipe > swipeConfidenceThreshold) {
-                      handlePrevious();
-                    }
-                  }}
-                  className="flex flex-wrap gap-5 justify-center"
+                  className="flex flex-wrap gap-5 justify-center items-center w-full"
+                  style={{ perspective: "1000px" }}
                 >
                   {getCurrentSlideMembers().map((member, index) => (
-                    <motion.div
-                      key={`${currentSlide}-${index}`}
-                      data-aos="fade-up"
-                      data-aos-delay={index * 150}
-                      className={getCardClasses()}
-                    >
-                      <div className={getImageClasses()}>
-                        <Image
-                          src={member.image}
-                          alt={member.name}
-                          className="object-cover w-full h-full"
-                        />
-                      </div>
-                      <div className="mt-6 flex-1 mb-4">
-                        <h3 className={getTitleClasses()}>{member.name}</h3>
-                        <p className="text-[#ED254E] font-semibold mb-4 text-lg group-hover:text-white">
-                          {member.title}
-                        </p>
-                        <p className={getDescriptionClasses()}>
-                          {member.description}
-                        </p>
-                      </div>
-                      <button className={getLearnMoreButtonClasses()}>
-                        Learn More
-                      </button>
-                    </motion.div>
+                    <AnimatedTeamCard
+                      key={`${currentSlide}-${member.name}`}
+                      member={member}
+                      index={index}
+                      scrollYProgress={scrollYProgress}
+                      getCardClasses={getCardClasses}
+                      getImageClasses={getImageClasses}
+                      getTitleClasses={getTitleClasses}
+                      getDescriptionClasses={getDescriptionClasses}
+                      getLearnMoreButtonClasses={getLearnMoreButtonClasses}
+                    />
                   ))}
                 </motion.div>
               </AnimatePresence>
             </div>
-
-            {/* Pagination Dots for Mobile */}
-            {totalSlides > 1 && (
-              <div className="flex gap-2 justify-center items-center mt-8">
-                {Array.from({ length: totalSlides }, (_, index) => {
-                  const isActive = currentSlide === index;
-                  return (
-                    <motion.button
-                      key={index}
-                      onClick={() => goToSlide(index)}
-                      className={`flex items-center justify-center rounded-full transition-all duration-300 ${
-                        isActive && "w-[21px] h-[21px] border-[#335F86]"
-                      }`}
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      style={{ borderWidth: 1 }}
-                      transition={{ delay: index * 0.1 }}
-                      whileHover={{ scale: 1.2 }}
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      <div
-                        className={`rounded-full ${
-                          isActive
-                            ? "bg-[#335F86]"
-                            : "bg-[#335F86] hover:bg-gray-400"
-                        } w-[9px] h-[9px]`}
-                      />
-                    </motion.button>
-                  );
-                })}
-              </div>
-            )}
           </div>
-        </section>
-      )}
-    </>
+
+          {/* Pagination Dots for Desktop */}
+          {totalSlides > 1 && (
+            <div className="flex gap-2 justify-center items-center pt-8 mb-8">
+              {Array.from({ length: totalSlides }, (_, index) => {
+                const isActive = currentSlide === index;
+                return (
+                  <motion.button
+                    key={index}
+                    onClick={() => goToSlide(index)}
+                    className={`flex items-center justify-center rounded-full transition-all duration-300 ${
+                      isActive && "w-[21px] h-[21px] border-[#335F86]"
+                    }`}
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    style={{ borderWidth: 1 }}
+                    transition={{ delay: index * 0.1 }}
+                    whileHover={{ scale: 1.2 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <motion.div
+                      className={`rounded-full ${
+                        isActive
+                          ? "bg-[#335F86]"
+                          : "bg-[#335F86] hover:bg-gray-400"
+                      } w-[9px] h-[9px]`}
+                    />
+                  </motion.button>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
   );
 };
 
