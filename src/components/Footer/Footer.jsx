@@ -6,7 +6,7 @@ import LinkedInLogo from "../../../assets/linkedin 1.png";
 
 export default function Footer() {
   return (
-    <footer className="sticky bottom-0 bg-[#212121] max-w-[1920px] text-white py-12 px-4">
+    <footer className=" bg-[#212121] max-w-[1920px] text-white py-12 px-4">
       <div className="max-w-screen-3xl mx-auto px-4 sm:px-8 md:px-12 2xl:px-44">
         {/* Logo Section */}
         <div className="flex justify-center py-16">

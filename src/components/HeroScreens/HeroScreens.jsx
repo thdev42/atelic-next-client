@@ -309,22 +309,22 @@ export const HeroComponent3 = ({ sectionY, backgroundY, robotY, textY }) => (
       </div>
 
       {/* Image with Better Responsive Width */}
-      <motion.div
+      {/* <motion.div
         style={{ y: robotY }}
-        className="w-full lg:w-2/5 2xl:w-1/2 relative px-4 sm:px-8 md:px-12 lg:px-0 lg:mr-28"
+        className="z-0 w-full lg:w-2/5 2xl:w-1/2 relative px-4 sm:px-8 md:px-12 lg:px-0 lg:mr-28"
       >
         <div className="relative w-full">
           <img
             src={Hero3Bg.src}
             alt="AI Robot"
-            className="w-full 2xl:-mt-24 crisp-edges"
+            className="-z-0 w-full 2xl:-mt-24 crisp-edges"
             style={{
               imageRendering: "pixelated",
               scale: 1.9,
             }}
           />
         </div>
-      </motion.div>
+      </motion.div> */}
     </div>
   </section>
 );

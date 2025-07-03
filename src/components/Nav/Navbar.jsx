@@ -98,7 +98,7 @@ const Navbar = () => {
   return (
     <>
       <header className="w-full bg-transparent">
-        <nav className="z-10">
+        <nav className="z-50">
           {" "}
           {/* Reduced padding from py-4 to py-2 */}
           <Container>
@@ -127,7 +127,7 @@ const Navbar = () => {
               </div>
 
               {/* CENTER: Navigation Links */}
-              <ul className="hidden lg:flex 2xl:gap-5 lg:gap-1 2xl:text-[20px] lg:text-sm font-sora font-normal">
+              <ul className="z-50 hidden lg:flex 2xl:gap-5 lg:gap-1 2xl:text-[20px] lg:text-sm font-sora font-normal">
                 {navLinks.map((link) => {
                   const isActive = router.pathname === link.path;
 
@@ -150,7 +150,7 @@ const Navbar = () => {
               </ul>
 
               {/* RIGHT: Menu Icon */}
-              <div className="flex-shrink-0">
+              <div className="z-50 flex-shrink-0">
                 <button className="cursor-pointer">
                   <Image
                     src={MenuButton}
