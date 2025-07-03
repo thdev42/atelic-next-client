@@ -357,10 +357,8 @@ const AboutAtelic = () => {
   if (isMobile) {
     return (
       <section
-        className="z-10 font-sora bg-[#f3f3f3] max-w-[1920px] mx-auto w-full py-16 min-h-screen relative"
-        // onTouchStart={handleTouchStart}
+        className="z-10 font-sora overflow-hidden bg-[#f3f3f3] max-w-[1920px] mx-auto w-full py-16 min-h-screen relative"
         onTouchMove={handleTouchMove}
-        // onTouchEnd={handleTouchEnd}
       >
         <div className="px-4 sm:px-8 md:px-12 xl:px-[178px]">
           <div className="md:flex justify-between items-start md:space-x-10 2xl:mb-16 mb-12">
@@ -420,9 +418,9 @@ const AboutAtelic = () => {
                     key={`${currentSlide}-${index}`}
                     data-aos="fade-up"
                     data-aos-delay={index * 150}
-                    className={getCardClasses()}
+                    className="group pt-4 px-6 text-center rounded-t-[400px] transition duration-200 flex flex-col items-center bg-white hover:bg-gradient-to-b hover:from-[#F21B2A] hover:to-[#335F86] hover:text-white relative overflow-visible w-[260px] h-[530px] mx-auto"
                   >
-                    <div className={getImageClasses()}>
+                    <div className="flex-shrink-0 rounded-full overflow-hidden border-[5px] border-white transition-all duration-500 group-hover:border-opacity-80 group-hover:shadow-2xl w-[190px] h-[190px]">
                       <Image
                         src={member.image}
                         alt={member.name}
@@ -430,15 +428,17 @@ const AboutAtelic = () => {
                       />
                     </div>
                     <div className="mt-6 flex-1 mb-4">
-                      <h3 className={getTitleClasses()}>{member.name}</h3>
+                      <h3 className="text-lg font-bold mb-2 flex-shrink-0">
+                        {member.name}
+                      </h3>
                       <p className="text-[#ED254E] font-semibold mb-4 text-lg group-hover:text-white">
                         {member.title}
                       </p>
-                      <p className={getDescriptionClasses()}>
+                      <p className="text-sm font-extralight leading-relaxed mb-4 flex-grow overflow-hidden">
                         {member.description}
                       </p>
                     </div>
-                    <button className={getLearnMoreButtonClasses()}>
+                    <button className="w-[160px] h-[40px] rounded-[20px] font-medium group-hover:bg-white group-hover:text-[#335F86] hover:transform hover:scale-110 hover:shadow-xl text-sm transition-all duration-300 bg-[#335F86] text-white mt-auto mb-4 mx-auto block hover:bg-white hover:text-black flex-shrink-0">
                       Learn More
                     </button>
                   </motion.div>

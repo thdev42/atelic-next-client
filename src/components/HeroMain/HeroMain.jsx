@@ -48,7 +48,12 @@ const HeroSection = ({ scrollYSProgress }) => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
+      const width =
+        typeof window !== "undefined"
+          ? window.visualViewport?.width || window.innerWidth
+          : 1024;
+      const newIsMobile = width < 768;
+      setIsMobile(newIsMobile);
     };
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -161,7 +166,7 @@ const HeroSection = ({ scrollYSProgress }) => {
       }}
       className={`overflow-y-visible ${
         isMobile ? "relative" : "sticky top-0"
-      } max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 transition-all duration-1000 ease-in-out z-0`}
+      } max-w-[1920px] mx-auto  w-full py-10 lg:py-5 2xl:py-5 transition-all duration-1000 ease-in-out z-0`}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}

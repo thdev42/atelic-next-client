@@ -102,7 +102,7 @@ const Navbar = () => {
           {" "}
           {/* Reduced padding from py-4 to py-2 */}
           <Container>
-            <div className="px-4 sm:px-8 md:px-12 xl:px-[178px] flex items-center justify-between w-full relative">
+            <div className="px-4 overflow-hidden sm:px-8 md:px-12 xl:px-[178px] flex items-center justify-between w-full relative">
               {/* LEFT: Logo with controlled height */}
               <div
                 style={getTextColorStyle()}
