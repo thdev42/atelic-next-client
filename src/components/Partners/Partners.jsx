@@ -78,7 +78,8 @@ export const Partners = () => {
             {[...logos, ...logos].map((logo, idx) => (
               <motion.div
                 key={idx}
-                className="inline-flex items-center justify-center my-3 px-8 py-4 min-w-[287px] h-[165.39px] bg-[rgba(233,233,233,0.95)] backdrop-blur-sm border border-[rgba(0,0,0,0.18)] transition-all duration-300 hover:bg-white hover:shadow-[3px_4px_9.4px_1px_rgba(0,0,0,0.14)]"
+                alt={`partner-${idx}`}
+                className="inline-flex items-center justify-center my-3 px-8 py-4 min-w-[190px] h-[115.39px] sm:min-w-[207px] sm:h-[135.39px] lg:min-w-[287px] lg:h-[165.39px] bg-[rgba(233,233,233,0.95)] backdrop-blur-sm border border-[rgba(0,0,0,0.18)] transition-all duration-300 hover:bg-white hover:shadow-[3px_4px_9.4px_1px_rgba(0,0,0,0.14)]"
               >
                 <Image
                   src={logo}
