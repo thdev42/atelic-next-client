@@ -38,15 +38,13 @@ const Section = ({ scrollYProgress, onComplete, shouldScrollToForm }) => {
         backfaceVisibility: "hidden",
       }}
     >
-      <Partners />
+      {/* <Partners /> */}
 
-      <div ref={formRef}>
-        <DecisionTree onComplete={onComplete} />
-      </div>
-      <ServicesSection />
-      <AboutAtelic />
-      <Appointment />
-      <Footer />
+      <div ref={formRef}>{/* <DecisionTree onComplete={onComplete} /> */}</div>
+      {/* <ServicesSection /> */}
+      {/* <AboutAtelic /> */}
+      {/* <Appointment /> */}
+      {/* <Footer /> */}
     </motion.div>
   );
 };
