@@ -34,11 +34,13 @@ const Section = ({ scrollYProgress, onComplete, shouldScrollToForm }) => {
     <div>
       <Partners />
 
-      <div ref={formRef}>{/* <DecisionTree onComplete={onComplete} /> */}</div>
-      {/* <ServicesSection /> */}
-      {/* <AboutAtelic /> */}
-      {/* <Appointment /> */}
-      {/* <Footer /> */}
+      <div ref={formRef}>
+        <DecisionTree onComplete={onComplete} />
+      </div>
+      <ServicesSection />
+      <AboutAtelic />
+      <Appointment />
+      <Footer />
     </div>
   );
 };
