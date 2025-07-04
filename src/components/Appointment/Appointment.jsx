@@ -264,7 +264,7 @@ const Appointment = () => {
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleInputChange}
-                  className={`w-full px-6 h-[80px] text-[22px] rounded-[50px] border-2 transition-colors focus:outline-none focus:ring-0 ${
+                  className={`w-full 2xl:px-6 2xl:h-[80px] 2xl:text-[22px] text-base px-5 py-5 rounded-[50px] border-2 transition-colors focus:outline-none focus:ring-0 ${
                     errors.firstName
                       ? "border-red-500 focus:border-red-500"
                       : "border-gray-300 focus:border-blue-500"
@@ -293,7 +293,7 @@ const Appointment = () => {
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleInputChange}
-                  className={`w-full px-6 h-[80px] text-[22px] rounded-[50px] border-2 transition-colors focus:outline-none focus:ring-0 ${
+                  className={`w-full 2xl:px-6 2xl:h-[80px] 2xl:text-[22px] text-base px-5 py-5 rounded-[50px] border-2 transition-colors focus:outline-none focus:ring-0 ${
                     errors.lastName
                       ? "border-red-500 focus:border-red-500"
                       : "border-gray-300 focus:border-blue-500"
@@ -327,7 +327,7 @@ const Appointment = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
-                className={`w-full px-6 h-[80px] text-[22px] rounded-[50px] border-2 transition-colors focus:outline-none focus:ring-0 ${
+                className={`w-full 2xl:px-6 2xl:h-[80px] 2xl:text-[22px] text-base px-5 py-5 rounded-[50px] border-2 transition-colors focus:outline-none focus:ring-0 ${
                   errors.email
                     ? "border-red-500 focus:border-red-500"
                     : "border-gray-300 focus:border-blue-500"
@@ -358,7 +358,7 @@ const Appointment = () => {
                 name="phone"
                 value={formData.phone}
                 onChange={handleInputChange}
-                className={`w-full px-6 h-[80px] text-[22px] rounded-[50px] border-2 transition-colors focus:outline-none focus:ring-0 ${
+                className={`w-full 2xl:px-6 2xl:h-[80px] 2xl:text-[22px] text-base px-5 py-5 rounded-[50px] border-2 transition-colors focus:outline-none focus:ring-0 ${
                   errors.phone
                     ? "border-red-500 focus:border-red-500"
                     : "border-gray-300 focus:border-blue-500"
@@ -388,7 +388,7 @@ const Appointment = () => {
                 name="industry"
                 value={formData.industry}
                 onChange={handleInputChange}
-                className={`w-full px-6 h-[80px] text-[22px] rounded-[50px] border-2 transition-colors focus:outline-none focus:ring-0 appearance-none bg-white ${
+                className={`w-full 2xl:px-6 2xl:h-[80px] 2xl:text-[22px] text-base px-5 py-5 rounded-[50px] border-2 transition-colors focus:outline-none focus:ring-0 appearance-none bg-white ${
                   errors.industry
                     ? "border-red-500 focus:border-red-500"
                     : "border-gray-300 focus:border-blue-500"
@@ -416,11 +416,11 @@ const Appointment = () => {
               //   x: submitX,
               //   y: submitY,
               // }}
-              className="will-change-transform w-full bg-[#335F86] text-[22px] text-white font-semibold px-6 h-[80px] rounded-[50px] focus:outline-none focus:ring-0"
-              initial={{ opacity: 0, y: 50 }}
-              animate={
-                isFormInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }
-              }
+              className="will-change-transform w-full bg-[#335F86] text-white font-semibold 2xl:px-6 2xl:h-[80px] 2xl:text-[22px] text-base px-5 py-5 rounded-[50px] focus:outline-none focus:ring-0"
+              // initial={{ opacity: 0, y: 50 }}
+              // animate={
+              //   isFormInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }
+              // }
               whileTap={{ scale: 0.98 }}
             >
               Submit Now
