@@ -31,13 +31,7 @@ const Section = ({ scrollYProgress, onComplete, shouldScrollToForm }) => {
   }, [shouldScrollToForm]);
 
   return (
-    <motion.div
-      style={{
-        willChange: "transform",
-        transformStyle: "preserve-3d",
-        backfaceVisibility: "hidden",
-      }}
-    >
+    <div>
       <Partners />
 
       <div ref={formRef}>{/* <DecisionTree onComplete={onComplete} /> */}</div>
@@ -45,7 +39,7 @@ const Section = ({ scrollYProgress, onComplete, shouldScrollToForm }) => {
       {/* <AboutAtelic /> */}
       {/* <Appointment /> */}
       {/* <Footer /> */}
-    </motion.div>
+    </div>
   );
 };
 
