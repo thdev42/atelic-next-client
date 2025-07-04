@@ -38,7 +38,7 @@ const Section = ({ scrollYProgress, onComplete, shouldScrollToForm }) => {
         backfaceVisibility: "hidden",
       }}
     >
-      <Partners />
+      {/* <Partners /> */}
 
       <div ref={formRef}>
         <DecisionTree onComplete={onComplete} />
