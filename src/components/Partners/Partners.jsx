@@ -29,7 +29,7 @@ export const Partners = () => {
   return (
     <section
       ref={container} // Added ref to section for scroll detection
-      className="will-change-transform max-w-[1920px] mx-auto w-full py-10 lg:py-20 relative overflow-hidden z-50"
+      className="will-change-transform max-w-[1920px] mx-auto w-full py-10 lg:py-20 relative overflow-hidden"
       style={{
         backgroundColor: "#f3f3f3",
         // backgroundAttachment:
@@ -44,7 +44,7 @@ export const Partners = () => {
       {/* Background Image Left */}
       <motion.div
         // style={{ y: sm }} // Added parallax to background
-        className="will-change-transform absolute inset-0 pointer-events-none select-none"
+        className="overflow-hidden will-change-transform absolute inset-0 pointer-events-none select-none"
       >
         <div
           style={{
@@ -58,7 +58,7 @@ export const Partners = () => {
         />
       </motion.div>
 
-      <div className="will-change-transform relative z-10 px-4 sm:px-8 md:px-12 xl:px-[178px] mx-auto w-full">
+      <div className="overflow-hidden will-change-transform relative z-10 px-4 sm:px-8 md:px-12 xl:px-[178px] mx-auto w-full">
         <motion.h2
           style={{ y: md }} // Changed from style={{ md }} to style={{ y: md }}
           className="text-center py-10 text-2xl md:text-3xl 2xl:text-[60px] font-normal text-black mb-10 font-sora"

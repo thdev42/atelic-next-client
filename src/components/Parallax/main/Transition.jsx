@@ -50,7 +50,7 @@ export default function AnimatedPageManager({ scrollYProgress, showHero }) {
 
   return (
     <div className="relative min-h-screen">
-      <AnimatePresence custom={direction} mode="wait">
+      <AnimatePresence custom={direction} mode="popLayout">
         {!showNext ? (
           <motion.div
             key="form"
