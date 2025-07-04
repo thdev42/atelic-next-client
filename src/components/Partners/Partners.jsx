@@ -27,7 +27,7 @@ export const Partners = () => {
   // const lg = useTransform(scrollYProgress, [0, 1], [60, 0]);
 
   return (
-    <section
+    <motion.section
       ref={container} // Added ref to section for scroll detection
       className="will-change-transform max-w-[1920px] mx-auto w-full py-10 lg:py-20 relative overflow-hidden"
       style={{
@@ -91,6 +91,6 @@ export const Partners = () => {
           </motion.div>
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
