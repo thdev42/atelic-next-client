@@ -35,11 +35,11 @@ export const RedefiningSuccess = () => {
     <section className="bg-[#f3f3f3] max-w-[1920px] mx-auto w-full py-10 relative overflow-hidden">
       <div className="font-sora md:mt-10 px-4 text-black sm:px-8 md:px-12 xl:px-[178px] mx-auto">
         {/* Header Section */}
-        <div className="mx-auto max-w-5xl text-center px-11">
-          <h1 className="text-4xl md:text-5xl 2xl:text-6xl">
+        <div className="mx-auto max-w-5xl text-center px-4 sm:px-8 md:px-11">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-normal">
             Redefining Success, <span className="font-bold">Together</span>
           </h1>
-          <p className="text-lg md:text-xl 2xl:text-[18px] mt-4">
+          <p className="text-base sm:text-lg md:text-xl 2xl:text-[18px] mt-4 leading-relaxed">
             Success for us, starts with understanding our clients & building on
             what the definition of success is for them. Time again we hear the
             same challenges, these include....
@@ -47,14 +47,20 @@ export const RedefiningSuccess = () => {
         </div>
 
         {/* Card Section */}
-        <div className="flex flex-wrap justify-center gap-5 py-14 mt-10 rounded-xl">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 py-14 mt-10 justify-items-center">
           {cardData.map((item, i) => (
             <div
               key={i}
-              className="group w-full sm:w-[48%] xl:w-[32%] max-w-[499px] h-[367px] bg-white rounded-md shadow-sm transition-all duration-300 hover:bg-[#335F86] text-black hover:text-white relative flex flex-col justify-center items-center text-center px-6 py-8"
+              className="group w-full max-w-[499px] min-h-[367px] bg-white rounded-md shadow-sm transition-all duration-300 hover:bg-[#335F86] text-black hover:text-white relative flex flex-col justify-between items-center text-center px-6 py-8"
             >
-              <div className="flex flex-col items-center gap-4">
-                <div className="w-[124px] h-[124px] flex items-center justify-center  group-hover:bg-white transition-colors duration-300 rounded-full">
+              {/* Card Number */}
+              <span className="absolute top-4 right-4 text-lg font-light">
+                {item.id}
+              </span>
+
+              {/* Icon Section */}
+              <div className="flex flex-col items-center gap-4 flex-shrink-0">
+                <div className="w-[124px] h-[124px] flex items-center justify-center group-hover:bg-white transition-colors duration-300 rounded-full">
                   <Image
                     src={item.icon}
                     alt={`icon-${item.id}`}
@@ -63,13 +69,14 @@ export const RedefiningSuccess = () => {
                   />
                 </div>
                 <div className="w-20 h-[3px] bg-[#335F86] group-hover:bg-white transition-colors duration-300" />
-                <p className="text-[18px] font-light leading-loose">
+              </div>
+
+              {/* Text Section */}
+              <div className="flex-1 flex items-center justify-center mt-4">
+                <p className="text-[18px] font-light leading-relaxed">
                   {item.text}
                 </p>
               </div>
-              <span className="absolute top-4 right-4 text-lg font-light">
-                {item.id}
-              </span>
             </div>
           ))}
         </div>

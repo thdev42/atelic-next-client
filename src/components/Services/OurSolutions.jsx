@@ -22,30 +22,32 @@ const features = [
 
 const OurSolutions = () => {
   return (
-    <section className="bg-[#EBEBEB] max-w-[1920px] mx-auto w-full py-10 relative overflow-hidden">
-      <div className="font-sora md:mt-20 px-4 text-black sm:px-8 md:px-12 xl:px-[178px] mx-auto">
-        {/* Title */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 items-center">
-          <div>
-            <h2 className="text-4xl md:text-5xl 2xl:text-6xl font-medium text-black">
-              Our <span className="font-bold">Solutions</span>
-            </h2>
-          </div>
-          <div>
-            <p className="text-base md:text-lg text-gray-700">
-              Our Solution is to simplify the complexity of Artificial
-              Intelligence, by providing problem solving and real business
-              solutions...
-            </p>
+    <section className="bg-[#EBEBEB] max-w-[1920px] mx-auto w-full py-8 sm:py-10 lg:py-12 xl:py-16 relative overflow-hidden">
+      <div className="font-sora px-4 sm:px-6 md:px-8 lg:px-12 xl:px-[178px] mx-auto">
+        {/* Title Section */}
+        <div className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 mb-12 sm:mb-16 lg:mb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 xl:gap-12 items-start lg:items-center">
+            <div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl 2xl:text-6xl font-medium text-black leading-tight">
+                Our <span className="font-bold">Solutions</span>
+              </h2>
+            </div>
+            <div>
+              <p className="text-base sm:text-lg md:text-lg lg:text-base xl:text-lg 2xl:text-xl text-gray-700 leading-relaxed mt-4 lg:mt-0">
+                Our Solution is to simplify the complexity of Artificial
+                Intelligence, by providing problem solving and real business
+                solutions...
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* Cards */}
-        <section className="flex flex-wrap justify-center gap-5 pt-16">
+        {/* Cards Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 xl:gap-6 2xl:gap-8">
           {features.map((feature, i) => (
             <div
               key={i}
-              className="group relative w-full sm:w-[48%] xl:w-[32%] max-w-[518px] lg:h-[373px] p-6 md:p-8 transition-all duration-300 border border-transparent hover:bg-white"
+              className="group relative w-full bg-transparent transition-all duration-300 border border-transparent hover:bg-white rounded-[10px] min-h-[320px] sm:min-h-[350px] lg:min-h-[370px] xl:min-h-[373px]"
             >
               {/* Gradient Border */}
               <div
@@ -58,24 +60,35 @@ const OurSolutions = () => {
                 <div className="w-full h-full rounded-[10px] bg-white"></div>
               </div>
 
-              {/* Top Icon */}
-              <div className="flex justify-start relative z-10">
-                <Image src={feature.icon} alt="Icon" className="mb-14" />
-              </div>
+              {/* Card Content */}
+              <div className="relative z-10 p-6 sm:p-7 md:p-8 h-full flex flex-col">
+                {/* Top Icon */}
+                <div className="flex justify-start mb-8 sm:mb-10 md:mb-12 lg:mb-14">
+                  <Image
+                    src={feature.icon}
+                    alt="Solution Icon"
+                    className="w-auto h-auto max-w-[60px] sm:max-w-[70px] md:max-w-[80px] object-contain"
+                  />
+                </div>
 
-              {/* Index number only on hover */}
-              <div className="absolute top-5 right-5 text-4xl font-semibold text-black opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
-                {feature.id}
-              </div>
+                {/* Index number - only on hover */}
+                <div className="absolute top-4 sm:top-5 right-4 sm:right-5 text-3xl sm:text-4xl font-semibold text-black opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+                  {feature.id}
+                </div>
 
-              {/* Text */}
-              <p className="text-sm md:text-[16px] text-gray-700 leading-relaxed relative z-10">
-                {feature.text}
-                <span className="underline ml-1 cursor-pointer">Read More</span>
-              </p>
+                {/* Text Content */}
+                <div className="flex-1 flex flex-col justify-end">
+                  <p className="text-sm sm:text-base md:text-[16px] lg:text-[15px] xl:text-[16px] 2xl:text-[17px] text-gray-700 leading-relaxed">
+                    {feature.text}
+                    <span className="underline ml-1 cursor-pointer hover:text-[#F21B2A] transition-colors duration-200">
+                      Read More
+                    </span>
+                  </p>
+                </div>
+              </div>
             </div>
           ))}
-        </section>
+        </div>
       </div>
     </section>
   );
