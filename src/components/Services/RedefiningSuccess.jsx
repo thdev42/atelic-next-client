@@ -1,0 +1,79 @@
+import React from "react";
+import Image from "next/image";
+import Group1 from "../../../assets/Group1.png";
+
+const cardData = [
+  {
+    id: "01",
+    icon: Group1,
+    text: "Sales teams that aren't industry experts selling agents that won't work for me",
+  },
+  {
+    id: "02",
+    icon: Group1,
+    text: "Our data is still silo'd & are unsure of how we can optimize AI performance with the data we have.",
+  },
+  {
+    id: "03",
+    icon: Group1,
+    text: "We don't have total trust in the potential hallucinations, nor the on-premise requirements to ensure our security is paramount when working with AI Technology.",
+  },
+  {
+    id: "04",
+    icon: Group1,
+    text: "We are still working with a Franken-Stack of SaaS, Cloud, OTA or legacy systems that won't integrate.",
+  },
+  {
+    id: "05",
+    icon: Group1,
+    text: "If I do this technology change now, what's to stop it becoming redundant within a year? Isn't the pace of change too quick.",
+  },
+];
+
+export const RedefiningSuccess = () => {
+  return (
+    <section className="bg-[#f3f3f3] max-w-[1920px] mx-auto w-full py-10 relative overflow-hidden">
+      <div className="font-sora md:mt-10 px-4 text-black sm:px-8 md:px-12 xl:px-[178px] mx-auto">
+        {/* Header Section */}
+        <div className="mx-auto max-w-5xl text-center px-11">
+          <h1 className="text-4xl md:text-5xl 2xl:text-6xl">
+            Redefining Success, <span className="font-bold">Together</span>
+          </h1>
+          <p className="text-lg md:text-xl 2xl:text-[18px] mt-4">
+            Success for us, starts with understanding our clients & building on
+            what the definition of success is for them. Time again we hear the
+            same challenges, these include....
+          </p>
+        </div>
+
+        {/* Card Section */}
+        <div className="flex flex-wrap justify-center gap-5 py-14 mt-10 rounded-xl">
+          {cardData.map((item, i) => (
+            <div
+              key={i}
+              className="group w-full sm:w-[48%] xl:w-[32%] max-w-[499px] h-[367px] bg-white rounded-md shadow-sm transition-all duration-300 hover:bg-[#335F86] text-black hover:text-white relative flex flex-col justify-center items-center text-center px-6 py-8"
+            >
+              <div className="flex flex-col items-center gap-4">
+                <div className="w-[124px] h-[124px] flex items-center justify-center  group-hover:bg-white transition-colors duration-300 rounded-full">
+                  <Image
+                    src={item.icon}
+                    alt={`icon-${item.id}`}
+                    width={124}
+                    height={124}
+                  />
+                </div>
+                <div className="w-20 h-[3px] bg-[#335F86] group-hover:bg-white transition-colors duration-300" />
+                <p className="text-[18px] font-light leading-loose">
+                  {item.text}
+                </p>
+              </div>
+              <span className="absolute top-4 right-4 text-lg font-light">
+                {item.id}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
