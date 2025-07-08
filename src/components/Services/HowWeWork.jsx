@@ -8,33 +8,68 @@ import Image from "next/image";
 
 function CircleProgress({ percentage, label, description }) {
   const [dimensions, setDimensions] = useState({
-    width: 200,
-    height: 200,
-    radius: 90,
+    width: 222,
+    height: 222,
+    radius: 105,
   });
   const circumference = 2 * Math.PI * dimensions.radius;
 
   const [offset, setOffset] = useState(circumference);
   const textRef = useRef(null);
+  const containerRef = useRef(null);
 
   useEffect(() => {
-    if (textRef.current) {
-      const textElement = textRef.current;
-      const textWidth = textElement.scrollWidth;
-      const textHeight = textElement.scrollHeight;
+    const updateDimensions = () => {
+      if (textRef.current && containerRef.current) {
+        const textElement = textRef.current;
+        const textWidth = textElement.scrollWidth;
+        const textHeight = textElement.scrollHeight;
 
-      // Responsive sizing based on screen size
-      const minSize = Math.max(textWidth * 1.5, textHeight * 3, 180);
-      const maxSize = window.innerWidth < 1024 ? 220 : 240; // Smaller on mobile/tablet
-      const finalSize = Math.min(minSize, maxSize);
-      const newRadius = (finalSize - 12) / 2;
+        // Get container width to determine available space
+        const containerWidth = containerRef.current.offsetWidth;
 
-      setDimensions({
-        width: finalSize,
-        height: finalSize,
-        radius: newRadius,
-      });
-    }
+        // Calculate base size based on screen size
+        let baseSize;
+        if (window.innerWidth >= 1536) {
+          // 2xl
+          baseSize = 222;
+        } else if (window.innerWidth >= 1280) {
+          // xl
+          baseSize = 200;
+        } else if (window.innerWidth >= 1024) {
+          // lg
+          baseSize = 180;
+        } else if (window.innerWidth >= 768) {
+          // md
+          baseSize = 170;
+        } else if (window.innerWidth >= 640) {
+          // sm
+          baseSize = 180;
+        } else {
+          // xs
+          baseSize = 170;
+        }
+
+        // Calculate required dimensions based on text size
+        const minSize = Math.max(textWidth * 1.8, textHeight * 3.5, baseSize);
+
+        // Ensure it doesn't exceed container width but maintain minimum size
+        const maxSize = Math.max(Math.min(minSize, containerWidth - 20), 170);
+
+        const newRadius = (maxSize - 12) / 2; // Account for stroke width
+
+        setDimensions({
+          width: maxSize,
+          height: maxSize,
+          radius: newRadius,
+        });
+      }
+    };
+
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
+
+    return () => window.removeEventListener("resize", updateDimensions);
   }, [label]);
 
   useEffect(() => {
@@ -47,9 +82,19 @@ function CircleProgress({ percentage, label, description }) {
   const center = dimensions.width / 2;
 
   return (
-    <div className="font-sora flex flex-col items-center text-center w-full max-w-[280px] mx-auto">
-      {/* Container with responsive height */}
-      <div className="flex items-center justify-center w-full h-[250px] sm:h-[280px] lg:h-[300px]">
+    <div
+      className="font-sora flex flex-col items-center text-center"
+      ref={containerRef}
+    >
+      {/* Container with responsive height for alignment */}
+      <div
+        className="flex items-center justify-center"
+        style={{
+          height: "300px",
+          width: "100%",
+          maxWidth: "300px",
+        }}
+      >
         <div
           className="relative"
           style={{ width: dimensions.width, height: dimensions.height }}
@@ -90,7 +135,7 @@ function CircleProgress({ percentage, label, description }) {
           <div className="absolute inset-0 flex items-center justify-center">
             <span
               ref={textRef}
-              className="text-2xl sm:text-3xl lg:text-4xl xl:text-[42px] font-medium text-black"
+              className="2xl:text-[46px] xl:text-[40px] lg:text-[36px] md:text-[32px] sm:text-[28px] text-[24px] font-medium text-black"
               style={{ visibility: "visible" }}
             >
               {label}
@@ -100,8 +145,8 @@ function CircleProgress({ percentage, label, description }) {
       </div>
 
       {/* Description below */}
-      <div className="w-full max-w-[280px] px-2">
-        <p className="mt-2 text-center text-sm lg:text-base xl:text-[16px] text-gray-700 leading-snug break-words">
+      <div className="max-w-[400px] px-2">
+        <p className="mt-4 text-center 2xl:text-[16px] lg:text-[14px] md:text-[13px] text-sm text-gray-700 leading-snug break-words">
           {description}
         </p>
       </div>
@@ -111,11 +156,14 @@ function CircleProgress({ percentage, label, description }) {
 
 function SeparatorImage() {
   return (
-    <div className="flex items-center justify-center h-[250px] sm:h-[280px] lg:h-[300px] w-full max-w-[80px] mx-auto">
+    <div
+      className="flex items-center justify-center"
+      style={{ height: "300px" }}
+    >
       <Image
         src={separatorImg}
+        className="2xl:w-auto xl:w-[150px] lg:w-[140px] md:w-[50px] w-[40px] h-auto object-contain"
         alt="Separator"
-        className="w-auto h-auto max-h-[200px] object-contain"
       />
     </div>
   );
@@ -124,11 +172,11 @@ function SeparatorImage() {
 const HowWeWork = () => {
   return (
     <>
-      <section className="bg-white max-w-[1920px] mx-auto w-full py-8 lg:py-12 xl:py-16 relative overflow-hidden">
-        <div className="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-[178px] mx-auto">
+      <section className="bg-white max-w-[1920px] mx-auto w-full py-8 lg:py-12 xl:py-16 2xl:py-20 relative overflow-hidden">
+        <div className="px-4 sm:px-6 md:px-8 lg:px-[100px] 2xl:px-[178px] mx-auto">
           {/* Desktop Layout - Hidden on mobile/tablet */}
           <div className="hidden lg:flex items-start justify-between gap-6 xl:gap-8 2xl:gap-12 h-full">
-            <div className="flex-1 max-w-[320px]">
+            <div className="flex-1 max-w-[320px] xl:max-w-[340px] 2xl:max-w-[380px]">
               <CircleProgress
                 percentage={30}
                 label="30%"
@@ -138,7 +186,7 @@ const HowWeWork = () => {
             <div className="flex-shrink-0">
               <SeparatorImage />
             </div>
-            <div className="flex-1 max-w-[320px]">
+            <div className="flex-1 max-w-[320px] xl:max-w-[340px] 2xl:max-w-[380px]">
               <CircleProgress
                 percentage={42}
                 label="42%"
@@ -148,7 +196,7 @@ const HowWeWork = () => {
             <div className="flex-shrink-0">
               <SeparatorImage />
             </div>
-            <div className="flex-1 max-w-[320px]">
+            <div className="flex-1 max-w-[320px] xl:max-w-[340px] 2xl:max-w-[380px]">
               <CircleProgress
                 percentage={77}
                 label="77%"
@@ -183,61 +231,56 @@ const HowWeWork = () => {
           </div>
 
           {/* Separator line */}
-          <div className="w-full h-[1px] bg-black opacity-20 mt-12 lg:mt-16 xl:mt-20" />
+          <div className="w-full h-[1px] bg-black opacity-20 mt-12 lg:mt-16 xl:mt-20 2xl:mt-24" />
         </div>
       </section>
 
       {/* Our Solutions Section */}
-      <section className="bg-white max-w-[1920px] z-10 font-sora overflow-hidden mx-auto py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 2xl:py-32">
-        <div className="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-[178px] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-[45%_55%] xl:grid-cols-[40%_60%] 2xl:grid-cols-[35%_65%] gap-8 sm:gap-10 md:gap-12 lg:gap-16 xl:gap-20 2xl:gap-24 items-center">
-            {/* Left Column - Image */}
-            <div className="flex justify-center lg:justify-start order-2 lg:order-1">
-              <div className="relative w-full max-w-[500px] sm:max-w-[600px] md:max-w-[650px] lg:max-w-none">
+      <section className="bg-white z-10 font-sora overflow-hidden mx-auto relative">
+        <div className="px-4 sm:px-8 md:px-12 mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left Column - Image (Absolute Positioned) */}
+            <div className="flex justify-center 2xl:justify-start lg:relative lg:min-h-[600px] xl:min-h-[650px] 2xl:min-h-[695px]">
+              <div className="relative lg:absolute lg:-left-8 xl:-left-12 2xl:-left-16 lg:top-0 lg:z-10 lg:w-[600px] xl:w-[650px] 2xl:w-[738px] lg:h-[600px] xl:h-[650px] 2xl:h-[695px]">
                 <Image
                   src={BenHowWork}
                   alt="AI Solutions Visualization - Digital iceberg showing visible AI solutions above and complex infrastructure below"
                   width={738}
                   height={695}
                   priority
-                  className="w-full h-auto object-contain"
+                  className="w-full h-full object-contain"
                 />
               </div>
             </div>
 
             {/* Right Column - Content */}
-            <div className="space-y-0 sm:space-y-0 md:space-y-0 lg:space-y-0 2xl:space-y-12 order-1 lg:order-2 max-w-[800px] lg:max-w-full">
-              {/* Heading */}
-              <div className="space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-4 xl:space-y-5 2xl:space-y-6">
-                <h2 className="text-3xl lg:text-4xl 2xl:text-[60px] font-light text-black leading-tight lg:leading-tight xl:leading-tight 2xl:leading-tight max-w-[600px] lg:max-w-full">
+            <div className="space-y-5 lg:relative lg:z-0 lg:ml-8 xl:ml-12 2xl:ml-16">
+              {/* Heading with fade-in */}
+              <div className="space-y-4">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-light text-black -mt-2">
                   How We <span className="font-bold">Work</span>
                 </h2>
 
-                <p className="text-sm lg:text-lg 2xl:text-[26px] font-semibold text-black leading-relaxed xl:leading-relaxed 2xl:leading-loose max-w-[650px] lg:max-w-full">
+                <p className="lg:leading-loose 2xl:text-[26px] md:text-xl text-lg 2xl:leading-loose font-semibold">
                   Without the right data, context & expertise, even the most
                   advanced tools fail to deliver real business value...
                 </p>
               </div>
 
-              {/* Description paragraph */}
-              <div className="pt-2 sm:pt-3 md:pt-4 lg:pt-2 xl:pt-3 2xl:pt-4">
-                <p className="text-xs  md:text-xs 2xl:text-[18px] font-normal text-black leading-relaxed lg:leading-relaxed xl:leading-relaxed 2xl:leading-loose max-w-[700px] lg:max-w-full">
-                  "SaaS² flips the traditional model. Instead of just delivering
-                  software, we provide pre-built Al agents & accelerators
-                  tailored to specific industries. In the case of Atelic, we
-                  decided to start with Energy, Financial Services, Healthcare,
-                  & the Public Sector. But are quickly scaling to meet the
-                  challenges of other verticals, including Healthcare, Travel,
-                  Real Estate & More..."
-                </p>
-              </div>
+              {/* Paragraph from left */}
+              <p className="text-black 2xl:text-[18px] lg:text-sm lg:leading-loose font-normal 2xl:leading-loose">
+                "SaaS² flips the traditional model. Instead of just delivering
+                software, we provide pre-built Al agents & accelerators tailored
+                to specific industries. In the case of Atelic, we decided to
+                start with Energy, Financial Services, Healthcare, & the Public
+                Sector. But are quickly scaling to meet the challenges of other
+                verticals, including Healthcare, Travel, Real Estate & More..."
+              </p>
 
-              {/* Button */}
-              <div className="pt-4 sm:pt-5 md:pt-6 lg:pt-4 xl:pt-5 2xl:pt-6">
-                <button className="bg-[#335F86] hover:bg-slate-700 text-white text-xs  2xl:text-base px-6 sm:px-7 md:px-8 lg:px-6 xl:px-8 2xl:px-9 py-3 sm:py-3 md:py-3 lg:py-2.5 xl:py-3 2xl:py-3 rounded-lg font-light transition-colors duration-200 w-full sm:w-auto 2xl:min-w-[200px]">
-                  Read More
-                </button>
-              </div>
+              {/* Button from left */}
+              <button className="bg-[#335F86] hover:bg-slate-700 text-[16px] text-white px-9 2xl:w-[200px] py-3 rounded-[8px] font-light transition-colors duration-200">
+                Read More
+              </button>
             </div>
           </div>
         </div>

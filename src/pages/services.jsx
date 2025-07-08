@@ -3,6 +3,7 @@ import {
   HeroServices,
 } from "@/components/HeroScreens/HeroScreens";
 import HowWeWork from "@/components/Services/HowWeWork";
+import IceBerg from "@/components/Services/IceBerg";
 import OurSolutions from "@/components/Services/OurSolutions";
 import { RedefiningSuccess } from "@/components/Services/RedefiningSuccess";
 import { ServicesHero } from "@/components/Services/ServicesHero";
@@ -20,6 +21,7 @@ const Services = () => {
       <HowWeWork />
       <OurSolutions />
       <RedefiningSuccess />
+      <IceBerg />
     </section>
   );
 };

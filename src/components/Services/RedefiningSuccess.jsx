@@ -33,13 +33,13 @@ const cardData = [
 export const RedefiningSuccess = () => {
   return (
     <section className="bg-[#f3f3f3] max-w-[1920px] mx-auto w-full py-10 relative overflow-hidden">
-      <div className="font-sora md:mt-10 px-4 text-black sm:px-8 md:px-12 xl:px-[178px] mx-auto">
+      <div className="font-sora md:mt-10 px-4 text-black sm:px-8 md:px-12 lg:px-[100px] 2xl:px-[178px] mx-auto">
         {/* Header Section */}
-        <div className="mx-auto max-w-5xl text-center px-4 sm:px-8 md:px-11">
+        <div className="mx-auto max-w-5xl text-center">
           <h1 className="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-normal">
             Redefining Success, <span className="font-bold">Together</span>
           </h1>
-          <p className="text-base sm:text-lg md:text-xl 2xl:text-[18px] mt-4 leading-relaxed">
+          <p className="lg:max-w-3xl 2xl:max-w-none lg:text-md lg:leading-loose 2xl:text-[18px] mt-4 leading-relaxed mx-auto">
             Success for us, starts with understanding our clients & building on
             what the definition of success is for them. Time again we hear the
             same challenges, these include....

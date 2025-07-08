@@ -412,18 +412,18 @@ export const HeroServices = ({ sectionY, backgroundY, robotY, textY }) => (
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     transition={{ duration: 0.5 }}
-    className="bg-[#00172B] max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 relative overflow-hidden min-h-[600px] lg:min-h-[700px] 2xl:min-h-[800px] select-none"
+    className="bg-[#00172B] max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 relative overflow-hidden select-none"
   >
-    <div className="px-4 sm:px-8 md:px-12 xl:px-[178px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-8 h-full">
+    <div className="px-4 sm:px-8 md:px-12 lg:px-[100px] 2xl:px-[178px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-8 h-full">
       {/* Text Content Section */}
-      <div className="w-full lg:w-[40%]">
+      <div className="w-full lg:min-w-[40%]">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="space-y-5 2xl:space-y-10"
         >
-          <h1 className="text-4xl sm:text-5xl lg:text-4xl xl:text-5xl 2xl:text-[60px] font-sora font-normal text-white leading-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-4xl 2xl:text-[60px] font-sora font-normal text-white leading-tight">
             Our{" "}
             <motion.span
               style={{ y: textY }}
@@ -437,7 +437,7 @@ export const HeroServices = ({ sectionY, backgroundY, robotY, textY }) => (
           </h1>
 
           <motion.p
-            className="text-base sm:text-lg lg:text-base xl:text-lg 2xl:text-[20px] font-thin font-sora leading-relaxed 2xl:leading-loose text-white mt-6 2xl:mt-14"
+            className="text-base sm:text-lg lg:text-md 2xl:text-[20px] font-thin font-sora leading-relaxed 2xl:leading-loose text-white mt-6 2xl:mt-14"
             initial={{ opacity: 0, y: 20 }}
             style={{ y: textY }}
             animate={{ opacity: 1, y: 0 }}
@@ -477,7 +477,7 @@ export const HeroServices = ({ sectionY, backgroundY, robotY, textY }) => (
       {/* Image Section */}
       <motion.div
         style={{ y: robotY }}
-        className="w-full lg:w-[60%] mix-blend-lighten"
+        className="mix-blend-lighten"
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, delay: 0.4 }}

@@ -112,3 +112,32 @@ body {
     @apply bg-background text-foreground;
   }
 }
+    @keyframes expand-from-center {
+          0% {
+            transform: scaleX(0);
+            opacity: 0;
+          }
+          100% {
+            transform: scaleX(1);
+            opacity: 1;
+          }
+        }
+        
+        @keyframes curtain-open {
+          0% {
+            clip-path: inset(0 50% 0 50%);
+            opacity: 0;
+          }
+          100% {
+            clip-path: inset(0 0% 0 0%);
+            opacity: 1;
+          }
+        }
+        
+        .animate-slide-in-from-left {
+          animation: curtain-open 0.9s ease-out;
+        }
+        
+        .animate-slide-in-from-right {
+          animation: curtain-open 0.9s ease-out;
+        }

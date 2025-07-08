@@ -1,21 +1,23 @@
 import React from "react";
 import Image from "next/image";
-import cube from "../../../assets/cube-group.png";
+import cube1 from "../../../assets/cube1.png";
+import cube2 from "../../../assets/cube2.png";
+import cube3 from "../../../assets/cube3.png";
 
 const features = [
   {
     id: "01",
-    icon: cube,
+    icon: cube1,
     text: "We are experts at listening & bring big ideas. We work backwards from customer needs with Industry subject matter experts who understands the business.",
   },
   {
     id: "02",
-    icon: cube,
+    icon: cube2,
     text: "Our MVPs are pre-built Atelic 'Supervisory' Agents that operate across Oil, Gas, Financial Services & the Public Sector.",
   },
   {
     id: "03",
-    icon: cube,
+    icon: cube3,
     text: "We are building a revolutionary enterprise ready new foundation for trust, providing cryptographic levers & blockchain resilience that secure transactions.",
   },
 ];
@@ -23,17 +25,17 @@ const features = [
 const OurSolutions = () => {
   return (
     <section className="bg-[#EBEBEB] max-w-[1920px] mx-auto w-full py-8 sm:py-10 lg:py-12 xl:py-16 relative overflow-hidden">
-      <div className="font-sora px-4 sm:px-6 md:px-8 lg:px-12 xl:px-[178px] mx-auto">
+      <div className="font-sora px-4 sm:px-6 md:px-8 lg:px-[100px] 2xl:px-[178px] mx-auto">
         {/* Title Section */}
         <div className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 mb-12 sm:mb-16 lg:mb-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 xl:gap-12 items-start lg:items-center">
             <div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl 2xl:text-6xl font-medium text-black leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-medium text-black leading-tight">
                 Our <span className="font-bold">Solutions</span>
               </h2>
             </div>
             <div>
-              <p className="text-base sm:text-lg md:text-lg lg:text-base xl:text-lg 2xl:text-xl text-gray-700 leading-relaxed mt-4 lg:mt-0">
+              <p className="2xl:text-[18px] lg:text-md text-gray-700 leading-relaxed mt-4 lg:mt-0">
                 Our Solution is to simplify the complexity of Artificial
                 Intelligence, by providing problem solving and real business
                 solutions...
@@ -67,7 +69,7 @@ const OurSolutions = () => {
                   <Image
                     src={feature.icon}
                     alt="Solution Icon"
-                    className="w-auto h-auto max-w-[60px] sm:max-w-[70px] md:max-w-[80px] object-contain"
+                    className="w-auto h-auto object-contain"
                   />
                 </div>
 
