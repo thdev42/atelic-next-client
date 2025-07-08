@@ -47,11 +47,11 @@ export const RedefiningSuccess = () => {
         </div>
 
         {/* Card Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 2xl:py-14 py-10  justify-items-center">
+        <div className="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 gap-5 2xl:py-14 py-10  justify-items-center">
           {cardData.map((item, i) => (
             <div
               key={i}
-              className="group w-full max-w-[499px] bg-white rounded-md shadow-sm transition-all duration-300 hover:bg-[#335F86] text-black hover:text-white relative flex flex-col justify-between items-center text-center px-5 py-7 2xl:px-6 2xl:py-8"
+              className="group w-full max-w-[499px] 2xl:min-h-[367px] bg-white rounded-md shadow-sm transition-all duration-300 hover:bg-[#335F86] text-black hover:text-white relative flex flex-col justify-between items-center text-center px-5 py-7 2xl:px-6 2xl:py-8"
             >
               {/* Card Number */}
               <span className="absolute top-4 right-4 text-lg font-light">
@@ -68,12 +68,12 @@ export const RedefiningSuccess = () => {
                     height={124}
                   />
                 </div>
-                <div className="w-20 h-[3px] relative bg-[#335F86] group-hover:bg-white transition-colors duration-300 " />
+                <div className="w-20 h-[3px] mt-4 bg-[#335F86] group-hover:bg-white transition-colors duration-300 " />
               </div>
 
               {/* Text Section */}
               <div className="flex-1 flex items-center justify-center">
-                <p className="2xl:text-[18px] text-[13px] font-light leading-relaxed mt-4">
+                <p className="2xl:text-[18px] text-[13px] font-light leading-loose mt-3">
                   {item.text}
                 </p>
               </div>
