@@ -30,12 +30,12 @@ const OurSolutions = () => {
         <div className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 mb-12 sm:mb-16 lg:mb-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 xl:gap-12 items-start lg:items-center">
             <div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-medium text-black leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-[41px] 2xl:text-6xl font-medium text-black leading-tight">
                 Our <span className="font-bold">Solutions</span>
               </h2>
             </div>
             <div>
-              <p className="2xl:text-[18px] lg:text-md text-gray-700 leading-relaxed mt-4 lg:mt-0">
+              <p className="2xl:text-[18px] lg:text-sm text-sm text-black leading-relaxed mt-4 lg:mt-0">
                 Our Solution is to simplify the complexity of Artificial
                 Intelligence, by providing problem solving and real business
                 solutions...
@@ -49,7 +49,7 @@ const OurSolutions = () => {
           {features.map((feature, i) => (
             <div
               key={i}
-              className="group relative w-full bg-transparent transition-all duration-300 border border-transparent hover:bg-white rounded-[10px] min-h-[320px] sm:min-h-[350px] lg:min-h-[370px] xl:min-h-[373px]"
+              className="group relative w-full bg-transparent transition-all duration-300 border border-transparent hover:bg-white rounded-[10px]"
             >
               {/* Gradient Border */}
               <div
@@ -69,18 +69,18 @@ const OurSolutions = () => {
                   <Image
                     src={feature.icon}
                     alt="Solution Icon"
-                    className="w-auto h-auto object-contain"
+                    className="max-w-[90px] 2xl:max-w-none object-contain"
                   />
                 </div>
 
                 {/* Index number - only on hover */}
-                <div className="absolute top-4 sm:top-5 right-4 sm:right-5 text-3xl sm:text-4xl font-semibold text-black opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+                <div className="absolute top-4 sm:top-5 right-4 sm:right-5 text-2xl 2xl:text-4xl font-medium text-black opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
                   {feature.id}
                 </div>
 
                 {/* Text Content */}
                 <div className="flex-1 flex flex-col justify-end">
-                  <p className="text-sm sm:text-base md:text-[16px] lg:text-[15px] xl:text-[16px] 2xl:text-[17px] text-gray-700 leading-relaxed">
+                  <p className=" lg:text-[11px] text-[11px] 2xl:text-[17px] text-gray-700 leading-relaxed">
                     {feature.text}
                     <span className="underline ml-1 cursor-pointer hover:text-[#F21B2A] transition-colors duration-200">
                       Read More

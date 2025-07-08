@@ -142,11 +142,11 @@ const IceBerg = () => {
         <div className="font-sora px-4 sm:px-6 md:px-8 lg:px-[100px] 2xl:px-[178px] mx-auto">
           <div className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 mb-12 sm:mb-16 lg:mb-20">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 xl:gap-12 items-start lg:items-center">
-              <div>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-light text-black leading-tight">
+              <div className="space-y-3">
+                <h2 className="text-3xl sm:text-4xl md:text-[41px] 2xl:text-6xl font-light text-black leading-tight">
                   Our
                 </h2>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-light text-black leading-tight">
+                <h2 className="text-3xl sm:text-4xl md:text-[41px]  2xl:text-6xl font-light text-black leading-tight">
                   <span className="font-bold">Solutions</span>
                 </h2>
               </div>
@@ -165,7 +165,7 @@ const IceBerg = () => {
 
         {/* Iceberg Background */}
         <div
-          className="min-h-[1562px] bg-cover bg-center relative 4md:hidden"
+          className="min-h-[1562px] w-full relative  bg-cover bg-center 4md:hidden"
           style={{ backgroundImage: `url(${IceBergBg.src})` }}
         >
           {/* Dynamic Circles - All rendered through one function */}

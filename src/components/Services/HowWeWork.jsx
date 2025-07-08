@@ -35,19 +35,19 @@ function CircleProgress({ percentage, label, description }) {
           baseSize = 222;
         } else if (window.innerWidth >= 1280) {
           // xl
-          baseSize = 200;
+          baseSize = 2;
         } else if (window.innerWidth >= 1024) {
           // lg
-          baseSize = 180;
+          baseSize = 22;
         } else if (window.innerWidth >= 768) {
           // md
-          baseSize = 170;
+          baseSize = 22;
         } else if (window.innerWidth >= 640) {
           // sm
-          baseSize = 180;
+          baseSize = 22;
         } else {
           // xs
-          baseSize = 170;
+          baseSize = 22;
         }
 
         // Calculate required dimensions based on text size
@@ -135,7 +135,7 @@ function CircleProgress({ percentage, label, description }) {
           <div className="absolute inset-0 flex items-center justify-center">
             <span
               ref={textRef}
-              className="2xl:text-[46px] xl:text-[40px] lg:text-[36px] md:text-[32px] sm:text-[28px] text-[24px] font-medium text-black"
+              className="2xl:text-[46px] lg:text-[30px] md:text-[30px] sm:text-[28px] text-[24px] font-light text-black"
               style={{ visibility: "visible" }}
             >
               {label}
@@ -146,7 +146,7 @@ function CircleProgress({ percentage, label, description }) {
 
       {/* Description below */}
       <div className="max-w-[400px] px-2">
-        <p className="mt-4 text-center 2xl:text-[16px] lg:text-[14px] md:text-[13px] text-sm text-gray-700 leading-snug break-words">
+        <p className=" text-center 2xl:text-[16px] lg:text-[10px] md:text-[10px] text-sm text-gray-700 leading-snug break-words">
           {description}
         </p>
       </div>
@@ -176,7 +176,7 @@ const HowWeWork = () => {
         <div className="px-4 sm:px-6 md:px-8 lg:px-[100px] 2xl:px-[178px] mx-auto">
           {/* Desktop Layout - Hidden on mobile/tablet */}
           <div className="hidden lg:flex items-start justify-between gap-6 xl:gap-8 2xl:gap-12 h-full">
-            <div className="flex-1 max-w-[320px] xl:max-w-[340px] 2xl:max-w-[380px]">
+            <div className="flex-1 max-w-[220px] lg:max-w-[240px] 2xl:max-w-[380px]">
               <CircleProgress
                 percentage={30}
                 label="30%"
@@ -186,7 +186,7 @@ const HowWeWork = () => {
             <div className="flex-shrink-0">
               <SeparatorImage />
             </div>
-            <div className="flex-1 max-w-[320px] xl:max-w-[340px] 2xl:max-w-[380px]">
+            <div className="flex-1 max-w-[220px] lg:max-w-[240px] 2xl:max-w-[380px]">
               <CircleProgress
                 percentage={42}
                 label="42%"
@@ -196,7 +196,7 @@ const HowWeWork = () => {
             <div className="flex-shrink-0">
               <SeparatorImage />
             </div>
-            <div className="flex-1 max-w-[320px] xl:max-w-[340px] 2xl:max-w-[380px]">
+            <div className="flex-1 max-w-[220px] lg:max-w-[240px] 2xl:max-w-[380px]">
               <CircleProgress
                 percentage={77}
                 label="77%"
@@ -261,14 +261,14 @@ const HowWeWork = () => {
                   How We <span className="font-bold">Work</span>
                 </h2>
 
-                <p className="lg:leading-loose 2xl:text-[26px] md:text-xl text-lg 2xl:leading-loose font-semibold">
+                <p className="lg:leading-loose 2xl:text-[26px] md:text-sm text-lg 2xl:leading-loose font-semibold">
                   Without the right data, context & expertise, even the most
                   advanced tools fail to deliver real business value...
                 </p>
               </div>
 
               {/* Paragraph from left */}
-              <p className="text-black 2xl:text-[18px] lg:text-sm lg:leading-loose font-normal 2xl:leading-loose">
+              <p className="text-black 2xl:text-[18px] lg:text-xs lg:leading-loose font-normal 2xl:leading-loose">
                 "SaaS² flips the traditional model. Instead of just delivering
                 software, we provide pre-built Al agents & accelerators tailored
                 to specific industries. In the case of Atelic, we decided to
