@@ -14,7 +14,7 @@ import Robot1 from "../../../assets/AtelicRobot.png";
 import BgPattern1 from "../../../assets/HeroWebRight1.png";
 import AiChip from "../../../assets/AiChip (2).png";
 import Hero3Bg from "../../../assets/HeroBg3 (2).png";
-
+import AboutUsHero from "../../../assets/AboutusHero.png";
 export const HeroComponent1 = ({ sectionY, backgroundY, robotY, textY }) => (
   <motion.section
     initial={{ opacity: 0 }}
@@ -490,6 +490,98 @@ export const HeroServices = ({ sectionY, backgroundY, robotY, textY }) => (
             alt="AI Robot"
             className="object-center"
           />
+        </div>
+      </motion.div>
+    </div>
+  </motion.section>
+);
+export const HeroAboutUs = ({ sectionY, backgroundY, robotY, textY }) => (
+  <motion.section
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.5 }}
+    className="bg-[#E9E9E9] text-black  2xl:max-h-[750px] max-w-[1920px] mx-auto w-full relative overflow-hidden select-none"
+  >
+    <div className="px-4 sm:px-8 md:px-12 lg:px-[100px] 2xl:px-[178px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-8">
+      {/* Text Content Section */}
+      <div className="w-full lg:min-w-[50%]">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="space-y-5 2xl:space-y-10"
+        >
+          <h1 className="text-4xl font-light sm:text-5xl lg:text-4xl 2xl:text-[60px] font-sora  leading-tight">
+            About
+            <motion.span
+              style={{ y: textY }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 * 0.3 }}
+              className={"font-bold text-[#F21B2A]"}
+            >
+              {" "}
+              Us
+            </motion.span>
+          </h1>
+
+          <motion.p
+            className="text-base 2xl:max-w-lg max-w-md sm:text-lg lg:text-md 2xl:text-[20px] font-light font-sora leading-relaxed 2xl:leading-loose text-black mt-6 2xl:mt-14"
+            initial={{ opacity: 0, y: 20 }}
+            style={{ y: textY }}
+            animate={{ opacity: 0.75, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+          >
+            Create value within the AI ecosystem by driving success & trust for
+            our customers.
+          </motion.p>
+
+          <motion.div
+            className="font-poppins mt-8 flex gap-4 flex-wrap"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+          >
+            <motion.button
+              className="text-xs sm:text-sm lg:text-xs xl:text-sm 2xl:text-[16px] bg-[#F21B2A] text-white px-6 py-4 rounded-md"
+              whileHover={{ scale: 1.03, backgroundColor: "#082c4e" }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ duration: 0.2 }}
+            >
+              Book a Consultation
+            </motion.button>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* Image Section */}
+      <motion.div
+        style={{ y: robotY }}
+        // className="mix-blend-lighten"
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+      >
+        <div className="relative 2xl:w-[872px] sm:mt-0 md:w-[600px] sm:scale-100">
+          <Image
+            // width={1104}
+            // height={736}
+            src={AboutUsHero}
+            alt="AI Robot"
+            className="object-center"
+          />
+          <div
+            style={{ animation: "floatUpDown 11s ease-in-out infinite" }}
+            className="font-poppins absolute w-[200px] h-[160px] 2xl:w-[280px] 2xl:h-[218px] bottom-40 left-0 lg:bottom-30 lg:left-0 md:bottom-20 md:left-20 2xl:bottom-56 2xl:left-28 bg-white/40 rounded-[30px] shadow-[0_4px_60px_rgba(0,0,0,0.05)] backdrop-blur-[10px] px-9 py-4 flex flex-col"
+          >
+            <p className="text-3xl 2xl:text-[50px] font-thin text-black 2xl:mt-4 2xl:mb-4">
+              77<span className="">%</span>
+            </p>
+            <p className="text-xs 2xl:text-[16px] mt-2 font-thin text-black/80 leading-snug">
+              of executives surveyed said that true benefits of AI will be
+              recognized when built on trust
+            </p>
+          </div>
         </div>
       </motion.div>
     </div>
