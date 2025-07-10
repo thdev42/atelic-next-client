@@ -5,7 +5,7 @@ import OurJourneyImage from "../../../assets/OurJourney.png";
 const OurJourney = () => {
   return (
     <section className="font-sora relative bg-[#f3f0f1] text-black w-full max-w-[1920px] mx-auto overflow-hidden">
-      <div className=" 2xl:px-[178px] px-4 sm:px-6 xl:px-12 gap-12">
+      <div className=" 2xl:px-[178px] md:px-12 lg:px-[100px] mx-auto px-6 sm:px-10 gap-12">
         <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 items-center gap-12">
           {/* LEFT COLUMN */}
           <div className="z-10">

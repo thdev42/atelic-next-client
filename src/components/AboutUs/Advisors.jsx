@@ -75,7 +75,7 @@ const advisors = [
 export const Advisors = () => {
   return (
     <section className="font-sora relative bg-[#E8E8E8] text-black w-full max-w-[1920px] mx-auto overflow-hidden py-16">
-      <div className="2xl:px-[178px] px-4 sm:px-6 xl:px-12 text-left">
+      <div className="2xl:px-[178px] md:px-12 lg:px-[100px] mx-auto px-6 sm:px-10 text-left">
         <h2 className="text-4xl md:text-5xl font-light">
           Our <span className="font-bold">Advisors</span>
         </h2>

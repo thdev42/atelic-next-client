@@ -4,7 +4,7 @@ import AtelicLogo from "../../../assets/Atelic-logo.png"; // ✅ Your import
 const Investors = () => {
   return (
     <section className="font-sora relative bg-[#E8E8E8] w-full max-w-[1920px] mx-auto overflow-hidden py-16">
-      <div className="2xl:px-[178px] px-4 sm:px-6 xl:px-12">
+      <div className="2xl:px-[178px] md:px-12 lg:px-[100px] mx-auto px-6 sm:px-10">
         <div
           className="
             relative 

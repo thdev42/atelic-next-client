@@ -52,7 +52,7 @@ const teamMembers = [
 const OurTeam = () => {
   return (
     <section className="font-sora relative bg-[#f3f0f1] text-black w-full max-w-[1920px] mx-auto overflow-hidden py-16">
-      <div className="2xl:px-[178px] px-4 sm:px-6 xl:px-12 gap-12">
+      <div className="2xl:px-[178px] md:px-12 lg:px-[100px] mx-auto px-6 sm:px-10 gap-12">
         <h2 className="text-3xl sm:text-4xl xl:text-5xl 2xl:text-[60px] font-light text-center mb-16">
           Our <span className="font-semibold">Team</span>
         </h2>
