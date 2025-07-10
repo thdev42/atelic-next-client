@@ -1,9 +1,9 @@
 import React from "react";
 
 import Image from "next/image";
-import cube1 from "../../../assets/cube1.png";
-import cube2 from "../../../assets/cube2.png";
-import cube3 from "../../../assets/cube3.png";
+import cube1 from "../../../assets/Cube1.png";
+import cube2 from "../../../assets/Cube2.png";
+import cube3 from "../../../assets/Cube3.png";
 
 const features = [
   {
