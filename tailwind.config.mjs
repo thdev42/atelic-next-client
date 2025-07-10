@@ -66,6 +66,7 @@ export default {
       fontFamily: {
         sora: ["Sora"],
         poppins: ["Poppins"],
+        raleway: ["Raleway"],
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -30,7 +30,7 @@ const Investors = () => {
             Our <span className="font-bold">Investors</span>
           </h2>
           <p className="text-base sm:text-lg lg:text-xl mb-3 z-10">
-            Pl Ease Contact Us For Our Latest Investors Guide
+            Please Contact Us For Our Latest Investors Guide
           </p>
           <p className="text-base sm:text-lg lg:text-xl z-10">
             Email: <span className="font-bold">Info@Atelic.Ai</span>

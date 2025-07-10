@@ -11,7 +11,7 @@ import Microsoft from "../../../assets/Microsoft.png";
 import Nvidia from "../../../assets/Nvidia.png";
 import { useScroll, motion, useTransform } from "framer-motion";
 
-export const Partners = () => {
+export const Partners = ({ partners }) => {
   const logos = [Aws, Google, IBM, Microsoft, Nvidia];
 
   const container = useRef(null);
@@ -29,7 +29,7 @@ export const Partners = () => {
   return (
     <motion.section
       ref={container} // Added ref to section for scroll detection
-      className="will-change-transform max-w-[1920px] mx-auto w-full py-10 lg:py-20 relative overflow-hidden"
+      className={`will-change-transform max-w-[1920px] mx-auto w-full py-10 lg:py-20 relative overflow-hidden`}
       style={{
         backgroundColor: "#f3f3f3",
         // backgroundAttachment:

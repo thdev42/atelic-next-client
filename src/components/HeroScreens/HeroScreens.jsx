@@ -15,6 +15,9 @@ import BgPattern1 from "../../../assets/HeroWebRight1.png";
 import AiChip from "../../../assets/AiChip (2).png";
 import Hero3Bg from "../../../assets/HeroBg3 (2).png";
 import AboutUsHero from "../../../assets/AboutusHero.png";
+import PartnersHero from "../../../assets/PartnersHero.jpg";
+import NewsHero from "../../../assets/NewsHero.jpg";
+
 export const HeroComponent1 = ({ sectionY, backgroundY, robotY, textY }) => (
   <motion.section
     initial={{ opacity: 0 }}
@@ -582,6 +585,216 @@ export const HeroAboutUs = ({ sectionY, backgroundY, robotY, textY }) => (
               recognized when built on trust
             </p>
           </div>
+        </div>
+      </motion.div>
+    </div>
+  </motion.section>
+);
+export const HeroPartners = ({ sectionY, backgroundY, robotY, textY }) => (
+  <motion.section
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.5 }}
+    className=" text-black max-w-[1920px] mx-auto w-full relative overflow-hidden select-none"
+  >
+    <div className="px-4 sm:px-8 md:px-12 lg:px-[100px] 2xl:px-[178px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-8">
+      {/* Text Content Section */}
+      <div className="w-full z-50 pt-48 lg:min-w-[50%]">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="space-y-5  2xl:space-y-10"
+        >
+          <h1 className="text-4xl font-light sm:text-5xl lg:text-4xl 2xl:text-[60px] font-raleway leading-tight">
+            Our
+            <motion.span
+              style={{ y: textY }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 * 0.3 }}
+              className={"font-bold text-[#F21B2A]"}
+            >
+              {" "}
+              Partners
+            </motion.span>
+          </h1>
+
+          <motion.p
+            className="text-base 2xl:max-w-2xl  max-w-2xl sm:text-lg lg:text-md 2xl:text-[20px] font-medium font-raleway leading-relaxed 2xl:leading-loose text-black mt-6 2xl:mt-14"
+            initial={{ opacity: 0, y: 20 }}
+            style={{ y: textY }}
+            animate={{ opacity: 0.75, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+          >
+            We are certified global partners of Multi-Model Systems and can work
+            across multiple Software Development Kits. Meaning that whatever
+            your chosen Tech-Stack is, we can work within your parameters.
+          </motion.p>
+
+          <motion.div
+            className="font-raleway mt-8 flex gap-4 flex-wrap"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+          >
+            <motion.button
+              className="text-xs sm:text-sm lg:text-xs xl:text-sm 2xl:text-[16px] bg-[#F21B2A] text-white px-6 2xl:px-14 py-4 rounded-md"
+              whileHover={{ scale: 1.03, backgroundColor: "#082c4e" }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ duration: 0.2 }}
+            >
+              Explore Now
+            </motion.button>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* Image Section */}
+      <motion.div
+        style={{ y: robotY }}
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+      >
+        <div
+          className="
+    md:block
+    hidden
+    relative
+    w-full
+    sm:w-[500px]
+    md:w-[600px]
+    lg:w-[800px]
+    xl:w-[1000px]
+    2xl:w-[1308px]
+    right-0
+    sm:right-10
+    md:right-16
+    lg:right-24
+    xl:right-32
+    2xl:right-48
+    scale-90
+    sm:scale-95
+    md:scale-100
+    2xl:scale-100
+  "
+        >
+          {/* Gradient Overlay */}
+          <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white to-transparent z-10 pointer-events-none" />
+
+          {/* Actual Image */}
+          <Image
+            src={PartnersHero}
+            alt="AI Robot"
+            className="object-cover w-full h-auto relative z-0"
+          />
+        </div>
+      </motion.div>
+    </div>
+  </motion.section>
+);
+export const HeroNews = ({ sectionY, backgroundY, robotY, textY }) => (
+  <motion.section
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.5 }}
+    className=" text-black max-w-[1920px] mx-auto w-full relative overflow-hidden select-none"
+  >
+    <div className="px-4 sm:px-8 md:px-12 lg:px-[100px] 2xl:px-[178px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-8">
+      {/* Text Content Section */}
+      <div className="w-full z-50 pt-48 lg:min-w-[50%]">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="space-y-5  2xl:space-y-10"
+        >
+          <h1 className="text-4xl font-light sm:text-5xl lg:text-4xl 2xl:text-[60px] font-raleway leading-tight">
+            Our
+            <motion.span
+              style={{ y: textY }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 * 0.3 }}
+              className={"font-bold text-[#F21B2A]"}
+            >
+              {" "}
+              News
+            </motion.span>
+          </h1>
+
+          <motion.p
+            className="text-base 2xl:max-w-2xl  max-w-2xl sm:text-lg lg:text-md 2xl:text-[20px] font-medium font-raleway leading-relaxed 2xl:leading-loose text-black mt-6 2xl:mt-14"
+            initial={{ opacity: 0, y: 20 }}
+            style={{ y: textY }}
+            animate={{ opacity: 0.75, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+          >
+            Discover the latest breakthroughs, product updates, and AI trends
+            shaping the future. Stay connected with Atelic as we lead the
+            evolution of intelligent technology.
+          </motion.p>
+
+          <motion.div
+            className="font-raleway mt-8 flex gap-4 flex-wrap"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+          >
+            <motion.button
+              className="text-xs sm:text-sm lg:text-xs xl:text-sm 2xl:text-[16px] bg-[#F21B2A] text-white px-6 2xl:px-14 py-4 rounded-md"
+              whileHover={{ scale: 1.03, backgroundColor: "#082c4e" }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ duration: 0.2 }}
+            >
+              Explore Now
+            </motion.button>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* Image Section */}
+      <motion.div
+        style={{ y: robotY }}
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+      >
+        <div
+          className="
+   
+    relative
+    w-full
+    sm:w-[500px]
+    md:w-[600px]
+    lg:w-[800px]
+    xl:w-[1000px]
+    2xl:w-[1308px]
+    right-0
+    sm:right-10
+    md:right-16
+    lg:right-24
+    xl:right-32
+    2xl:right-48
+    scale-90
+    sm:scale-95
+    md:scale-100
+    2xl:scale-100
+  "
+        >
+          {/* 🔼 Top Gradient (existing) */}
+          <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-white to-transparent z-10 pointer-events-none hidden md:block" />
+
+          {/* 🔼 Left Gradient (new) */}
+          <div className="absolute top-0 left-0 h-full w-1/5 bg-gradient-to-r from-[#E9F7FF] to-transparent z-10 pointer-events-none" />
+
+          {/* 🖼️ Actual Image */}
+          <Image
+            src={NewsHero}
+            alt="AI Robot"
+            className="object-cover w-full h-auto relative z-0"
+          />
         </div>
       </motion.div>
     </div>
