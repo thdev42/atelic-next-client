@@ -64,7 +64,7 @@ const AiInsights = () => {
 
               {/* Text */}
               <div className="w-full lg:w-1/2 text-center lg:text-left">
-                <h3 className="text-2xl md:text-3xl font-semibold text-gray-900">
+                <h3 className="text-2xl md:text-3xl font-semibold md:mt-0 mt-6 text-gray-900">
                   {member.name}
                 </h3>
                 <div
