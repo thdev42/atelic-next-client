@@ -10,7 +10,8 @@ import { useBackground } from "@/context/BackgroundContext";
 
 const Navbar = () => {
   const router = useRouter();
-  const { activeHeroIndex, slideProgress, isDark } = useBackground();
+  const { activeHeroIndex, slideProgress, isDark, fixedNav, setFixedNav } =
+    useBackground();
   console.log(isDark);
   const [textColor, setTextColor] = useState("text-black");
 
@@ -98,9 +99,13 @@ const Navbar = () => {
   return (
     <>
       <header className="w-full bg-transparent">
-        <nav className="z-50">
+        <nav
+          className={`z-50 ${
+            fixedNav ? "absolute top-0 left-0 right-0 w-full" : ""
+          }`}
+        >
           {" "}
-          {/* Reduced padding from py-4 to py-2 */}
+          {/* Conditional fixed positioning */}
           <Container>
             <div className="px-4 overflow-hidden sm:px-8 md:px-12 lg:px-[100px] 2xl:px-[178px] flex items-center justify-between w-full relative">
               {/* LEFT: Logo with controlled height */}
