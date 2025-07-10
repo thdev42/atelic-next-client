@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Aws from "../../../assets/Aws1.png";
 import googlecloud from "../../../assets/googlecloud.png";
-import openstack from "../../../assets/openstack.png";
+import openstack from "../../../assets/Openstack.png";
 import VmWare from "../../../assets/VmWare.png";
 import Azure from "../../../assets/Azure.png";
 
