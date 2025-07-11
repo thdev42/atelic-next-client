@@ -107,11 +107,11 @@ const Navbar = () => {
           {" "}
           {/* Conditional fixed positioning */}
           <Container>
-            <div className="px-4 overflow-hidden sm:px-8 md:px-12 lg:px-[100px] 2xl:px-[178px] flex items-center justify-between w-full relative">
+            <div className=" px-4 overflow-hidden sm:px-8 md:px-12 lg:px-[100px] 2xl:px-[178px] flex items-center justify-between w-full relative">
               {/* LEFT: Logo with controlled height */}
               <div
                 style={getTextColorStyle()}
-                className="flex-shrink-0 cursor-pointer"
+                className=" flex-shrink-0 cursor-pointer"
               >
                 <Image
                   src={NavIcon}
@@ -132,7 +132,7 @@ const Navbar = () => {
               </div>
 
               {/* CENTER: Navigation Links */}
-              <ul className="z-50 hidden lg:flex 2xl:gap-5 lg:gap-1 2xl:text-[20px] lg:text-sm font-sora font-normal">
+              <ul className="z-50 hidden flex-shrink-0 lg:flex 2xl:gap-5 lg:gap-1 2xl:text-[20px] lg:text-sm font-sora font-normal">
                 {navLinks.map((link) => {
                   const isActive = router.pathname === link.path;
 

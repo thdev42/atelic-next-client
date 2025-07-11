@@ -17,7 +17,7 @@ export default function ServicesSection() {
   return (
     <section className="z-10 font-sora overflow-hidden bg-[#f3f3f3] max-w-[1920px] mx-auto w-full py-16 min-h-screen relative">
       {/* <Parallax speed={10}> */}
-      <div className="px-4 sm:px-8 md:px-12 lg:px-[100px] xl:px-[178px] mx-auto">
+      <div className="px-4 sm:px-8 2xl:px-[178px] md:px-12 lg:px-[100px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Column - Content */}
           <Parallax speed={20}>

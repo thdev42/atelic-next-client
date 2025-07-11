@@ -16,7 +16,7 @@ const HeroSection = ({ scrollYSProgress, section }) => {
   const [activeSection, setActiveSection] = useState(0);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
-  const { setBackground, setActiveHeroIndex, setSlideProgress } =
+  const { setBackground, setActiveHeroIndex, setSlideProgress, setFixedNav } =
     useBackground();
 
   const heroDataArray = section?.details || [];
@@ -121,13 +121,13 @@ const HeroSection = ({ scrollYSProgress, section }) => {
       style={{ y: isMobile ? 0 : sectionY, willChange: "transform" }}
       className={`overflow-y-visible ${
         isMobile ? "relative" : "sticky top-0"
-      } max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 transition-all duration-1000 ease-in-out z-0`}
+      } max-w-[1920px]  mx-auto w-full py-10 lg:py-5 2xl:py-5 transition-all duration-1000 ease-in-out z-0`}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
       {/* Vertical Numbers */}
-      <div className="font-poppins hidden xl:flex flex-col gap-4 2xl:ml-20 xl:ml-10 ml-0 items-center absolute left-0 top-1/2 -translate-y-1/2 z-20">
+      <div className=" font-poppins hidden xl:flex flex-col gap-4 2xl:ml-20 xl:ml-10 ml-0 items-center absolute left-0 top-1/2 -translate-y-1/2 z-20">
         {heroDataArray.map((_, idx) => (
           <div
             key={idx}

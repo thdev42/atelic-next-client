@@ -868,7 +868,7 @@ export const HeroDynamic = ({
   // Smart styling based on hero type and theme
   const getContainerStyles = () => {
     const baseStyles =
-      "max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 relative overflow-hidden select-none";
+      "max-w-[1920px] mx-auto w-full 2xl:py-5 relative overflow-hidden select-none";
 
     if (isInnovation) {
       return `${baseStyles} min-h-[600px] lg:min-h-[700px] 2xl:min-h-[800px] overflow-x-clip overflow-visible`;

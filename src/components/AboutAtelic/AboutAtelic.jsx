@@ -360,7 +360,7 @@ const AboutAtelic = () => {
         className="z-10 font-sora overflow-hidden bg-[#f3f3f3] max-w-[1920px] mx-auto w-full py-16 min-h-screen relative"
         onTouchMove={handleTouchMove}
       >
-        <div className="px-4 sm:px-8 md:px-12 xl:px-[178px]">
+        <div className="px-4 sm:px-8 2xl:px-[178px] md:px-12 lg:px-[100px]">
           <div className="md:flex justify-between items-start md:space-x-10 2xl:mb-16 mb-12">
             <h2
               className="2xl:text-[60px] text-3xl md:text-4xl font-semibold whitespace-nowrap"
@@ -493,7 +493,7 @@ const AboutAtelic = () => {
       onMouseLeave={() => setShowArrows(false)}
     >
       <div className="sticky top-0 w-full min-h-screen py-0 flex flex-col overflow-visible">
-        <div className="px-4 sm:px-8 md:px-12 xl:px-[178px] flex flex-col flex-grow h-full">
+        <div className="px-4 sm:px-8 2xl:px-[178px] md:px-12 lg:px-[100px] flex flex-col flex-grow h-full">
           <div className="md:flex justify-between items-start pt-10 md:space-x-10 2xl:mb-16 mb-12">
             <div className="relative">
               <h2 className="2xl:text-[60px] text-3xl md:text-4xl font-semibold whitespace-nowrap">

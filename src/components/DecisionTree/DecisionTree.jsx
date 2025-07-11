@@ -35,7 +35,7 @@ export const DecisionTree = ({ onComplete }) => {
   return (
     <section className="z-10 relative font-sora overflow-hidden bg-[#1C1C1C] text-white max-w-[1920px] mx-auto w-full py-16">
       <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
-      <div className="px-4 sm:px-8 md:px-12 xl:px-[178px] mx-auto flex flex-col lg:flex-row justify-between gap-0">
+      <div className="px-4 sm:px-8 2xl:px-[178px] md:px-12 lg:px-[100px] mx-auto flex flex-col lg:flex-row justify-between gap-0">
         <div className="flex-1 flex flex-col justify-center items-center lg:items-start text-center lg:text-left mx-auto">
           <h2 className="2xl:text-[55px] text-3xl 2xl:leading-snug md:text-4xl font-light mb-4">
             Find The Right{" "}
