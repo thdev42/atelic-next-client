@@ -3,6 +3,7 @@ import { BackgroundProvider, useBackground } from "@/context/BackgroundContext";
 import Navbar from "../Nav/Navbar";
 import { Toaster } from "react-hot-toast";
 import { NavProvider, useNav } from "@/context/NavContext";
+import { LoaderProvider } from "@/context/useLoader";
 
 const Layout = ({ children }) => {
   const { background } = useBackground();
@@ -22,8 +23,10 @@ const Layout = ({ children }) => {
 const LayoutWrapper = ({ children }) => (
   <BackgroundProvider>
     <NavProvider>
-      <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
-      <Layout>{children}</Layout>
+      <LoaderProvider>
+        <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
+        <Layout>{children}</Layout>
+      </LoaderProvider>
     </NavProvider>
   </BackgroundProvider>
 );

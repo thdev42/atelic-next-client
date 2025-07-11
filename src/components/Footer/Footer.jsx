@@ -39,7 +39,7 @@ export default function Footer() {
                 <div key={text} className="flex items-center">
                   <Link
                     href="#"
-                    className="2xl:text-[24px] text-sm lg:text-base px-2 sm:px-4 lg:px-6 2xl:px-9 transition-colors relative"
+                    className="2xl:text-[24px] text-sm lg:text-lg px-2 sm:px-4  lg:px-9 transition-colors relative"
                   >
                     {text}
                   </Link>
@@ -50,7 +50,7 @@ export default function Footer() {
               ))}
             </div>
             {/* Icon + Phone Number */}
-            <div className="flex justify-between items-center mb-6 px-2 sm:px-4 lg:px-6 2xl:px-9 transition-colors relative">
+            <div className="flex justify-between items-center mb-6 px-2 sm:px-4  lg:px-9 transition-colors relative">
               {/* LinkedIn Icon */}
               <Link
                 href="#"

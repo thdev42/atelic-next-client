@@ -17,6 +17,7 @@ import Hero3Bg from "../../../assets/HeroBg3 (2).png";
 import AboutUsHero from "../../../assets/AboutusHero.png";
 import PartnersHero from "../../../assets/PartnersHero.jpg";
 import NewsHero from "../../../assets/NewsHero.jpg";
+import { API_BASE_URL } from "@/config/config";
 
 export const HeroComponent1 = ({ sectionY, backgroundY, robotY, textY }) => (
   <motion.section
@@ -800,3 +801,391 @@ export const HeroNews = ({ sectionY, backgroundY, robotY, textY }) => (
     </div>
   </motion.section>
 );
+const parseHeadlines = (headliness) => {
+  if (!headliness)
+    return ["Simplifying AI.", "Building Trust.", "Delivering ROI."];
+
+  // Handle both string with \n and array formats
+  if (typeof headliness === "string") {
+    return headliness.split("\\n").filter((line) => line.trim());
+  }
+
+  if (Array.isArray(headliness)) {
+    return headliness;
+  }
+
+  // Fallback
+  return ["Simplifying AI.", "Building Trust.", "Delivering ROI."];
+};
+
+// Smart image resolver
+const resolveImageSrc = (imageData) => {
+  if (!imageData) return null;
+
+  // If it's already an imported image object
+  if (imageData.src) return imageData;
+
+  // If it's Strapi image data
+  if (imageData.url) {
+    return {
+      src: `${API_BASE_URL}${imageData.url}`,
+      width: imageData.width || 500,
+      height: imageData.height || 500,
+      alt: imageData.alternativeText || imageData.name || "Hero Image",
+    };
+  }
+
+  return null;
+};
+
+// Enhanced Dynamic Hero Component
+export const HeroDynamic = ({
+  heroData,
+  sectionY,
+  backgroundY,
+  robotY,
+  textY,
+}) => {
+  const {
+    heroType = "robot",
+    theme = "light",
+    bgColor = "#e9e9e9",
+    heroImage,
+    bgImage,
+    headliness,
+    primaryButtonText = "Book a Consultation",
+    secondaryButtonText = "Explore Our Approach",
+  } = heroData;
+
+  const headlines = parseHeadlines(headliness);
+  const mainImage = resolveImageSrc(heroImage);
+  const backgroundImage = resolveImageSrc(bgImage);
+  const isDark = theme === "dark";
+  const isRobot = heroType === "robot";
+  const isChip = heroType === "chip";
+  const isInnovation = heroType === "innovation";
+
+  // Smart styling based on hero type and theme
+  const getContainerStyles = () => {
+    const baseStyles =
+      "max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 relative overflow-hidden select-none";
+
+    if (isInnovation) {
+      return `${baseStyles} min-h-[600px] lg:min-h-[700px] 2xl:min-h-[800px] overflow-x-clip overflow-visible`;
+    }
+
+    if (isChip) {
+      return `${baseStyles} min-h-[600px] lg:h-[650px] 2xl:h-[730px]`;
+    }
+
+    return `${baseStyles} min-h-[600px] lg:min-h-[700px] 2xl:min-h-[800px]`;
+  };
+
+  const getTextColor = () => {
+    return isDark ? "text-white" : "text-black";
+  };
+
+  const getDescriptionColor = () => {
+    return isDark ? "text-gray-300" : "text-gray-600";
+  };
+
+  // Dynamic background styling
+  const getBackgroundStyles = () => {
+    if (bgColor.includes("gradient")) {
+      return { background: bgColor };
+    }
+    return { backgroundColor: bgColor };
+  };
+
+  // Smart button styling based on theme
+  const getButtonStyles = (isPrimary = true) => {
+    const baseStyles =
+      "text-xs 2xl:text-[16px] px-6 py-4 rounded-md transition-all duration-300";
+
+    if (isPrimary) {
+      return `${baseStyles} bg-[#335F86] text-white hover:bg-[#082c4e]`;
+    }
+
+    return `${baseStyles} bg-[#E5EAF0] text-[#0A3C66] hover:bg-[#d3dbe3]`;
+  };
+
+  // Enhanced headline rendering with smart ROI detection
+  const renderHeadline = (text, index) => {
+    const isROILine = text.toLowerCase().includes("roi");
+    const roiColor = isDark ? "text-white" : "text-[#F02C2C]";
+
+    return (
+      <motion.span
+        key={index}
+        style={{ y: textY }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.1 * index + 0.3 }}
+        className={isROILine ? `${roiColor} font-bold` : getTextColor()}
+      >
+        {isROILine ? (
+          <>
+            <span className={roiColor}>Delivering ROI</span>
+            <span className={getTextColor()}>.</span>
+          </>
+        ) : (
+          text
+        )}
+      </motion.span>
+    );
+  };
+
+  // Smart layout configuration
+  const getLayoutConfig = () => {
+    if (isInnovation) {
+      return {
+        textWidth: "w-full lg:w-3/5 2xl:w-2/3",
+        imageWidth: "w-full lg:w-2/5 2xl:w-1/2",
+        textPadding: "px-4 sm:px-8 md:px-12 xl:px-[178px]",
+        imagePadding: "px-4 sm:px-8 md:px-12 lg:px-0 lg:mr-28",
+        containerPadding: "",
+      };
+    }
+
+    return {
+      textWidth: "w-full",
+      imageWidth: "w-full",
+      textPadding: "",
+      imagePadding: "",
+      containerPadding: "px-4 sm:px-8 md:px-12 xl:px-[178px]",
+    };
+  };
+
+  const layoutConfig = getLayoutConfig();
+
+  return (
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className={getContainerStyles()}
+      style={getBackgroundStyles()}
+    >
+      <div
+        className={`${layoutConfig.containerPadding} mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 h-full`}
+      >
+        {/* Smart Background Pattern Rendering */}
+        {backgroundImage && !isInnovation && (
+          <motion.div className="absolute right-0 top-0 translate-x-1/2 2xl:translate-x-1/4 hidden lg:block z-0">
+            <div className="w-[1282px] h-[915px]">
+              <Image
+                src={backgroundImage.src}
+                alt={backgroundImage.alt}
+                width={backgroundImage.width}
+                height={backgroundImage.height}
+              />
+            </div>
+          </motion.div>
+        )}
+
+        {/* Enhanced Text Content */}
+        <div
+          className={`${layoutConfig.textPadding} flex flex-row ${layoutConfig.textWidth}`}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="space-y-5 2xl:space-y-10"
+          >
+            {/* Dynamic Headlines */}
+            <h1
+              className={`text-4xl 2xl:text-[60px] md:text-4xl font-sora font-normal ${getTextColor()} space-y-5 2xl:space-y-10 flex flex-col`}
+            >
+              {headlines.map((headline, index) =>
+                renderHeadline(headline, index)
+              )}
+            </h1>
+
+            {/* Description */}
+            <motion.p
+              className={`2xl:text-[22px] text-base font-sora 2xl:leading-normal ${getDescriptionColor()} mt-6 2xl:mt-14 ${
+                isInnovation ? "max-w-none 2xl:max-w-2xl" : "max-w-lg"
+              }`}
+              initial={{ opacity: 0, y: 20 }}
+              style={{ y: textY }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+            >
+              Atelic AI helps enterprises unlock real value from AI by solving
+              complex challenges with secure, customized, industry-specific
+              solutions.
+            </motion.p>
+
+            {/* Smart Button Rendering */}
+            <motion.div
+              className="font-poppins mt-8 flex gap-4 flex-wrap"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
+              style={isInnovation ? { y: textY } : {}}
+            >
+              {isInnovation ? (
+                <>
+                  <button className={getButtonStyles(true)}>
+                    {primaryButtonText}
+                  </button>
+                  <button className={getButtonStyles(false)}>
+                    {secondaryButtonText}
+                  </button>
+                </>
+              ) : (
+                <>
+                  <motion.button
+                    className={getButtonStyles(true)}
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {primaryButtonText}
+                  </motion.button>
+                  <motion.button
+                    className={getButtonStyles(false)}
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {secondaryButtonText}
+                  </motion.button>
+                </>
+              )}
+            </motion.div>
+          </motion.div>
+        </div>
+
+        {/* Smart Image Rendering Based on Hero Type */}
+        {mainImage && (
+          <>
+            {/* Chip Type - Absolute Positioning */}
+            {isChip && (
+              <motion.div
+                style={{ y: robotY }}
+                className="hidden lg:block absolute right-0 top-20 z-10 -translate-x-2 sm:translate-x-0 md:translate-x-4 lg:translate-x-8 xl:translate-x-12 2xl:translate-x-16 translate-y-4 sm:translate-y-6 md:translate-y-8 lg:translate-y-0"
+              >
+                <div className="2xl:max-w-[900px] xl:max-w-[700px] lg:max-w-[650px]">
+                  <Image
+                    src={mainImage.src}
+                    alt={mainImage.alt}
+                    width={mainImage.width}
+                    height={mainImage.height}
+                    className=""
+                  />
+                </div>
+              </motion.div>
+            )}
+
+            {/* Innovation Type - Custom Scaling */}
+            {isInnovation && (
+              <motion.div
+                style={{ y: robotY }}
+                className={`${layoutConfig.imageWidth} relative ${layoutConfig.imagePadding}`}
+              >
+                <div className="relative w-full">
+                  <img
+                    src={mainImage.src}
+                    alt={mainImage.alt}
+                    className="w-full 2xl:-mt-24 crisp-edges"
+                    style={{
+                      imageRendering: "pixelated",
+                      scale: 1.9,
+                    }}
+                  />
+                </div>
+              </motion.div>
+            )}
+
+            {/* Regular Image Container for Robot and other types */}
+            {!isInnovation && (
+              <motion.div
+                style={{ y: robotY }}
+                className={`${layoutConfig.imageWidth} relative flex justify-end`}
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                <div className="relative w-full 2xl:max-w lg:max-w-[600px] max-w-[500px]">
+                  {/* Show image for mobile on chip type, or always for robot type */}
+                  {isRobot && (
+                    <Image
+                      src={mainImage.src}
+                      alt={mainImage.alt}
+                      width={mainImage.width}
+                      height={mainImage.height}
+                      className="w-full"
+                    />
+                  )}
+
+                  {isChip && (
+                    <div className="block lg:hidden">
+                      <Image
+                        src={mainImage.src}
+                        alt={mainImage.alt}
+                        width={mainImage.width}
+                        height={mainImage.height}
+                        className="w-full"
+                      />
+                    </div>
+                  )}
+
+                  {/* Statistics Cards - Only for Robot Type */}
+                  {isRobot && heroData.stats && heroData.stats.length > 0 && (
+                    <>
+                      {heroData?.stats.map((stat, index) => (
+                        <div
+                          key={stat.id}
+                          style={{
+                            animation: "floatUpDown 11s ease-in-out infinite",
+                            animationDelay: `${index * 0.5}s`, // Stagger animation
+                          }}
+                          className={`font-poppins absolute xs:w-[180px] xs:h-[140px] w-[210px] h-[170px] 2xl:w-[240px] 2xl:h-[190px] 
+          ${
+            index === 0
+              ? "top-6 -right-6 lg:top-14 lg:-right-6"
+              : "bottom-0 left-0 2xl:bottom-40 2xl:-left-20"
+          } 
+          bg-white/40 rounded-[30px] shadow-[0_4px_60px_rgba(0,0,0,0.05)] backdrop-blur-[10px] px-9 py-4 flex flex-col`}
+                        >
+                          <p className="text-4xl 2xl:text-[50px] font-normal 2xl:mt-2 mb-2 text-black">
+                            {stat.percentage}
+                          </p>
+                          <p className="text-xs 2xl:text-[16px] mt-2 font-thin text-black/60 leading-snug">
+                            {stat.description}
+                            {index === 0 && (
+                              <span className="underline cursor-pointer ml-1">
+                                Learn More
+                              </span>
+                            )}
+                          </p>
+                        </div>
+                      ))}
+                    </>
+                  )}
+                </div>
+              </motion.div>
+            )}
+          </>
+        )}
+      </div>
+
+      {/* CSS Animation for Statistics Cards */}
+      {isRobot && (
+        <style jsx>{`
+          @keyframes floatUpDown {
+            0%,
+            100% {
+              transform: translateY(0px);
+            }
+            50% {
+              transform: translateY(-10px);
+            }
+          }
+        `}</style>
+      )}
+    </motion.section>
+  );
+};

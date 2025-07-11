@@ -61,7 +61,7 @@ export const Partners = ({ partners }) => {
       <div className="overflow-hidden will-change-transform relative z-10 px-4 sm:px-8 md:px-12 xl:px-[178px] mx-auto w-full">
         <motion.h2
           style={{ y: md }} // Changed from style={{ md }} to style={{ y: md }}
-          className="text-center py-10 text-3xl md:text-3xl 2xl:text-[60px] font-normal text-black mb-10 font-sora"
+          className="text-center py-10 text-3xl sm:text-4xl md:text-[41px] 2xl:text-[60px]  font-medium text-black leading-tight mb-10 font-sora"
         >
           Our Global <span className="font-extrabold">Partners</span>
         </motion.h2>

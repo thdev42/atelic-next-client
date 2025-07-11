@@ -89,6 +89,17 @@ import HeroSection from "@/components/HeroMain/HeroMain";
 import HomePage from "@/components/Parallax/main/Pages";
 import { Partners } from "@/components/Partners/Partners";
 import { Services } from "@/components/AboutAtelic/AboutAtelic";
+import { fetchHomePageData } from "@/lib/api/home";
+
+// export async function getServerSideProps() {
+//   const page = await fetchHomePageData();
+//   console.log(page, "PAGE");
+//   return {
+//     props: {
+//       sections: page,
+//     },
+//   };
+// }
 
 export default function Home() {
   return (

@@ -38,7 +38,7 @@ const NewsLetter = () => {
   // Enhanced parallax transforms with smoother reverse motion
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["20%", "-20%"]);
   const textY = useTransform(scrollYProgress, [0, 1], ["100%", "-200%"]);
-  const formY = useTransform(scrollYProgress, [0, 1], ["30%", "-50%"]);
+  const formY = useTransform(scrollYProgress, [0, 1], ["0%", "0%"]);
 
   // Enhanced form field animations with reverse parallax
   const rawFirstNameX = useTransform(
@@ -73,36 +73,12 @@ const NewsLetter = () => {
   );
 
   // Additional Y-axis transforms for more dynamic movement
-  const firstNameY = useTransform(
-    scrollYProgress,
-    [0, 0.3, 0.7, 1],
-    ["50px", "0px", "0px", "-50px"]
-  );
-  const lastNameY = useTransform(
-    scrollYProgress,
-    [0, 0.3, 0.7, 1],
-    ["-50px", "0px", "0px", "50px"]
-  );
-  const emailY = useTransform(
-    scrollYProgress,
-    [0, 0.4, 0.6, 1],
-    ["30px", "0px", "0px", "-30px"]
-  );
-  const phoneY = useTransform(
-    scrollYProgress,
-    [0, 0.4, 0.6, 1],
-    ["-30px", "0px", "0px", "30px"]
-  );
-  const industryY = useTransform(
-    scrollYProgress,
-    [0, 0.4, 0.6, 1],
-    ["40px", "0px", "0px", "-40px"]
-  );
-  const submitY = useTransform(
-    scrollYProgress,
-    [0, 0.4, 0.6, 1],
-    ["60px", "0px", "0px", "-60px"]
-  );
+  const firstNameY = useTransform(scrollYProgress, [0, 0.3], ["50px", "0px"]);
+  const lastNameY = useTransform(scrollYProgress, [0, 0.3], ["-50px", "0px"]);
+  const emailY = useTransform(scrollYProgress, [0, 0.4], ["30px", "0px"]);
+  const phoneY = useTransform(scrollYProgress, [0, 0.4], ["-30px", "0px"]);
+  const industryY = useTransform(scrollYProgress, [0, 0.4], ["40px", "0px"]);
+  const submitY = useTransform(scrollYProgress, [0, 0.4], ["60px", "0px"]);
 
   // Opacity transforms for fade effects
   const formOpacity = useTransform(
@@ -123,19 +99,6 @@ const NewsLetter = () => {
   const phoneX = useSpring(rawPhoneX, springConfig);
   const industryX = useSpring(rawIndustryX, springConfig);
   const submitX = useSpring(rawSubmitX, springConfig);
-
-  const industries = [
-    "Technology",
-    "Healthcare",
-    "Finance",
-    "Education",
-    "Manufacturing",
-    "Retail",
-    "Real Estate",
-    "Consulting",
-    "Marketing",
-    "Other",
-  ];
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -404,22 +367,32 @@ const NewsLetter = () => {
             </motion.div>
 
             {/* Submit Button */}
-            <motion.button
-              type="button"
-              onClick={handleSubmit}
-              // style={{
-              //   x: submitX,
-              //   y: submitY,
-              // }}
-              className="will-change-transform w-full bg-[#335F86] text-white font-semibold 2xl:px-6 2xl:h-[80px] 2xl:text-[22px] text-base px-5 py-5 rounded-[50px] focus:outline-none focus:ring-0"
+            <motion.div
+              className="will-change-transform space-y-5 mb-8"
+              style={{
+                x: industryX,
+                // y: industryY,
+              }}
               // initial={{ opacity: 0, y: 50 }}
               // animate={
               //   isFormInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }
               // }
+              // transition={{ duration: 0.3, delay: 0.3 }}
               whileTap={{ scale: 0.98 }}
+              // whileHover={{ scale: 1.02 }}
             >
-              Submit Now
-            </motion.button>
+              <button
+                type="button"
+                onClick={handleSubmit}
+                style={{
+                  x: submitX,
+                  y: submitY,
+                }}
+                className="will-change-transform w-full bg-[#335F86] text-white font-semibold 2xl:px-6 2xl:h-[80px] 2xl:text-[22px] text-base px-5 py-5 rounded-[50px]"
+              >
+                Submit Now
+              </button>
+            </motion.div>
           </div>
         </motion.div>
       </div>
