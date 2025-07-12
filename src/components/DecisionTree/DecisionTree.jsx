@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { SelectField } from "../SelectComp/SelectComp";
 import toast, { Toaster } from "react-hot-toast";
 
-export const DecisionTree = ({ onComplete }) => {
+export const DecisionTree = ({ onComplete, data }) => {
   const [formData, setFormData] = useState({
     industry: "",
     role: "",
@@ -38,10 +38,17 @@ export const DecisionTree = ({ onComplete }) => {
       <div className="px-4 sm:px-8 2xl:px-[178px] md:px-12 lg:px-[100px] mx-auto flex flex-col lg:flex-row justify-between gap-0">
         <div className="flex-1 flex flex-col justify-center items-center lg:items-start text-center lg:text-left mx-auto">
           <h2 className="2xl:text-[55px] text-3xl 2xl:leading-snug md:text-4xl font-light mb-4">
-            Find The Right{" "}
-            <span className="font-bold text-[#F02C2C]">AI Solution</span>
-            <br />
-            For Your Needs
+            {data?.headings?.map(({ id, text, color, breakAfter }, idx) => (
+              <span key={id || idx}>
+                <span
+                  className={color !== "default" ? "font-bold" : ""}
+                  style={color !== "default" ? { color } : {}}
+                >
+                  {text}
+                </span>
+                {breakAfter && <br />}
+              </span>
+            ))}
           </h2>
           <p className="text-base 2xl:text-[22px] font-light leading-normal text-white/60 max-w-[580px] mb-4">
             Use our smart decision tool to discover which AI technologies best

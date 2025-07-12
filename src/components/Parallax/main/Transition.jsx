@@ -6,7 +6,11 @@ import Section from "./Section";
 import Results from "@/components/DecisionTree/Results";
 import { useNav } from "@/context/NavContext";
 
-export default function AnimatedPageManager({ scrollYProgress, showHero }) {
+export default function AnimatedPageManager({
+  scrollYProgress,
+  showHero,
+  data,
+}) {
   const [showNext, setShowNext] = useState(false);
   const [direction, setDirection] = useState(1);
   const [formData, setFormData] = useState([]);
@@ -70,6 +74,7 @@ export default function AnimatedPageManager({ scrollYProgress, showHero }) {
               scrollYProgress={scrollYProgress}
               onComplete={handleComplete}
               formRef={formRef}
+              data={data}
             />
           </div>
         ) : (

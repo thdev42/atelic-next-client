@@ -10,10 +10,28 @@ import IBM from "../../../assets/IBM.png";
 import Microsoft from "../../../assets/Microsoft.png";
 import Nvidia from "../../../assets/Nvidia.png";
 import { useScroll, motion, useTransform } from "framer-motion";
+import { API_BASE_URL } from "@/config/config";
 
-export const Partners = ({ partners }) => {
-  const logos = [Aws, Google, IBM, Microsoft, Nvidia];
+export const formatHeading = (text) => {
+  if (!text) return null;
 
+  const words = text.trim().split(" ");
+  if (words.length === 0) return null;
+
+  const lastWord = words.pop();
+  const rest = words.join(" ");
+
+  return (
+    <>
+      {rest} <span className="font-extrabold">{lastWord}</span>
+    </>
+  );
+};
+
+export const Partners = ({ partners, data }) => {
+  const logos = data?.logos;
+  // const logos = [Aws, Google, IBM, Microsoft, Nvidia];
+  console.log(data, "partners");
   const container = useRef(null);
 
   const { scrollYProgress } = useScroll({
@@ -63,7 +81,7 @@ export const Partners = ({ partners }) => {
           style={{ y: md }} // Changed from style={{ md }} to style={{ y: md }}
           className="text-center py-10 text-3xl sm:text-4xl md:text-[41px] 2xl:text-[60px]  font-medium text-black leading-tight mb-10 font-sora"
         >
-          Our Global <span className="font-extrabold">Partners</span>
+          {formatHeading(data?.heading)}
         </motion.h2>
 
         <motion.div
@@ -75,19 +93,22 @@ export const Partners = ({ partners }) => {
             className="flex gap-8 animate-marquee whitespace-nowrap"
             style={{ y: sm, willChange: "transform" }}
           >
-            {[...logos, ...logos].map((logo, idx) => (
-              <motion.div
-                key={idx}
-                alt={`partner-${idx}`}
-                className="inline-flex items-center justify-center my-3 px-8 py-4 min-w-[190px] h-[115.39px] sm:min-w-[207px] sm:h-[135.39px] lg:min-w-[287px] lg:h-[165.39px] bg-[rgba(233,233,233,0.95)] backdrop-blur-sm border border-[rgba(0,0,0,0.18)] transition-all duration-300 hover:bg-white hover:shadow-[3px_4px_9.4px_1px_rgba(0,0,0,0.14)]"
-              >
-                <Image
-                  src={logo}
+            {Array.isArray(logos) &&
+              [...logos, ...logos]?.map((logo, idx) => (
+                <motion.div
+                  key={idx}
                   alt={`partner-${idx}`}
-                  className="h-[65px] w-auto object-contain"
-                />
-              </motion.div>
-            ))}
+                  className="inline-flex items-center justify-center my-3 px-8 py-4 min-w-[190px] h-[115.39px] sm:min-w-[207px] sm:h-[135.39px] lg:min-w-[287px] lg:h-[165.39px] bg-[rgba(233,233,233,0.95)] backdrop-blur-sm border border-[rgba(0,0,0,0.18)] transition-all duration-300 hover:bg-white hover:shadow-[3px_4px_9.4px_1px_rgba(0,0,0,0.14)]"
+                >
+                  <Image
+                    src={`${API_BASE_URL}${logo?.logo?.url}`}
+                    width={logo?.logo?.width}
+                    height={logo?.logo?.height}
+                    alt={`partner-${idx}`}
+                    className="h-[65px] w-auto object-contain"
+                  />
+                </motion.div>
+              ))}
           </motion.div>
         </motion.div>
       </div>

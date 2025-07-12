@@ -83,6 +83,7 @@ const HomePage = () => {
       <AnimatedPageManager
         scrollYProgress={scrollYProgress}
         showHero={() => {}}
+        data={sections}
       />
     </main>
   );

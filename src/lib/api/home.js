@@ -1,5 +1,4 @@
 import { API_BASE_URL } from "@/config/config";
-import axios from "axios";
 import QueryString from "qs";
 import { fetchWithSmartCache } from "../cache";
 
@@ -27,6 +26,40 @@ export const fetchHomePageData = async () => {
                 },
               },
             },
+            "shared.global-partners": {
+              populate: {
+                logos: {
+                  populate: "*",
+                },
+              },
+            },
+            "shared.ai-solution": {
+              populate: {
+                headings: {
+                  populate: "*",
+                },
+              },
+            },
+            "shared.solutions": {
+              populate: {
+                image: {
+                  populate: "*",
+                },
+              },
+            },
+            "shared.our-team": {
+              populate: {
+                heading: {
+                  populate: "*",
+                },
+                teamMembers: {
+                  populate: "*",
+                },
+              },
+            },
+            "shared.appointment": {
+              populate: "*",
+            },
           },
         },
       },
@@ -42,18 +75,43 @@ export const fetchHomePageData = async () => {
     key: "home",
     url,
     getUpdatedAt: (res) => {
-      const details = res?.data?.[0]?.section?.find(
-        (s) => s.__component === "shared.main-hero"
-      );
+      const sections = res?.data?.[0]?.section;
+      if (!Array.isArray(sections)) return res?.data?.[0]?.updatedAt;
 
-      if (!details || !Array.isArray(details)) return res?.data?.[0]?.updatedAt;
+      let latestDate = new Date(res?.data?.[0]?.updatedAt || 0); // page-level updatedAt
 
-      const latest = details.reduce((latestDate, item) => {
-        const updated = new Date(item.updatedAt);
-        return updated > latestDate ? updated : latestDate;
-      }, new Date(0));
-      console.log(latest.toISOString());
-      return latest.toISOString();
+      sections.forEach((section) => {
+        // Check nested arrays (deep components)
+        if (Array.isArray(section.details)) {
+          section.details.forEach((detail) => {
+            const updated = new Date(detail?.updatedAt || 0);
+            if (updated > latestDate) latestDate = updated;
+          });
+        }
+
+        if (Array.isArray(section.teamMembers)) {
+          section.teamMembers.forEach((member) => {
+            const updated = new Date(member?.updatedAt || 0);
+            if (updated > latestDate) latestDate = updated;
+          });
+        }
+
+        if (Array.isArray(section.headings)) {
+          section.headings.forEach((heading) => {
+            const updated = new Date(heading?.updatedAt || 0);
+            if (updated > latestDate) latestDate = updated;
+          });
+        }
+
+        if (Array.isArray(section.logos)) {
+          section.logos.forEach((logo) => {
+            const updated = new Date(logo?.updatedAt || 0);
+            if (updated > latestDate) latestDate = updated;
+          });
+        }
+      });
+
+      return latestDate.toISOString();
     },
   });
 };
