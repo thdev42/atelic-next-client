@@ -76,8 +76,8 @@ const solutionsData = [
   },
 ];
 
-const AgenticCard = ({ solution, onClose }) => {
-  const isOdd = solution.id % 2 === 1;
+const AgenticCard = ({ solution, onClose, index }) => {
+  const isOdd = index % 2 === 1;
   const slideDirection = isOdd
     ? "animate-slide-in-from-left"
     : "animate-slide-in-from-right";
@@ -89,10 +89,10 @@ const AgenticCard = ({ solution, onClose }) => {
       onClick={onClose}
     >
       <div
-        className={`w-[82px] h-[82px] rounded-full flex items-center justify-center text-white text-2xl font-light shadow-[0_0_0_8px_rgba(11,35,65,0.1)]`}
+        className={`w-[75px] h-[75px] rounded-full flex items-center justify-center flex-shrink-0 text-white text-2xl font-light shadow-[0_0_0_8px_rgba(11,35,65,0.1)]`}
         style={{ backgroundColor: solution.circleColor }}
       >
-        {String(solution.id).padStart(2, "0")}
+        {String(index + 1).padStart(2, "0")}
       </div>
       <div className="ml-6 text-left leading-loose">
         <h3 className="text-[18px] font-semibold text-black">
@@ -106,9 +106,13 @@ const AgenticCard = ({ solution, onClose }) => {
   );
 };
 
-const IceBerg = () => {
+const IceBerg = ({ sections }) => {
   const [activeCard, setActiveCard] = useState(null);
+  const solutionsData = Array?.isArray(sections?.details)
+    ? sections?.details
+    : [];
 
+  console.log(sections, "SECTIONS");
   const handleCircleClick = (id) => {
     setActiveCard(id);
   };
@@ -118,18 +122,22 @@ const IceBerg = () => {
   };
 
   // Dynamic circle renderer
-  const renderCircle = (solution) => {
+  const renderCircle = (solution, index) => {
     return (
-      <div key={solution.id} className={solution.position}>
-        {activeCard === solution.id ? (
+      <div key={index} className={solution.position}>
+        {activeCard === index ? (
           <div className="transition-all duration-500 ease-in-out scale-100">
-            <AgenticCard solution={solution} onClose={handleCardClose} />
+            <AgenticCard
+              index={index}
+              solution={solution}
+              onClose={handleCardClose}
+            />
           </div>
         ) : (
           <DashedCircle
             color={solution.dashColor}
-            number={String(solution.id).padStart(2, "0")}
-            onClick={() => handleCircleClick(solution.id)}
+            number={String(index + 1).padStart(2, "0")}
+            onClick={() => handleCircleClick(index)}
           />
         )}
       </div>
@@ -142,21 +150,25 @@ const IceBerg = () => {
         <div className="font-sora px-4 sm:px-6 md:px-8 lg:px-[100px] 2xl:px-[178px] mx-auto">
           <div className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 mb-12 sm:mb-16 lg:mb-20">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 xl:gap-12 items-start lg:items-center">
-              <div className="space-y-3">
-                <h2 className="text-3xl sm:text-4xl md:text-[41px] 2xl:text-6xl font-light text-black leading-tight">
-                  Our
-                </h2>
-                <h2 className="text-3xl sm:text-4xl md:text-[41px]  2xl:text-6xl font-light text-black leading-tight">
-                  <span className="font-bold">Solutions</span>
-                </h2>
-              </div>
+              {sections?.heading &&
+                (() => {
+                  const words = sections.heading.split(" ");
+                  return (
+                    <div className="space-y-3">
+                      <h2 className="text-3xl sm:text-4xl md:text-[41px] 2xl:text-6xl font-light text-black leading-tight">
+                        {words[0]}
+                      </h2>
+                      <h2 className="text-3xl sm:text-4xl md:text-[41px] 2xl:text-6xl font-light text-black leading-tight">
+                        <span className="font-bold">
+                          {words.slice(1).join(" ")}
+                        </span>
+                      </h2>
+                    </div>
+                  );
+                })()}
               <div>
                 <p className="2xl:text-[18px] lg:text-md text-gray-700 leading-relaxed mt-4 lg:mt-0">
-                  Atelic's vision is to create value within the API ecosystem by
-                  driving success & trust for our customers. We do this by
-                  providing education, problem solving and real business
-                  solutions, thus removing the complexity of AI. We are a SaaS2
-                  business, providing both ROI services and agentic AI software.
+                  {sections?.subHeading}
                 </p>
               </div>
             </div>
@@ -169,7 +181,9 @@ const IceBerg = () => {
           style={{ backgroundImage: `url(${IceBergBg.src})` }}
         >
           {/* Dynamic Circles - All rendered through one function */}
-          {solutionsData.map((solution) => renderCircle(solution))}
+          {solutionsData.map((solution, index) =>
+            renderCircle(solution, index)
+          )}
         </div>
       </section>
     </>

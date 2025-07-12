@@ -5,6 +5,8 @@ import React, { useEffect, useRef, useState } from "react";
 import separatorImg from "../../../assets/separator.png";
 import BenHowWork from "../../../assets/BenHowWork.png";
 import Image from "next/image";
+import { API_BASE_URL } from "@/config/config";
+import { formatHeading } from "../Partners/Partners";
 
 function CircleProgress({ percentage, label, description }) {
   const [dimensions, setDimensions] = useState({
@@ -169,68 +171,53 @@ function SeparatorImage() {
   );
 }
 
-const HowWeWork = () => {
+const HowWeWork = ({ sections }) => {
+  const servicesProgress = sections?.[0];
+  const servicesWork = sections?.[1];
+
+  console.log(servicesProgress, "SERVICES PROGRESS");
   return (
     <>
       <section className="bg-white max-w-[1920px] mx-auto w-full py-8 lg:py-12 xl:py-16 2xl:py-20 relative overflow-hidden">
         <div className="px-4 sm:px-6 md:px-8 lg:px-[100px] 2xl:px-[178px] mx-auto">
-          {/* Desktop Layout - Hidden on mobile/tablet */}
+          {/* Desktop Layout */}
           <div className="hidden lg:flex items-start justify-between gap-6 xl:gap-8 2xl:gap-12 h-full">
-            <div className="flex-1 max-w-[220px] lg:max-w-[240px] 2xl:max-w-[380px]">
-              <CircleProgress
-                percentage={30}
-                label="30%"
-                description="30% of GenAI projects will be abandoned after proof of concept by the end of 2025, due to poor data quality, inadequate risk controls, escalating costs or unclear business value"
-              />
-            </div>
-            <div className="flex-shrink-0">
-              <SeparatorImage />
-            </div>
-            <div className="flex-1 max-w-[220px] lg:max-w-[240px] 2xl:max-w-[380px]">
-              <CircleProgress
-                percentage={42}
-                label="42%"
-                description="42% of respondents don't fully understand the benefits of AI & struggle to identify use cases in the workplace"
-              />
-            </div>
-            <div className="flex-shrink-0">
-              <SeparatorImage />
-            </div>
-            <div className="flex-1 max-w-[220px] lg:max-w-[240px] 2xl:max-w-[380px]">
-              <CircleProgress
-                percentage={77}
-                label="77%"
-                description="77% of executives surveyed said that true benefits of AI will be recognized when built on trust"
-              />
-            </div>
+            {servicesProgress?.details?.map((item, index) => (
+              <React.Fragment key={item.id}>
+                <div className="flex-1 max-w-[220px] lg:max-w-[240px] 2xl:max-w-[380px]">
+                  <CircleProgress
+                    percentage={parseInt(item.percentage)}
+                    label={item.percentage}
+                    description={item.description}
+                  />
+                </div>
+                {index < servicesProgress.details.length - 1 && (
+                  <div className="flex-shrink-0">
+                    <SeparatorImage />
+                  </div>
+                )}
+              </React.Fragment>
+            ))}
           </div>
 
-          {/* Mobile/Tablet Layout */}
+          {/* Mobile Layout */}
           <div className="lg:hidden space-y-8">
-            <CircleProgress
-              percentage={30}
-              label="30%"
-              description="30% of GenAI projects will be abandoned after proof of concept by the end of 2025, due to poor data quality, inadequate risk controls, escalating costs or unclear business value"
-            />
-            <div className="flex justify-center">
-              <div className="w-full max-w-[200px] h-[1px] bg-gray-300"></div>
-            </div>
-            <CircleProgress
-              percentage={42}
-              label="42%"
-              description="42% of respondents don't fully understand the benefits of AI & struggle to identify use cases in the workplace"
-            />
-            <div className="flex justify-center">
-              <div className="w-full max-w-[200px] h-[1px] bg-gray-300"></div>
-            </div>
-            <CircleProgress
-              percentage={77}
-              label="77%"
-              description="77% of executives surveyed said that true benefits of AI will be recognized when built on trust"
-            />
+            {servicesProgress?.details?.map((item, index) => (
+              <React.Fragment key={item.id}>
+                <CircleProgress
+                  percentage={parseInt(item.percentage)}
+                  label={item.percentage}
+                  description={item.description}
+                />
+                {index < servicesProgress.details.length - 1 && (
+                  <div className="flex justify-center">
+                    <div className="w-full max-w-[200px] h-[1px] bg-gray-300"></div>
+                  </div>
+                )}
+              </React.Fragment>
+            ))}
           </div>
 
-          {/* Separator line */}
           <div className="w-full h-[1px] bg-black opacity-20 mt-12 lg:mt-16 xl:mt-20 2xl:mt-24" />
         </div>
       </section>
@@ -242,8 +229,8 @@ const HowWeWork = () => {
             {/* Left Column - Image (Absolute Positioned) */}
             <div className="flex justify-center 2xl:justify-start lg:relative lg:min-h-[600px] xl:min-h-[650px] 2xl:min-h-[695px]">
               <div className="relative lg:absolute lg:-left-8 xl:-left-12 2xl:-left-16 lg:top-0 lg:z-10 lg:w-[600px] xl:w-[650px] 2xl:w-[738px] lg:h-[600px] xl:h-[650px] 2xl:h-[695px]">
-                <Image
-                  src={BenHowWork}
+                <img
+                  src={`${API_BASE_URL}${servicesWork?.image?.url}`}
                   alt="AI Solutions Visualization - Digital iceberg showing visible AI solutions above and complex infrastructure below"
                   width={738}
                   height={695}
@@ -258,27 +245,22 @@ const HowWeWork = () => {
               {/* Heading with fade-in */}
               <div className="space-y-4">
                 <h2 className="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-light text-black -mt-2">
-                  How We <span className="font-bold">Work</span>
+                  {formatHeading(servicesWork?.heading)}
                 </h2>
 
                 <p className="lg:leading-loose 2xl:text-[26px] md:text-sm text-lg 2xl:leading-loose font-semibold">
-                  Without the right data, context & expertise, even the most
-                  advanced tools fail to deliver real business value...
+                  {servicesWork?.subHeading}
                 </p>
               </div>
 
               {/* Paragraph from left */}
               <p className="text-black 2xl:text-[18px] lg:text-xs lg:leading-loose font-normal 2xl:leading-loose">
-                "SaaS² flips the traditional model. Instead of just delivering
-                software, we provide pre-built Al agents & accelerators tailored
-                to specific industries. In the case of Atelic, we decided to
-                start with Energy, Financial Services, Healthcare, & the Public
-                Sector. But are quickly scaling to meet the challenges of other
-                verticals, including Healthcare, Travel, Real Estate & More..."
+                {servicesWork?.description}
               </p>
 
               {/* Button from left */}
               <button className="bg-[#335F86] hover:bg-slate-700 text-[16px] text-white px-9 2xl:w-[200px] py-3 rounded-[8px] font-light transition-colors duration-200">
+                {/* {servicesWork?.primaryButton} */}
                 Read More
               </button>
             </div>

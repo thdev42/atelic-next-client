@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { HeroPartners } from "../HeroScreens/HeroScreens";
 import { useBackground } from "@/context/BackgroundContext";
 
-const PartnersHero = () => {
+const PartnersHero = ({ sections }) => {
   const { setBackground, fixedNav, setFixedNav } = useBackground();
 
   useEffect(() => {
@@ -11,7 +11,7 @@ const PartnersHero = () => {
   }, []);
   return (
     <div>
-      <HeroPartners />
+      <HeroPartners data={sections} />
     </div>
   );
 };

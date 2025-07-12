@@ -11,6 +11,8 @@ import Emma from "../../../assets/Emma.jpg";
 import Marcus from "../../../assets/Marcus.jpg";
 import Julia from "../../../assets/Julia.jpg";
 import Ryan from "../../../assets/Ryan.jpg";
+import { formatHeading } from "../Partners/Partners";
+import { API_BASE_URL } from "@/config/config";
 const teamMembers = [
   {
     name: "Ben Owen",
@@ -49,12 +51,21 @@ const teamMembers = [
   },
 ];
 
-const OurTeam = () => {
+const OurTeam = ({ sections }) => {
+  const teamMembers = Array.isArray(sections?.teamMembers)
+    ? sections?.teamMembers
+    : [];
+
   return (
     <section className="font-sora relative bg-[#f3f0f1] text-black w-full max-w-[1920px] mx-auto overflow-hidden py-16">
       <div className="2xl:px-[178px] md:px-12 lg:px-[100px] mx-auto px-6 sm:px-10 gap-12">
         <h2 className="text-3xl sm:text-4xl xl:text-5xl 2xl:text-[60px] font-light text-center mb-16">
-          Our <span className="font-semibold">Team</span>
+          {sections?.heading?.map((word, index) => (
+            <span key={word.id} style={{ color: word.color }}>
+              {word.text}
+              {word.breakAfter ? <br /> : " "}
+            </span>
+          ))}
         </h2>
 
         <div className="space-y-24">
@@ -72,9 +83,9 @@ const OurTeam = () => {
                 } md:mx-auto`}
               >
                 <div className="relative w-full max-w-[614px] aspect-[614/582]">
-                  <Image
-                    src={member.image}
-                    alt={member.name}
+                  <img
+                    src={`${API_BASE_URL}${member?.image?.url}`}
+                    alt={member?.name}
                     fill
                     className="object-cover rounded-xl shadow-xl"
                   />
@@ -84,11 +95,11 @@ const OurTeam = () => {
               {/* Text */}
               <div className="w-full lg:w-1/2 text-center lg:text-left">
                 <h3 className="text-2xl md:text-3xl font-semibold text-gray-900">
-                  {member.name}
+                  {member?.name}
                 </h3>
-                <p className="text-sm text-gray-500 py-4">{member.title}</p>
+                <p className="text-sm text-gray-500 py-4">{member?.title}</p>
                 <p className="text-black/80 text-base xl:text-lg 2xl:text-[22px] mb-9  mx-auto lg:mx-0 2xl:leading-relaxed font-light">
-                  {member.description}
+                  {member?.description}
                 </p>
               </div>
             </div>

@@ -2,9 +2,28 @@ import Image from "next/image";
 import React from "react";
 import VisionImage from "../../../assets/Vision.png";
 import AtelicLogo from "../../../assets/AtelicLogoAbout.jpg"; // Replace with correct path
+import { API_BASE_URL } from "@/config/config";
+import { formatHeading } from "../Partners/Partners";
 // import MissionBG from "../../../assets/mission-waves.png"; // If you have a background SVG/pattern
 
-const Vision = () => {
+const Vision = ({ sections }) => {
+  console.log(sections, "Section");
+  const visionData = sections?.[0];
+  const missionData = sections?.[1];
+
+  console.log(missionData, "MISSION");
+
+  const VisionImage = visionData?.image?.url
+    ? visionData.image.url.startsWith("http")
+      ? visionData.image.url
+      : `${API_BASE_URL}${visionData.image.url}`
+    : null;
+  const MissionImage = missionData?.image?.url
+    ? missionData.image.url.startsWith("http")
+      ? missionData.image.url
+      : `${API_BASE_URL}${missionData.image.url}`
+    : null;
+
   return (
     <>
       {/* --- Vision Section --- */}
@@ -33,17 +52,17 @@ const Vision = () => {
           <div className="w-full lg:w-1/2 flex items-center justify-center py-8 px-4 sm:px-10 md:px-14 xl:px-20 text-center lg:text-left">
             <div className="w-full max-w-[600px]">
               <h2 className="text-3xl sm:text-4xl 2xl:text-[60px] font-light mb-6 2xl:mb-14">
-                Our <span className="font-semibold">Vision</span>
+                {/* Our <span className="font-semibold">Vision</span> */}
+                {formatHeading(visionData?.heading)}
               </h2>
               <p className="text-black/60 2xl:text-[22px] font-light text-base xl:text-lg mb-7 2xl:leading-relaxed">
-                Our Vision is to create value within the AI ecosystem by
-                building success & trust with our customers.
+                {visionData?.subHeading}
               </p>
-              <p className="text-black/60 2xl:text-[22px] font-light text-base xl:text-lg mb-6 2xl:leading-relaxed">
+              {/* <p className="text-black/60 2xl:text-[22px] font-light text-base xl:text-lg mb-6 2xl:leading-relaxed">
                 Our purpose in this third wave of computing, is to be the best
                 Enterprise grade AI solution provider in the world, focused on
                 real customer ROI.
-              </p>
+              </p> */}
               <button className="bg-[#F21B2A] hover:bg-red-700 transition text-white px-11 py-3 rounded-md text-sm sm:text-base">
                 Read More
               </button>
@@ -59,14 +78,13 @@ const Vision = () => {
           <div className="w-full lg:w-1/2 text-center lg:text-left relative z-10">
             <div className="relative z-10 lg:space-y-12">
               <h2 className="text-3xl sm:text-4xl xl:text-5xl 2xl:text-[60px] font-light mb-9">
-                Our <span className="font-semibold">Mission</span>
+                {formatHeading(missionData?.heading)}
               </h2>
               <p className="text-black/60 text-base xl:text-lg 2xl:text-[22px] mb-9  mx-auto lg:mx-0 2xl:leading-normal font-light ">
-                Our Mission is to simplify the complexity of AI, by providing
-                real business solutions that help problem solve & drive ROI.
+                {missionData?.subHeading}
               </p>
               <button className="bg-[#F21B2A] hover:bg-red-700 transition text-white px-11 py-3 rounded-md text-sm sm:text-base">
-                Read More
+                {missionData?.primaryButton}
               </button>
             </div>
 
@@ -95,7 +113,7 @@ const Vision = () => {
           <div className="w-full lg:w-1/2 relative h-[300px] flex justify-center lg:justify-start mt-10 lg:mt-0">
             <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 w-full max-w-[700px] h-full px-6 sm:px-10 lg:px-0">
               <Image
-                src={AtelicLogo}
+                src={MissionImage}
                 alt="Atelic Logo"
                 fill
                 className="lg:object-cover object-none mix-blend-multiply"

@@ -7,7 +7,7 @@ export const fetchUpdatedAt = async (slug) => {
     {
       fields: ["updatedAt"],
       filters: {
-        slug: { $eq: "home" },
+        slug: { $eq: slug },
       },
     },
     { encodeValuesOnly: true }

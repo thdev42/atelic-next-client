@@ -5,7 +5,26 @@ import Iceberg from "../../../assets/servicesiceberg.png";
 import AOS from "aos";
 // import "aos/dist/aos.css";
 import { Parallax } from "react-scroll-parallax";
-export default function ServicesSection() {
+import { API_BASE_URL } from "@/config/config";
+const formatHeading = (text) => {
+  if (!text) return null;
+
+  const words = text.trim().split(" ");
+  if (words.length === 0) return null;
+
+  const lastWord = words.pop();
+  const rest = words.join(" ");
+
+  return (
+    <>
+      {rest}
+      <br />
+      <span className="font-bold">{lastWord}</span>
+    </>
+  );
+};
+export default function ServicesSection({ data }) {
+  console.log(data, "DATA");
   // useEffect(() => {
   //   AOS.init({
   //     duration: 1000,
@@ -29,10 +48,7 @@ export default function ServicesSection() {
                 // data-aos="fade-up"
               >
                 <h2 className="text-4xl sm:text-5xl 2xl:text-[60px] lg:text-6xl font-light text-black">
-                  Our
-                </h2>
-                <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-black -mt-2">
-                  Solutions
+                  {formatHeading(data?.heading)}
                 </h2>
               </div>
 
@@ -42,11 +58,7 @@ export default function ServicesSection() {
                 // data-aos="fade-right"
                 // data-aos-delay="200"
               >
-                Atelic's vision is to create value within the AI ecosystem by
-                driving success & trust for our customers. We do this by
-                providing education, problem solving and real business
-                solutions, thus removing the complexity of AI. We are a SaaS2
-                business, providing both ROI services and agentic AI software.
+                {data?.subHeading}
               </p>
 
               {/* Button from left */}
@@ -55,7 +67,7 @@ export default function ServicesSection() {
                 // data-aos="fade-right"
                 // data-aos-delay="400"
               >
-                Read More
+                {data?.primaryButton}
               </button>
             </div>
           </Parallax>
@@ -69,8 +81,8 @@ export default function ServicesSection() {
                 style={{ backgroundColor: "#D9D9D9" }}
               >
                 <div className="relative">
-                  <Image
-                    src={Iceberg}
+                  <img
+                    src={`${API_BASE_URL}${data?.image?.url}`}
                     alt="AI Solutions Visualization - Digital iceberg showing visible AI solutions above and complex infrastructure below"
                     width={1024}
                     height={1024}

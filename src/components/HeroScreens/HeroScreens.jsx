@@ -276,7 +276,75 @@ export const HeroComponent2 = ({ sectionY, backgroundY, robotY, textY }) => (
     `}</style>
   </motion.section>
 );
+export const AnimatedHeading = ({
+  headings = [],
+  textY = 0,
+  className = "",
+}) => {
+  return (
+    <h1 className={`font-sora leading-tight ${className}`}>
+      {headings.map((heading, index) => {
+        const isAnimated = index !== 0;
+        const commonStyle = {
+          color: heading.color,
+        };
 
+        return isAnimated ? (
+          <motion.span
+            key={heading.id}
+            style={{ ...commonStyle, y: textY }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 * index }}
+            className="font-bold"
+          >
+            {" " + heading.text}
+          </motion.span>
+        ) : (
+          <span key={heading.id} style={commonStyle} className="font-light">
+            {heading.text}
+          </span>
+        );
+      })}
+    </h1>
+  );
+};
+export const AnimatedHeadingBoldLast = ({
+  headings = [],
+  textY = 0,
+  className = "",
+}) => {
+  // No heading? Don't render
+  if (!headings?.length) return null;
+
+  const heading = headings[0]; // assuming only one object as per your API
+  const words = heading.text.trim().split(" "); // split text into words
+  const color = heading.color || "white";
+
+  return (
+    <h1 className={`font-sora leading-tight ${className}`}>
+      {words.map((word, index) => {
+        const isLast = index === words.length - 1;
+
+        return (
+          <motion.span
+            key={index}
+            style={{
+              color,
+              fontWeight: isLast ? 700 : 300,
+              y: textY,
+            }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 * index }}
+          >
+            {word + " "}
+          </motion.span>
+        );
+      })}
+    </h1>
+  );
+};
 // Hero Component 3 - Innovation Focus
 export const HeroComponent3 = ({ sectionY, backgroundY, robotY, textY }) => (
   <section className="max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 relative min-h-[600px] lg:min-h-[700px] 2xl:min-h-[800px] select-none overflow-x-clip overflow-visible">
@@ -411,187 +479,223 @@ export const HeroComponent4 = ({ sectionY, backgroundY, robotY, textY }) => (
   </>
 );
 
-export const HeroServices = ({ sectionY, backgroundY, robotY, textY }) => (
-  <motion.section
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ duration: 0.5 }}
-    className="bg-[#00172B] max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 relative overflow-hidden select-none"
-  >
-    <div className="px-4 sm:px-8 md:px-12 lg:px-[100px] 2xl:px-[178px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-8 h-full">
-      {/* Text Content Section */}
-      <div className="w-full lg:min-w-[40%]">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="space-y-5 2xl:space-y-10"
-        >
-          <h1 className="text-4xl sm:text-5xl lg:text-4xl 2xl:text-[60px] font-sora font-normal text-white leading-tight">
-            Our{" "}
-            <motion.span
+export const HeroServices = ({
+  sectionY,
+  backgroundY,
+  robotY,
+  textY,
+  sections,
+}) => {
+  console.log(sections);
+  return (
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="bg-[#00172B] max-w-[1920px] mx-auto w-full py-10 lg:py-5 2xl:py-5 relative overflow-hidden select-none"
+    >
+      <div className="px-4 sm:px-8 md:px-12 lg:px-[100px] 2xl:px-[178px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-8 h-full">
+        {/* Text Content Section */}
+        <div className="w-full lg:min-w-[40%]">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="space-y-5 2xl:space-y-10"
+          >
+            <AnimatedHeadingBoldLast
+              headings={sections?.headings}
+              textY={textY}
+              className="text-4xl sm:text-5xl lg:text-4xl 2xl:text-[60px]"
+            />
+
+            <motion.p
+              className="text-base sm:text-lg lg:text-md 2xl:text-[20px] font-thin font-sora leading-relaxed 2xl:leading-loose text-white mt-6 2xl:mt-14"
+              initial={{ opacity: 0, y: 20 }}
               style={{ y: textY }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+            >
+              {sections?.subHeading}
+            </motion.p>
+
+            <motion.div
+              className="font-poppins mt-8 flex gap-4 flex-wrap"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 * 0.3 }}
-              className={"font-bold text-white"}
+              transition={{ duration: 0.5, delay: 0.7 }}
             >
-              Services
-            </motion.span>
-          </h1>
-
-          <motion.p
-            className="text-base sm:text-lg lg:text-md 2xl:text-[20px] font-thin font-sora leading-relaxed 2xl:leading-loose text-white mt-6 2xl:mt-14"
-            initial={{ opacity: 0, y: 20 }}
-            style={{ y: textY }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-          >
-            We craft AI Agent specialists designed to blend in & support your
-            organisation through solving complex workflows at a fraction of the
-            time & cost.
-          </motion.p>
-
-          <motion.div
-            className="font-poppins mt-8 flex gap-4 flex-wrap"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.7 }}
-          >
-            <motion.button
-              className="text-xs sm:text-sm lg:text-xs xl:text-sm 2xl:text-[16px] bg-[#335F86] text-white px-6 py-4 rounded-md"
-              whileHover={{ scale: 1.03, backgroundColor: "#082c4e" }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ duration: 0.2 }}
-            >
-              Book a Consultation
-            </motion.button>
-            <motion.button
-              className="text-xs sm:text-sm lg:text-xs xl:text-sm 2xl:text-[16px] bg-[#E5EAF0] text-[#0A3C66] px-6 py-4 rounded-md"
-              whileHover={{ scale: 1.03, backgroundColor: "#d3dbe3" }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ duration: 0.2 }}
-            >
-              Explore Our Approach
-            </motion.button>
+              <motion.button
+                className="text-xs sm:text-sm lg:text-xs xl:text-sm 2xl:text-[16px] bg-[#335F86] text-white px-6 py-4 rounded-md"
+                whileHover={{ scale: 1.03, backgroundColor: "#082c4e" }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.2 }}
+              >
+                {sections?.primaryButton}
+              </motion.button>
+              <motion.button
+                className="text-xs sm:text-sm lg:text-xs xl:text-sm 2xl:text-[16px] bg-[#E5EAF0] text-[#0A3C66] px-6 py-4 rounded-md"
+                whileHover={{ scale: 1.03, backgroundColor: "#d3dbe3" }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.2 }}
+              >
+                {sections?.secondaryButton}
+              </motion.button>
+            </motion.div>
           </motion.div>
-        </motion.div>
-      </div>
-
-      {/* Image Section */}
-      <motion.div
-        style={{ y: robotY }}
-        className="mix-blend-lighten"
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, delay: 0.4 }}
-      >
-        <div className="relative 2xl:w-[1100px] lg:w-[900px] mix-blend-lighten scale-125 mt-12 sm:mt-0 sm:scale-100">
-          <Image
-            // width={1104}
-            // height={736}
-            src={ServicesRobot}
-            alt="AI Robot"
-            className="object-center"
-          />
         </div>
-      </motion.div>
-    </div>
-  </motion.section>
-);
-export const HeroAboutUs = ({ sectionY, backgroundY, robotY, textY }) => (
-  <motion.section
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ duration: 0.5 }}
-    className="bg-[#E9E9E9] text-black  2xl:max-h-[750px] max-w-[1920px] mx-auto w-full relative overflow-hidden select-none"
-  >
-    <div className="px-4 sm:px-8 md:px-12 lg:px-[100px] 2xl:px-[178px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-8">
-      {/* Text Content Section */}
-      <div className="w-full lg:min-w-[50%]">
+
+        {/* Image Section */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="space-y-5 2xl:space-y-10"
+          style={{ y: robotY }}
+          className="mix-blend-lighten"
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <h1 className="text-4xl font-light sm:text-5xl lg:text-4xl 2xl:text-[60px] font-sora  leading-tight">
-            About
-            <motion.span
-              style={{ y: textY }}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 * 0.3 }}
-              className={"font-bold text-[#F21B2A]"}
-            >
-              {" "}
-              Us
-            </motion.span>
-          </h1>
-
-          <motion.p
-            className="text-base 2xl:max-w-lg max-w-md sm:text-lg lg:text-md 2xl:text-[20px] font-light font-sora leading-relaxed 2xl:leading-loose text-black mt-6 2xl:mt-14"
-            initial={{ opacity: 0, y: 20 }}
-            style={{ y: textY }}
-            animate={{ opacity: 0.75, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-          >
-            Create value within the AI ecosystem by driving success & trust for
-            our customers.
-          </motion.p>
-
-          <motion.div
-            className="font-poppins mt-8 flex gap-4 flex-wrap"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.7 }}
-          >
-            <motion.button
-              className="text-xs sm:text-sm lg:text-xs xl:text-sm 2xl:text-[16px] bg-[#F21B2A] text-white px-6 py-4 rounded-md"
-              whileHover={{ scale: 1.03, backgroundColor: "#082c4e" }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ duration: 0.2 }}
-            >
-              Book a Consultation
-            </motion.button>
-          </motion.div>
-        </motion.div>
-      </div>
-
-      {/* Image Section */}
-      <motion.div
-        style={{ y: robotY }}
-        // className="mix-blend-lighten"
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, delay: 0.4 }}
-      >
-        <div className="relative 2xl:w-[872px] sm:mt-0 md:w-[600px] sm:scale-100">
-          <Image
-            // width={1104}
-            // height={736}
-            src={AboutUsHero}
-            alt="AI Robot"
-            className="object-center"
-          />
-          <div
-            style={{ animation: "floatUpDown 11s ease-in-out infinite" }}
-            className="font-poppins absolute w-[200px] h-[160px] 2xl:w-[280px] 2xl:h-[218px] bottom-40 left-0 lg:bottom-30 lg:left-0 md:bottom-20 md:left-20 2xl:bottom-56 2xl:left-28 bg-white/40 rounded-[30px] shadow-[0_4px_60px_rgba(0,0,0,0.05)] backdrop-blur-[10px] px-9 py-4 flex flex-col"
-          >
-            <p className="text-3xl 2xl:text-[50px] font-thin text-black 2xl:mt-4 2xl:mb-4">
-              77<span className="">%</span>
-            </p>
-            <p className="text-xs 2xl:text-[16px] mt-2 font-thin text-black/80 leading-snug">
-              of executives surveyed said that true benefits of AI will be
-              recognized when built on trust
-            </p>
+          <div className="relative 2xl:w-[1100px] lg:w-[900px] mix-blend-lighten scale-125 mt-12 sm:mt-0 sm:scale-100">
+            <img
+              // width={1104}
+              // height={736}
+              src={`${API_BASE_URL}${sections?.image?.url}`}
+              alt="AI Robot"
+              className="object-center"
+            />
           </div>
+        </motion.div>
+      </div>
+    </motion.section>
+  );
+};
+
+export const HeroAboutUs = ({
+  sectionY,
+  backgroundY,
+  robotY,
+  textY,
+  sections,
+}) => {
+  return (
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="bg-[#E9E9E9] text-black  2xl:max-h-[750px] max-w-[1920px] mx-auto w-full relative overflow-hidden select-none"
+    >
+      <div className="px-4 sm:px-8 md:px-12 lg:px-[100px] 2xl:px-[178px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-8">
+        {/* Text Content Section */}
+        <div className="w-full lg:min-w-[50%]">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="space-y-5 2xl:space-y-10"
+          >
+            <AnimatedHeading
+              headings={sections?.headings}
+              textY={textY}
+              className="text-4xl sm:text-5xl lg:text-4xl 2xl:text-[60px]"
+            />
+
+            <motion.p
+              className="text-base 2xl:max-w-lg max-w-md sm:text-lg lg:text-md 2xl:text-[20px] font-light font-sora leading-relaxed 2xl:leading-loose text-black mt-6 2xl:mt-14"
+              initial={{ opacity: 0, y: 20 }}
+              style={{ y: textY }}
+              animate={{ opacity: 0.75, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+            >
+              {sections?.subHeading}
+            </motion.p>
+
+            <motion.div
+              className="font-poppins mt-8 flex gap-4 flex-wrap"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
+            >
+              <motion.button
+                className="text-xs sm:text-sm lg:text-xs xl:text-sm 2xl:text-[16px] bg-[#F21B2A] text-white px-6 py-4 rounded-md"
+                whileHover={{ scale: 1.03, backgroundColor: "#082c4e" }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.2 }}
+              >
+                {sections?.primaryButton}
+              </motion.button>
+            </motion.div>
+          </motion.div>
         </div>
-      </motion.div>
-    </div>
-  </motion.section>
-);
-export const HeroPartners = ({ sectionY, backgroundY, robotY, textY }) => (
+
+        {/* Image Section */}
+        <motion.div
+          style={{ y: robotY }}
+          // className="mix-blend-lighten"
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <div className="relative 2xl:w-[872px] sm:mt-0 md:w-[600px] sm:scale-100">
+            <img
+              width={`${sections?.image?.width}`}
+              height={`${sections?.image?.height}`}
+              src={`${API_BASE_URL}${sections?.image?.url}`}
+              alt="AI Robot"
+              className="object-center"
+            />
+            <div
+              style={{ animation: "floatUpDown 11s ease-in-out infinite" }}
+              className="font-poppins absolute w-[200px] h-[160px] 2xl:w-[280px] 2xl:h-[218px] bottom-40 left-0 lg:bottom-30 lg:left-0 md:bottom-20 md:left-20 2xl:bottom-56 2xl:left-28 bg-white/40 rounded-[30px] shadow-[0_4px_60px_rgba(0,0,0,0.05)] backdrop-blur-[10px] px-9 py-4 flex flex-col"
+            >
+              <p className="text-3xl 2xl:text-[50px] font-thin text-black 2xl:mt-4 2xl:mb-4">
+                {sections?.stats?.percentage}
+              </p>
+              <p className="text-xs 2xl:text-[16px] mt-2 font-thin text-black/80 leading-snug">
+                {sections?.stats?.description}
+              </p>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </motion.section>
+  );
+};
+export const AnimatedHeadingPartners = ({ headings = [], textY = 0 }) => {
+  return (
+    <h1 className="text-4xl font-light sm:text-5xl lg:text-4xl 2xl:text-[60px] font-raleway leading-tight">
+      {headings.map((heading, index) => {
+        const isLast = index === headings.length - 1;
+        const color = heading.color?.trim() || "black";
+
+        const SpanComponent = (
+          <motion.span
+            key={heading.id}
+            style={{ y: textY }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 * index }}
+            className={`font-bold`}
+            style={{ color }}
+          >
+            {heading.text}
+          </motion.span>
+        );
+
+        return (
+          <span key={heading.id}>
+            {index === 0 ? heading.text : SpanComponent}
+            {heading.breakAfter ? <br /> : " "}
+          </span>
+        );
+      })}
+    </h1>
+  );
+};
+export const HeroPartners = ({
+  sectionY,
+  backgroundY,
+  robotY,
+  textY,
+  data,
+}) => (
   <motion.section
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
@@ -607,19 +711,7 @@ export const HeroPartners = ({ sectionY, backgroundY, robotY, textY }) => (
           transition={{ duration: 0.6, delay: 0.2 }}
           className="space-y-5  2xl:space-y-10"
         >
-          <h1 className="text-4xl font-light sm:text-5xl lg:text-4xl 2xl:text-[60px] font-raleway leading-tight">
-            Our
-            <motion.span
-              style={{ y: textY }}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 * 0.3 }}
-              className={"font-bold text-[#F21B2A]"}
-            >
-              {" "}
-              Partners
-            </motion.span>
-          </h1>
+          <AnimatedHeadingPartners headings={data?.headings} />
 
           <motion.p
             className="text-base 2xl:max-w-2xl  max-w-2xl sm:text-lg lg:text-md 2xl:text-[20px] font-medium font-raleway leading-relaxed 2xl:leading-loose text-black mt-6 2xl:mt-14"
@@ -628,9 +720,7 @@ export const HeroPartners = ({ sectionY, backgroundY, robotY, textY }) => (
             animate={{ opacity: 0.75, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
           >
-            We are certified global partners of Multi-Model Systems and can work
-            across multiple Software Development Kits. Meaning that whatever
-            your chosen Tech-Stack is, we can work within your parameters.
+            {data?.subHeading}
           </motion.p>
 
           <motion.div
@@ -645,7 +735,7 @@ export const HeroPartners = ({ sectionY, backgroundY, robotY, textY }) => (
               whileTap={{ scale: 0.98 }}
               transition={{ duration: 0.2 }}
             >
-              Explore Now
+              {data?.primaryButton}
             </motion.button>
           </motion.div>
         </motion.div>
@@ -685,8 +775,8 @@ export const HeroPartners = ({ sectionY, backgroundY, robotY, textY }) => (
           <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-white to-transparent z-10 pointer-events-none" />
 
           {/* Actual Image */}
-          <Image
-            src={PartnersHero}
+          <img
+            src={`${API_BASE_URL}${data?.image?.url}`}
             alt="AI Robot"
             className="object-cover w-full h-auto relative z-0"
           />

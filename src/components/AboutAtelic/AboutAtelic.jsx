@@ -17,49 +17,51 @@ import AlvinImage from "../../../assets/AlvinHeib.png";
 import BenImage from "../../../assets/Ben.png";
 import RomanImage from "../../../assets/Roman.png";
 import SimonImage from "../../../assets/Simon.png";
+import { API_BASE_URL } from "@/config/config";
 
-const teamMembers = [
-  {
-    name: "David Chalklen",
-    title: "CTO",
-    description:
-      "David has over 20 years experience in AI/Tech. He's held Senior and Executive roles at Microsoft, Publicis, WPP, and has been a senior tech/strategy led for startups.",
-    image: davidImage,
-  },
-  {
-    name: "Alvin Heib",
-    title: "CPO",
-    description:
-      "As Chief Product Officer, and one of the co-founders of Atelic, Alvin brings 15+ years of experience in AI, cloud, data, product strategy, and technical execution.",
-    image: AlvinImage,
-  },
-  {
-    name: "Ben Owen",
-    title: "Founder & CEO",
-    description:
-      "The Atelic Founder & CEO has over 15 years' experience in enterprise digital/analytics, with a focus on AI adoption & transformation strategy.",
-    image: BenImage,
-  },
-  {
-    name: "Romain Picard",
-    title: "Investor & Advisor",
-    description:
-      "Romain is an expert investor. Founder & ex-key CCO of Dataiku. Now active as a strategic advisor & investor for AI startups.",
-    image: RomanImage,
-  },
-  {
-    name: "Simon Williams",
-    title: "Advisor",
-    description:
-      "Advisor to AI Founders. Simon has led Sales and GTM for top AI platforms, and helped scale multiple AI startups with a strategic network & vision.",
-    image: SimonImage,
-  },
-];
+// const teamMembers = [
+//   {
+//     name: "David Chalklen",
+//     title: "CTO",
+//     description:
+//       "David has over 20 years experience in AI/Tech. He's held Senior and Executive roles at Microsoft, Publicis, WPP, and has been a senior tech/strategy led for startups.",
+//     image: davidImage,
+//   },
+//   {
+//     name: "Alvin Heib",
+//     title: "CPO",
+//     description:
+//       "As Chief Product Officer, and one of the co-founders of Atelic, Alvin brings 15+ years of experience in AI, cloud, data, product strategy, and technical execution.",
+//     image: AlvinImage,
+//   },
+//   {
+//     name: "Ben Owen",
+//     title: "Founder & CEO",
+//     description:
+//       "The Atelic Founder & CEO has over 15 years' experience in enterprise digital/analytics, with a focus on AI adoption & transformation strategy.",
+//     image: BenImage,
+//   },
+//   {
+//     name: "Romain Picard",
+//     title: "Investor & Advisor",
+//     description:
+//       "Romain is an expert investor. Founder & ex-key CCO of Dataiku. Now active as a strategic advisor & investor for AI startups.",
+//     image: RomanImage,
+//   },
+//   {
+//     name: "Simon Williams",
+//     title: "Advisor",
+//     description:
+//       "Advisor to AI Founders. Simon has led Sales and GTM for top AI platforms, and helped scale multiple AI startups with a strategic network & vision.",
+//     image: SimonImage,
+//   },
+// ];
 
 // A new, dedicated component for each card's animation logic (from first code)
 const AnimatedTeamCard = ({
   member,
   index,
+  teamMembers,
   scrollYProgress,
   getCardClasses,
   getImageClasses,
@@ -67,7 +69,7 @@ const AnimatedTeamCard = ({
   getDescriptionClasses,
   getLearnMoreButtonClasses,
 }) => {
-  const totalMembers = teamMembers.length;
+  const totalMembers = teamMembers?.length;
 
   // Define the segment of the scroll progress that this card will react to.
   // We add a slight overlap for a smoother effect.
@@ -82,24 +84,33 @@ const AnimatedTeamCard = ({
     <motion.div style={{ y, opacity }} className={getCardClasses()}>
       <div className={getImageClasses()}>
         <Image
-          src={member.image}
-          alt={member.name}
+          src={`${API_BASE_URL}${member?.image?.url}`}
+          alt={member?.name}
+          width={member?.image?.width}
+          height={member?.image?.height}
           className="object-cover w-full h-full"
         />
       </div>
       <div className="mt-6 flex-1 mb-4">
-        <h3 className={getTitleClasses()}>{member.name}</h3>
+        <h3 className={getTitleClasses()}>{member?.name}</h3>
         <p className="text-[#ED254E] font-semibold mb-4 text-lg group-hover:text-white">
-          {member.title}
+          {member?.title}
         </p>
-        <p className={getDescriptionClasses()}>{member.description}</p>
+        <p className={getDescriptionClasses()}>{member?.description}</p>
       </div>
-      <button className={getLearnMoreButtonClasses()}>Learn More</button>
+      <button className={getLearnMoreButtonClasses()}>
+        {member?.primaryButton}
+      </button>
     </motion.div>
   );
 };
 
-const AboutAtelic = () => {
+const AboutAtelic = ({ data }) => {
+  console.log(data, "Team Members");
+
+  const teamMembers = Array.isArray(data?.teamMembers) ? data.teamMembers : [];
+
+  // console.log(Array?.isArray(team) && team);
   const sectionRef = useRef(null);
   const [screenSize, setScreenSize] = useState("2xl");
   const [isMobile, setIsMobile] = useState(false);
@@ -183,12 +194,12 @@ const AboutAtelic = () => {
   });
 
   // Navigation functions (from second code)
-  const totalSlides = Math.ceil(teamMembers.length / membersPerSlide);
+  const totalSlides = Math.ceil(teamMembers?.length / membersPerSlide);
 
   const getCurrentSlideMembers = () => {
     const startIndex = currentSlide * membersPerSlide;
     const endIndex = startIndex + membersPerSlide;
-    return teamMembers.slice(startIndex, endIndex);
+    return teamMembers?.slice(startIndex, endIndex);
   };
 
   const handlePrevious = () => {
@@ -366,18 +377,19 @@ const AboutAtelic = () => {
               className="2xl:text-[60px] text-3xl md:text-4xl font-semibold whitespace-nowrap"
               data-aos="fade-right"
             >
-              About <span className="text-[#ED254E]">Atelic</span>
+              {data?.heading?.map((part) => (
+                <span key={part.id} style={{ color: part.color }}>
+                  {part.text}
+                  {part.breakAfter ? <br /> : " "}
+                </span>
+              ))}
             </h2>
             <p
               className="2xl:text-[22px] text-gray-600 mt-4 md:mt-0 max-w-3xl"
               data-aos="fade-left"
               data-aos-delay="200"
             >
-              Founded by a team of seasoned AI, cloud, and data experts, Atelic
-              AI was created to cut through the noise and hype of generic AI
-              solutions. We exist to deliver true business value through
-              context-aware, ROI-driven implementations that solve real-world
-              problems — not just pilot experiments.
+              {data?.subHeading}
             </p>
           </div>
 
@@ -422,8 +434,10 @@ const AboutAtelic = () => {
                   >
                     <div className="flex-shrink-0 rounded-full overflow-hidden border-[5px] border-white transition-all duration-500 group-hover:border-opacity-80 group-hover:shadow-2xl w-[190px] h-[190px]">
                       <Image
-                        src={member.image}
-                        alt={member.name}
+                        src={`${API_BASE_URL}${member?.image?.url}`}
+                        alt={member?.name}
+                        width={member?.image?.width}
+                        height={member?.image?.height}
                         className="object-cover w-full h-full"
                       />
                     </div>
@@ -497,7 +511,12 @@ const AboutAtelic = () => {
           <div className="md:flex justify-between items-start pt-10 md:space-x-10 2xl:mb-16 mb-12">
             <div className="relative">
               <h2 className="2xl:text-[60px] text-3xl md:text-4xl font-semibold whitespace-nowrap">
-                About <span className="text-[#ED254E]">Atelic</span>
+                {data?.heading?.map((part) => (
+                  <span key={part.id} style={{ color: part.color }}>
+                    {part.text}
+                    {part.breakAfter ? <br /> : " "}
+                  </span>
+                ))}
               </h2>
 
               {/* Navigation Arrows below heading - Desktop only */}
@@ -567,11 +586,7 @@ const AboutAtelic = () => {
             </div>
 
             <p className="2xl:text-[22px] text-gray-600 mt-4 md:mt-0 max-w-3xl">
-              Founded by a team of seasoned AI, cloud, and data experts, Atelic
-              AI was created to cut through the noise and hype of generic AI
-              solutions. We exist to deliver true business value through
-              context-aware, ROI-driven implementations that solve real-world
-              problems — not just pilot experiments.
+              {data?.subHeading}
             </p>
           </div>
 
@@ -613,6 +628,7 @@ const AboutAtelic = () => {
                     <AnimatedTeamCard
                       key={`${currentSlide}-${member.name}`}
                       member={member}
+                      teamMembers={teamMembers}
                       index={index}
                       scrollYProgress={scrollYProgress}
                       getCardClasses={getCardClasses}

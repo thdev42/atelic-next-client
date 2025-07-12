@@ -1,7 +1,8 @@
 import React from "react";
 import AtelicLogo from "../../../assets/Atelic-logo.png"; // ✅ Your import
+import { formatHeading } from "../Partners/Partners";
 
-const Investors = () => {
+const Investors = ({ sections }) => {
   return (
     <section className="font-sora relative bg-[#E8E8E8] w-full max-w-[1920px] mx-auto overflow-hidden py-16">
       <div className="2xl:px-[178px] md:px-12 lg:px-[100px] mx-auto px-6 sm:px-10">
@@ -27,13 +28,13 @@ const Investors = () => {
           "
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold mb-4 z-10">
-            Our <span className="font-bold">Investors</span>
+            {formatHeading(sections?.heading)}
           </h2>
           <p className="text-base sm:text-lg lg:text-xl mb-3 z-10">
-            Please Contact Us For Our Latest Investors Guide
+            {sections?.subHeading}
           </p>
           <p className="text-base sm:text-lg lg:text-xl z-10">
-            Email: <span className="font-bold">Info@Atelic.Ai</span>
+            Email: <span className="font-bold">{sections?.email}</span>
           </p>
 
           {/* ✅ Actual Logo at bottom-right */}

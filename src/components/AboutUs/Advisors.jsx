@@ -14,6 +14,7 @@ import Victor from "../../../assets/Victor.jpg";
 import InstagramIcon from "../../../assets/Insta.png";
 import LinkedinIcon from "../../../assets/Linkedin.png";
 import XIcon from "../../../assets/Twitter.png";
+import { API_BASE_URL } from "@/config/config";
 
 const iconMap = {
   instagram: InstagramIcon,
@@ -72,7 +73,11 @@ const advisors = [
   },
 ];
 
-export const Advisors = () => {
+export const Advisors = ({ sections }) => {
+  const advisors = Array.isArray(sections?.teamMembers)
+    ? sections?.teamMembers
+    : [];
+
   return (
     <section className="font-sora relative bg-[#E8E8E8] text-black w-full max-w-[1920px] mx-auto overflow-hidden py-16">
       <div className="2xl:px-[178px] md:px-12 lg:px-[100px] mx-auto px-6 sm:px-10 text-left">
@@ -92,19 +97,19 @@ export const Advisors = () => {
               className="w-full max-w-[496px] h-[319px]  bg-[#E8E8E8] border border-black/50 hover:border-white hover:shadow-md rounded-[29px] p-6 mx-auto flex flex-col items-start justify-start text-left transition-all duration-100"
             >
               <div className="w-full flex items-center justify-between mb-4">
-                <Image
-                  src={advisor.image}
-                  alt={advisor.name}
+                <img
+                  src={`${API_BASE_URL}${advisor?.image?.url}`}
+                  alt={advisor?.name}
                   width={48}
                   height={48}
                   className="rounded-full object-cover"
                 />
                 <div className="flex gap-3">
-                  {advisor.socials.map((social, i) => (
+                  {advisor.icons.map((social, i) => (
                     <a className="cursor-pointer">
-                      <Image
+                      <img
                         key={i}
-                        src={iconMap[social]}
+                        src={`${API_BASE_URL}${social?.logo?.url}`}
                         alt={social}
                         width={26}
                         height={26}

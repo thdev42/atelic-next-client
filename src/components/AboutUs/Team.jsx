@@ -1,75 +1,21 @@
 import Image from "next/image";
 import React from "react";
-import Alvin from "../../../assets/Alvin.png";
-import Ben from "../../../assets/Ben (2).png";
-import Romain from "../../../assets/Romain.png";
-import Emma from "../../../assets/Emma.jpg";
-import Marcus from "../../../assets/Marcus.jpg";
-import Julia from "../../../assets/Julia.jpg";
-import Ryan from "../../../assets/Ryan.jpg";
+// import Alvin from "../../../assets/Alvin.png";
+// import Ben from "../../../assets/Ben (2).png";
+// import Romain from "../../../assets/Romain.png";
+// import Emma from "../../../assets/Emma.jpg";
+// import Marcus from "../../../assets/Marcus.jpg";
+// import Julia from "../../../assets/Julia.jpg";
+// import Ryan from "../../../assets/Ryan.jpg";
 
 import LinkedinLogo from "../../../assets/AboutLinkedin.png";
-const teamMembers = [
-  {
-    name: "David Marshall",
-    title: "SVP of Marketing",
-    description:
-      "David has over 20 years’ experience in AdTech, MarTech Sales with companies such as Yahoo!, Publicis, WPP...",
-    img: "/images/david.jpg",
-    linkedin: true,
-  },
-  {
-    name: "Alvin Heib",
-    title: "CPO",
-    description: "Same description as David...",
-    img: Alvin,
-    linkedin: true,
-  },
-  {
-    name: "Ben Owen",
-    title: "Founder & CEO",
-    description: "Same description as David...",
-    img: Ben,
-    linkedin: true,
-  },
-  {
-    name: "Romain Picard",
-    title: "Investor & Advisor",
-    description: "Same description as David...",
-    img: Romain,
-    linkedin: true,
-  },
-  {
-    name: "Emma Collins",
-    title: "COO",
-    description: "Same description as David...",
-    img: Emma,
-    linkedin: true,
-  },
-  {
-    name: "Marcus Reid",
-    title: "CMO",
-    description: "Same description as David...",
-    img: Marcus,
-    linkedin: true,
-  },
-  {
-    name: "Julia Bennett",
-    title: "Head of Design",
-    description: "Same description as David...",
-    img: Julia,
-    linkedin: true,
-  },
-  {
-    name: "Ryan Blake",
-    title: "Lead Software Engineer",
-    description: "Same description as David...",
-    img: Ryan,
-    linkedin: true,
-  },
-];
+import { API_BASE_URL } from "@/config/config";
 
-export default function TeamSection() {
+export default function TeamSection({ sections }) {
+  const teamMembers = Array.isArray(sections?.teamMembers)
+    ? sections?.teamMembers
+    : [];
+
   return (
     <section className="w-full bg-[#fdfdfd] text-black font-sora">
       <div className="2xl:px-[178px] md:px-12 lg:px-[100px] mx-auto px-6 sm:px-10 pb-9">
@@ -77,16 +23,17 @@ export default function TeamSection() {
         <div className="flex flex-col-reverse lg:flex-row items-center lg:items-start justify-between gap-6 mb-16">
           {/* Left: Paragraph */}
           <p className="text-gray-700 max-w-3xl text-base leading-relaxed text-left lg:text-left">
-            Founded by a team of seasoned AI, cloud, and data experts, Atelic AI
-            was created to cut through the noise and hype of generic AI
-            solutions. <em>We exist to deliver true business value</em> through
-            context-aware, ROI-driven implementations that solve real-world
-            problems — not just pilot experiments.
+            {sections?.subHeading}
           </p>
 
           {/* Right: Heading */}
           <h2 className="text-4xl lg:text-5xl font-bold whitespace-nowrap text-right lg:text-right">
-            Team <span className="text-black">Atelic</span>
+            {sections?.heading?.map((word, index) => (
+              <span key={word.id} style={{ color: word.color }}>
+                {word.text}
+                {word.breakAfter ? <br /> : " "}
+              </span>
+            ))}
           </h2>
         </div>
 
@@ -101,8 +48,8 @@ export default function TeamSection() {
                 {/* Front */}
                 <div className="flip-front absolute w-full h-full bg-[#E2E2E2] p-6 shadow-md text-center flex flex-col justify-center items-center">
                   <div className="w-20 h-20 rounded-full overflow-hidden mb-4">
-                    <Image
-                      src={member.img}
+                    <img
+                      src={`${API_BASE_URL}${member?.image?.url}`}
                       alt={member.name}
                       width={80}
                       height={80}
@@ -113,16 +60,18 @@ export default function TeamSection() {
                     {member.name}
                   </h3>
                   <p className="text-sm text-gray-600">{member.title}</p>
-                  {member.linkedin && (
-                    <div className="absolute top-4 right-4 z-20">
-                      <Image
-                        src={LinkedinLogo}
-                        alt="LinkedIn"
-                        width={42}
-                        height={42}
-                      />
-                    </div>
-                  )}
+                  {member.icons &&
+                    member?.icons?.map((social, key) => (
+                      <div className="absolute top-4 right-4 z-20">
+                        <Image
+                          key={key}
+                          src={`${API_BASE_URL}${social?.logo?.url}`}
+                          alt="LinkedIn"
+                          width={42}
+                          height={42}
+                        />
+                      </div>
+                    ))}
                 </div>
 
                 {/* Back */}
