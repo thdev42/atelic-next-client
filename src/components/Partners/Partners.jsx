@@ -29,7 +29,7 @@ export const formatHeading = (text) => {
 };
 
 export const Partners = ({ partners, data }) => {
-  const logos = data?.logos;
+  const logos = Array?.isArray(data?.logos) ? data?.logos : [];
   // const logos = [Aws, Google, IBM, Microsoft, Nvidia];
   console.log(data, "partners");
   const container = useRef(null);

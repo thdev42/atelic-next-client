@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import Aws from "../../../assets/Aws1.png";
 import googlecloud from "../../../assets/googlecloud.png";
@@ -7,20 +9,20 @@ import Azure from "../../../assets/Azure.png";
 import { formatHeading } from "../Partners/Partners";
 import { API_BASE_URL } from "@/config/config";
 
-const tabs = [
-  {
-    name: "Agility & DevOps",
-    tools: [googlecloud, openstack, VmWare, Aws, Azure],
-  },
-  {
-    name: "Cloud & Virtualisation",
-    tools: [VmWare, openstack, Aws, Azure, googlecloud],
-  },
-  {
-    name: "Big Data & AI",
-    tools: [openstack, googlecloud, Aws, Azure, VmWare],
-  },
-];
+// const tabs = [
+//   {
+//     name: "Agility & DevOps",
+//     tools: [googlecloud, openstack, VmWare, Aws, Azure],
+//   },
+//   {
+//     name: "Cloud & Virtualisation",
+//     tools: [VmWare, openstack, Aws, Azure, googlecloud],
+//   },
+//   {
+//     name: "Big Data & AI",
+//     tools: [openstack, googlecloud, Aws, Azure, VmWare],
+//   },
+// ];
 
 const Specialism = ({ sections }) => {
   const [activeTab, setActiveTab] = useState(1);
@@ -59,7 +61,7 @@ const Specialism = ({ sections }) => {
         </div>
 
         <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 justify-items-center">
-          {tabs[activeTab].tools.map((tool, i) => (
+          {tabs[activeTab]?.tools?.map((tool, i) => (
             <div
               key={i}
               className="w-[120px] h-[120px] sm:w-[140px] sm:h-[140px] lg:w-[160px] lg:h-[160px] 2xl:w-[180px] 2xl:h-[180px] rounded-full bg-white shadow-[2px_2px_9.9px_-1px_#00000021] flex items-center justify-center"
