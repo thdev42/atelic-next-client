@@ -55,41 +55,13 @@ export default function AnimatedPageManager({
   return (
     <div className="relative min-h-screen">
       <AnimatePresence custom={direction} mode="popLayout">
-        {!showNext ? (
-          <div
-            key="form"
-            // custom={direction}
-            // variants={variants}
-            // initial="initial"
-            // animate="animate"
-            // exit="exit"
-            // transition={{ duration: 0.6, ease: "easeInOut" }}
-            // onAnimationComplete={() => {
-            //   if (direction === -1 && formRef.current) {
-            //     formRef.current.scrollIntoView({ behavior: "smooth" });
-            //   }
-            // }}
-          >
-            <Section
-              scrollYProgress={scrollYProgress}
-              onComplete={handleComplete}
-              formRef={formRef}
-              data={data}
-            />
-          </div>
-        ) : (
-          <motion.div
-            key="result"
-            custom={direction}
-            variants={variants}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            transition={{ duration: 0.6, ease: "easeInOut" }}
-          >
-            <Results data={formData} onBack={handleBack} />
-          </motion.div>
-        )}
+        <div key="form">
+          <Section
+            scrollYProgress={scrollYProgress}
+            formRef={formRef}
+            data={data}
+          />
+        </div>
       </AnimatePresence>
     </div>
   );

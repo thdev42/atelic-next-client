@@ -7,8 +7,9 @@ import {
   useSpring,
 } from "framer-motion";
 import AppointmentBg from "../../../assets/Appointmentbg.png";
+import { formatHeading } from "../Partners/Partners";
 
-const NewsLetter = () => {
+const NewsLetter = ({ sections }) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -190,8 +191,7 @@ const NewsLetter = () => {
           }
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          Sign up for our
-          <span className="font-bold"> Newsletter</span>
+          {formatHeading(sections?.heading)}
         </motion.h1>
 
         <motion.div

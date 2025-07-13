@@ -3,8 +3,10 @@
 import React, { useState } from "react";
 import { SelectField } from "../SelectComp/SelectComp";
 import toast, { Toaster } from "react-hot-toast";
+import { useRouter } from "next/router";
 
 export const DecisionTree = ({ onComplete, data }) => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     industry: "",
     role: "",
@@ -29,7 +31,12 @@ export const DecisionTree = ({ onComplete, data }) => {
       return;
     }
 
-    onComplete(formData);
+    router.push({
+      pathname: "/dt",
+      query: formData,
+    });
+
+    // onComplete(formData);
   };
 
   return (

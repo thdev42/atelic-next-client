@@ -14,13 +14,14 @@ import IceBerg from "@/components/Services/IceBerg";
 import OurSolutions from "@/components/Services/OurSolutions";
 import { RedefiningSuccess } from "@/components/Services/RedefiningSuccess";
 import { useBackground } from "@/context/BackgroundContext";
+import Loader from "@/components/Loader/Loader";
 
 const Services = () => {
   const container = useRef();
   const [sections, setSections] = useState([]);
 
   const { setBackground, setIsDark } = useBackground();
-  const { setLoading, setIsCached, setDataFetched } = useLoader();
+  const { setLoading, setIsCached, setDataFetched, dataFetched } = useLoader();
 
   setBackground("#00172B");
   setIsDark(true);
@@ -69,6 +70,7 @@ const Services = () => {
       if (cached?.content?.data?.[0]?.section) {
         setSections(cached.content.data?.[0].section);
         setIsCached(true);
+        setDataFetched(true);
       }
     }
 
@@ -90,7 +92,9 @@ const Services = () => {
   );
 
   const iceberg = sections?.find((sec) => sec?.__component === "shared.sols2");
-
+  if (!dataFetched) {
+    return <Loader />;
+  }
   return (
     <section ref={container}>
       <HeroServices sections={hero} />

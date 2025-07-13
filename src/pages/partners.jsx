@@ -13,12 +13,13 @@ import { Partners } from "@/components/Partners/Partners";
 import Differentiation from "@/components/PartnersSection/Differentiation";
 import PartnersHero from "@/components/PartnersSection/PartnersHero";
 import Specialism from "@/components/PartnersSection/Specialism";
+import Loader from "@/components/Loader/Loader";
 
 const partners = () => {
   const container = useRef();
   const [sections, setSections] = useState([]);
 
-  const { setLoading, setIsCached, setDataFetched } = useLoader();
+  const { setLoading, setIsCached, setDataFetched, dataFetched } = useLoader();
 
   let cached = null;
 
@@ -82,7 +83,9 @@ const partners = () => {
   const specialism = sections?.find(
     (sec) => sec?.__component === "shared.partners-speciality"
   );
-
+  if (!dataFetched) {
+    return <Loader />;
+  }
   return (
     <div ref={container}>
       <PartnersHero sections={hero} />

@@ -2,8 +2,10 @@ import React, { useEffect } from "react";
 import { HeroNews } from "../HeroScreens/HeroScreens";
 import { useBackground } from "@/context/BackgroundContext";
 
-const NewsHero = () => {
+const NewsHero = ({ sections }) => {
   const { setBackground, fixedNav, setFixedNav } = useBackground();
+
+  console.log(sections, "SECTIONS");
 
   useEffect(() => {
     setBackground("#E9F7FF");
@@ -11,7 +13,7 @@ const NewsHero = () => {
   }, []);
   return (
     <div>
-      <HeroNews />
+      <HeroNews data={sections} />
     </div>
   );
 };

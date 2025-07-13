@@ -282,7 +282,7 @@ export const AnimatedHeading = ({
   className = "",
 }) => {
   return (
-    <h1 className={`font-sora leading-tight ${className}`}>
+    <h1 className={`${className}`}>
       {headings.map((heading, index) => {
         const isAnimated = index !== 0;
         const commonStyle = {
@@ -322,7 +322,7 @@ export const AnimatedHeadingBoldLast = ({
   const color = heading.color || "white";
 
   return (
-    <h1 className={`font-sora leading-tight ${className}`}>
+    <h1 className={` ${className}`}>
       {words.map((word, index) => {
         const isLast = index === words.length - 1;
 
@@ -506,7 +506,7 @@ export const HeroServices = ({
             <AnimatedHeadingBoldLast
               headings={sections?.headings}
               textY={textY}
-              className="text-4xl sm:text-5xl lg:text-4xl 2xl:text-[60px]"
+              className="font-sora leading-tight text-4xl sm:text-5xl lg:text-4xl 2xl:text-[60px]"
             />
 
             <motion.p
@@ -594,7 +594,7 @@ export const HeroAboutUs = ({
             <AnimatedHeading
               headings={sections?.headings}
               textY={textY}
-              className="text-4xl sm:text-5xl lg:text-4xl 2xl:text-[60px]"
+              className="font-sora leading-tight text-4xl sm:text-5xl lg:text-4xl 2xl:text-[60px]"
             />
 
             <motion.p
@@ -785,23 +785,28 @@ export const HeroPartners = ({
     </div>
   </motion.section>
 );
-export const HeroNews = ({ sectionY, backgroundY, robotY, textY }) => (
-  <motion.section
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ duration: 0.5 }}
-    className=" text-black max-w-[1920px] mx-auto w-full relative overflow-hidden select-none"
-  >
-    <div className="px-4 sm:px-8 md:px-12 lg:px-[100px] 2xl:px-[178px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-8">
-      {/* Text Content Section */}
-      <div className="w-full z-50 pt-48 lg:min-w-[50%]">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="space-y-5  2xl:space-y-10"
-        >
-          <h1 className="text-4xl font-light sm:text-5xl lg:text-4xl 2xl:text-[60px] font-raleway leading-tight">
+export const HeroNews = ({ sectionY, backgroundY, robotY, textY, data }) => {
+  return (
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className=" text-black max-w-[1920px] mx-auto w-full relative overflow-hidden select-none"
+    >
+      <div className="px-4 sm:px-8 md:px-12 lg:px-[100px] 2xl:px-[178px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-8">
+        {/* Text Content Section */}
+        <div className="w-full z-50 pt-48 lg:min-w-[50%]">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="space-y-5  2xl:space-y-10"
+          >
+            <AnimatedHeading
+              headings={data?.headings}
+              className="text-4xl font-light sm:text-5xl lg:text-4xl 2xl:text-[60px] font-raleway leading-tight"
+            />
+            {/* <h1 className="text-4xl font-light sm:text-5xl lg:text-4xl 2xl:text-[60px] font-raleway leading-tight">
             Our
             <motion.span
               style={{ y: textY }}
@@ -813,47 +818,45 @@ export const HeroNews = ({ sectionY, backgroundY, robotY, textY }) => (
               {" "}
               News
             </motion.span>
-          </h1>
+          </h1> */}
 
-          <motion.p
-            className="text-base 2xl:max-w-2xl  max-w-2xl sm:text-lg lg:text-md 2xl:text-[20px] font-medium font-raleway leading-relaxed 2xl:leading-loose text-black mt-6 2xl:mt-14"
-            initial={{ opacity: 0, y: 20 }}
-            style={{ y: textY }}
-            animate={{ opacity: 0.75, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-          >
-            Discover the latest breakthroughs, product updates, and AI trends
-            shaping the future. Stay connected with Atelic as we lead the
-            evolution of intelligent technology.
-          </motion.p>
-
-          <motion.div
-            className="font-raleway mt-8 flex gap-4 flex-wrap"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.7 }}
-          >
-            <motion.button
-              className="text-xs sm:text-sm lg:text-xs xl:text-sm 2xl:text-[16px] bg-[#F21B2A] text-white px-6 2xl:px-14 py-4 rounded-md"
-              whileHover={{ scale: 1.03, backgroundColor: "#082c4e" }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ duration: 0.2 }}
+            <motion.p
+              className="text-base 2xl:max-w-2xl  max-w-2xl sm:text-lg lg:text-md 2xl:text-[20px] font-medium font-raleway leading-relaxed 2xl:leading-loose text-black mt-6 2xl:mt-14"
+              initial={{ opacity: 0, y: 20 }}
+              style={{ y: textY }}
+              animate={{ opacity: 0.75, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
             >
-              Explore Now
-            </motion.button>
-          </motion.div>
-        </motion.div>
-      </div>
+              {data?.subHeading}
+            </motion.p>
 
-      {/* Image Section */}
-      <motion.div
-        style={{ y: robotY }}
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, delay: 0.4 }}
-      >
-        <div
-          className="
+            <motion.div
+              className="font-raleway mt-8 flex gap-4 flex-wrap"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
+            >
+              <motion.button
+                className="text-xs sm:text-sm lg:text-xs xl:text-sm 2xl:text-[16px] bg-[#F21B2A] text-white px-6 2xl:px-14 py-4 rounded-md"
+                whileHover={{ scale: 1.03, backgroundColor: "#082c4e" }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.2 }}
+              >
+                Explore Now
+              </motion.button>
+            </motion.div>
+          </motion.div>
+        </div>
+
+        {/* Image Section */}
+        <motion.div
+          style={{ y: robotY }}
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <div
+            className="
    
     relative
     w-full
@@ -873,24 +876,25 @@ export const HeroNews = ({ sectionY, backgroundY, robotY, textY }) => (
     md:scale-100
     2xl:scale-100
   "
-        >
-          {/* 🔼 Top Gradient (existing) */}
-          <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-white to-transparent z-10 pointer-events-none hidden md:block" />
+          >
+            {/* 🔼 Top Gradient (existing) */}
+            <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-white to-transparent z-10 pointer-events-none hidden md:block" />
 
-          {/* 🔼 Left Gradient (new) */}
-          <div className="absolute top-0 left-0 h-full w-1/5 bg-gradient-to-r from-[#E9F7FF] to-transparent z-10 pointer-events-none" />
+            {/* 🔼 Left Gradient (new) */}
+            <div className="absolute top-0 left-0 h-full w-1/5 bg-gradient-to-r from-[#E9F7FF] to-transparent z-10 pointer-events-none" />
 
-          {/* 🖼️ Actual Image */}
-          <Image
-            src={NewsHero}
-            alt="AI Robot"
-            className="object-cover w-full h-auto relative z-0"
-          />
-        </div>
-      </motion.div>
-    </div>
-  </motion.section>
-);
+            {/* 🖼️ Actual Image */}
+            <Image
+              src={NewsHero}
+              alt="AI Robot"
+              className="object-cover w-full h-auto relative z-0"
+            />
+          </div>
+        </motion.div>
+      </div>
+    </motion.section>
+  );
+};
 const parseHeadlines = (headliness) => {
   if (!headliness)
     return ["Simplifying AI.", "Building Trust.", "Delivering ROI."];
@@ -961,14 +965,14 @@ export const HeroDynamic = ({
       "max-w-[1920px] mx-auto w-full 2xl:py-5 relative overflow-hidden select-none";
 
     if (isInnovation) {
-      return `${baseStyles} min-h-[600px] lg:min-h-[700px] 2xl:min-h-[800px] overflow-x-clip overflow-visible`;
+      return `${baseStyles} lg:min-h-[700px] 2xl:min-h-[800px] overflow-x-clip overflow-visible`;
     }
 
     if (isChip) {
-      return `${baseStyles} min-h-[600px] lg:h-[650px] 2xl:h-[730px]`;
+      return `${baseStyles}  lg:h-[650px] 2xl:h-[730px]`;
     }
 
-    return `${baseStyles} min-h-[600px] lg:min-h-[700px] 2xl:min-h-[800px]`;
+    return `${baseStyles}  lg:min-h-[700px] 2xl:min-h-[800px]`;
   };
 
   const getTextColor = () => {
@@ -1031,7 +1035,8 @@ export const HeroDynamic = ({
       return {
         textWidth: "w-full lg:w-3/5 2xl:w-2/3",
         imageWidth: "w-full lg:w-2/5 2xl:w-1/2",
-        textPadding: "px-4 sm:px-8 md:px-12 xl:px-[178px]",
+        textPadding:
+          "px-4 lg:pt-36 sm:px-8 md:px-12 lg:px-[120px] 2xl:px-[178px]",
         imagePadding: "px-4 sm:px-8 md:px-12 lg:px-0 lg:mr-28",
         containerPadding: "",
       };
@@ -1042,7 +1047,7 @@ export const HeroDynamic = ({
       imageWidth: "w-full",
       textPadding: "",
       imagePadding: "",
-      containerPadding: "px-4 sm:px-8 md:px-12 xl:px-[178px]",
+      containerPadding: "px-4 sm:px-8 md:px-12 lg:px-[120px] 2xl:px-[178px]",
     };
   };
 
@@ -1157,7 +1162,7 @@ export const HeroDynamic = ({
                 style={{ y: robotY }}
                 className="hidden lg:block absolute right-0 top-20 z-10 -translate-x-2 sm:translate-x-0 md:translate-x-4 lg:translate-x-8 xl:translate-x-12 2xl:translate-x-16 translate-y-4 sm:translate-y-6 md:translate-y-8 lg:translate-y-0"
               >
-                <div className="2xl:max-w-[900px] xl:max-w-[700px] lg:max-w-[650px]">
+                <div className="sm:block hidden 2xl:max-w-[900px] xl:max-w-[700px] lg:max-w-[650px]">
                   <Image
                     src={mainImage.src}
                     alt={mainImage.alt}
@@ -1175,7 +1180,7 @@ export const HeroDynamic = ({
                 style={{ y: robotY }}
                 className={`${layoutConfig.imageWidth} relative ${layoutConfig.imagePadding}`}
               >
-                <div className="relative w-full">
+                <div className="hidden lg:block relative w-full">
                   <img
                     src={mainImage.src}
                     alt={mainImage.alt}
@@ -1198,7 +1203,7 @@ export const HeroDynamic = ({
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                <div className="relative w-full 2xl:max-w lg:max-w-[600px] max-w-[500px]">
+                <div className="hidden lg:block relative w-full 2xl:max-w lg:max-w-[600px] max-w-[500px]">
                   {/* Show image for mobile on chip type, or always for robot type */}
                   {isRobot && (
                     <Image
@@ -1211,7 +1216,7 @@ export const HeroDynamic = ({
                   )}
 
                   {isChip && (
-                    <div className="block lg:hidden">
+                    <div className="block lg:hidden ">
                       <Image
                         src={mainImage.src}
                         alt={mainImage.alt}

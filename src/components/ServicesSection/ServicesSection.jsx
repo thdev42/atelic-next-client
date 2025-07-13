@@ -41,10 +41,19 @@ export default function ServicesSection({ data }) {
           {/* Left Column - Content */}
           <Parallax speed={20}>
             {" "}
-            <div className="space-y-14">
+            <div className="space-y-14 relative">
+              {/* Mobile background image - only visible on mobile */}
+              <div
+                className="sm:hidden absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+                style={{
+                  backgroundImage: `url(${API_BASE_URL}${data?.image?.url})`,
+                  zIndex: -1,
+                }}
+              ></div>
+
               {/* Heading with fade-in */}
               <div
-                className="space-y-4"
+                className="space-y-4 relative z-10"
                 // data-aos="fade-up"
               >
                 <h2 className="text-4xl sm:text-5xl 2xl:text-[60px] lg:text-6xl font-light text-black">
@@ -54,7 +63,7 @@ export default function ServicesSection({ data }) {
 
               {/* Paragraph from left */}
               <p
-                className="text-black text-base 2xl:text-[22px] font-light sm:text-lg 2xl:leading-9"
+                className="text-black text-base 2xl:text-[22px] font-light sm:text-lg 2xl:leading-9 relative z-10"
                 // data-aos="fade-right"
                 // data-aos-delay="200"
               >
@@ -63,7 +72,7 @@ export default function ServicesSection({ data }) {
 
               {/* Button from left */}
               <button
-                className="bg-[#335F86] hover:bg-slate-700 text-[16px] text-white px-9 2xl:w-[200px] py-3 rounded-[8px] font-light transition-colors duration-200"
+                className="bg-[#335F86] hover:bg-slate-700 text-[16px] text-white px-9 2xl:w-[200px] py-3 rounded-[8px] font-light transition-colors duration-200 relative z-10"
                 // data-aos="fade-right"
                 // data-aos-delay="400"
               >
@@ -74,7 +83,7 @@ export default function ServicesSection({ data }) {
 
           {/* Right Column - Image from right */}
           {/* <Parallax speed={30} translateX={["150px", "0px"]}> */}
-          <div className="flex justify-center lg:justify-end">
+          <div className=" sm:flex hidden justify-center lg:justify-end">
             <div className="relative">
               <div
                 className="relative p-8 aspect-square flex items-center justify-center"

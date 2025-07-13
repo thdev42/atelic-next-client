@@ -10,6 +10,7 @@ export const BackgroundProvider = ({ children }) => {
   const [isShowNav, setIsShowNav] = useState(true);
   const [isDark, setIsDark] = useState(false);
   const [fixedNav, setFixedNav] = useState(false);
+
   const updateSlideProgress = useCallback((progress) => {
     setSlideProgress(progress);
   }, []);

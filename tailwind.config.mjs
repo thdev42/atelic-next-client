@@ -78,6 +78,7 @@ export default {
         "6md": { max: "1603px" },
         "5md": { max: "1311px" },
         "4md": { max: "1103px" },
+        "3md": { min: "1020px" },
       },
     },
   },

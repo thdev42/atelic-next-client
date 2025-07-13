@@ -118,16 +118,16 @@ const HeroSection = ({ scrollYSProgress, section }) => {
   return (
     <motion.section
       ref={sectionRef}
-      style={{ y: isMobile ? 0 : sectionY, willChange: "transform" }}
+      // style={{ y: isMobile ? 0 : sectionY, willChange: "transform" }}
       className={`overflow-y-visible ${
         isMobile ? "relative" : "sticky top-0"
-      } max-w-[1920px]  mx-auto w-full py-10 lg:py-5 2xl:py-5 transition-all duration-1000 ease-in-out z-0`}
+      } max-w-[1920px]  mx-auto w-full  2xl:py-5 transition-all duration-1000 ease-in-out z-0`}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
       {/* Vertical Numbers */}
-      <div className=" font-poppins hidden xl:flex flex-col gap-4 2xl:ml-20 xl:ml-10 ml-0 items-center absolute left-0 top-1/2 -translate-y-1/2 z-20">
+      <div className=" font-poppins hidden lg:flex flex-col gap-4 2xl:ml-20 xl:ml-10 ml-10 items-center absolute left-0 lg:top-1/3 xl:top-1/2 top-1/3 -translate-y-1/2 z-20">
         {heroDataArray.map((_, idx) => (
           <div
             key={idx}
@@ -181,7 +181,7 @@ const HeroSection = ({ scrollYSProgress, section }) => {
       )}
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
+      <div className="absolute lg:hidden bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
         {heroDataArray.map((_, idx) => (
           <div
             key={idx}

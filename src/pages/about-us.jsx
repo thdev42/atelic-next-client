@@ -16,12 +16,13 @@ import TeamSection from "@/components/AboutUs/Team";
 import Vision from "@/components/AboutUs/Vision";
 import Footer from "@/components/Footer/Footer";
 import { HeroAboutUs } from "@/components/HeroScreens/HeroScreens";
+import Loader from "@/components/Loader/Loader";
 
 const AboutUsPage = () => {
   const container = useRef();
   const [sections, setSections] = useState([]);
 
-  const { setLoading, setIsCached, setDataFetched } = useLoader();
+  const { setLoading, setIsCached, setDataFetched, dataFetched } = useLoader();
 
   let cached = null;
 
@@ -89,6 +90,9 @@ const AboutUsPage = () => {
   const investors = sections?.find(
     (sec) => sec?.__component === "shared.investors"
   );
+  if (!dataFetched) {
+    return <Loader />;
+  }
 
   return (
     <section ref={container}>

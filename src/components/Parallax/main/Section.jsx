@@ -9,7 +9,7 @@ import Footer from "@/components/Footer/Footer";
 import Appointment from "@/components/Appointment/Appointment";
 import ServicesSection from "@/components/ServicesSection/ServicesSection";
 
-const Section = ({ scrollYProgress, onComplete, shouldScrollToForm, data }) => {
+const Section = ({ scrollYProgress, shouldScrollToForm, data }) => {
   const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
   const rotate = useTransform(scrollYProgress, [0, 1], [5, 0]);
   const formRef = useRef(null);
@@ -50,7 +50,7 @@ const Section = ({ scrollYProgress, onComplete, shouldScrollToForm, data }) => {
       <Partners data={partners} />
 
       <div ref={formRef}>
-        <DecisionTree onComplete={onComplete} data={dt} />
+        <DecisionTree data={dt} />
       </div>
       <ServicesSection data={solutions} />
       <AboutAtelic data={ourteam} />

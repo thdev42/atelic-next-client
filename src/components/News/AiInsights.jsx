@@ -5,6 +5,8 @@ import Image from "next/image";
 import Ai1 from "../../../assets/Ai1.jpg";
 import Ai2 from "../../../assets/Ai2.jpg";
 import Ai3 from "../../../assets/Ai3.jpg";
+import { AnimatedHeadingBoldLast } from "../HeroScreens/HeroScreens";
+import { API_BASE_URL } from "@/config/config";
 
 const teamMembers = [
   {
@@ -30,14 +32,30 @@ const teamMembers = [
   },
 ];
 
-const AiInsights = () => {
+const AiInsights = ({ sections }) => {
+  const teamMembers = Array?.isArray(sections?.teamMembers)
+    ? sections?.teamMembers
+    : [];
+
   return (
     <section className="font-raleway relative bg-[#f3f0f1] text-black w-full max-w-[1920px] mx-auto overflow-hidden py-16">
       <div className="2xl:px-[178px] px-4 sm:px-6 xl:px-12 gap-12">
-        <h2 className="text-3xl sm:text-4xl xl:text-5xl 2xl:text-[60px] font-light text-center mb-16">
+        {/* <h2 className="text-3xl sm:text-4xl xl:text-5xl 2xl:text-[60px] font-light text-center mb-16">
           Our <span className="font-semibold">Team</span>
+        </h2> */}
+        <h2
+          className={`text-3xl sm:text-4xl xl:text-5xl 2xl:text-[60px] font-light text-center mb-16`}
+          style={{ color: sections?.heading?.[0]?.color || "black" }}
+        >
+          {sections?.heading?.[0]?.text?.split(" ").map((word, index) => {
+            const isBold = word.toLowerCase() === "team"; // or based on any condition you want
+            return (
+              <span key={index} className={isBold ? "font-semibold" : ""}>
+                {word}{" "}
+              </span>
+            );
+          })}
         </h2>
-
         <div className="space-y-24">
           {teamMembers.map((member, index) => (
             <div
@@ -54,8 +72,8 @@ const AiInsights = () => {
               >
                 <div className="relative w-full max-w-[770px] max-h-[498px] aspect-[614/582]">
                   <Image
-                    src={member.image}
-                    alt={member.name}
+                    src={`${API_BASE_URL}${member?.image?.url}`}
+                    alt={member?.name}
                     fill
                     className="object-cover rounded-xl shadow-xl"
                   />
@@ -65,10 +83,10 @@ const AiInsights = () => {
               {/* Text */}
               <div className="w-full lg:w-1/2 text-center lg:text-left">
                 <h3 className="text-2xl md:text-3xl font-semibold md:mt-0 mt-6 text-gray-900">
-                  {member.name}
+                  {member?.name}
                 </h3>
                 <div
-                  className="mt-3"
+                  className="mt-3 hidden md:block"
                   style={{
                     borderWidth: 1,
                     borderColor: "red",
@@ -77,7 +95,7 @@ const AiInsights = () => {
                 />
                 <p className="text-sm text-gray-500 py-4">{member.title}</p>
                 <p className="text-black/80 text-base xl:text-lg 2xl:text-[22px] mb-9  mx-auto lg:mx-0 2xl:leading-relaxed font-light">
-                  {member.description}
+                  {member?.description}
                 </p>
               </div>
             </div>

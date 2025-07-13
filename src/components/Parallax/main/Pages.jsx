@@ -8,6 +8,7 @@ import { useScroll } from "framer-motion";
 import { fetchHomePageData } from "@/lib/api/home";
 import { useLoader } from "@/context/useLoader";
 import { fetchUpdatedAt } from "@/lib/updatedAt";
+import Loader from "@/components/Loader/Loader";
 
 const HomePage = () => {
   const container = useRef();
@@ -59,6 +60,7 @@ const HomePage = () => {
       if (cached?.content?.data?.[0]?.section) {
         setSections(cached.content.data?.[0].section);
         setIsCached(true);
+        setDataFetched(true);
       }
     }
 
@@ -75,6 +77,9 @@ const HomePage = () => {
     (sec) => sec?.__component === "shared.main-hero"
   );
 
+  if (!dataFetched) {
+    return <Loader />;
+  }
   return (
     <main ref={container} className="relative">
       {sections?.length > 0 && (
