@@ -68,6 +68,7 @@ const AboutUsPage = () => {
       if (cached?.content?.data?.[0]?.section) {
         setSections(cached.content.data?.[0].section);
         setIsCached(true);
+        setDataFetched(true);
       }
     }
 

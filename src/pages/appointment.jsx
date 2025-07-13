@@ -18,7 +18,7 @@ export default function FinalResult() {
 
   return (
     <div
-      className="p-9 font-sora min-h-screen text-white flex items-center justify-center px-4 relative overflow-hidden bg-cover bg-center"
+      className="p-9 font-sora h-full text-white flex items-center justify-center px-4 relative overflow-hidden bg-cover bg-center"
       style={{
         backgroundImage: ` url(${OutputBg.src})`,
         backgroundColor: step === 3 && "#1B1B1B",
@@ -38,19 +38,19 @@ export default function FinalResult() {
           {/* Desktop Layout */}
           <div className="hidden lg:flex items-center justify-between animate-fadeIn">
             {/* Left: AI Robot Image - Starting from very left */}
-            <div className="flex-shrink-0 flex items-end justify-start -ml-4">
+            <div className="flex-shrink-0 flex items-end justify-start">
               <Image
                 src={OutputBot}
                 alt="AI Robot"
-                width={810}
-                height={1216}
+                width={1000}
+                // height={1216}
                 className="object-contain object-bottom 
-                   sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl 2xl:max-w-max"
+                   sm:max-w-sm md:max-w-xl lg:max-w-xl xl:max-w-2xl 2xl:max-w-max"
               />
             </div>
 
             {/* Right: Speech Bubble */}
-            <div className="flex justify-end  items-center pr-8 lg:pr-16 w-full max-w-2xl">
+            <div className="flex justify-end  items-center pr-8 lg:pr-16 w-full 2xl:max-w-3xl max-w-2xl">
               <form className=" text-black p-8 rounded-[50px] shadow-2xl w-full space-y-6">
                 <h2 className="text-white text-left text-2xl font-semibold">
                   Book An Appointment
@@ -60,30 +60,30 @@ export default function FinalResult() {
                   <input
                     type="text"
                     placeholder="Name"
-                    className="w-full px-6 py-4 rounded-[50px] border-2 border-gray-300 focus:outline-none focus:border-blue-500 text-base"
+                    className="w-full 2xl:px-6 2xl:h-[80px] 2xl:text-[22px] text-base px-5 py-5 rounded-[50px] border-2 transition-colors focus:outline-none focus:ring-0"
                   />
                   <input
                     type="tel"
                     placeholder="Phone No"
-                    className="w-full px-6 py-4 rounded-[50px] border-2 border-gray-300 focus:outline-none focus:border-blue-500 text-base"
+                    className="w-full 2xl:px-6 2xl:h-[80px] 2xl:text-[22px] text-base px-5 py-5 rounded-[50px] border-2 transition-colors focus:outline-none focus:ring-0"
                   />
                 </div>
 
                 <input
                   type="email"
                   placeholder="Email"
-                  className="w-full px-6 py-4 rounded-[50px] border-2 border-gray-300 focus:outline-none focus:border-blue-500 text-base"
+                  className="w-full 2xl:px-6 2xl:h-[80px] 2xl:text-[22px] text-base px-5 py-5 rounded-[50px] border-2 transition-colors focus:outline-none focus:ring-0"
                 />
 
                 <input
                   type="text"
                   placeholder="Industry"
-                  className="w-full px-6 py-4 rounded-[50px] border-2 border-gray-300 focus:outline-none focus:border-blue-500 text-base"
+                  className="w-full 2xl:px-6 2xl:h-[80px] 2xl:text-[22px] text-base px-5 py-5 rounded-[50px] border-2 transition-colors focus:outline-none focus:ring-0"
                 />
 
                 <button
                   type="submit"
-                  className="w-full text-white font-semibold px-6 py-4 rounded-[50px] text-base transition-all"
+                  className="w-full text-white 2xl:px-6 2xl:h-[80px] 2xl:text-[22px] text-base px-5 py-5 rounded-[50px] border-2 transition-colors focus:outline-none focus:ring-0"
                   style={{
                     background: "rgba(255, 255, 255, 0.19)",
                     border: "3px solid rgba(255, 255, 255, 1)",
