@@ -7,9 +7,11 @@ import MenuButton from "../../../assets/menu1.png";
 import Image from "next/image";
 import { Sora } from "next/font/google";
 import { useBackground } from "@/context/BackgroundContext";
+import { API_BASE_URL } from "@/config/config";
 
-const Navbar = () => {
+const Navbar = ({ data }) => {
   const router = useRouter();
+
   const {
     activeHeroIndex,
     slideProgress,
@@ -21,15 +23,19 @@ const Navbar = () => {
   console.log(isDark);
   const [textColor, setTextColor] = useState("text-black");
 
-  const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "About Us", path: "/about-us" },
-    { name: "Our Services", path: "/services" },
-    { name: "Partners", path: "/partners" },
-    { name: "News", path: "/news" },
-    { name: "Enquire", path: "/enquire" },
-    { name: "Our Work", path: "/work" },
-  ];
+  const navLinks = Array?.isArray(data?.details) ? data?.details : [];
+
+  console.log(navLinks, "NAV LINKS");
+  console.log(router?.pathname, "PATHNAME");
+  // const navLinks = [
+  //   { name: "Home", path: "/" },
+  //   { name: "About Us", path: "/about-us" },
+  //   { name: "Our Services", path: "/services" },
+  //   { name: "Partners", path: "/partners" },
+  //   { name: "News", path: "/news" },
+  //   { name: "Enquire", path: "/enquire" },
+  //   { name: "Our Work", path: "/work" },
+  // ];
 
   // Function to interpolate between colors
   const interpolateTextColor = (progress) => {
@@ -120,8 +126,8 @@ const Navbar = () => {
                   style={getTextColorStyle()}
                   className=" flex-shrink-0 cursor-pointer"
                 >
-                  <Image
-                    src={NavIcon}
+                  <img
+                    src={`${API_BASE_URL}${data?.image?.url}`}
                     alt="Logo"
                     width={173} // Reduced from 173 to 120
                     // height={120} // Added fixed height
@@ -141,12 +147,12 @@ const Navbar = () => {
                 {/* CENTER: Navigation Links */}
                 <ul className="z-50 hidden flex-shrink-0 lg:flex 2xl:gap-5 lg:gap-1 2xl:text-[20px] lg:text-sm font-sora font-normal">
                   {navLinks.map((link) => {
-                    const isActive = router.pathname === link.path;
+                    const isActive = router.pathname == link?.link;
 
                     return (
-                      <li key={link.path}>
+                      <li key={link.link}>
                         <a
-                          href={link.path}
+                          href={link.link}
                           className={`px-3 py-1 rounded-[20.5px] transition-all duration-200 ease-out ${
                             isActive
                               ? "bg-[#FFDDDD] border border-[rgba(242,27,42,0.26)] text-[#F21B2A]"
@@ -154,7 +160,7 @@ const Navbar = () => {
                           }`}
                           style={!isActive ? getTextColorStyle() : {}}
                         >
-                          {link.name}
+                          {link.text}
                         </a>
                       </li>
                     );

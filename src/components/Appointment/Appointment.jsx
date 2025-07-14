@@ -39,7 +39,7 @@ const Appointment = ({ data }) => {
   // Enhanced parallax transforms with smoother reverse motion
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["20%", "-20%"]);
   const textY = useTransform(scrollYProgress, [0, 1], ["100%", "-200%"]);
-  const formY = useTransform(scrollYProgress, [0, 1], ["30%", "-50%"]);
+  const formY = useTransform(scrollYProgress, [0, 1], ["0%", "0%"]);
 
   // Enhanced form field animations with reverse parallax
   const rawFirstNameX = useTransform(
@@ -74,36 +74,12 @@ const Appointment = ({ data }) => {
   );
 
   // Additional Y-axis transforms for more dynamic movement
-  const firstNameY = useTransform(
-    scrollYProgress,
-    [0, 0.3, 0.7, 1],
-    ["50px", "0px", "0px", "-50px"]
-  );
-  const lastNameY = useTransform(
-    scrollYProgress,
-    [0, 0.3, 0.7, 1],
-    ["-50px", "0px", "0px", "50px"]
-  );
-  const emailY = useTransform(
-    scrollYProgress,
-    [0, 0.4, 0.6, 1],
-    ["30px", "0px", "0px", "-30px"]
-  );
-  const phoneY = useTransform(
-    scrollYProgress,
-    [0, 0.4, 0.6, 1],
-    ["-30px", "0px", "0px", "30px"]
-  );
-  const industryY = useTransform(
-    scrollYProgress,
-    [0, 0.4, 0.6, 1],
-    ["40px", "0px", "0px", "-40px"]
-  );
-  const submitY = useTransform(
-    scrollYProgress,
-    [0, 0.4, 0.6, 1],
-    ["60px", "0px", "0px", "-60px"]
-  );
+  const firstNameY = useTransform(scrollYProgress, [0, 0.3], ["50px", "0px"]);
+  const lastNameY = useTransform(scrollYProgress, [0, 0.3], ["-50px", "0px"]);
+  const emailY = useTransform(scrollYProgress, [0, 0.4], ["30px", "0px"]);
+  const phoneY = useTransform(scrollYProgress, [0, 0.4], ["-30px", "0px"]);
+  const industryY = useTransform(scrollYProgress, [0, 0.4], ["40px", "0px"]);
+  const submitY = useTransform(scrollYProgress, [0, 0.4], ["60px", "0px"]);
 
   // Opacity transforms for fade effects
   const formOpacity = useTransform(

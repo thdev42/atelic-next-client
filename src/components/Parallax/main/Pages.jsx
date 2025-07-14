@@ -9,6 +9,7 @@ import { fetchHomePageData } from "@/lib/api/home";
 import { useLoader } from "@/context/useLoader";
 import { fetchUpdatedAt } from "@/lib/updatedAt";
 import Loader from "@/components/Loader/Loader";
+import { useBackground } from "@/context/BackgroundContext";
 
 const HomePage = () => {
   const container = useRef();
@@ -16,7 +17,7 @@ const HomePage = () => {
 
   const { setLoading, setIsCached, loading, setDataFetched, dataFetched } =
     useLoader();
-
+  const { setIsShowNav } = useBackground();
   useEffect(() => {
     const lenis = new Lenis();
     function raf(time) {
@@ -50,6 +51,7 @@ const HomePage = () => {
     }
   };
   useEffect(() => {
+    setIsShowNav(true);
     if (typeof window !== "undefined") {
       try {
         cached = JSON.parse(localStorage.getItem("home") || "null");

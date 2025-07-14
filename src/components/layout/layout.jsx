@@ -4,17 +4,60 @@ import Navbar from "../Nav/Navbar";
 import { Toaster } from "react-hot-toast";
 import { NavProvider, useNav } from "@/context/NavContext";
 import { LoaderProvider } from "@/context/useLoader";
+import { useEffect, useState } from "react";
+import { fetchNavbarsData } from "@/lib/api/navbar";
+import { fetchUpdatedAt } from "@/lib/updatedAt";
+import { useRouter } from "next/router";
 
 const Layout = ({ children }) => {
-  const { background } = useBackground();
-  const { isShowNav } = useNav();
+  const { background, isShowNav } = useBackground();
+
+  const [navLinks, setNavLinks] = useState([]);
+
+  let cached = null;
+
+  const getNavbarSections = async () => {
+    const latestUpdatedAt = await fetchUpdatedAt("navbar");
+    const cachedPage = cached?.content?.data?.[0];
+
+    if (!cached || cachedPage?.updatedAt !== latestUpdatedAt) {
+      try {
+        const res = await fetchNavbarsData();
+        const fetchedLinks = res?.data?.[0] || [];
+        setNavLinks(fetchedLinks);
+      } catch (err) {
+        console.error("Navbar fetch error:", err);
+        if (cached?.content?.data?.[0]) {
+          setNavLinks(cached.content.data?.[0]);
+        }
+      }
+    }
+  };
+
+  // Load from cache first
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        cached = JSON.parse(localStorage.getItem("navbars") || "null");
+      } catch (e) {
+        console.warn("Error parsing navbar cache:", e);
+      }
+
+      if (cached?.content?.data?.[0]) {
+        setNavLinks(cached.content.data?.[0]);
+      }
+    }
+
+    getNavbarSections();
+  }, []);
+
   return (
     <main
       className="min-h-screen text-black"
       style={{ background: background ? background : "black" }}
     >
       <ParallaxProvider>
-        {isShowNav && <Navbar />}
+        {isShowNav && <Navbar data={navLinks} />}
         {children}
       </ParallaxProvider>
     </main>
