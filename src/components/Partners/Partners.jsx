@@ -89,7 +89,7 @@ export const Partners = ({ partners, data }) => {
           className="w-full"
         >
           <motion.div
-            className="flex gap-8 whitespace-nowrap"
+            className="flex gap-8 md:animate-marquee whitespace-nowrap"
             style={{ y: sm, willChange: "transform" }}
             drag={
               typeof window !== "undefined" && window.innerWidth <= 768

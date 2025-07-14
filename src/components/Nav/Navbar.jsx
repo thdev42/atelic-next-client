@@ -166,7 +166,7 @@ const Navbar = ({ data }) => {
 
   return (
     <>
-      {isShowNav && (
+      {isShowNav && data?.details && (
         <header className="w-full bg-transparent">
           <nav
             className={`z-50 ${
@@ -182,22 +182,24 @@ const Navbar = ({ data }) => {
                   style={getTextColorStyle()}
                   className=" flex-shrink-0 cursor-pointer"
                 >
-                  <img
-                    src={`${API_BASE_URL}${data?.image?.url}`}
-                    alt="Logo"
-                    width={173} // Reduced from 173 to 120
-                    // height={120} // Added fixed height
-                    className="object-contain" // Maintain aspect ratio
-                    style={{
-                      filter:
-                        (typeof slideProgress === "number" &&
-                          slideProgress > 1.5) ||
-                        isDark
-                          ? "brightness(0) invert(1)" // Make logo white for dark background
-                          : "none",
-                      transition: "filter 0.3s ease-out",
-                    }}
-                  />
+                  {data?.image?.url && (
+                    <img
+                      src={`${API_BASE_URL}${data?.image?.url}`}
+                      alt="Logo"
+                      width={173} // Reduced from 173 to 120
+                      // height={120} // Added fixed height
+                      className="object-contain" // Maintain aspect ratio
+                      style={{
+                        filter:
+                          (typeof slideProgress === "number" &&
+                            slideProgress > 1.5) ||
+                          isDark
+                            ? "brightness(0) invert(1)" // Make logo white for dark background
+                            : "none",
+                        transition: "filter 0.3s ease-out",
+                      }}
+                    />
+                  )}
                 </div>
 
                 {/* CENTER: Navigation Links */}
@@ -233,15 +235,17 @@ const Navbar = ({ data }) => {
                     <Image
                       src={MenuButton}
                       alt="Menu"
-                      width={32} // Reduced from 38 to 32
-                      height={32} // Added fixed height
-                      className="object-contain opacity-50"
+                      width={32}
+                      height={32}
+                      className={`object-contain ${
+                        !isMobile ? "opacity-50" : "opacity-100"
+                      }`}
                       style={{
                         filter:
                           (typeof slideProgress === "number" &&
                             slideProgress > 1.5) ||
                           isDark
-                            ? "brightness(0) invert(1)" // Make menu icon white for dark background
+                            ? "brightness(0) invert(1)"
                             : "none",
                         transition: "filter 0.3s ease-out",
                       }}

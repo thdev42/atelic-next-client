@@ -10,7 +10,7 @@ import { fetchUpdatedAt } from "@/lib/updatedAt";
 import { useRouter } from "next/router";
 
 const Layout = ({ children }) => {
-  const { background, isShowNav } = useBackground();
+  const { background, isShowNav, setLoading } = useBackground();
 
   const [navLinks, setNavLinks] = useState([]);
 

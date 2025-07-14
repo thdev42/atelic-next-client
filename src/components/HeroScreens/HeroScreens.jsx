@@ -643,7 +643,7 @@ export const HeroAboutUs = ({
             />
             <div
               style={{ animation: "floatUpDown 11s ease-in-out infinite" }}
-              className="font-poppins absolute w-[200px] h-[160px] 2xl:w-[280px] 2xl:h-[218px] bottom-40 left-0 lg:bottom-30 lg:left-0 md:bottom-20 md:left-20 2xl:bottom-56 2xl:left-28 bg-white/40 rounded-[30px] shadow-[0_4px_60px_rgba(0,0,0,0.05)] backdrop-blur-[10px] px-9 py-4 flex flex-col"
+              className="md:flex hidden font-poppins absolute w-[200px] h-[160px] 2xl:w-[280px] 2xl:h-[218px] bottom-40 left-0 lg:bottom-30 lg:left-0 md:bottom-20 md:left-20 2xl:bottom-56 2xl:left-28 bg-white/40 rounded-[30px] shadow-[0_4px_60px_rgba(0,0,0,0.05)] backdrop-blur-[10px] px-9 py-4  flex-col"
             >
               <p className="text-3xl 2xl:text-[50px] font-thin text-black 2xl:mt-4 2xl:mb-4">
                 {sections?.stats?.percentage}
@@ -1236,7 +1236,7 @@ export const HeroDynamic = ({
                             animation: "floatUpDown 11s ease-in-out infinite",
                             animationDelay: `${index * 0.5}s`, // Stagger animation
                           }}
-                          className={`font-poppins absolute xs:w-[180px] xs:h-[140px] w-[210px] h-[170px] 2xl:w-[240px] 2xl:h-[190px] 
+                          className={` font-poppins absolute xs:w-[180px] xs:h-[140px] w-[210px] h-[170px] 2xl:w-[240px] 2xl:h-[190px] 
           ${
             index === 0
               ? "top-6 -right-6 lg:top-14 lg:-right-6"
