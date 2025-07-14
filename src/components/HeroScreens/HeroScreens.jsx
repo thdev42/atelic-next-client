@@ -749,8 +749,6 @@ export const HeroPartners = ({
       >
         <div
           className="
-    md:block
-    hidden
     relative
     w-full
     sm:w-[500px]

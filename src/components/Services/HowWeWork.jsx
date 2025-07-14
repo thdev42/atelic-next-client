@@ -241,7 +241,7 @@ const HowWeWork = ({ sections }) => {
             </div>
 
             {/* Right Column - Content */}
-            <div className="space-y-5 lg:relative lg:z-0 lg:ml-8 xl:ml-12 2xl:ml-16">
+            <div className="space-y-5 lg:relative mb-5 md:mb-0 lg:z-0 lg:ml-8 xl:ml-12 2xl:ml-16">
               {/* Heading with fade-in */}
               <div className="space-y-4">
                 <h2 className="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-light text-black -mt-2">
@@ -259,7 +259,7 @@ const HowWeWork = ({ sections }) => {
               </p>
 
               {/* Button from left */}
-              <button className="bg-[#335F86] hover:bg-slate-700 text-[16px] text-white px-9 2xl:w-[200px] py-3 rounded-[8px] font-light transition-colors duration-200">
+              <button className="bg-[#335F86] hover:bg-slate-700 text-[16px]  text-white px-9 2xl:w-[200px] py-3 rounded-[8px] font-light transition-colors duration-200">
                 {/* {servicesWork?.primaryButton} */}
                 Read More
               </button>
