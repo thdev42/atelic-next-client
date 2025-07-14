@@ -191,7 +191,7 @@ const HeroSection = ({ scrollYSProgress, section }) => {
       )}
 
       {/* Slide Indicators */}
-      <div className="absolute lg:hidden bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2 items-center z-20">
+      <div className="absolute lg:hidden bottom-4 left-1/2 transform -translate-x-1/2 flex gap-3 items-center z-20">
         {heroDataArray.map((_, idx) => {
           const isActive = idx === activeSection;
           return (

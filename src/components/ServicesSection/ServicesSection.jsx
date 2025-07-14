@@ -39,8 +39,50 @@ export default function ServicesSection({ data }) {
       <div className="px-4 sm:px-8 2xl:px-[178px] md:px-12 lg:px-[100px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Column - Content */}
-          <Parallax speed={20}>
-            {" "}
+          <div className="block sm:hidden">
+            {/* Mobile version without parallax */}
+            <div className="space-y-14 relative">
+              {/* Mobile background image - only visible on mobile */}
+              <div
+                className="sm:hidden absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+                style={{
+                  backgroundImage: `url(${API_BASE_URL}${data?.image?.url})`,
+                  zIndex: -1,
+                }}
+              ></div>
+
+              {/* Heading with fade-in */}
+              <div
+                className="space-y-4 relative z-10"
+                // data-aos="fade-up"
+              >
+                <h2 className="text-4xl sm:text-5xl 2xl:text-[60px] lg:text-6xl font-light text-black">
+                  {formatHeading(data?.heading)}
+                </h2>
+              </div>
+
+              {/* Paragraph from left */}
+              <p
+                className="text-black text-base 2xl:text-[22px] font-light sm:text-lg 2xl:leading-9 relative z-10"
+                // data-aos="fade-right"
+                // data-aos-delay="200"
+              >
+                {data?.subHeading}
+              </p>
+
+              {/* Button from left */}
+              <button
+                className="bg-[#335F86] hover:bg-slate-700 text-[16px] text-white px-9 2xl:w-[200px] py-3 rounded-[8px] font-light transition-colors duration-200 relative z-10"
+                // data-aos="fade-right"
+                // data-aos-delay="400"
+              >
+                {data?.primaryButton}
+              </button>
+            </div>
+          </div>
+
+          {/* Desktop version with parallax */}
+          <Parallax speed={20} className="hidden sm:block">
             <div className="space-y-14 relative">
               {/* Mobile background image - only visible on mobile */}
               <div

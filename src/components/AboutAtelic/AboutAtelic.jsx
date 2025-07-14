@@ -368,7 +368,7 @@ const AboutAtelic = ({ data }) => {
   if (isMobile) {
     return (
       <section
-        className="z-10 font-sora overflow-hidden bg-[#f3f3f3] max-w-[1920px] mx-auto w-full py-16 min-h-screen relative"
+        className="z-10 font-sora overflow-hidden bg-[#f3f3f3] max-w-[1920px] mx-auto w-full py-5 min-h-screen relative"
         onTouchMove={handleTouchMove}
       >
         <div className="px-4 sm:px-8 2xl:px-[178px] md:px-12 lg:px-[100px]">
