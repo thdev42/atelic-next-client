@@ -416,9 +416,7 @@ export default function FinalResult() {
                   {!isTyping && (
                     <div className="m-6 flex justify-center">
                       <button
-                        onClick={() => {
-                          console.log("Book appointment clicked");
-                        }}
+                        onClick={handleSubmit}
                         style={{
                           background: "rgba(255, 255, 255, 0.19)",
                           border: "3px solid rgba(255, 255, 255, 1)",
