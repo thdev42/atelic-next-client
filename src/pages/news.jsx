@@ -94,13 +94,13 @@ const NewsPage = () => {
     return <Loader />;
   }
   return (
-    <section ref={container}>
+    <>
       <NewsHero sections={mainHero} />
       <AiInsights sections={aiInsights} />
       <Blogs sections={blogs} />
       <NewsLetter sections={newsLetter} />
       <Footer />
-    </section>
+    </>
   );
 };
 

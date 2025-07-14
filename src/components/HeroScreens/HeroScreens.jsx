@@ -580,7 +580,7 @@ export const HeroAboutUs = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="bg-[#E9E9E9] text-black  2xl:max-h-[750px] max-w-[1920px] mx-auto w-full relative overflow-hidden select-none"
+      className="bg-[#E9E9E9] z-0 text-black  2xl:max-h-[750px] max-w-[1920px] mx-auto w-full relative overflow-hidden select-none"
     >
       <div className="px-4 sm:px-8 md:px-12 lg:px-[100px] 2xl:px-[178px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-8">
         {/* Text Content Section */}
@@ -699,7 +699,7 @@ export const HeroPartners = ({
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     transition={{ duration: 0.5 }}
-    className=" text-black max-w-[1920px] mx-auto w-full relative overflow-hidden select-none"
+    className=" text-black max-w-[1920px] z-0 mx-auto w-full relative overflow-hidden select-none"
   >
     <div className="px-4 sm:px-8 md:px-12 lg:px-[100px] 2xl:px-[178px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-8">
       {/* Text Content Section */}
@@ -788,7 +788,7 @@ export const HeroNews = ({ sectionY, backgroundY, robotY, textY, data }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className=" text-black max-w-[1920px] mx-auto w-full relative overflow-hidden select-none"
+      className=" text-black max-w-[1920px] z-0 mx-auto w-full relative overflow-hidden select-none"
     >
       <div className="px-4 sm:px-8 md:px-12 lg:px-[100px] 2xl:px-[178px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-8">
         {/* Text Content Section */}
