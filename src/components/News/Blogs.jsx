@@ -81,6 +81,10 @@ const blogData = [
 const Blogs = ({ sections }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [slidesToShow, setSlidesToShow] = useState(3);
+  const [isMobile, setIsMobile] = useState(false);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const blogData = Array?.isArray(sections?.details) ? sections?.details : [];
 
@@ -88,13 +92,17 @@ const Blogs = ({ sections }) => {
   useEffect(() => {
     const updateSlidesToShow = () => {
       if (window.innerWidth < 640) {
-        setSlidesToShow(1); // Mobile: 1 slide
+        setSlidesToShow(1);
+        setIsMobile(true);
       } else if (window.innerWidth < 1024) {
-        setSlidesToShow(2); // Tablet: 2 slides
+        setSlidesToShow(2);
+        setIsMobile(false);
       } else if (window.innerWidth < 1280) {
-        setSlidesToShow(2); // Large screens: 2 slides
+        setSlidesToShow(2);
+        setIsMobile(false);
       } else {
-        setSlidesToShow(3); // Extra large screens: 3 slides
+        setSlidesToShow(3);
+        setIsMobile(false);
       }
     };
 
@@ -104,17 +112,49 @@ const Blogs = ({ sections }) => {
   }, []);
 
   const prevSlide = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
     setCurrentIndex((prev) =>
       prev - slidesToShow < 0
         ? Math.max(0, blogData.length - slidesToShow)
         : prev - slidesToShow
     );
+    setTimeout(() => setIsTransitioning(false), 300);
   };
 
   const nextSlide = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
     setCurrentIndex((prev) =>
       prev + slidesToShow >= blogData.length ? 0 : prev + slidesToShow
     );
+    setTimeout(() => setIsTransitioning(false), 300);
+  };
+
+  // Touch handlers for mobile swipe
+  const handleTouchStart = (e) => {
+    if (!isMobile) return;
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    if (!isMobile) return;
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!isMobile || !touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe && currentIndex + slidesToShow < blogData.length) {
+      nextSlide();
+    }
+    if (isRightSwipe && currentIndex > 0) {
+      prevSlide();
+    }
   };
 
   const visibleSlides = blogData.slice(
@@ -128,16 +168,18 @@ const Blogs = ({ sections }) => {
 
   return (
     <section className="font-raleway relative bg-[#f3f0f1] text-black w-full max-w-[1920px] mx-auto overflow-hidden py-8 sm:py-12 lg:py-16">
-      <div className="px-4 sm:px-6 md:px-8 lg:px-[100px] 2xl:px-[178px] mx-auto">
+      <div className="lg:px-[100px] 2xl:px-[178px] mx-auto">
         <h2 className="text-center text-2xl sm:text-3xl lg:text-4xl font-semibold mb-6 sm:mb-8">
           Our <span className="font-bold text-black">Blogs</span>
         </h2>
 
         <div className="relative">
-          {/* Previous Button */}
+          {/* Previous Button - Hidden on mobile */}
           <button
             onClick={prevSlide}
-            className={`absolute left-0 lg:-left-10 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full shadow-md transition-all duration-200 flex items-center justify-center -ml-4 sm:-ml-5 ${
+            className={`absolute left-2 sm:left-4 md:left-8 lg:left-2 xl:-left-5 2xl:-left-10 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full shadow-md transition-all duration-200 flex items-center justify-center ${
+              isMobile ? "hidden" : ""
+            } ${
               isPrevDisabled
                 ? "bg-gray-300 cursor-not-allowed opacity-50"
                 : "bg-white hover:bg-gradient-to-br hover:from-[#F21B2A] hover:to-[#335F86] hover:scale-110 group"
@@ -153,12 +195,27 @@ const Blogs = ({ sections }) => {
             />
           </button>
 
-          {/* Slides Container */}
-          <div className="flex gap-3 sm:gap-4 lg:gap-6 justify-center overflow-hidden px-6 sm:px-8">
+          {/* Slides Container with touch support */}
+          <div
+            className={`flex gap-3 sm:gap-4 lg:gap-6 max-w-none justify-center overflow-hidden px-4 sm:px-16 md:px-20 lg:px-16 xl:px-12 2xl:px-8 transition-all duration-300 ease-in-out ${
+              isTransitioning ? "transform" : ""
+            }`}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            style={{
+              touchAction: isMobile ? "pan-y" : "auto",
+              userSelect: "none",
+            }}
+          >
             {visibleSlides.map((item) => (
               <div
                 key={item.id}
-                className="flex-1 min-w-0 w-full max-w-[280px] sm:max-w-[350px] lg:max-w-[400px] xl:max-w-[492px] shadow-[0px_4px_6px_-2px_#10182808,0px_12px_16px_-4px_#10182814] bg-white rounded-xl overflow-hidden flex flex-col"
+                className={`flex-1 min-w-0 w-full max-w-none sm:max-w-[350px] lg:max-w-[400px] xl:max-w-[492px] shadow-[0px_4px_6px_-2px_#10182808,0px_12px_16px_-4px_#10182814] bg-white rounded-xl overflow-hidden flex flex-col transform transition-all duration-300 ease-in-out ${
+                  isTransitioning
+                    ? "scale-95 opacity-90"
+                    : "scale-100 opacity-100"
+                }`}
               >
                 {/* Image */}
                 <div className="aspect-[492/240] w-full overflow-hidden">
@@ -166,6 +223,7 @@ const Blogs = ({ sections }) => {
                     src={`${API_BASE_URL}${item.image.url}`}
                     alt={item?.title}
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    draggable={false}
                   />
                 </div>
 
@@ -187,6 +245,7 @@ const Blogs = ({ sections }) => {
                       src={`${API_BASE_URL}${item?.avatar?.url}`}
                       alt={item?.author}
                       className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 bg-gray-300 rounded-full object-cover"
+                      draggable={false}
                     />
                     <div className="min-w-0 flex-1">
                       <p className="text-xs sm:text-sm font-medium text-gray-900 truncate">
@@ -200,10 +259,12 @@ const Blogs = ({ sections }) => {
             ))}
           </div>
 
-          {/* Next Button */}
+          {/* Next Button - Hidden on mobile */}
           <button
             onClick={nextSlide}
-            className={`absolute right-0 lg:-right-10 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full shadow-[0px_4px_60px_0px_#00000008] backdrop-blur-md transition-all duration-200 flex items-center justify-center -mr-4 sm:-mr-5 ${
+            className={`absolute right-2 sm:right-4 md:right-8 lg:right-2 xl:-right-5 2xl:-right-10 top-1/2 -translate-y-1/2 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full shadow-[0px_4px_60px_0px_#00000008] backdrop-blur-md transition-all duration-200 flex items-center justify-center ${
+              isMobile ? "hidden" : ""
+            } ${
               isNextDisabled
                 ? "bg-gray-300 cursor-not-allowed opacity-50"
                 : "bg-white hover:bg-gradient-to-br hover:from-[#F21B2A] hover:to-[#335F86] hover:scale-110 group"
