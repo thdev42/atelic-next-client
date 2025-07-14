@@ -86,26 +86,33 @@ export const Partners = ({ partners, data }) => {
 
         <motion.div
           // style={{ y: lg }} // Added parallax to the logos section as well
-          className="overflow-hidden w-full"
-          style={{ y: sm }}
+          className="w-full"
         >
           <motion.div
-            className="flex gap-8 animate-marquee whitespace-nowrap"
+            className="flex gap-8 whitespace-nowrap"
             style={{ y: sm, willChange: "transform" }}
+            drag={
+              typeof window !== "undefined" && window.innerWidth <= 768
+                ? "x"
+                : false
+            }
+            dragConstraints={{ left: -1000, right: 0 }}
+            dragElastic={0.2}
+            whileTap={{ cursor: "grabbing" }}
           >
             {Array.isArray(logos) &&
               [...logos, ...logos]?.map((logo, idx) => (
                 <motion.div
                   key={idx}
                   alt={`partner-${idx}`}
-                  className="inline-flex items-center justify-center my-3 px-8 py-4 min-w-[190px] h-[115.39px] sm:min-w-[207px] sm:h-[135.39px] lg:min-w-[287px] lg:h-[165.39px] bg-[rgba(233,233,233,0.95)] backdrop-blur-sm border border-[rgba(0,0,0,0.18)] transition-all duration-300 hover:bg-white hover:shadow-[3px_4px_9.4px_1px_rgba(0,0,0,0.14)]"
+                  className="inline-flex items-center justify-center my-3 px-8 py-4 min-w-[170px] h-[95.39px] sm:min-w-[207px] sm:h-[135.39px] md:min-w-[287px] md:h-[165.39px] bg-[rgba(233,233,233,0.95)] backdrop-blur-sm border border-[rgba(0,0,0,0.18)] transition-all duration-300 hover:bg-white hover:shadow-[3px_4px_9.4px_1px_rgba(0,0,0,0.14)]"
                 >
                   <img
                     src={`${API_BASE_URL}${logo?.logo?.url}`}
                     width={logo?.logo?.width}
                     height={logo?.logo?.height}
                     alt={`partner-${idx}`}
-                    className="h-[65px] w-auto object-contain"
+                    className="md:h-[65px] h-[45px]  object-contain"
                   />
                 </motion.div>
               ))}

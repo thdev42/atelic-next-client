@@ -159,13 +159,23 @@ const HeroSection = ({ scrollYSProgress, section }) => {
 
       {/* Slide Component */}
       {isMobile ? (
-        <HeroDynamic
-          heroData={activeSlideData}
-          sectionY={sectionY}
-          backgroundY={backgroundY}
-          robotY={robotY}
-          textY={textY}
-        />
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeSection}
+            // initial={{ opacity: 0, x: 100 }}
+            // animate={{ opacity: 1, x: 0 }}
+            // exit={{ opacity: 0, x: -100 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+          >
+            <HeroDynamic
+              heroData={activeSlideData}
+              sectionY={sectionY}
+              backgroundY={backgroundY}
+              robotY={robotY}
+              textY={textY}
+            />
+          </motion.div>
+        </AnimatePresence>
       ) : (
         <AnimatePresence mode="wait">
           <motion.div key={activeSection}>
@@ -181,20 +191,58 @@ const HeroSection = ({ scrollYSProgress, section }) => {
       )}
 
       {/* Slide Indicators */}
-      <div className="absolute lg:hidden bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
-        {heroDataArray.map((_, idx) => (
-          <div
-            key={idx}
-            className={`w-2 h-2 rounded-full cursor-pointer transition-all duration-300 ${
-              idx === activeSection
-                ? isDark
-                  ? "bg-white w-8"
-                  : "bg-black w-8"
-                : "bg-gray-400"
-            }`}
-            onClick={() => goToSlide(idx)}
-          />
-        ))}
+      <div className="absolute lg:hidden bottom-6 left-1/2 transform -translate-x-1/2 flex gap-2 items-center z-20">
+        {heroDataArray.map((_, idx) => {
+          const isActive = idx === activeSection;
+          return (
+            <motion.button
+              key={idx}
+              onClick={() => goToSlide(idx)}
+              className="flex items-center justify-center rounded-full transition-all duration-300"
+              style={{
+                width: isActive ? "21px" : "9px",
+                height: isActive ? "21px" : "9px",
+                borderWidth: isActive ? 1 : 0,
+                borderColor: isActive
+                  ? isDark
+                    ? "#ffffff"
+                    : "#335F86"
+                  : "transparent",
+              }}
+              initial={false}
+              animate={{
+                width: isActive ? "21px" : "9px",
+                height: isActive ? "21px" : "9px",
+                borderWidth: isActive ? 1 : 0,
+              }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+            >
+              <motion.div
+                className={`rounded-full ${
+                  isActive
+                    ? isDark
+                      ? "bg-white"
+                      : "bg-[#335F86]"
+                    : isDark
+                    ? "bg-white hover:bg-gray-300"
+                    : "bg-[#335F86] hover:bg-gray-400"
+                }`}
+                style={{ width: "9px", height: "9px" }}
+                initial={false}
+                animate={{
+                  backgroundColor: isActive
+                    ? isDark
+                      ? "#ffffff"
+                      : "#335F86"
+                    : isDark
+                    ? "#ffffff"
+                    : "#335F86",
+                }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              />
+            </motion.button>
+          );
+        })}
       </div>
 
       <style jsx>{`

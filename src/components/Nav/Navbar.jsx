@@ -11,6 +11,7 @@ import { API_BASE_URL } from "@/config/config";
 
 const Navbar = ({ data }) => {
   const router = useRouter();
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const {
     activeHeroIndex,
@@ -27,15 +28,6 @@ const Navbar = ({ data }) => {
 
   console.log(navLinks, "NAV LINKS");
   console.log(router?.pathname, "PATHNAME");
-  // const navLinks = [
-  //   { name: "Home", path: "/" },
-  //   { name: "About Us", path: "/about-us" },
-  //   { name: "Our Services", path: "/services" },
-  //   { name: "Partners", path: "/partners" },
-  //   { name: "News", path: "/news" },
-  //   { name: "Enquire", path: "/enquire" },
-  //   { name: "Our Work", path: "/work" },
-  // ];
 
   // Function to interpolate between colors
   const interpolateTextColor = (progress) => {
@@ -106,7 +98,71 @@ const Navbar = ({ data }) => {
     return {};
   };
 
+  // Toggle drawer
+  const toggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen);
+  };
+
+  // Close drawer when clicking on a link
+  const closeDrawer = () => {
+    setIsDrawerOpen(false);
+  };
+
+  // Close drawer when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        isDrawerOpen &&
+        !event.target.closest(".mobile-drawer") &&
+        !event.target.closest(".menu-button")
+      ) {
+        setIsDrawerOpen(false);
+      }
+    };
+
+    if (isDrawerOpen) {
+      document.addEventListener("click", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [isDrawerOpen]);
+
+  // Prevent body scroll when drawer is open
+  useEffect(() => {
+    if (isDrawerOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isDrawerOpen]);
+
   console.log(router?.pathname);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width =
+        typeof window !== "undefined"
+          ? window.visualViewport?.width || window.innerWidth
+          : 1024;
+
+      console.log("Viewport width:", width);
+
+      const newIsMobile = width < 1024;
+
+      setIsMobile(newIsMobile);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <>
@@ -169,13 +225,17 @@ const Navbar = ({ data }) => {
 
                 {/* RIGHT: Menu Icon */}
                 <div className="z-50 flex-shrink-0">
-                  <button className="cursor-pointer">
+                  <button
+                    className="cursor-pointer menu-button"
+                    onClick={toggleDrawer}
+                    disabled={!isMobile}
+                  >
                     <Image
                       src={MenuButton}
                       alt="Menu"
                       width={32} // Reduced from 38 to 32
                       height={32} // Added fixed height
-                      className="object-contain"
+                      className="object-contain opacity-50"
                       style={{
                         filter:
                           (typeof slideProgress === "number" &&
@@ -191,6 +251,68 @@ const Navbar = ({ data }) => {
               </div>
             </Container>
           </nav>
+
+          {/* Mobile Drawer Overlay */}
+          {isDrawerOpen && (
+            <div
+              className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+              onClick={closeDrawer}
+            />
+          )}
+
+          {/* Mobile Drawer */}
+          <div
+            className={`mobile-drawer fixed top-0 right-0 h-full w-80 bg-white shadow-lg transform transition-transform duration-300 ease-in-out z-50 lg:hidden ${
+              isDrawerOpen ? "translate-x-0" : "translate-x-full"
+            }`}
+          >
+            <div className="p-6">
+              {/* Close Button */}
+              <div className="flex justify-end mb-6">
+                <button
+                  onClick={closeDrawer}
+                  className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+                >
+                  <svg
+                    className="w-6 h-6 text-gray-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Navigation Links */}
+              <ul className="space-y-4">
+                {navLinks.map((link) => {
+                  const isActive = router.pathname == link?.link;
+
+                  return (
+                    <li key={link.link}>
+                      <a
+                        href={link.link}
+                        onClick={closeDrawer}
+                        className={`block px-4 py-3 rounded-[20.5px] transition-all duration-200 ease-out font-sora text-lg ${
+                          isActive
+                            ? "bg-[#FFDDDD] border border-[rgba(242,27,42,0.26)] text-[#F21B2A]"
+                            : "text-gray-700 hover:bg-gray-50 hover:text-[#F21B2A]"
+                        }`}
+                      >
+                        {link.text}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </div>
         </header>
       )}
     </>
