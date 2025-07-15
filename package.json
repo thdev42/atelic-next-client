@@ -11,6 +11,8 @@
   "dependencies": {
     "@radix-ui/react-select": "^2.2.5",
     "@studio-freight/lenis": "^1.0.42",
+    "@tsparticles/react": "^3.0.0",
+    "@tsparticles/slim": "^3.8.1",
     "aos": "^2.3.4",
     "axios": "^1.10.0",
     "class-variance-authority": "^0.7.1",

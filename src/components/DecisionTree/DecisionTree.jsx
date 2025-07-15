@@ -189,7 +189,7 @@ export const DecisionTree = ({ onComplete, data }) => {
 
       <div className="px-4 sm:px-8 2xl:px-[178px] md:px-12 lg:px-[100px] mx-auto flex flex-col lg:flex-row justify-between gap-0">
         <div className="flex-1 flex flex-col justify-center items-center lg:items-start text-center lg:text-left mx-auto">
-          <h2 className="2xl:text-[55px] text-3xl 2xl:leading-snug md:text-4xl font-light mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-[41px] 2xl:text-6xl 2xl:leading-snug md:text-4xl font-light mb-4">
             {data?.headings?.map(({ id, text, color, breakAfter }, idx) => (
               <span key={id || idx}>
                 <span

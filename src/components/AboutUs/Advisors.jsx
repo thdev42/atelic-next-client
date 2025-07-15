@@ -94,38 +94,40 @@ export const Advisors = ({ sections }) => {
             <motion.div
               key={index}
               whileHover={{ backgroundColor: "#ffffff" }}
-              className="w-full max-w-[496px] h-[319px]  bg-[#E8E8E8] border border-black/50 hover:border-white hover:shadow-md rounded-[29px] p-6 mx-auto flex flex-col items-start justify-start text-left transition-all duration-100"
+              className="w-full max-w-[496px] h-[279px]  bg-[#E8E8E8] border border-black/50 hover:border-white hover:shadow-md rounded-[29px] p-6 mx-auto flex flex-col items-start justify-start text-left transition-all duration-100"
             >
-              <div className="w-full flex items-center justify-between mb-4">
-                <img
-                  src={`${API_BASE_URL}${advisor?.image?.url}`}
-                  alt={advisor?.name}
-                  width={48}
-                  height={48}
-                  className="rounded-full object-cover"
-                />
-                <div className="flex gap-3">
-                  {advisor.icons.map((social, i) => (
-                    <a className="cursor-pointer">
-                      <img
-                        key={i}
-                        src={`${API_BASE_URL}${social?.logo?.url}`}
-                        alt={social}
-                        width={26}
-                        height={26}
-                        className="opacity-100 mix-blend-luminosity hover:opacity-100 transition-opacity duration-200"
-                      />
-                    </a>
-                  ))}
+              <div className="space-y-5">
+                <div className="w-full flex items-center justify-between mb-4">
+                  <img
+                    src={`${API_BASE_URL}${advisor?.image?.url}`}
+                    alt={advisor?.name}
+                    width={48}
+                    height={48}
+                    className="rounded-full object-cover"
+                  />
+                  <div className="flex gap-3">
+                    {advisor.icons.map((social, i) => (
+                      <a className="cursor-pointer">
+                        <img
+                          key={i}
+                          src={`${API_BASE_URL}${social?.logo?.url}`}
+                          alt={social}
+                          width={26}
+                          height={26}
+                          className="opacity-100 mix-blend-luminosity hover:opacity-100 transition-opacity duration-200"
+                        />
+                      </a>
+                    ))}
+                  </div>
                 </div>
+                <h3 className="font-medium text-lg mt-1">{advisor.name}</h3>
+                <p className="text-sm font-semibold text-gray-800 mt-1">
+                  {advisor.title}
+                </p>
+                <p className="text-sm text-gray-700 mt-3">
+                  {advisor.description}
+                </p>
               </div>
-              <h3 className="font-medium text-lg mt-1">{advisor.name}</h3>
-              <p className="text-sm font-semibold text-gray-800 mt-1">
-                {advisor.title}
-              </p>
-              <p className="text-sm text-gray-700 mt-3">
-                {advisor.description}
-              </p>
             </motion.div>
           ))}
         </div>

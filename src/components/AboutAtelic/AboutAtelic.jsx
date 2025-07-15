@@ -374,7 +374,7 @@ const AboutAtelic = ({ data }) => {
         <div className="px-4 sm:px-8 2xl:px-[178px] md:px-12 lg:px-[100px]">
           <div className="md:flex justify-between items-start md:space-x-10 2xl:mb-16 mb-12">
             <h2
-              className="2xl:text-[60px] text-3xl md:text-4xl font-semibold whitespace-nowrap"
+              className="text-3xl sm:text-4xl md:text-[41px] 2xl:text-6xl font-semibold whitespace-nowrap"
               data-aos="fade-right"
             >
               {data?.heading?.map((part) => (

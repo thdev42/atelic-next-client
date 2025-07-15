@@ -969,7 +969,7 @@ export const HeroDynamic = ({
       return `${baseStyles}  lg:h-[650px] 2xl:h-[730px]`;
     }
 
-    return `${baseStyles}  lg:min-h-[700px] 2xl:min-h-[800px]`;
+    return `${baseStyles}  lg:max-h-[600px] 2xl:max-h-[850px]`;
   };
 
   const getTextColor = () => {
@@ -1087,7 +1087,7 @@ export const HeroDynamic = ({
           >
             {/* Dynamic Headlines */}
             <h1
-              className={`text-4xl 2xl:text-[60px] md:text-4xl font-sora font-normal ${getTextColor()} space-y-5 2xl:space-y-10 flex flex-col`}
+              className={`text-4xl  sm:text-4xl md:text-[41px] 2xl:text-6xl 2xl:text-[60px] md:text-4xl font-sora font-normal ${getTextColor()} space-y-5 2xl:space-y-10 flex flex-col`}
             >
               {headlines.map((headline, index) =>
                 renderHeadline(headline, index)
@@ -1200,15 +1200,15 @@ export const HeroDynamic = ({
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                <div className="hidden lg:block relative w-full 2xl:max-w lg:max-w-[600px] max-w-[500px]">
+                <div className="hidden lg:block relative w-full 2xl:max-w-none lg:max-w-[600px] max-w-[500px]">
                   {/* Show image for mobile on chip type, or always for robot type */}
                   {isRobot && (
-                    <Image
+                    <img
                       src={mainImage.src}
                       alt={mainImage.alt}
                       width={mainImage.width}
-                      height={mainImage.height}
-                      className="w-full"
+                      // height={mainImage.height}
+                      className="w-full object-bottom"
                     />
                   )}
 

@@ -180,25 +180,27 @@ const Navbar = ({ data }) => {
                 {/* LEFT: Logo with controlled height */}
                 <div
                   style={getTextColorStyle()}
-                  className=" flex-shrink-0 cursor-pointer"
+                  className=" flex-shrink-0 cursor-pointer z-50"
                 >
                   {data?.image?.url && (
-                    <img
-                      src={`${API_BASE_URL}${data?.image?.url}`}
-                      alt="Logo"
-                      width={173} // Reduced from 173 to 120
-                      // height={120} // Added fixed height
-                      className="object-contain" // Maintain aspect ratio
-                      style={{
-                        filter:
-                          (typeof slideProgress === "number" &&
-                            slideProgress > 1.5) ||
-                          isDark
-                            ? "brightness(0) invert(1)" // Make logo white for dark background
-                            : "none",
-                        transition: "filter 0.3s ease-out",
-                      }}
-                    />
+                    <a href="/">
+                      <img
+                        src={`${API_BASE_URL}${data?.image?.url}`}
+                        alt="Logo"
+                        width={173} // Reduced from 173 to 120
+                        // height={120} // Added fixed height
+                        className="object-contain z-50" // Maintain aspect ratio
+                        style={{
+                          filter:
+                            (typeof slideProgress === "number" &&
+                              slideProgress > 1.5) ||
+                            isDark
+                              ? "brightness(0) invert(1)" // Make logo white for dark background
+                              : "none",
+                          transition: "filter 0.3s ease-out",
+                        }}
+                      />
+                    </a>
                   )}
                 </div>
 

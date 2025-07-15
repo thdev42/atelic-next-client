@@ -56,7 +56,7 @@ export default function ServicesSection({ data }) {
                 className="space-y-4 relative z-10"
                 // data-aos="fade-up"
               >
-                <h2 className="text-4xl sm:text-5xl 2xl:text-[60px] lg:text-6xl font-light text-black">
+                <h2 className="text-3xl sm:text-4xl md:text-[41px] 2xl:text-6xl font-light text-black">
                   {formatHeading(data?.heading)}
                 </h2>
               </div>
