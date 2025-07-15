@@ -944,6 +944,7 @@ export const HeroDynamic = ({
     heroImage,
     bgImage,
     headliness,
+    subHeading,
     primaryButtonText = "Book a Consultation",
     secondaryButtonText = "Explore Our Approach",
   } = heroData;
@@ -991,7 +992,7 @@ export const HeroDynamic = ({
   // Smart button styling based on theme
   const getButtonStyles = (isPrimary = true) => {
     const baseStyles =
-      "text-xs 2xl:text-[16px] px-6 py-4 rounded-md transition-all duration-300";
+      "text-xs 2xl:text-[16px] px-6 py-4 cursor-pointer z-50 rounded-md transition-all duration-300";
 
     if (isPrimary) {
       return `${baseStyles} bg-[#335F86] text-white hover:bg-[#082c4e]`;
@@ -1077,17 +1078,17 @@ export const HeroDynamic = ({
 
         {/* Enhanced Text Content */}
         <div
-          className={`${layoutConfig.textPadding} flex flex-row ${layoutConfig.textWidth}`}
+          className={`${layoutConfig.textPadding} z-30 flex flex-row ${layoutConfig.textWidth}`}
         >
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-5 2xl:space-y-10"
+            className="space-y-5  2xl:space-y-10"
           >
             {/* Dynamic Headlines */}
             <h1
-              className={`text-4xl  sm:text-4xl md:text-[41px] 2xl:text-6xl 2xl:text-[60px] md:text-4xl font-sora font-normal ${getTextColor()} space-y-5 2xl:space-y-10 flex flex-col`}
+              className={`text-4xl sm:text-4xl md:text-[41px] 2xl:text-6xl 2xl:text-[60px] md:text-4xl font-sora font-normal ${getTextColor()} space-y-5 2xl:space-y-10 flex flex-col`}
             >
               {headlines.map((headline, index) =>
                 renderHeadline(headline, index)
@@ -1104,9 +1105,7 @@ export const HeroDynamic = ({
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
             >
-              Atelic AI helps enterprises unlock real value from AI by solving
-              complex challenges with secure, customized, industry-specific
-              solutions.
+              {subHeading}
             </motion.p>
 
             {/* Smart Button Rendering */}
@@ -1175,7 +1174,7 @@ export const HeroDynamic = ({
             {isInnovation && (
               <motion.div
                 style={{ y: robotY }}
-                className={`${layoutConfig.imageWidth} relative ${layoutConfig.imagePadding}`}
+                className={`${layoutConfig.imageWidth} z-50 relative ${layoutConfig.imagePadding}`}
               >
                 <div className="hidden lg:block relative w-full">
                   <img
@@ -1200,7 +1199,7 @@ export const HeroDynamic = ({
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                <div className="hidden lg:block relative w-full 2xl:max-w-none lg:max-w-[600px] max-w-[500px]">
+                <div className="hidden z-50 lg:block relative w-full 2xl:max-w-none lg:max-w-[600px] max-w-[500px]">
                   {/* Show image for mobile on chip type, or always for robot type */}
                   {isRobot && (
                     <img

@@ -722,7 +722,7 @@ const HeroSection = ({ scrollYSProgress, section }) => {
       onTouchEnd={handleTouchEnd}
     >
       {/* Vertical Numbers */}
-      <div className=" font-poppins hidden lg:flex flex-col gap-4 2xl:ml-20 xl:ml-10 ml-10 items-center absolute left-0 lg:top-1/3 xl:top-1/2 top-1/3 -translate-y-1/2 z-20">
+      <div className=" font-poppins hidden z-50 lg:flex flex-col gap-4 2xl:ml-20 xl:ml-10 ml-10 items-center absolute left-0 lg:top-1/3 xl:top-1/2 top-1/3 -translate-y-1/2">
         {heroDataArray.map((_, idx) => (
           <div
             key={idx}

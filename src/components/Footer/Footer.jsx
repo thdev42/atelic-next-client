@@ -77,12 +77,12 @@ export default function Footer() {
                 <div key={text} className="flex items-center">
                   <a
                     href={`${text?.link}`}
-                    className="2xl:text-[24px] text-sm lg:text-lg px-2 sm:px-4  lg:px-9 transition-colors relative"
+                    className="2xl:text-[24px] text-sm lg:text-lg px-2 sm:px-4 lg:px-9 transition-colors relative"
                   >
                     {text?.text}
                   </a>
                   {index !== arr.length - 1 && (
-                    <div className="w-px h-7 bg-[#636363]"></div>
+                    <div className="w-px h-7 bg-[#636363] mx-2 sm:mx-4 lg:mx-9"></div>
                   )}
                 </div>
               ))}
