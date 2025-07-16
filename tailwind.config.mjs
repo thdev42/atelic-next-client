@@ -8,6 +8,9 @@ export default {
   ],
   theme: {
     extend: {
+      backdropBlur: {
+        1200: "1200px",
+      },
       animation: {
         marquee: "marquee 40s linear infinite",
       },
