@@ -1174,6 +1174,9 @@ export const HeroDynamic = ({
             {isInnovation && (
               <motion.div
                 style={{ y: robotY }}
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
                 className={`${layoutConfig.imageWidth} z-50 relative ${layoutConfig.imagePadding}`}
               >
                 <div className="hidden lg:block relative w-full">

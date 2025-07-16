@@ -83,9 +83,9 @@ const OurTeam = ({ sections }) => {
                   index % 2 !== 0 ? "justify-end" : "justify-start"
                 } md:mx-auto`}
               >
-                {/* <div className="">
+                <div className="-z-0">
                   <ParticlesComp />
-                </div> */}
+                </div>
                 <div className="relative w-full max-w-[614px] aspect-[614/582]">
                   <img
                     src={`${API_BASE_URL}${member?.image?.url}`}
@@ -97,7 +97,7 @@ const OurTeam = ({ sections }) => {
               </div>
 
               {/* Text */}
-              <div className="w-full lg:w-1/2 text-center lg:text-left">
+              <div className="z-50 bg-white w-full lg:w-1/2 text-center lg:text-left">
                 <h3 className="text-2xl md:text-3xl font-semibold text-gray-900">
                   {member?.name}
                 </h3>

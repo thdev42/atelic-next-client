@@ -47,19 +47,22 @@ export default function TeamSection({ sections }) {
               <div className="flip-inner relative w-full h-full">
                 {/* Front */}
                 <div className="flip-front absolute w-full h-full bg-[#E2E2E2] p-6 shadow-md text-center flex flex-col justify-center items-center">
-                  <div className="w-20 h-20 rounded-full overflow-hidden mb-4">
-                    <img
-                      src={`${API_BASE_URL}${member?.image?.url}`}
-                      alt={member.name}
-                      width={80}
-                      height={80}
-                      className="object-cover w-full h-full"
-                    />
+                  <div className="space-y-4 flex flex-col justify-center items-center">
+                    <div className="w-20 h-20 rounded-full overflow-hidden">
+                      <img
+                        src={`${API_BASE_URL}${member?.image?.url}`}
+                        alt={member.name}
+                        width={80}
+                        height={80}
+                        className="object-cover w-full h-full"
+                      />
+                    </div>
+
+                    <h3 className="text-lg font-semibold text-black">
+                      {member.name}
+                    </h3>
+                    <p className="text-sm text-gray-600">{member.title}</p>
                   </div>
-                  <h3 className="text-lg font-semibold text-black mb-1">
-                    {member.name}
-                  </h3>
-                  <p className="text-sm text-gray-600">{member.title}</p>
                   {member.icons &&
                     member?.icons?.map((social, key) => (
                       <div className="absolute top-4 right-4 z-20">

@@ -14,6 +14,8 @@ import Differentiation from "@/components/PartnersSection/Differentiation";
 import PartnersHero from "@/components/PartnersSection/PartnersHero";
 import Specialism from "@/components/PartnersSection/Specialism";
 import Loader from "@/components/Loader/Loader";
+import SVGComponent from "@/components/Svg";
+import RegionalPartners from "@/components/PartnersSection/RegionalPartners";
 
 const partners = () => {
   const container = useRef();
@@ -91,6 +93,7 @@ const partners = () => {
     <div ref={container}>
       <PartnersHero sections={hero} />
       <Partners data={partnersData} partners={true} />
+      <RegionalPartners />
       <Differentiation sections={differentiation} />
       <Specialism sections={specialism} />
       <Footer />
