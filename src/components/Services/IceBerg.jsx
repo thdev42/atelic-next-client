@@ -180,9 +180,10 @@ const IceBerg = ({ sections }) => {
     <>
       <section
         ref={sectionRef}
-        className="bg-[#BEF9FD] max-w-[1920px] mx-auto w-full relative overflow-hidden"
+        // Provides the scrollable area
+        className="z-10 4min:h-[500vh] 4min:overflow-visible overflow-hidden bg-[#BEF9FD] max-w-[1920px] mx-auto w-full relative"
       >
-        <div className=" w-full ">
+        <div className="4min:sticky 4min:-top-96  w-full">
           <div className="font-sora px-4 sm:px-6 md:px-8 lg:px-[100px] 2xl:px-[178px] mx-auto">
             <div className="pt-8 sm:pt-12 md:pt-16 lg:pt-20 mb-12 sm:mb-16 lg:mb-20">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 xl:gap-12 items-start lg:items-center">
