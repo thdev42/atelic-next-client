@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import IceBergBg from "../../../assets/IceBerg2.png";
 import DashedCircle from "../DashedCircle/DashedCircle";
 
@@ -106,84 +107,140 @@ const AgenticCard = ({ solution, onClose, index }) => {
   );
 };
 
+const ScrollRevealCircle = ({
+  solution,
+  index,
+  scrollYProgress,
+  solutionsData,
+}) => {
+  const totalSolutions = solutionsData.length;
+
+  const start = index / totalSolutions;
+  const end = start + 0.4;
+
+  // Always keep end within scrollYProgress 0–1 range
+  const safeEnd = Math.min(end, 0.98);
+  const revealThreshold = Math.min(start + 0.25, 0.97); // reveal earlier if needed
+
+  const cardOpacity = useTransform(scrollYProgress, [start, safeEnd], [0, 1]);
+  const cardScale = useTransform(scrollYProgress, [start, safeEnd], [0.8, 1]);
+  const cardY = useTransform(scrollYProgress, [start, safeEnd], [80, 0]);
+
+  const [currentProgress, setCurrentProgress] = useState(0);
+
+  React.useEffect(() => {
+    const unsubscribe = scrollYProgress.onChange((latest) => {
+      setCurrentProgress(latest);
+    });
+    return () => unsubscribe();
+  }, [scrollYProgress]);
+
+  const isRevealed = currentProgress >= revealThreshold;
+
+  return (
+    <div className={solution.position}>
+      {isRevealed ? (
+        <motion.div
+          style={{
+            opacity: cardOpacity,
+            scale: cardScale,
+            y: cardY,
+          }}
+        >
+          <AgenticCard index={index} solution={solution} />
+        </motion.div>
+      ) : (
+        <DashedCircle
+          color={solution.dashColor}
+          number={String(index + 1).padStart(2, "0")}
+        />
+      )}
+    </div>
+  );
+};
+
+// ALTERNATIVE SOLUTION: Viewport-based reveal instead of scroll progress
+import { useInView } from "framer-motion";
+
 const IceBerg = ({ sections }) => {
-  const [activeCard, setActiveCard] = useState(null);
+  const sectionRef = useRef(null);
   const solutionsData = Array?.isArray(sections?.details)
     ? sections?.details
     : [];
 
   console.log(sections, "SECTIONS");
-  const handleCircleClick = (id) => {
-    setActiveCard(id);
-  };
 
-  const handleCardClose = () => {
-    setActiveCard(null);
-  };
-
-  // Dynamic circle renderer
-  const renderCircle = (solution, index) => {
-    return (
-      <div key={index} className={solution.position}>
-        {activeCard === index ? (
-          <div className="transition-all duration-500 ease-in-out scale-100">
-            <AgenticCard
-              index={index}
-              solution={solution}
-              onClose={handleCardClose}
-            />
-          </div>
-        ) : (
-          <DashedCircle
-            color={solution.dashColor}
-            number={String(index + 1).padStart(2, "0")}
-            onClick={() => handleCircleClick(index)}
-          />
-        )}
-      </div>
-    );
-  };
+  // Set up scroll tracking for the entire section
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"],
+  });
 
   return (
     <>
-      <section className="bg-[#BEF9FD] max-w-[1920px] mx-auto w-full relative overflow-hidden">
-        <div className="font-sora px-4 sm:px-6 md:px-8 lg:px-[100px] 2xl:px-[178px] mx-auto">
-          <div className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 mb-12 sm:mb-16 lg:mb-20">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 xl:gap-12 items-start lg:items-center">
-              {sections?.heading &&
-                (() => {
-                  const words = sections.heading.split(" ");
-                  return (
-                    <div className="space-y-3">
-                      <h2 className="text-3xl sm:text-4xl md:text-[41px] 2xl:text-6xl font-light text-black leading-tight">
-                        {words[0]}
-                      </h2>
-                      <h2 className="text-3xl sm:text-4xl md:text-[41px] 2xl:text-6xl font-light text-black leading-tight">
-                        <span className="font-bold">
-                          {words.slice(1).join(" ")}
-                        </span>
-                      </h2>
-                    </div>
-                  );
-                })()}
-              <div>
-                <p className="2xl:text-[18px] lg:text-md text-gray-700 leading-relaxed mt-4 lg:mt-0">
-                  {sections?.subHeading}
-                </p>
+      <section
+        ref={sectionRef}
+        className="bg-[#BEF9FD] max-w-[1920px] mx-auto w-full relative overflow-hidden"
+      >
+        <div className=" w-full ">
+          <div className="font-sora px-4 sm:px-6 md:px-8 lg:px-[100px] 2xl:px-[178px] mx-auto">
+            <div className="pt-8 sm:pt-12 md:pt-16 lg:pt-20 mb-12 sm:mb-16 lg:mb-20">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 xl:gap-12 items-start lg:items-center">
+                {sections?.heading &&
+                  (() => {
+                    const words = sections.heading.split(" ");
+                    return (
+                      <div className="space-y-3">
+                        <motion.h2
+                          className="text-3xl sm:text-4xl md:text-[41px] 2xl:text-6xl font-light text-black leading-tight"
+                          initial={{ opacity: 0, y: 30 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.6 }}
+                        >
+                          {words[0]}
+                        </motion.h2>
+                        <motion.h2
+                          className="text-3xl sm:text-4xl md:text-[41px] 2xl:text-6xl font-light text-black leading-tight"
+                          initial={{ opacity: 0, y: 30 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.6, delay: 0.2 }}
+                        >
+                          <span className="font-bold">
+                            {words.slice(1).join(" ")}
+                          </span>
+                        </motion.h2>
+                      </div>
+                    );
+                  })()}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                >
+                  <p className="2xl:text-[18px] lg:text-md text-gray-700 leading-relaxed mt-4 lg:mt-0">
+                    {sections?.subHeading}
+                  </p>
+                </motion.div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Iceberg Background */}
-        <div
-          className="min-h-[1562px] w-full relative  bg-cover bg-center 4md:hidden"
-          style={{ backgroundImage: `url(${IceBergBg.src})` }}
-        >
-          {/* Dynamic Circles - All rendered through one function */}
-          {solutionsData.map((solution, index) =>
-            renderCircle(solution, index)
-          )}
+          {/* Iceberg Background with Scroll-Reveal Circles */}
+          <div
+            className="min-h-[1562px] w-full relative bg-cover bg-center 4md:hidden"
+            style={{ backgroundImage: `url(${IceBergBg.src})` }}
+          >
+            {/* Scroll-based reveal circles */}
+            {solutionsData.map((solution, index) => (
+              <ScrollRevealCircle
+                key={solution.id || index}
+                solution={solution}
+                index={index}
+                scrollYProgress={scrollYProgress}
+                solutionsData={solutionsData}
+              />
+            ))}
+          </div>
         </div>
       </section>
     </>

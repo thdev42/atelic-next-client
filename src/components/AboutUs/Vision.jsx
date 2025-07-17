@@ -4,6 +4,7 @@ import VisionImage from "../../../assets/Vision.png";
 import AtelicLogo from "../../../assets/AtelicLogoAbout.jpg"; // Replace with correct path
 import { API_BASE_URL } from "@/config/config";
 import { formatHeading } from "../Partners/Partners";
+import BgPattern1 from "../../../assets/WebServices.png";
 // import MissionBG from "../../../assets/mission-waves.png"; // If you have a background SVG/pattern
 
 const Vision = ({ sections }) => {
@@ -29,7 +30,7 @@ const Vision = ({ sections }) => {
       {/* --- Vision Section --- */}
       <section className="font-sora relative bg-white text-black w-full max-w-[1920px] mx-auto overflow-hidden py-12">
         {/* Background Box (Fixed Height & Centered) */}
-        <div className="absolute inset-0 flex justify-center 2xl:px-[100px] items-center z-0 pointer-events-none">
+        <div className="z-10 absolute inset-0 flex justify-center 2xl:px-[100px] items-center pointer-events-none">
           <div className="w-[90%] lg:h-[750px] bg-[#E8E8E8]"></div>
         </div>
 
@@ -73,6 +74,15 @@ const Vision = ({ sections }) => {
 
       {/* --- Mission Section --- */}
       <section className="w-full bg-[#fdfdfd] text-black py-20 relative font-sora">
+        <div className="absolute -top-96 -left-44">
+          <Image
+            src={BgPattern1}
+            alt="Background Pattern"
+            width={930}
+            className="min-h-screen"
+            // height={713}
+          />
+        </div>
         <div className="2xl:px-[178px] md:px-12 lg:px-[100px] mx-auto px-6 sm:px-10 flex flex-col lg:flex-row items-center justify-between">
           {/* LEFT: Text Section */}
           <div className="w-full lg:w-1/2 text-center lg:text-left relative z-10">

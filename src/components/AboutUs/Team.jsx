@@ -10,6 +10,7 @@ import React from "react";
 
 import LinkedinLogo from "../../../assets/AboutLinkedin.png";
 import { API_BASE_URL } from "@/config/config";
+import BgPattern1 from "../../../assets/WebServices.png";
 
 export default function TeamSection({ sections }) {
   const teamMembers = Array.isArray(sections?.teamMembers)
@@ -17,8 +18,17 @@ export default function TeamSection({ sections }) {
     : [];
 
   return (
-    <section className="w-full bg-[#fdfdfd] text-black font-sora">
-      <div className="2xl:px-[178px] md:px-12 lg:px-[100px] mx-auto px-6 sm:px-10 pb-9">
+    <section className="w-full bg-[#fdfdfd] text-black font-sora overflow-hidden">
+      <div className="2xl:px-[178px] relative md:px-12 lg:px-[100px] mx-auto px-6 sm:px-10 py-20">
+        <div className="absolute top-[600px] 2xl:block hidden -right-56">
+          <Image
+            src={BgPattern1}
+            alt="Background Pattern"
+            width={930}
+            className="min-h-screen object-contain"
+            // height={713}
+          />
+        </div>
         {/* Heading + Description */}
         <div className="flex flex-col-reverse lg:flex-row items-center lg:items-start justify-between gap-6 mb-16">
           {/* Left: Paragraph */}

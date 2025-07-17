@@ -510,7 +510,7 @@ const AboutAtelic = ({ data }) => {
         <div className="px-4 sm:px-8 2xl:px-[178px] md:px-12 lg:px-[100px] flex flex-col flex-grow h-full">
           <div className="md:flex justify-between items-start pt-10 md:space-x-10 2xl:mb-16 mb-12">
             <div className="relative">
-              <h2 className="2xl:text-[60px] text-3xl md:text-4xl font-semibold whitespace-nowrap">
+              <h2 className="2xl:text-[60px] text-3xl md:text-6xl font-semibold whitespace-nowrap">
                 {data?.heading?.map((part) => (
                   <span key={part.id} style={{ color: part.color }}>
                     {part.text}
@@ -585,7 +585,7 @@ const AboutAtelic = ({ data }) => {
               </motion.div>
             </div>
 
-            <p className="2xl:text-[22px] text-gray-600 mt-4 md:mt-0 max-w-3xl">
+            <p className="2xl:text-[22px] sm:text-lg text-base text-gray-600 mt-4 md:mt-0 max-w-3xl">
               {data?.subHeading}
             </p>
           </div>

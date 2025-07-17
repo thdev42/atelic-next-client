@@ -202,7 +202,7 @@ export const DecisionTree = ({ onComplete, data }) => {
               </span>
             ))}
           </h2>
-          <p className="text-base 2xl:text-[22px] font-light leading-normal text-white/60 max-w-[580px] mb-4">
+          <p className="2xl:text-[22px] font-light sm:text-lg  leading-normal text-white/60 max-w-[580px] mb-4">
             Use our smart decision tool to discover which AI technologies best
             align with your business goals.
           </p>

@@ -15,6 +15,7 @@ import OurSolutions from "@/components/Services/OurSolutions";
 import { RedefiningSuccess } from "@/components/Services/RedefiningSuccess";
 import { useBackground } from "@/context/BackgroundContext";
 import Loader from "@/components/Loader/Loader";
+import Footer from "@/components/Footer/Footer";
 
 const Services = () => {
   const container = useRef();
@@ -102,6 +103,7 @@ const Services = () => {
       <OurSolutions sections={solutions[0]} />
       <RedefiningSuccess sections={solutions[1]} />
       <IceBerg sections={iceberg} />
+      <Footer />
     </section>
   );
 };

@@ -624,6 +624,15 @@ export const HeroAboutUs = ({
             </motion.div>
           </motion.div>
         </div>
+        <div className=" absolute lg:max-w-xl 2xl:max-w-none right-0 lg:block hidden overflow-hidden">
+          <Image
+            src={BgPattern1}
+            alt="Background Pattern"
+            width={930}
+            className="min-h-screen object-contain"
+            // height={713}
+          />
+        </div>
 
         {/* Image Section */}
         <motion.div
@@ -1236,7 +1245,7 @@ export const HeroDynamic = ({
                             animation: "floatUpDown 11s ease-in-out infinite",
                             animationDelay: `${index * 0.5}s`, // Stagger animation
                           }}
-                          className={` font-poppins absolute xs:w-[180px] xs:h-[140px] w-[210px] h-[170px] 2xl:w-[240px] 2xl:h-[190px] 
+                          className={`z-50 font-poppins absolute xs:w-[180px] xs:h-[140px] w-[220px] h-[180px] 2xl:w-[240px] 2xl:h-[200px] 
           ${
             index === 0
               ? "top-6 -right-6 lg:top-14 lg:-right-6"
@@ -1244,16 +1253,14 @@ export const HeroDynamic = ({
           } 
           bg-white/40 rounded-[30px] shadow-[0_4px_60px_rgba(0,0,0,0.05)] backdrop-blur-[10px] px-9 py-4 flex flex-col`}
                         >
-                          <p className="text-4xl 2xl:text-[50px] font-normal 2xl:mt-2 mb-2 text-black">
+                          <p className="text-5xl 2xl:text-[50px] font-normal 2xl:mt-2 mb-2 text-black">
                             {stat.percentage}
                           </p>
-                          <p className="text-xs 2xl:text-[16px] mt-2 font-thin text-black/60 leading-snug">
+                          <p className="text-[14px] 2xl:text-[16px] mt-2 font-thin text-black/60 leading-snug">
                             {stat.description}
-                            {index === 0 && (
-                              <span className="underline cursor-pointer ml-1">
-                                Learn More
-                              </span>
-                            )}
+                            <span className="underline cursor-pointer ml-1">
+                              Learn More
+                            </span>
                           </p>
                         </div>
                       ))}

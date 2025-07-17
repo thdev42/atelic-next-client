@@ -721,8 +721,11 @@ const HeroSection = ({ scrollYSProgress, section }) => {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Vertical Numbers */}
-      <div className=" font-poppins hidden z-50 lg:flex flex-col gap-4 2xl:ml-20 xl:ml-10 ml-10 items-center absolute left-0 lg:top-1/3 xl:top-1/2 top-1/3 -translate-y-1/2">
+      {/* Vertical Numbers - Fixed Position */}
+      <div
+        className="font-poppins hidden z-50 lg:flex flex-col gap-4 2xl:ml-20 xl:ml-10 ml-10 items-center fixed left-0 top-1/2 -translate-y-1/2"
+        style={{ transform: "translateY(-50%) translateY(10vh)" }}
+      >
         {heroDataArray.map((_, idx) => (
           <div
             key={idx}
@@ -775,6 +778,7 @@ const HeroSection = ({ scrollYSProgress, section }) => {
         <AnimatePresence mode="wait">
           <motion.div key={activeSection}>
             <ParticlesComp />
+
             <HeroDynamic
               heroData={activeSlideData}
               sectionY={sectionY}
