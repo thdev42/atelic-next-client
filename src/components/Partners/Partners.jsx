@@ -11,6 +11,7 @@ import Microsoft from "../../../assets/Microsoft.png";
 import Nvidia from "../../../assets/Nvidia.png";
 import { useScroll, motion, useTransform } from "framer-motion";
 import { API_BASE_URL } from "@/config/config";
+import { headingStyle } from "@/styles/globalStyles";
 
 export const formatHeading = (text) => {
   if (!text) return null;
@@ -79,7 +80,7 @@ export const Partners = ({ partners, data }) => {
       <div className="overflow-hidden will-change-transform relative z-10 px-4 sm:px-8 2xl:px-[178px] md:px-12 lg:px-[100px] mx-auto w-full">
         <motion.h2
           style={{ y: md }} // Changed from style={{ md }} to style={{ y: md }}
-          className="text-center py-10 text-3xl sm:text-4xl md:text-[41px] 2xl:text-[60px]  font-medium text-black leading-tight mb-10 font-sora"
+          className={` text-center py-10 ${headingStyle}  font-medium text-black leading-tight mb-10 font-sora`}
         >
           {formatHeading(data?.heading)}
         </motion.h2>

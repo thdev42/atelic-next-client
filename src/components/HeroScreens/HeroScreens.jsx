@@ -18,6 +18,11 @@ import AboutUsHero from "../../../assets/AboutusHero.png";
 import PartnersHero from "../../../assets/PartnersHero.jpg";
 import NewsHero from "../../../assets/NewsHero.jpg";
 import { API_BASE_URL } from "@/config/config";
+import {
+  headingStyle,
+  headingStylesHeroMain,
+  paragraphStyles,
+} from "@/styles/globalStyles";
 
 export const HeroComponent1 = ({ sectionY, backgroundY, robotY, textY }) => (
   <motion.section
@@ -594,11 +599,11 @@ export const HeroAboutUs = ({
             <AnimatedHeading
               headings={sections?.headings}
               textY={textY}
-              className="font-sora leading-tight text-4xl sm:text-5xl lg:text-4xl 2xl:text-[60px]"
+              className={`${headingStyle}font-sora leading-tight  `}
             />
 
             <motion.p
-              className="text-base 2xl:max-w-lg max-w-md sm:text-lg lg:text-md 2xl:text-[20px] font-light font-sora leading-relaxed 2xl:leading-loose text-black mt-6 2xl:mt-14"
+              className={`text-base 2xl:max-w-lg max-w-md ${paragraphStyles} font-light font-sora leading-relaxed 2xl:leading-loose text-black mt-6 2xl:mt-14`}
               initial={{ opacity: 0, y: 20 }}
               style={{ y: textY }}
               animate={{ opacity: 0.75, y: 0 }}
@@ -1097,7 +1102,7 @@ export const HeroDynamic = ({
           >
             {/* Dynamic Headlines */}
             <h1
-              className={`text-4xl sm:text-4xl md:text-[41px] 2xl:text-6xl 2xl:text-[60px] md:text-4xl font-sora font-normal ${getTextColor()} space-y-5 2xl:space-y-10 flex flex-col`}
+              className={`${headingStylesHeroMain} font-sora font-normal ${getTextColor()} space-y-5 2xl:space-y-10 flex flex-col`}
             >
               {headlines.map((headline, index) =>
                 renderHeadline(headline, index)
@@ -1164,8 +1169,8 @@ export const HeroDynamic = ({
             {/* Chip Type - Absolute Positioning */}
             {isChip && (
               <motion.div
-                style={{ y: robotY }}
-                className="hidden lg:block absolute right-0 top-20 z-10 -translate-x-2 sm:translate-x-0 md:translate-x-4 lg:translate-x-8 xl:translate-x-12 2xl:translate-x-16 translate-y-4 sm:translate-y-6 md:translate-y-8 lg:translate-y-0"
+                // style={{ y: robotY }}
+                className="hidden lg:block absolute right-0 top-20 z-50 -translate-x-2 sm:translate-x-0 md:translate-x-4 lg:translate-x-8 xl:translate-x-12 2xl:translate-x-16 translate-y-4 sm:translate-y-6 md:translate-y-8 lg:translate-y-0"
               >
                 <div className="sm:block hidden 2xl:max-w-[900px] xl:max-w-[700px] lg:max-w-[650px]">
                   <Image
@@ -1206,12 +1211,12 @@ export const HeroDynamic = ({
             {!isInnovation && (
               <motion.div
                 style={{ y: robotY }}
-                className={`${layoutConfig.imageWidth} relative flex justify-end`}
+                className={`${layoutConfig.imageWidth} z-50 relative flex justify-end`}
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                <div className="hidden z-50 lg:block relative w-full 2xl:max-w-none lg:max-w-[600px] max-w-[500px]">
+                <div className="hidden  lg:block relative w-full 2xl:max-w-none lg:max-w-[600px] max-w-[500px]">
                   {/* Show image for mobile on chip type, or always for robot type */}
                   {isRobot && (
                     <img

@@ -6,6 +6,11 @@ import AOS from "aos";
 // import "aos/dist/aos.css";
 import { Parallax } from "react-scroll-parallax";
 import { API_BASE_URL } from "@/config/config";
+import {
+  headingStyle,
+  headingStylesMobile,
+  paragraphStyles,
+} from "@/styles/globalStyles";
 const formatHeading = (text) => {
   if (!text) return null;
 
@@ -56,7 +61,7 @@ export default function ServicesSection({ data }) {
                 className="space-y-4 relative z-10"
                 // data-aos="fade-up"
               >
-                <h2 className="text-3xl sm:text-4xl md:text-[41px] 2xl:text-6xl font-light text-black">
+                <h2 className={`${headingStylesMobile} font-light text-black`}>
                   {formatHeading(data?.heading)}
                 </h2>
               </div>
@@ -98,14 +103,14 @@ export default function ServicesSection({ data }) {
                 className="space-y-4 relative z-10"
                 // data-aos="fade-up"
               >
-                <h2 className="text-4xl sm:text-5xl 2xl:text-[60px] lg:text-6xl font-light text-black">
+                <h2 className={`${headingStyle}font-light text-black`}>
                   {formatHeading(data?.heading)}
                 </h2>
               </div>
 
               {/* Paragraph from left */}
               <p
-                className="text-black text-base 2xl:text-[22px] font-light sm:text-lg 2xl:leading-9 relative z-10"
+                className={`text-black ${paragraphStyles} 2xl:leading-9 relative z-10`}
                 // data-aos="fade-right"
                 // data-aos-delay="200"
               >

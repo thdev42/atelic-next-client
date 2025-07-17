@@ -18,6 +18,7 @@ import BenImage from "../../../assets/Ben.png";
 import RomanImage from "../../../assets/Roman.png";
 import SimonImage from "../../../assets/Simon.png";
 import { API_BASE_URL } from "@/config/config";
+import { headingStylesMobile } from "@/styles/globalStyles";
 
 // const teamMembers = [
 //   {
@@ -374,7 +375,7 @@ const AboutAtelic = ({ data }) => {
         <div className="px-4 sm:px-8 2xl:px-[178px] md:px-12 lg:px-[100px]">
           <div className="md:flex justify-between items-start md:space-x-10 2xl:mb-16 mb-12">
             <h2
-              className="text-3xl sm:text-4xl md:text-[41px] 2xl:text-6xl font-semibold whitespace-nowrap"
+              className={`${headingStylesMobile} font-semibold whitespace-nowrap`}
               data-aos="fade-right"
             >
               {data?.heading?.map((part) => (

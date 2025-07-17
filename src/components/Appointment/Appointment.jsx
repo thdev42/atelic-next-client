@@ -8,6 +8,7 @@ import {
 } from "framer-motion";
 import AppointmentBg from "../../../assets/Appointmentbg.png";
 import { formatHeading } from "../Partners/Partners";
+import { headingStyle } from "@/styles/globalStyles";
 
 const Appointment = ({ data }) => {
   const [formData, setFormData] = useState({
@@ -196,7 +197,7 @@ const Appointment = ({ data }) => {
       <div className="px-4 sm:px-8 2xl:px-[178px] md:px-12 lg:px-[100px] mx-auto text-center relative z-10">
         <motion.h1
           ref={headingRef}
-          className="will-change-transform text-3xl sm:text-4xl md:text-[41px] 2xl:text-6xl font-light mb-12"
+          className={`will-change-transform ${headingStyle} font-light mb-12`}
           style={{ y: textY }}
           initial={{ opacity: 0, x: -100 }}
           animate={
