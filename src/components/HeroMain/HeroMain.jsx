@@ -197,7 +197,9 @@ const HeroSection = ({ scrollYSProgress, section }) => {
               heroData={activeSlideData}
               sectionY={sectionY}
               backgroundY={backgroundY}
-              activeSection={activeSection}
+              // activeSection={activeSection}
+              // hero={heroDataArray}
+              // goToSlide={goToSlide}
               robotY={robotY}
               textY={textY}
             />

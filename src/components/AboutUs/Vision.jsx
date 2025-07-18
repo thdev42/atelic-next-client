@@ -38,12 +38,12 @@ const Vision = ({ sections }) => {
         <div className="relative z-10 flex flex-col lg:flex-row items-center lg:items-stretch 2xl:px-[178px] mx-auto px-4 sm:px-6 xl:px-12">
           {/* LEFT: Image breaking outside the background box */}
           <div className="w-full lg:w-1/2 flex items-center justify-start py-8 relative">
-            <div className="relative w-[1044px] max-w-[1044px] h-[670px] overflow-hidden 2xl:-ml-[177px]">
+            <div className="aspect-[4/3] 2xl:aspect-[4/3] lg:aspect-[10/9] relative w-[1044px] max-w-[1044px] overflow-hidden 2xl:-ml-[177px]">
               <Image
                 src={VisionImage}
                 alt="Our Vision"
                 fill
-                className="object-cover scale-125 rounded-[20px]"
+                className="object-cover scale-150 md:scale-[1.3] lg:scale-[1.7] 2xl:scale-125 rounded-[20px]"
                 priority
               />
             </div>
@@ -74,7 +74,7 @@ const Vision = ({ sections }) => {
 
       {/* --- Mission Section --- */}
       <section className="w-full bg-[#fdfdfd] text-black py-20 relative font-sora">
-        <div className="absolute -top-96 -left-44">
+        <div className="lg:block hidden absolute -top-96 -left-44">
           <Image
             src={BgPattern1}
             alt="Background Pattern"

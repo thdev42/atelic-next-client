@@ -677,13 +677,16 @@ export const HeroAboutUs = ({
             />
             <div
               style={{ animation: "floatUpDown 11s ease-in-out infinite" }}
-              className="md:flex hidden font-poppins absolute w-[200px] h-[160px] 2xl:w-[280px] 2xl:h-[218px] bottom-40 left-0 lg:bottom-30 lg:left-0 md:bottom-20 md:left-20 2xl:bottom-56 2xl:left-28 bg-white/40 rounded-[30px] shadow-[0_4px_60px_rgba(0,0,0,0.05)] backdrop-blur-[10px] px-9 py-4  flex-col"
+              className="md:flex text-black hidden font-raleway absolute  xs:w-[180px] xs:h-[140px] w-[240px] h-[200px] 2xl:w-[280px] 2xl:h-[220px] bottom-40 left-0 lg:bottom-30 lg:left-0 md:bottom-20 md:left-20 2xl:bottom-56 2xl:left-28 bg-white/40 rounded-[30px] shadow-[0_4px_60px_rgba(0,0,0,0.05)] backdrop-blur-[10px] px-7 2xl:px-9 py-4 leading-normal  flex-col"
             >
-              <p className="text-3xl 2xl:text-[50px] font-thin text-black 2xl:mt-4 2xl:mb-4">
+              <p className="text-5xl 2xl:text-[50px] font-normal text-black 2xl:mt-2 mb-2 2xl:mb-4">
                 {sections?.stats?.percentage}
               </p>
-              <p className="text-xs 2xl:text-[16px] mt-2 font-thin text-black/80 leading-snug">
+              <p className="text-[14px] 2xl:text-[16px] mt-2 font-medium text-black/100 leading-snug">
                 {sections?.stats?.description}
+                <span className="underline cursor-pointer ml-1">
+                  Learn More
+                </span>
               </p>
             </div>
           </div>
@@ -1116,10 +1119,9 @@ export const HeroDynamic = ({
       className={getContainerStyles()}
       style={getBackgroundStyles()}
     >
-      {/* Vertical Navigation - Now positioned relative to hero content */}
-      {hero.length > 0 && (
+      {hero?.length > 0 && (
         <div className="font-poppins hidden z-50 lg:flex flex-col gap-4 2xl:ml-20 xl:ml-10 ml-10 items-center absolute left-0 top-1/2 -translate-y-1/2">
-          {hero.map((_, idx) => (
+          {hero?.map((_, idx) => (
             <div
               key={idx}
               className={`relative cursor-pointer transition-all duration-300 ${
