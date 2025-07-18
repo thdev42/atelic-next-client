@@ -8,10 +8,12 @@ import OutputBg from "../../assets/OutputBg.png";
 import Image from "next/image";
 import { useBackground } from "@/context/BackgroundContext";
 import { useRouter } from "next/router";
+import ParticlesComp from "@/components/Particles/Particles";
+import { useFormContext } from "@/context/FormContext";
 
 export default function FinalResult() {
-  const { setIsShowNav } = useBackground();
-  const [step, setStep] = useState(1);
+  const { setIsShowNav, setBackground } = useBackground();
+  const [step, setStep] = useState(2);
   const [selectedCategory, setSelectedCategory] = useState(""); // selected id
   const [selectedGoal, setSelectedGoal] = useState(""); // selected subOption id
   const [outputText, setOutputText] = useState("");
@@ -25,14 +27,27 @@ export default function FinalResult() {
   //   console.log(data, "DATA");
   const router = useRouter();
   useEffect(() => {
-    setIsShowNav(false);
+    setBackground("#f9f9f9", "color");
+    // setIsShowNav(false);
   }, []);
-  const selectedCategoryObj = seekingSupport.find(
-    (cat) => cat.id === selectedCategory
-  );
+  const { hydrateFromQuery } = useFormContext();
 
-  const goalsStep2 = selectedCategoryObj?.subOptions || [];
+  const { industry, role, employees, support } = router.query;
+  const [selectedCategoryObj, setSelectedCategoryObj] = useState(null);
+  const [goalsStep2, setGoalsStep2] = useState([]);
 
+  useEffect(() => {
+    if (support) {
+      const foundCategory = seekingSupport.find((cat) => cat.id === support);
+      setSelectedCategoryObj(foundCategory || null);
+      setSelectedCategory(support); // Set selectedCategory ID as well (for button selection)
+      setGoalsStep2(foundCategory?.subOptions || []);
+    }
+  }, [support]);
+
+  useEffect(() => {
+    hydrateFromQuery(router.query); // Inject query into context
+  }, [router.query]);
   const handleStepChange = (newStep, direction) => {
     setSlideDirection(direction);
     setTimeout(() => {
@@ -122,7 +137,7 @@ export default function FinalResult() {
   };
 
   const handleBack = () => {
-    handleStepChange(1, "slide-right");
+    router?.back();
   };
   const handleSubmit = () => {
     router?.push("appointment");
@@ -130,17 +145,20 @@ export default function FinalResult() {
 
   return (
     <div
-      className="p-9 font-sora min-h-screen text-white flex items-center justify-center px-4 relative overflow-hidden bg-cover bg-center"
-      style={{
-        backgroundImage:
-          step === 3 ? ` url(${OutputBg.src})` : ` url(${ResultBg.src})`,
-        backgroundColor: step === 3 && "#1B1B1B",
-        backgroundBlendMode: "lighten",
-      }}
+      className="p-9 font-sora  text-black flex justify-center px-4 relative overflow-hidden bg-cover bg-center"
+      style={
+        {
+          // backgroundImage:
+          //   step === 3 ? ` url(${OutputBg.src})` : ` url(${ResultBg.src})`,
+          // backgroundColor: step === 3 && "#1B1B1B",
+          // backgroundBlendMode: "lighten",
+        }
+      }
     >
+      {!isTyping && !isLoading && <ParticlesComp />}
       <div
         className={`${
-          step === 3 ? "" : "max-w-6xl"
+          step === 3 ? "" : "max-w-[1600px]"
         } w-full z-10 text-center transition-all duration-300 ease-in-out ${
           slideDirection === "slide-left"
             ? "transform -translate-x-full opacity-0"
@@ -150,37 +168,6 @@ export default function FinalResult() {
         }`}
       >
         {/* Step 1 */}
-        {step === 1 && (
-          <>
-            <h1 className="text-2xl md:text-2xl font-medium mb-10">
-              I am seeking support in:
-            </h1>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-7 gap-5 mb-10">
-              {seekingSupport.map((cat) => (
-                <button
-                  key={cat.id}
-                  type="button"
-                  onClick={() => setSelectedCategory(cat.id)}
-                  className={`py-4 rounded-full text-sm font-medium border border-white transition-all duration-200 ${
-                    selectedCategory === cat.id
-                      ? "bg-gray-400 text-black"
-                      : "bg-white text-black bg-transparent hover:bg-[#CACACA] hover:text-black"
-                  }`}
-                >
-                  {cat.label}
-                </button>
-              ))}
-            </div>
-
-            <button
-              onClick={handleSubmitStep1}
-              className="max-w-xs w-full backdrop-blur-md bg-white/10 text-white px-12 py-4 rounded-full border border-white hover:bg-white/20 transition-all duration-300"
-            >
-              NEXT
-            </button>
-          </>
-        )}
 
         {/* Step 2 */}
         {step === 2 && (
@@ -189,33 +176,41 @@ export default function FinalResult() {
               {`Select ${selectedCategoryObj?.label} Support:`}
             </h1>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-7 gap-5 mb-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-x-7 gap-5 mb-10">
               {goalsStep2.map((goal) => (
                 <button
                   key={goal.id}
                   type="button"
                   onClick={() => setSelectedGoal(goal.id)}
-                  className={`py-4 rounded-full text-sm font-medium border border-white transition-all duration-200 ${
+                  className={`py-4 min-h-[60px] rounded-full text-sm font-medium border border-white transition-all duration-200 ${
                     selectedGoal === goal.id
-                      ? "bg-[#CACACA] text-black"
-                      : "bg-white text-black bg-transparent hover:bg-[#CACACA] hover:text-black"
-                  }`}
+                      ? "bg-gray-400 text-black border-white"
+                      : "bg-[#E6E6E6] text-black bg-transparent border-white"
+                  }
+hover:border-[#D3D3D3] hover:shadow-[2px_4px_4px_0px_#0000001C] hover:bg-[#FFFFFF] hover:text-black`}
                 >
                   {goal.label}
                 </button>
               ))}
             </div>
 
-            <div className="flex justify-center gap-4">
+            <div className="flex w-full flex-col sm:flex-row justify-center gap-4  max-w-3xl mx-auto">
               <button
                 onClick={handleBack}
-                className="px-8 py-3 rounded-full border border-white text-white hover:bg-white/10"
+                style={{
+                  background: "rgba(51, 95, 134, 0.13)",
+                  border: "1px solid rgba(51, 95, 134, 1)",
+                  backdropFilter: "blur(19.2px)",
+                  WebkitBackdropFilter: "blur(19.2px)",
+                }}
+                className="w-full sm:w-1/2 md:w-[250px] px-8 py-3 rounded-full text-[#335F86] transition-all duration-300 hover:bg-white/10"
               >
                 Back
               </button>
+
               <button
                 onClick={handleFinalSubmit}
-                className="px-8 py-3 rounded-full border border-white bg-white/10 text-white hover:bg-white/20"
+                className="w-full sm:w-1/2 md:w-[250px] px-8 py-3 rounded-full border border-white text-white bg-[#335F86] backdrop-blur-[19.2px] hover:bg-[#4477A3]"
               >
                 Submit
               </button>
@@ -350,7 +345,10 @@ export default function FinalResult() {
 
                   {/* Right: Speech Bubble */}
                   <div className="flex flex-col justify-end mr-44 items-center pr-8 lg:pr-16">
-                    <div className="relative bg-white mb-5 text-black text-xl 2xl:text-2xl p-8 rounded-[50px] shadow-2xl font-medium animate-slideInRight">
+                    <div
+                      className="relative bg-[#E6E6E6] mb-5 text-black text-xl 2xl:text-2xl p-8 rounded-[50px] font-medium animate-slideInRight"
+                      style={{ boxShadow: "2px 4px 8.7px 0px #00000030" }}
+                    >
                       <p className="leading-relaxed">
                         {displayedText}
                         {isTyping && <span className="animate-pulse">|</span>}
@@ -358,9 +356,8 @@ export default function FinalResult() {
 
                       {/* Long speech bubble tail pointing left from bottom */}
                       <div className="absolute left-7 rotate-[-25deg] -bottom-3 transform -translate-x-full">
-                        {/* Main tail triangle - longer and positioned at bottom */}
                         <div className="relative">
-                          <div className="w-0 h-0 border-t-[60px] border-t-transparent border-b-[10px] border-b-transparent border-r-[70px] border-r-white"></div>
+                          <div className="w-0 h-0 border-t-[60px] border-t-transparent border-b-[10px] border-b-transparent border-r-[70px] border-r-[#E6E6E6]"></div>
                         </div>
                       </div>
                     </div>
@@ -369,12 +366,12 @@ export default function FinalResult() {
                         <button
                           onClick={handleSubmit}
                           style={{
-                            background: "rgba(255, 255, 255, 0.19)",
-                            border: "3px solid rgba(255, 255, 255, 1)",
+                            background: "#335F86",
+
                             backdropFilter: "blur(19.2px)",
                             WebkitBackdropFilter: "blur(19.2px)",
                           }}
-                          className=" text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg animate-slideInUp"
+                          className="text-white font-semibold text-xl py-5 px-12 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg animate-slideInUp"
                         >
                           Book an Appointment
                         </button>
@@ -401,7 +398,10 @@ export default function FinalResult() {
 
                   {/* Mobile: Speech Bubble */}
                   <div className="w-full max-w-md">
-                    <div className="relative bg-white text-black text-base p-6 rounded-3xl shadow-2xl font-medium animate-slideInUp">
+                    <div
+                      className="relative bg-[#E6E6E6] text-black text-base p-6 rounded-3xl font-medium animate-slideInUp"
+                      style={{ boxShadow: "2px 4px 8.7px 0px #00000030" }}
+                    >
                       <p className="leading-relaxed text-center">
                         {displayedText}
                         {isTyping && <span className="animate-pulse">|</span>}
@@ -409,7 +409,7 @@ export default function FinalResult() {
 
                       {/* Mobile speech bubble tail pointing up to robot */}
                       <div className="absolute top-[-20px] left-1/2 transform -translate-x-1/2">
-                        <div className="w-0 h-0 border-l-[15px] border-l-transparent border-r-[15px] border-r-transparent border-b-[20px] border-b-white"></div>
+                        <div className="w-0 h-0 border-l-[15px] border-l-transparent border-r-[15px] border-r-transparent border-b-[20px] border-b-[#E6E6E6]"></div>
                       </div>
                     </div>
                   </div>
@@ -418,12 +418,12 @@ export default function FinalResult() {
                       <button
                         onClick={handleSubmit}
                         style={{
-                          background: "rgba(255, 255, 255, 0.19)",
-                          border: "3px solid rgba(255, 255, 255, 1)",
+                          background: "#335F86",
+
                           backdropFilter: "blur(19.2px)",
                           WebkitBackdropFilter: "blur(19.2px)",
                         }}
-                        className="  text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg animate-slideInUp"
+                        className="text-white font-semibold py-5 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg animate-slideInUp"
                       >
                         Book an Appointment
                       </button>

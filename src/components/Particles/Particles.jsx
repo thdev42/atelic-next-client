@@ -2,7 +2,7 @@ import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import React, { useEffect, useState } from "react";
 
-const ParticlesComp = () => {
+const ParticlesComp = ({ isDark }) => {
   const [init, setInit] = useState(false);
   useEffect(() => {
     initParticlesEngine(async (engine) => {
@@ -211,7 +211,7 @@ const ParticlesComp = () => {
         },
       },
       color: {
-        value: "#f02c2c",
+        value: isDark ? "#ffffff" : "#f02c2c",
         animation: {
           h: {
             count: 0,
@@ -486,7 +486,7 @@ const ParticlesComp = () => {
       links: {
         blink: false,
         color: {
-          value: "#f02c2c",
+          value: isDark ? "#ffffff" : "#f02c2c",
         },
         consent: false,
         distance: 150,

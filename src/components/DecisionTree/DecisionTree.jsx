@@ -4,24 +4,13 @@ import React, { useState } from "react";
 import { SelectField } from "../SelectComp/SelectComp";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
-import { paragraphStyles } from "@/styles/globalStyles";
+import { useFormContext } from "@/context/FormContext";
 
 export const DecisionTree = ({ onComplete, data }) => {
   const router = useRouter();
 
-  const [formData, setFormData] = useState({
-    industry: "",
-    role: "",
-    employees: "",
-    support: "",
-  });
-
-  const [customValues, setCustomValues] = useState({
-    industry: "",
-    role: "",
-    employees: "",
-    support: "",
-  });
+  const { formData, setFormData, customValues, setCustomValues } =
+    useFormContext();
 
   const [modalState, setModalState] = useState({
     isOpen: false,
@@ -41,7 +30,7 @@ export const DecisionTree = ({ onComplete, data }) => {
         ...prev,
         [key]: value,
       }));
-      // Clear custom value if not selecting other
+
       setCustomValues((prev) => ({
         ...prev,
         [key]: "",
@@ -102,7 +91,6 @@ export const DecisionTree = ({ onComplete, data }) => {
       return;
     }
 
-    // Prepare final data with custom values where applicable
     const finalData = {
       industry: industry === "other" ? customValues.industry : industry,
       role: role === "other" ? customValues.role : role,
@@ -114,8 +102,6 @@ export const DecisionTree = ({ onComplete, data }) => {
       pathname: "/dt",
       query: finalData,
     });
-
-    // onComplete(finalData);
   };
 
   const selectFields = [
@@ -203,9 +189,7 @@ export const DecisionTree = ({ onComplete, data }) => {
               </span>
             ))}
           </h2>
-          <p
-            className={`${paragraphStyles} leading-normal text-white/60 max-w-[580px] mb-4`}
-          >
+          <p className="2xl:text-[22px] font-light sm:text-lg  leading-normal text-white/60 max-w-[580px] mb-4">
             Use our smart decision tool to discover which AI technologies best
             align with your business goals.
           </p>
@@ -213,15 +197,39 @@ export const DecisionTree = ({ onComplete, data }) => {
 
         <div className="font-sora w-full 2xl:max-w-[520px] lg:max-w-[480px] space-y-5">
           <form onSubmit={handleSubmit} className="space-y-5">
-            {selectFields.map(({ key, placeholder, options }) => (
-              <SelectField
-                key={key}
-                placeholder={placeholder}
-                value={formData[key]}
-                onChange={(value) => handleChange(key, value)}
-                options={options}
-              />
-            ))}
+            {selectFields.map(({ key, placeholder, options }) => {
+              // Append custom "Other" label if needed
+              const enhancedOptions = [...options];
+              const isOtherSelected = formData[key] === "other";
+              const customLabel = customValues[key];
+
+              if (isOtherSelected && customLabel) {
+                const index = enhancedOptions.findIndex(
+                  (opt) => opt.value === "other"
+                );
+                if (index !== -1) {
+                  enhancedOptions[index] = {
+                    ...enhancedOptions[index],
+                    label: customLabel,
+                  };
+                } else {
+                  enhancedOptions.push({
+                    value: "other",
+                    label: customLabel,
+                  });
+                }
+              }
+
+              return (
+                <SelectField
+                  key={key}
+                  placeholder={placeholder}
+                  value={isOtherSelected ? "other" : formData[key]}
+                  onChange={(value) => handleChange(key, value)}
+                  options={enhancedOptions}
+                />
+              );
+            })}
 
             <button
               type="submit"

@@ -8,9 +8,13 @@ import { useEffect, useState } from "react";
 import { fetchNavbarsData } from "@/lib/api/navbar";
 import { fetchUpdatedAt } from "@/lib/updatedAt";
 import { useRouter } from "next/router";
+import { API_BASE_URL } from "@/config/config";
+import { FormProvider } from "@/context/FormContext";
 
 const Layout = ({ children }) => {
-  const { background, isShowNav, setLoading } = useBackground();
+  const { background, backgroundType, isShowNav, setLoading } = useBackground();
+
+  console.log(background, "BACKGROUND");
 
   const [navLinks, setNavLinks] = useState([]);
 
@@ -51,11 +55,26 @@ const Layout = ({ children }) => {
     getNavbarSections();
   }, []);
 
+  // Generate background styles based on type
+  const getBackgroundStyles = () => {
+    if (!background) return { background: "red" };
+
+    if (backgroundType == "image") {
+      return {
+        backgroundImage: `url(${API_BASE_URL}${background})`,
+        // backgroundSize: "contain",
+        // backgroundPosition: "center",
+        // backgroundRepeat: "no-repeat",
+        // backgroundAttachment: "fixed",
+      };
+    } else {
+      // backgroundType === "color" or default
+      return { background: background };
+    }
+  };
+
   return (
-    <main
-      className="min-h-screen text-black"
-      style={{ background: background ? background : "black" }}
-    >
+    <main className="min-h-screen text-black" style={getBackgroundStyles()}>
       <ParallaxProvider>
         {isShowNav && <Navbar data={navLinks} />}
         {children}
@@ -63,12 +82,15 @@ const Layout = ({ children }) => {
     </main>
   );
 };
+
 const LayoutWrapper = ({ children }) => (
   <BackgroundProvider>
     <NavProvider>
       <LoaderProvider>
-        <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
-        <Layout>{children}</Layout>
+        <FormProvider>
+          <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
+          <Layout>{children}</Layout>
+        </FormProvider>
       </LoaderProvider>
     </NavProvider>
   </BackgroundProvider>

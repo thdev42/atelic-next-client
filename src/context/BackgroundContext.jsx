@@ -5,11 +5,18 @@ const BackgroundContext = createContext();
 
 export const BackgroundProvider = ({ children }) => {
   const [background, setBackground] = useState("#e9e9e9");
+  const [backgroundType, setBackgroundType] = useState("color"); // "color" or "image"
   const [activeHeroIndex, setActiveHeroIndex] = useState(0);
   const [slideProgress, setSlideProgress] = useState(0);
   const [isShowNav, setIsShowNav] = useState(true);
   const [isDark, setIsDark] = useState(false);
   const [fixedNav, setFixedNav] = useState(false);
+
+  // Enhanced setBackground function to handle both colors and images
+  const setBackgroundValue = useCallback((value, type = "color") => {
+    setBackground(value);
+    setBackgroundType(type);
+  }, []);
 
   const updateSlideProgress = useCallback((progress) => {
     setSlideProgress(progress);
@@ -17,9 +24,10 @@ export const BackgroundProvider = ({ children }) => {
 
   const value = {
     background,
+    backgroundType,
+    setBackground: setBackgroundValue,
     isDark,
     setIsDark,
-    setBackground,
     activeHeroIndex,
     setActiveHeroIndex,
     slideProgress,
