@@ -964,12 +964,17 @@ const resolveImageSrc = (imageData) => {
 };
 
 // Enhanced Dynamic Hero Component
+// Enhanced Dynamic Hero Component with Vertical Navigation
 export const HeroDynamic = ({
   heroData,
   sectionY,
   backgroundY,
   robotY,
   textY,
+  activeSection,
+  hero,
+  goToSlide = () => {},
+  isDark = false,
 }) => {
   const {
     heroType = "robot",
@@ -979,6 +984,7 @@ export const HeroDynamic = ({
     bgImage,
     headliness,
     subHeading,
+
     wholeHeroBg,
     primaryButtonText = "Book a Consultation",
     secondaryButtonText = "Explore Our Approach",
@@ -987,7 +993,7 @@ export const HeroDynamic = ({
   const headlines = parseHeadlines(headliness);
   const mainImage = resolveImageSrc(heroImage);
   const backgroundImage = resolveImageSrc(bgImage);
-  const isDark = theme === "dark";
+  const isDarkTheme = theme === "dark" || isDark;
   const isRobot = heroType === "robot";
   const isChip = heroType === "chip";
   const isInnovation = heroType === "innovation";
@@ -999,7 +1005,7 @@ export const HeroDynamic = ({
       "max-w-[1920px] mx-auto w-full 2xl:py-5 relative overflow-hidden select-none";
 
     if (isInnovation) {
-      return `${baseStyles} lg:min-h-[700px] 2xl:min-h-[800px] overflow-x-clip overflow-visible`;
+      return `${baseStyles} lg:min-h-[500px] 2xl:min-h-[800px] overflow-x-clip overflow-visible`;
     }
 
     if (isChip) {
@@ -1007,18 +1013,18 @@ export const HeroDynamic = ({
     }
 
     if (isFullBg) {
-      return `${baseStyles} lg:min-h-[700px] 2xl:min-h-[800px]`;
+      return `${baseStyles} lg:min-h-[500px] 2xl:min-h-[800px]`;
     }
 
     return `${baseStyles}  lg:max-h-[600px] 2xl:max-h-[850px]`;
   };
 
   const getTextColor = () => {
-    return isDark ? "text-white" : "text-black";
+    return isDarkTheme ? "text-white" : "text-black";
   };
 
   const getDescriptionColor = () => {
-    return isDark ? "text-gray-300" : "text-gray-600";
+    return isDarkTheme ? "text-gray-300" : "text-gray-600";
   };
 
   // Dynamic background styling
@@ -1044,7 +1050,7 @@ export const HeroDynamic = ({
   // Enhanced headline rendering with smart ROI detection
   const renderHeadline = (text, index) => {
     const isROILine = text.toLowerCase().includes("roi");
-    const roiColor = isDark ? "text-white" : "text-[#F02C2C]";
+    const roiColor = isDarkTheme ? "text-white" : "text-[#F02C2C]";
 
     return (
       <motion.span
@@ -1071,10 +1077,10 @@ export const HeroDynamic = ({
   const getLayoutConfig = () => {
     if (isInnovation) {
       return {
-        textWidth: "w-full lg:w-3/5 2xl:w-2/3",
+        textWidth: "w-full lg:w-3/4 2xl:w-2/3",
         imageWidth: "w-full lg:w-2/5 2xl:w-1/2",
         textPadding:
-          "px-4 lg:pt-36 sm:px-8 md:px-12 lg:px-[120px] 2xl:px-[178px]",
+          "px-4 lg:pt-24 xl:pt-36 2xl:pt-36 sm:px-8 md:px-12 lg:px-[120px] 2xl:px-[178px]",
         imagePadding: "px-4 sm:px-8 md:px-12 lg:px-0 lg:mr-28",
         containerPadding: "",
       };
@@ -1082,10 +1088,10 @@ export const HeroDynamic = ({
 
     if (isFullBg) {
       return {
-        textWidth: "w-full lg:w-3/5 2xl:w-2/3",
+        textWidth: "w-full lg:w-3/4 2xl:w-2/3",
         imageWidth: "w-full lg:w-2/5 2xl:w-1/2",
         textPadding:
-          "px-4 lg:pt-36 sm:px-8 md:px-12 lg:px-[120px] 2xl:px-[178px]",
+          "px-4 lg:pt-24 xl:pt-36 2xl:pt-36 sm:px-8 md:px-12 lg:px-[120px] 2xl:px-[178px]",
         imagePadding: "px-4 sm:px-8 md:px-12 lg:px-0 lg:mr-28",
         containerPadding: "",
       };
@@ -1110,6 +1116,39 @@ export const HeroDynamic = ({
       className={getContainerStyles()}
       style={getBackgroundStyles()}
     >
+      {/* Vertical Navigation - Now positioned relative to hero content */}
+      {hero.length > 0 && (
+        <div className="font-poppins hidden z-50 lg:flex flex-col gap-4 2xl:ml-20 xl:ml-10 ml-10 items-center absolute left-0 top-1/2 -translate-y-1/2">
+          {hero.map((_, idx) => (
+            <div
+              key={idx}
+              className={`relative cursor-pointer transition-all duration-300 ${
+                idx === activeSection ? "w-14 h-14" : "w-11 h-11"
+              } flex items-center justify-center`}
+              onClick={() => goToSlide(idx)}
+            >
+              <span
+                className={`text-sm font-semibold z-10 transition-colors duration-300 ${
+                  isDarkTheme ? "text-white" : "text-black"
+                }`}
+              >
+                {idx + 1 < 10 ? `0${idx + 1}` : idx + 1}
+              </span>
+              {idx === activeSection && (
+                <motion.span
+                  className={`absolute w-14 h-14 rounded-full border-[2px] rotate-[45deg] border-t-transparent transition-colors duration-300 ${
+                    isDarkTheme ? "border-white" : "border-black"
+                  }`}
+                  initial={{ scale: 0, rotate: 0 }}
+                  animate={{ scale: 1, rotate: 45 }}
+                  transition={{ duration: 0.5, ease: "backOut" }}
+                />
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
       <div
         className={`${layoutConfig.containerPadding} mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 h-full`}
       >
@@ -1311,8 +1350,8 @@ export const HeroDynamic = ({
                           className={`z-50 font-poppins absolute xs:w-[180px] xs:h-[140px] w-[220px] h-[180px] 2xl:w-[240px] 2xl:h-[200px] 
           ${
             index === 0
-              ? "top-6 -right-6 lg:top-14 lg:-right-6"
-              : "bottom-0 left-0 2xl:bottom-40 2xl:-left-20"
+              ? "top-6 -right-6 lg:top-14 xl:-right-6"
+              : "bottom-0 left-0 lg:bottom-24 lg:-left-14 2xl:bottom-40 2xl:-left-20"
           } 
           bg-white/40 rounded-[30px] shadow-[0_4px_60px_rgba(0,0,0,0.05)] backdrop-blur-[10px] px-9 py-4 flex flex-col`}
                         >

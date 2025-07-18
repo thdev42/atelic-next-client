@@ -150,7 +150,7 @@ const HeroSection = ({ scrollYSProgress, section }) => {
       onTouchEnd={handleTouchEnd}
     >
       {/* Vertical Numbers - Fixed Position */}
-      <div
+      {/* <div
         className="font-poppins hidden z-50 lg:flex flex-col gap-4 2xl:ml-20 xl:ml-10 ml-10 items-center fixed left-0 top-1/2 -translate-y-1/2"
         style={{ transform: "translateY(-50%) translateY(10vh)" }}
       >
@@ -181,7 +181,7 @@ const HeroSection = ({ scrollYSProgress, section }) => {
             )}
           </div>
         ))}
-      </div>
+      </div> */}
 
       {/* Slide Component */}
       {isMobile ? (
@@ -197,6 +197,7 @@ const HeroSection = ({ scrollYSProgress, section }) => {
               heroData={activeSlideData}
               sectionY={sectionY}
               backgroundY={backgroundY}
+              activeSection={activeSection}
               robotY={robotY}
               textY={textY}
             />
@@ -210,6 +211,9 @@ const HeroSection = ({ scrollYSProgress, section }) => {
             <HeroDynamic
               heroData={activeSlideData}
               sectionY={sectionY}
+              hero={heroDataArray}
+              goToSlide={goToSlide}
+              activeSection={activeSection}
               backgroundY={backgroundY}
               robotY={robotY}
               textY={textY}
