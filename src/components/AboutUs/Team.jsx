@@ -57,7 +57,7 @@ export default function TeamSection({ sections }) {
           {teamMembers.map((member, index) => (
             <div
               key={index}
-              className="flip-card w-full max-w-[479px] min-w-[270px] mx-auto min-h-[410px] cursor-pointer"
+              className="flip-card w-full max-w-[479px] min-w-[390px] mx-auto min-h-[410px] cursor-pointer"
             >
               <div className="flip-inner relative w-full h-full">
                 {/* Front */}

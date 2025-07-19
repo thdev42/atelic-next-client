@@ -105,7 +105,7 @@ const AgenticCard = ({ solution, onClose, index }) => {
       animate={{ opacity: 1, scale: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.8, y: 50 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="font-sora 2xl:w-[413px] lg:w-[300px] h-[100px] rounded-[66.5px] flex items-center px-6 bg-white shadow-lg cursor-pointer hover:shadow-xl transition-shadow duration-300"
+      className="font-sora 2xl:w-[413px] 2xl:h-[120px] lg:w-[300px] h-[100px] rounded-[66.5px] flex items-center px-6 bg-white shadow-lg cursor-pointer hover:shadow-xl transition-shadow duration-300"
       onClick={onClose}
     >
       <div
@@ -293,7 +293,7 @@ const IceBerg = ({ sections }) => {
           {/* Iceberg Background with Scroll-Reveal Circles */}
           <div
             ref={svgContainerRef}
-            className="lg:block hidden relative w-full"
+            className="4min:block hidden relative w-full"
           >
             <IceBergSvg circles={circlesForSVG} />
             {solutionsData.map((solution, index) => (
