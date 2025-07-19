@@ -105,20 +105,20 @@ const AgenticCard = ({ solution, onClose, index }) => {
       animate={{ opacity: 1, scale: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.8, y: 50 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="font-sora w-[413px] h-[117px] rounded-[66.5px] flex items-center px-6 bg-white shadow-lg cursor-pointer hover:shadow-xl transition-shadow duration-300"
+      className="font-sora 2xl:w-[413px] lg:w-[300px] h-[100px] rounded-[66.5px] flex items-center px-6 bg-white shadow-lg cursor-pointer hover:shadow-xl transition-shadow duration-300"
       onClick={onClose}
     >
       <div
-        className="w-[75px] h-[75px] rounded-full flex items-center justify-center flex-shrink-0 text-white text-2xl font-light"
+        className="2xl:w-[75px] 2xl:h-[75px] lg:w-[60px] lg:h-[60px] rounded-full flex items-center justify-center flex-shrink-0 text-white text-2xl font-light"
         style={{ backgroundColor: solution.circleColor || "#0B2341" }}
       >
         {String(index + 1).padStart(2, "0")}
       </div>
       <div className="ml-6 text-left">
-        <h3 className="text-[18px] font-semibold text-black mb-1">
+        <h3 className="2xl:text-[18px] lg:text-[14px] font-semibold text-black mb-1">
           {solution.title}
         </h3>
-        <p className="text-[15px] text-black leading-relaxed whitespace-pre-line">
+        <p className="2xl:text-[15px] lg:text-[13px] text-black 2xl:leading-relaxed whitespace-pre-line">
           {solution.description}
         </p>
       </div>
@@ -291,7 +291,10 @@ const IceBerg = ({ sections }) => {
           </div>
 
           {/* Iceberg Background with Scroll-Reveal Circles */}
-          <div ref={svgContainerRef} className="relative w-full">
+          <div
+            ref={svgContainerRef}
+            className="lg:block hidden relative w-full"
+          >
             <IceBergSvg circles={circlesForSVG} />
             {solutionsData.map((solution, index) => (
               <ScrollRevealCircle
