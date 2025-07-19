@@ -47,8 +47,9 @@ const AiInsights = ({ sections }) => {
           className={`text-3xl sm:text-4xl xl:text-5xl 2xl:text-[60px] font-light text-center mb-16`}
           style={{ color: sections?.heading?.[0]?.color || "black" }}
         >
-          {sections?.heading?.[0]?.text?.split(" ").map((word, index) => {
-            const isBold = word.toLowerCase() === "team"; // or based on any condition you want
+          {sections?.heading?.[0]?.text?.split(" ").map((word, index, arr) => {
+            const isBold =
+              word.toLowerCase() === arr[arr.length - 1].toLowerCase();
             return (
               <span key={index} className={isBold ? "font-semibold" : ""}>
                 {word}{" "}
@@ -95,7 +96,10 @@ const AiInsights = ({ sections }) => {
                 />
                 <p className="text-sm text-gray-500 py-4">{member.title}</p>
                 <p className="text-black/80 text-base xl:text-lg 2xl:text-[22px] mb-9  mx-auto lg:mx-0 2xl:leading-relaxed font-light">
-                  {member?.description}
+                  {member?.description}{" "}
+                  <span className="cursor-pointer underline text-base xl:text-md 2xl:text-[19px]">
+                    Learn More
+                  </span>
                 </p>
               </div>
             </div>

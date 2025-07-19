@@ -531,11 +531,11 @@ export const HeroServices = ({
             <AnimatedHeadingBoldLast
               headings={sections?.headings}
               textY={textY}
-              className="font-sora leading-tight text-4xl sm:text-5xl lg:text-4xl 2xl:text-[60px]"
+              className={` font-sora leading-tight ${headingStyle}`}
             />
 
             <motion.p
-              className="text-base sm:text-lg lg:text-md 2xl:text-[20px] font-thin font-sora leading-relaxed 2xl:leading-loose text-white mt-6 2xl:mt-14"
+              className={`text-base ${paragraphStyles} font-thin font-sora leading-relaxed 2xl:leading-loose text-white mt-6 2xl:mt-14`}
               initial={{ opacity: 0, y: 20 }}
               style={{ y: textY }}
               animate={{ opacity: 1, y: 0 }}
@@ -697,7 +697,7 @@ export const HeroAboutUs = ({
 };
 export const AnimatedHeadingPartners = ({ headings = [], textY = 0 }) => {
   return (
-    <h1 className="text-4xl font-light sm:text-5xl lg:text-4xl 2xl:text-[60px] font-raleway leading-tight">
+    <h1 className={`font-light ${headingStyle} font-raleway leading-tight`}>
       {headings.map((heading, index) => {
         const isLast = index === headings.length - 1;
         const color = heading.color?.trim() || "black";
@@ -750,7 +750,7 @@ export const HeroPartners = ({
           <AnimatedHeadingPartners headings={data?.headings} />
 
           <motion.p
-            className="text-base 2xl:max-w-2xl  max-w-2xl sm:text-lg lg:text-md 2xl:text-[20px] font-medium font-raleway leading-relaxed 2xl:leading-loose text-black mt-6 2xl:mt-14"
+            className={`text-base 2xl:max-w-2xl  max-w-2xl ${paragraphStyles} font-medium font-raleway leading-relaxed 2xl:leading-loose text-black mt-6 2xl:mt-14`}
             initial={{ opacity: 0, y: 20 }}
             style={{ y: textY }}
             animate={{ opacity: 0.75, y: 0 }}
@@ -838,7 +838,7 @@ export const HeroNews = ({ sectionY, backgroundY, robotY, textY, data }) => {
           >
             <AnimatedHeading
               headings={data?.headings}
-              className="text-4xl font-light sm:text-5xl lg:text-4xl 2xl:text-[60px] font-raleway leading-tight"
+              className={`font-light ${headingStyle} font-raleway leading-tight`}
             />
             {/* <h1 className="text-4xl font-light sm:text-5xl lg:text-4xl 2xl:text-[60px] font-raleway leading-tight">
             Our
@@ -855,7 +855,7 @@ export const HeroNews = ({ sectionY, backgroundY, robotY, textY, data }) => {
           </h1> */}
 
             <motion.p
-              className="text-base 2xl:max-w-2xl  max-w-2xl sm:text-lg lg:text-md 2xl:text-[20px] font-medium font-raleway leading-relaxed 2xl:leading-loose text-black mt-6 2xl:mt-14"
+              className={`2xl:max-w-2xl  max-w-2xl ${paragraphStyles} font-medium font-raleway leading-relaxed 2xl:leading-loose text-black mt-6 2xl:mt-14`}
               initial={{ opacity: 0, y: 20 }}
               style={{ y: textY }}
               animate={{ opacity: 0.75, y: 0 }}

@@ -5,6 +5,7 @@ import cube2 from "../../../assets/Cube2.png";
 import cube3 from "../../../assets/Cube3.png";
 import { formatHeading } from "../Partners/Partners";
 import { API_BASE_URL } from "@/config/config";
+import { headingStyle, paragraphStyles } from "@/styles/globalStyles";
 
 // const features = [
 //   {
@@ -33,13 +34,17 @@ const OurSolutions = ({ sections }) => {
         <div className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 mb-12 sm:mb-16 lg:mb-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 xl:gap-12 items-start lg:items-center">
             <div>
-              <h2 className="text-3xl sm:text-4xl md:text-[41px] 2xl:text-6xl font-medium text-black leading-tight">
+              <h2
+                className={`${headingStyle} font-medium text-black leading-tight`}
+              >
                 {/* Our <span className="font-bold">Solutions</span> */}
                 {formatHeading(sections?.heading)}
               </h2>
             </div>
             <div>
-              <p className="2xl:text-[18px] lg:text-sm text-sm text-black leading-relaxed mt-4 lg:mt-0">
+              <p
+                className={`${paragraphStyles} text-black leading-relaxed mt-4 lg:mt-0`}
+              >
                 {sections?.subHeading}
               </p>
             </div>
@@ -71,18 +76,20 @@ const OurSolutions = ({ sections }) => {
                   <img
                     src={`${API_BASE_URL}${feature?.image?.url}`}
                     alt="Solution Icon"
-                    className="max-w-[90px] 2xl:max-w-none object-contain"
+                    className="max-w-[90px] 2xl:max-w-[130px]  object-contain"
                   />
                 </div>
 
                 {/* Index number - only on hover */}
                 <div className="absolute top-4 sm:top-5 right-4 sm:right-5 text-2xl 2xl:text-4xl font-medium text-black opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
-                  {index + 1}
+                  0{index + 1}
                 </div>
 
                 {/* Text Content */}
                 <div className="flex-1 flex flex-col justify-end">
-                  <p className=" lg:text-[11px] text-[11px] 2xl:text-[17px] text-gray-700 leading-relaxed">
+                  <p
+                    className={`2xl:text-[16px] lg:text-[14px] text-gray-700 leading-relaxed`}
+                  >
                     {feature.text}
                     <span className="underline ml-1 cursor-pointer hover:text-[#F21B2A] transition-colors duration-200">
                       Read More

@@ -3,6 +3,7 @@ import Image from "next/image";
 import Group1 from "../../../assets/Group1.png";
 import { formatHeading } from "../Partners/Partners";
 import { API_BASE_URL } from "@/config/config";
+import { headingStyle, paragraphStyles } from "@/styles/globalStyles";
 
 const cardData = [
   {
@@ -40,10 +41,12 @@ export const RedefiningSuccess = ({ sections }) => {
       <div className="font-sora md:mt-10 px-4 text-black sm:px-8 md:px-12 lg:px-[100px] 2xl:px-[178px] mx-auto">
         {/* Header Section */}
         <div className="mx-auto max-w-5xl text-center">
-          <h1 className="text-3xl sm:text-3xl md:text-[43px] 2xl:text-6xl font-normal">
+          <h1 className={`${headingStyle} font-normal`}>
             {formatHeading(sections?.heading)}
           </h1>
-          <p className="lg:max-w-3xl 2xl:max-w-none lg:text-sm lg:leading-loose 2xl:text-[18px] mt-4 leading-relaxed mx-auto">
+          <p
+            className={`lg:max-w-3xl 2xl:max-w-none ${paragraphStyles} lg:leading-loose mt-4 leading-relaxed mx-auto`}
+          >
             {sections?.subHeading}
           </p>
         </div>
@@ -57,25 +60,37 @@ export const RedefiningSuccess = ({ sections }) => {
             >
               {/* Card Number */}
               <span className="absolute top-4 right-4 text-lg font-light">
-                {index + 1}
+                0{index + 1}
               </span>
 
               {/* Icon Section */}
-              <div className="flex flex-col items-center flex-shrink-0">
-                <div className="w-[124px] h-[124px] max-w-[90px] 2xl:max-w-none flex items-center justify-center transition-colors duration-300 rounded-full">
+              <div className="group flex flex-col items-center flex-shrink-0">
+                <div className="w-[124px] h-[124px] max-w-[90px] 2xl:max-w-none flex items-center justify-center transition-colors duration-300 rounded-full relative">
+                  {/* Default image */}
                   <img
                     src={`${API_BASE_URL}${item?.image?.url}`}
                     alt={`icon-${item.id}`}
                     width={124}
                     height={124}
+                    className="absolute inset-0 object-contain group-hover:opacity-0 transition-opacity duration-300"
+                  />
+
+                  {/* Hover image */}
+                  <img
+                    src={`${API_BASE_URL}${item?.hoverImage?.url}`} // ← Add hover image in data
+                    alt={`icon-hover-${item.id}`}
+                    width={124}
+                    height={124}
+                    className="absolute inset-0 object-contain opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   />
                 </div>
-                <div className="w-20 h-[3px] mt-4 bg-[#335F86] group-hover:bg-white transition-colors duration-300 " />
+
+                <div className="w-20 h-[3px] mt-4 bg-[#335F86] group-hover:bg-white transition-colors duration-300" />
               </div>
 
               {/* Text Section */}
               <div className="flex-1 flex items-center justify-center">
-                <p className="2xl:text-[18px] text-[13px] font-light leading-loose mt-3">
+                <p className="2xl:text-[16px] lg:text-[14px] font-light leading-loose mt-3">
                   {item.text}
                 </p>
               </div>

@@ -6,6 +6,7 @@ import cube2 from "../../../assets/Cube2.png";
 import cube3 from "../../../assets/Cube3.png";
 import { formatHeading } from "../Partners/Partners";
 import { API_BASE_URL } from "@/config/config";
+import { headingStyle, paragraphStyles } from "@/styles/globalStyles";
 
 const features = [
   {
@@ -49,12 +50,16 @@ const Differentiation = ({ sections }) => {
         <div className="font-raleway mt-8 sm:mt-12 md:mt-16 lg:mt-20 mb-12 sm:mb-16 lg:mb-20">
           <div className="mx-auto text-center lg:items-center">
             <div>
-              <h2 className="text-3xl sm:text-4xl md:text-[41px] 2xl:text-[60px]  font-medium text-black leading-tight">
+              <h2
+                className={`${headingStyle} font-medium text-black leading-tight`}
+              >
                 {formatHeading(sections?.heading)}
               </h2>
             </div>
             <div>
-              <p className="2xl:text-[22px] max-w-5xl mx-auto lg:text-sm text-sm  text-black 2xl:leading-relaxed pt-9 lg:mt-0">
+              <p
+                className={`max-w-5xl mx-auto ${paragraphStyles} text-black 2xl:leading-relaxed pt-9 lg:mt-0`}
+              >
                 {sections?.subHeading}
               </p>
             </div>
@@ -92,12 +97,12 @@ const Differentiation = ({ sections }) => {
 
                 {/* Index number - only on hover */}
                 <div className="absolute top-4 sm:top-5 right-4 sm:right-5 text-2xl 2xl:text-4xl font-medium text-black opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
-                  {index + 1}
+                  0{index + 1}
                 </div>
 
                 {/* Text Content */}
                 <div className="flex-1 flex flex-col justify-end">
-                  <p className=" lg:text-[11px] text-[11px] 2xl:text-[17px] text-gray-700 leading-relaxed">
+                  <p className=" 2xl:text-[16px] lg:text-[14px] text-gray-700 leading-relaxed">
                     {feature.text}
                     {/* <span className="underline ml-1 cursor-pointer hover:text-[#F21B2A] transition-colors duration-200">
                       Read More
@@ -108,11 +113,11 @@ const Differentiation = ({ sections }) => {
             </div>
           ))}
         </div>
-        <div className="font-raleway mt-12 flex justify-center items-center">
+        {/* <div className="font-raleway mt-12 flex justify-center items-center">
           <button className="font-raleway text-xs sm:text-sm lg:text-xs xl:text-sm 2xl:text-[16px] bg-[#F21B2A] text-white px-6 2xl:px-14 py-4 rounded-md hover:bg-[#082c4e] transition duration-200">
             Learn More
           </button>
-        </div>
+        </div> */}
       </div>
     </section>
   );

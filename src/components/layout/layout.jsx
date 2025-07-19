@@ -65,7 +65,7 @@ const Layout = ({ children }) => {
         // backgroundSize: "contain",
         // backgroundPosition: "center",
         // backgroundRepeat: "no-repeat",
-        // backgroundAttachment: "fixed",
+        // backgroundAttachment: "scroll",
       };
     } else {
       // backgroundType === "color" or default

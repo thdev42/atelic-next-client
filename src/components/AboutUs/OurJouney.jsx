@@ -29,9 +29,6 @@ const OurJourney = ({ sections }) => {
             >
               {sections?.subHeading}
             </p>
-            <button className="bg-[#F21B2A] hover:bg-red-700 transition text-white px-11 py-3 rounded-md text-sm sm:text-base relative z-10">
-              {sections?.primaryButton}
-            </button>
           </div>
 
           {/* RIGHT IMAGE */}

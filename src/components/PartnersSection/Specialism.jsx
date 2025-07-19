@@ -8,6 +8,7 @@ import VmWare from "../../../assets/VmWare.png";
 import Azure from "../../../assets/Azure.png";
 import { formatHeading } from "../Partners/Partners";
 import { API_BASE_URL } from "@/config/config";
+import { headingStyle, paragraphStyles } from "@/styles/globalStyles";
 
 // const tabs = [
 //   {
@@ -34,17 +35,23 @@ const Specialism = ({ sections }) => {
   return (
     <section className="bg-[#E8E8E8] max-w-[1920px] mx-auto w-full py-8 sm:py-10 lg:py-12 xl:py-16 relative overflow-hidden">
       <div className="font-raleway px-4 sm:px-6 md:px-8 lg:px-[100px] 2xl:px-[178px] mx-auto text-center">
-        <h2 className="mt-7 text-3xl sm:text-4xl md:text-[41px] 2xl:text-[60px] font-medium text-black leading-tight">
+        <h2
+          className={`md:text-left mt-7 ${headingStyle} font-medium text-black leading-tight`}
+        >
           {formatHeading(sections?.heading)}
         </h2>
-        <p className="2xl:text-[22px] mx-auto lg:text-sm text-sm  text-black 2xl:leading-relaxed pt-9 lg:mt-0">
+        <p
+          className={`md:text-left mx-auto ${paragraphStyles} text-black 2xl:leading-relaxed pt-9 lg:mt-0`}
+        >
           {sections?.subHeading}
         </p>
-        <p className="font-semibold 2xl:text-[22px] mt-6 text-[#333]">
+        <p
+          className={`md:text-left font-semibold ${paragraphStyles} mt-6 text-[#333]`}
+        >
           {sections?.buttonHeading}
         </p>
 
-        <div className="flex justify-center  mt-6 flex-wrap gap-3 2xl:gap-0 relative z-0">
+        <div className="flex justify-center  pt-20 flex-wrap gap-3 2xl:gap-0 relative z-0">
           {tabs.map((tab, index) => (
             <button
               key={tab.name}

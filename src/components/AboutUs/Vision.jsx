@@ -67,9 +67,6 @@ const Vision = ({ sections }) => {
                 Enterprise grade AI solution provider in the world, focused on
                 real customer ROI.
               </p> */}
-              <button className="bg-[#F21B2A] hover:bg-red-700 transition text-white px-11 py-3 rounded-md text-sm sm:text-base">
-                Read More
-              </button>
             </div>
           </div>
         </div>
@@ -98,9 +95,6 @@ const Vision = ({ sections }) => {
               >
                 {missionData?.subHeading}
               </p>
-              <button className="bg-[#F21B2A] hover:bg-red-700 transition text-white px-11 py-3 rounded-md text-sm sm:text-base">
-                {missionData?.primaryButton}
-              </button>
             </div>
 
             {/* OPTIONAL: Background SVG Lines */}

@@ -7,6 +7,7 @@ import BenHowWork from "../../../assets/BenHowWork.png";
 import Image from "next/image";
 import { API_BASE_URL } from "@/config/config";
 import { formatHeading } from "../Partners/Partners";
+import { headingStyle, paragraphStyles } from "@/styles/globalStyles";
 
 function CircleProgress({ percentage, label, description }) {
   const [dimensions, setDimensions] = useState({
@@ -34,10 +35,10 @@ function CircleProgress({ percentage, label, description }) {
         let baseSize;
         if (window.innerWidth >= 1536) {
           // 2xl
-          baseSize = 222;
+          baseSize = 220;
         } else if (window.innerWidth >= 1280) {
           // xl
-          baseSize = 2;
+          baseSize = 190;
         } else if (window.innerWidth >= 1024) {
           // lg
           baseSize = 22;
@@ -56,7 +57,7 @@ function CircleProgress({ percentage, label, description }) {
         const minSize = Math.max(textWidth * 1.8, textHeight * 3.5, baseSize);
 
         // Ensure it doesn't exceed container width but maintain minimum size
-        const maxSize = Math.max(Math.min(minSize, containerWidth - 20), 170);
+        const maxSize = Math.max(Math.min(minSize, containerWidth - 20), 175);
 
         const newRadius = (maxSize - 12) / 2; // Account for stroke width
 
@@ -90,9 +91,9 @@ function CircleProgress({ percentage, label, description }) {
     >
       {/* Container with responsive height for alignment */}
       <div
-        className="flex items-center justify-center"
+        className="flex items-center max-w-7xl justify-center 2xl:h-[300px] lg:h-[250px]"
         style={{
-          height: "300px",
+          // height: "300px",
           width: "100%",
           maxWidth: "300px",
         }}
@@ -147,8 +148,8 @@ function CircleProgress({ percentage, label, description }) {
       </div>
 
       {/* Description below */}
-      <div className="max-w-[400px] px-2">
-        <p className=" text-center 2xl:text-[16px] lg:text-[10px] md:text-[10px] text-sm text-gray-700 leading-snug break-words">
+      <div className="max-w-[600px] px-2">
+        <p className=" text-center 2xl:text-[16px] lg:text-[14px] md:text-[10px] text-sm text-gray-700 leading-snug break-words">
           {description}
         </p>
       </div>
@@ -244,25 +245,25 @@ const HowWeWork = ({ sections }) => {
             <div className="space-y-5 lg:relative mb-5 md:mb-0 lg:z-0 lg:ml-8 xl:ml-12 2xl:ml-16">
               {/* Heading with fade-in */}
               <div className="space-y-4">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-light text-black -mt-2">
+                <h2 className={`${headingStyle} font-light text-black -mt-2`}>
                   {formatHeading(servicesWork?.heading)}
                 </h2>
 
-                <p className="lg:leading-loose 2xl:text-[26px] md:text-sm text-lg 2xl:leading-loose font-semibold">
+                <p
+                  className={`lg:leading-loose ${paragraphStyles} 2xl:leading-loose font-semibold`}
+                >
                   {servicesWork?.subHeading}
                 </p>
               </div>
 
               {/* Paragraph from left */}
-              <p className="text-black 2xl:text-[18px] lg:text-xs lg:leading-loose font-normal 2xl:leading-loose">
+              <p
+                className={`${paragraphStyles} text-black lg:leading-loose font-normal 2xl:leading-loose`}
+              >
                 {servicesWork?.description}
               </p>
 
               {/* Button from left */}
-              <button className="bg-[#335F86] hover:bg-slate-700 text-[16px]  text-white px-9 2xl:w-[200px] py-3 rounded-[8px] font-light transition-colors duration-200">
-                {/* {servicesWork?.primaryButton} */}
-                Read More
-              </button>
             </div>
           </div>
         </div>

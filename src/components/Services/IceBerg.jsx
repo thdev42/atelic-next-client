@@ -3,16 +3,19 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import IceBergBg from "../../../assets/IceBerg2.png";
 import DashedCircle from "../DashedCircle/DashedCircle";
 
-// Solutions data array - Perfect for Strapi integration
-const solutionsData = [
+// Default solutions data array - Perfect for Strapi integration
+const defaultSolutionsData = [
   {
     id: 1,
     title: "AGENTIC VP's",
     description: "Industry Specific LEAD Agents\ntailored to use cases.",
     bgColor: "#ffffff",
     circleColor: "#0B2341",
-    position:
-      "absolute left-[15%] top-[10%] sm:top-[15%] md:top-[18%] 2xl:left-[20%] 7md:left-[17%] 6md:left-[10%] 5md:left-[4%]",
+    cx: 402, // Add circle coordinates
+    cy: 275,
+    r: 56,
+    stroke: "#335F86",
+    strokeWidth: 2,
     dashColor: "#335F86",
   },
   {
@@ -21,8 +24,11 @@ const solutionsData = [
     description: "Expert guidance for AI\nintegration and strategy.",
     bgColor: "#ffffff",
     circleColor: "#2D5016",
-    position:
-      "absolute right-[5%] top-[20%] sm:right-[8%] sm:top-[25%] md:right-[12%] md:top-[25%] 2xl:top-[25%] 2xl:right-[20%] 7md:right-[15%] 6md:right-[10%] 5md:right-[8%]",
+    cx: 1518, // Add circle coordinates
+    cy: 347,
+    r: 56,
+    stroke: "#335F86",
+    strokeWidth: 2,
     dashColor: "#335F86",
   },
   {
@@ -31,8 +37,11 @@ const solutionsData = [
     description: "Complete workflow automation\nfor business processes.",
     bgColor: "#ffffff",
     circleColor: "#8B4513",
-    position:
-      "absolute left-[15%] top-[90%] sm:left-[14%] sm:top-[0%] md:left-[10%] md:top-[44%] 2xl:left-[18%] 7md:left-[17%] 6md:left-[10%] 5md:left-[4%]",
+    cx: 402, // Add circle coordinates
+    cy: 649,
+    r: 56,
+    stroke: "white",
+    strokeWidth: 2,
     dashColor: "#ffffff",
   },
   {
@@ -41,8 +50,11 @@ const solutionsData = [
     description: "Advanced analytics and\ninsights for decision making.",
     bgColor: "#ffffff",
     circleColor: "#6B2C91",
-    position:
-      "absolute right-[5%] top-[30%] sm:right-[8%] sm:top-[37%] md:right-[12%] md:top-[37%] 2xl:top-[37%] 2xl:right-[23%] 7md:right-[19%] 6md:right-[14%] 5md:right-[10%]",
+    cx: 1187, // Add circle coordinates
+    cy: 561,
+    r: 56,
+    stroke: "white",
+    strokeWidth: 2,
     dashColor: "#ffffff",
   },
   {
@@ -51,8 +63,11 @@ const solutionsData = [
     description: "Advanced analytics and\ninsights for decision making.",
     bgColor: "#ffffff",
     circleColor: "#6B2C91",
-    position:
-      "absolute right-[5%] top-[53%] sm:right-[8%] sm:top-[53%] md:right-[12%] md:top-[53%] 2xl:top-[53%] 2xl:right-[26%] 7md:right-[22%] 6md:right-[17%] 5md:right-[13%]",
+    cx: 1142, // Add circle coordinates
+    cy: 800,
+    r: 56,
+    stroke: "white",
+    strokeWidth: 2,
     dashColor: "#ffffff",
   },
   {
@@ -61,8 +76,11 @@ const solutionsData = [
     description: "Complete workflow automation\nfor business processes.",
     bgColor: "#ffffff",
     circleColor: "#8B4513",
-    position:
-      "absolute left-[15%] top-[63%] sm:left-[14%] sm:top-[63%] md:left-[10%] md:top-[63%] 2xl:left-[27%] 7md:left-[22%] 6md:left-[15%] 5md:left-[10%]",
+    cx: 817, // Add circle coordinates
+    cy: 937,
+    r: 56,
+    stroke: "white",
+    strokeWidth: 2,
     dashColor: "#ffffff",
   },
   {
@@ -71,39 +89,40 @@ const solutionsData = [
     description: "Complete workflow automation\nfor business processes.",
     bgColor: "#ffffff",
     circleColor: "#8B4513",
-    position:
-      "absolute left-[15%] top-[80%] sm:left-[14%] sm:top-[80%] md:left-[10%] md:top-[80%] 2xl:left-[48%] 7md:left-[48%] 6md:left-[48%] 5md:left-[48%]",
+    cx: 1037, // Add circle coordinates
+    cy: 1055,
+    r: 56,
+    stroke: "white",
+    strokeWidth: 2,
     dashColor: "#ffffff",
   },
 ];
 
 const AgenticCard = ({ solution, onClose, index }) => {
-  const isOdd = index % 2 === 1;
-  const slideDirection = isOdd
-    ? "animate-slide-in-from-left"
-    : "animate-slide-in-from-right";
-
   return (
-    <div
-      className={`font-sora w-[413px] h-[117px] rounded-[66.5px] flex items-center px-6 transition-all duration-500 ease-in-out shadow-md cursor-pointer hover:shadow-lg ${slideDirection}`}
-      style={{ backgroundColor: solution.bgColor }}
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8, y: 50 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.8, y: 50 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="font-sora w-[413px] h-[117px] rounded-[66.5px] flex items-center px-6 bg-white shadow-lg cursor-pointer hover:shadow-xl transition-shadow duration-300"
       onClick={onClose}
     >
       <div
-        className={`w-[75px] h-[75px] rounded-full flex items-center justify-center flex-shrink-0 text-white text-2xl font-light shadow-[0_0_0_8px_rgba(11,35,65,0.1)]`}
-        style={{ backgroundColor: solution.circleColor }}
+        className="w-[75px] h-[75px] rounded-full flex items-center justify-center flex-shrink-0 text-white text-2xl font-light"
+        style={{ backgroundColor: solution.circleColor || "#0B2341" }}
       >
         {String(index + 1).padStart(2, "0")}
       </div>
-      <div className="ml-6 text-left leading-loose">
-        <h3 className="text-[18px] font-semibold text-black">
+      <div className="ml-6 text-left">
+        <h3 className="text-[18px] font-semibold text-black mb-1">
           {solution.title}
         </h3>
-        <p className="text-[15px] text-black leading-loose whitespace-pre-line">
+        <p className="text-[15px] text-black leading-relaxed whitespace-pre-line">
           {solution.description}
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -111,70 +130,115 @@ const ScrollRevealCircle = ({
   solution,
   index,
   scrollYProgress,
-  solutionsData,
+  containerRef,
 }) => {
-  const totalSolutions = solutionsData.length;
+  const [showCard, setShowCard] = useState(false);
 
-  const start = index / totalSolutions;
-  const end = start + 0.4;
-
-  // Always keep end within scrollYProgress 0–1 range
-  const safeEnd = Math.min(end, 0.98);
-  const revealThreshold = Math.min(start + 0.25, 0.97); // reveal earlier if needed
-
-  const cardOpacity = useTransform(scrollYProgress, [start, safeEnd], [0, 1]);
-  const cardScale = useTransform(scrollYProgress, [start, safeEnd], [0.8, 1]);
-  const cardY = useTransform(scrollYProgress, [start, safeEnd], [80, 0]);
-
-  const [currentProgress, setCurrentProgress] = useState(0);
+  const revealThreshold = ((index + 1) / defaultSolutionsData.length) * 0.8;
 
   React.useEffect(() => {
     const unsubscribe = scrollYProgress.onChange((latest) => {
-      setCurrentProgress(latest);
+      if (latest >= revealThreshold) {
+        if (!showCard) {
+          setShowCard(true);
+        }
+      } else {
+        setShowCard(false);
+      }
     });
     return () => unsubscribe();
-  }, [scrollYProgress]);
+  }, [scrollYProgress, revealThreshold]);
 
-  const isRevealed = currentProgress >= revealThreshold;
+  // Calculate card position relative to the container
+  const getCardPosition = () => {
+    if (!containerRef.current || !solution.cx || !solution.cy)
+      return { left: 0, top: 0 };
+
+    const containerRect = containerRef.current.getBoundingClientRect();
+    const svgWidth = 1920;
+    const svgHeight = 1562;
+
+    // Calculate position as percentage of container
+    const leftPercent = (solution.cx / svgWidth) * 100;
+    const topPercent = (solution.cy / svgHeight) * 100;
+
+    return {
+      left: `${leftPercent}%`,
+      top: `${topPercent}%`,
+    };
+  };
+
+  const cardPosition = getCardPosition();
 
   return (
-    <div className={solution.position}>
-      {isRevealed ? (
-        <motion.div
+    <>
+      {showCard && (
+        <div
+          className="absolute z-20 pointer-events-none"
           style={{
-            opacity: cardOpacity,
-            scale: cardScale,
-            y: cardY,
+            left: cardPosition.left,
+            top: cardPosition.top,
+            transform: "translate(-50%, -50%)",
           }}
         >
-          <AgenticCard index={index} solution={solution} />
-        </motion.div>
-      ) : (
-        <DashedCircle
-          color={solution.dashColor}
-          number={String(index + 1).padStart(2, "0")}
-        />
+          <AgenticCard
+            solution={solution}
+            index={index}
+            onClose={() => setShowCard(false)}
+          />
+        </div>
       )}
-    </div>
+    </>
   );
 };
 
 // ALTERNATIVE SOLUTION: Viewport-based reveal instead of scroll progress
 import { useInView } from "framer-motion";
+import IceBergSvg from "../Svg/IceBerg";
 
 const IceBerg = ({ sections }) => {
   const sectionRef = useRef(null);
+  const svgContainerRef = useRef(null);
+  const [revealedCircles, setRevealedCircles] = useState(new Set());
   const solutionsData = Array?.isArray(sections?.details)
-    ? sections?.details
-    : [];
+    ? sections?.details.map((detail, index) => ({
+        ...defaultSolutionsData[index], // Use default coordinates and styling
+        ...detail, // Override with any custom data from sections
+      }))
+    : defaultSolutionsData;
 
   console.log(sections, "SECTIONS");
+  const circlesForSVG = solutionsData.map((solution, index) => ({
+    ...solution,
+    revealed: revealedCircles.has(index),
+  }));
 
   // Set up scroll tracking for the entire section
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end end"],
   });
+
+  React.useEffect(() => {
+    const unsubscribe = scrollYProgress.onChange((latest) => {
+      const newRevealed = new Set();
+      solutionsData.forEach((_, index) => {
+        const threshold = ((index + 1) / solutionsData.length) * 0.8;
+        if (latest >= threshold) {
+          newRevealed.add(index);
+        }
+      });
+
+      // Only update if there's actually a change
+      if (
+        newRevealed.size !== revealedCircles.size ||
+        ![...newRevealed].every((item) => revealedCircles.has(item))
+      ) {
+        setRevealedCircles(newRevealed);
+      }
+    });
+    return () => unsubscribe();
+  }, [scrollYProgress, solutionsData.length]);
 
   return (
     <>
@@ -227,18 +291,15 @@ const IceBerg = ({ sections }) => {
           </div>
 
           {/* Iceberg Background with Scroll-Reveal Circles */}
-          <div
-            className="min-h-[1562px] w-full relative bg-cover bg-center 4md:hidden"
-            style={{ backgroundImage: `url(${IceBergBg.src})` }}
-          >
-            {/* Scroll-based reveal circles */}
+          <div ref={svgContainerRef} className="relative w-full">
+            <IceBergSvg circles={circlesForSVG} />
             {solutionsData.map((solution, index) => (
               <ScrollRevealCircle
-                key={solution.id || index}
+                key={solution.id}
                 solution={solution}
                 index={index}
                 scrollYProgress={scrollYProgress}
-                solutionsData={solutionsData}
+                containerRef={svgContainerRef}
               />
             ))}
           </div>
