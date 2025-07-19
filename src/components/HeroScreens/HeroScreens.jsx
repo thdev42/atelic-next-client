@@ -619,7 +619,7 @@ export const HeroAboutUs = ({
             <AnimatedHeading
               headings={sections?.headings}
               textY={textY}
-              className={`${headingStyle}font-sora leading-tight  `}
+              className={`${headingStyle} font-sora leading-tight  `}
             />
 
             <motion.p

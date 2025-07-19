@@ -5,6 +5,7 @@ import AtelicLogo from "../../../assets/AtelicLogoAbout.jpg"; // Replace with co
 import { API_BASE_URL } from "@/config/config";
 import { formatHeading } from "../Partners/Partners";
 import BgPattern1 from "../../../assets/WebServices.png";
+import { headingStyle, paragraphStyles } from "@/styles/globalStyles";
 // import MissionBG from "../../../assets/mission-waves.png"; // If you have a background SVG/pattern
 
 const Vision = ({ sections }) => {
@@ -52,11 +53,13 @@ const Vision = ({ sections }) => {
           {/* RIGHT: Text Section */}
           <div className="w-full lg:w-1/2 flex items-center justify-center py-8 px-4 sm:px-10 md:px-14 xl:px-20 text-center lg:text-left">
             <div className="w-full max-w-[600px]">
-              <h2 className="text-3xl sm:text-4xl 2xl:text-[60px] font-light mb-6 2xl:mb-14">
+              <h2 className={`${headingStyle} font-light mb-6 2xl:mb-14`}>
                 {/* Our <span className="font-semibold">Vision</span> */}
                 {formatHeading(visionData?.heading)}
               </h2>
-              <p className="text-black/60 2xl:text-[22px] font-light text-base xl:text-lg mb-7 2xl:leading-relaxed">
+              <p
+                className={`text-black/60 ${paragraphStyles} font-light mb-7 2xl:leading-relaxed`}
+              >
                 {visionData?.subHeading}
               </p>
               {/* <p className="text-black/60 2xl:text-[22px] font-light text-base xl:text-lg mb-6 2xl:leading-relaxed">
@@ -87,10 +90,12 @@ const Vision = ({ sections }) => {
           {/* LEFT: Text Section */}
           <div className="w-full lg:w-1/2 text-center lg:text-left relative z-10">
             <div className="relative z-10 lg:space-y-12">
-              <h2 className="text-3xl sm:text-4xl xl:text-5xl 2xl:text-[60px] font-light mb-9">
+              <h2 className={`${headingStyle} font-light mb-9`}>
                 {formatHeading(missionData?.heading)}
               </h2>
-              <p className="text-black/60 text-base xl:text-lg 2xl:text-[22px] mb-9  mx-auto lg:mx-0 2xl:leading-normal font-light ">
+              <p
+                className={`text-black/60 ${paragraphStyles} mb-9  mx-auto lg:mx-0 2xl:leading-normal font-light `}
+              >
                 {missionData?.subHeading}
               </p>
               <button className="bg-[#F21B2A] hover:bg-red-700 transition text-white px-11 py-3 rounded-md text-sm sm:text-base">

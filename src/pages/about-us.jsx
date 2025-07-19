@@ -99,9 +99,13 @@ const AboutUsPage = () => {
     <section ref={container}>
       <HeroAboutUs sections={mainHero} />
       <Vision sections={[solutions[0], solutions[1]]} />
-      <TeamSection sections={teamMembers[0]} />
+      <div className="lg:block hidden">
+        <TeamSection sections={teamMembers[0]} />
+      </div>
       <OurJourney sections={solutions[2]} />
-      <OurTeam sections={teamMembers[1]} />
+      <div className="lg:hidden block">
+        <OurTeam sections={teamMembers[1]} />
+      </div>
       <Advisors sections={teamMembers[2]} />
       <Investors sections={investors} />
       <Footer />

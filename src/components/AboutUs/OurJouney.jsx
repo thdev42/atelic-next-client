@@ -3,6 +3,7 @@ import Image from "next/image";
 import OurJourneyImage from "../../../assets/OurJourney.png";
 import { formatHeading } from "../Partners/Partners";
 import { API_BASE_URL } from "@/config/config";
+import { headingStyle, paragraphStyles } from "@/styles/globalStyles";
 
 const OurJourney = ({ sections }) => {
   return (
@@ -20,10 +21,12 @@ const OurJourney = ({ sections }) => {
               }}
             ></div>
 
-            <h2 className="text-3xl sm:text-4xl xl:text-5xl 2xl:text-[60px] font-light relative z-10">
+            <h2 className={`${headingStyle} font-light relative z-10`}>
               {formatHeading(sections?.heading)}
             </h2>
-            <p className="text-black/80 text-base xl:text-lg 2xl:text-[22px] mb-9  mx-auto lg:mx-0 2xl:leading-relaxed font-light mt-9 relative z-10">
+            <p
+              className={`text-black/80 ${paragraphStyles} mb-9  mx-auto lg:mx-0 2xl:leading-relaxed font-light mt-9 relative z-10`}
+            >
               {sections?.subHeading}
             </p>
             <button className="bg-[#F21B2A] hover:bg-red-700 transition text-white px-11 py-3 rounded-md text-sm sm:text-base relative z-10">
