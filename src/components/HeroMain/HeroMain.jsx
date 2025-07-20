@@ -17,6 +17,8 @@ import ParticlesComp from "../Particles/Particles";
 const HeroSection = ({ scrollYSProgress, section }) => {
   const sectionRef = useRef(null);
   const [activeSection, setActiveSection] = useState(0);
+  const [prevSection, setPrevSection] = useState(0);
+  const [slideDirection, setSlideDirection] = useState(0); // 1 for forward, -1 for backward
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
   const {
@@ -87,9 +89,13 @@ const HeroSection = ({ scrollYSProgress, section }) => {
     const isRightSwipe = distance < -50;
 
     if (isLeftSwipe && activeSection < heroDataArray.length - 1) {
+      setPrevSection(activeSection);
+      setSlideDirection(1);
       setActiveSection(activeSection + 1);
     }
     if (isRightSwipe && activeSection > 0) {
+      setPrevSection(activeSection);
+      setSlideDirection(-1);
       setActiveSection(activeSection - 1);
     }
   };
@@ -97,9 +103,13 @@ const HeroSection = ({ scrollYSProgress, section }) => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "ArrowLeft" && activeSection > 0) {
+        setPrevSection(activeSection);
+        setSlideDirection(-1);
         setActiveSection(activeSection - 1);
       }
       if (e.key === "ArrowRight" && activeSection < heroDataArray.length - 1) {
+        setPrevSection(activeSection);
+        setSlideDirection(1);
         setActiveSection(activeSection + 1);
       }
     };
@@ -132,19 +142,43 @@ const HeroSection = ({ scrollYSProgress, section }) => {
 
   const goToSlide = (newIndex) => {
     if (newIndex < 0 || newIndex >= heroDataArray.length) return;
+    setPrevSection(activeSection);
+    setSlideDirection(newIndex > activeSection ? 1 : -1);
     setActiveSection(newIndex);
   };
 
   const activeSlideData = heroDataArray[activeSection];
   const isDark = activeSlideData?.theme === "dark";
 
+  // Animation variants for slide transitions
+  const slideVariants = {
+    enter: (direction) => ({
+      x: direction > 0 ? "100%" : "-100%",
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction) => ({
+      x: direction > 0 ? "-100%" : "100%",
+      opacity: 0,
+    }),
+  };
+
+  const slideTransition = {
+    type: "tween",
+    ease: "easeInOut",
+    duration: 0.5,
+  };
+
   return (
     <motion.section
       ref={sectionRef}
       // style={{ y: isMobile ? 0 : sectionY, willChange: "transform" }}
-      className={`overflow-y-visible ${
+      className={`overflow-hidden ${
         isMobile ? "relative" : "sticky top-0"
-      } max-w-[1920px]  mx-auto w-full  2xl:py-5 transition-all duration-1000 ease-in-out z-0`}
+      } max-w-[1920px] mx-auto w-full 2xl:py-5 transition-all duration-1000 ease-in-out z-0`}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -183,46 +217,57 @@ const HeroSection = ({ scrollYSProgress, section }) => {
         ))}
       </div> */}
 
-      {/* Slide Component */}
-      {isMobile ? (
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeSection}
-            // initial={{ opacity: 0, x: 100 }}
-            // animate={{ opacity: 1, x: 0 }}
-            // exit={{ opacity: 0, x: -100 }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
-          >
-            <HeroDynamic
-              heroData={activeSlideData}
-              sectionY={sectionY}
-              backgroundY={backgroundY}
-              // activeSection={activeSection}
-              // hero={heroDataArray}
-              // goToSlide={goToSlide}
-              robotY={robotY}
-              textY={textY}
-            />
-          </motion.div>
-        </AnimatePresence>
-      ) : (
-        <AnimatePresence mode="wait">
-          <motion.div key={activeSection}>
-            <ParticlesComp isDark={isDark} />
+      {/* Slide Component with Animation Container */}
+      <div className="relative w-full h-full overflow-hidden">
+        {isMobile ? (
+          <AnimatePresence mode="wait" custom={slideDirection}>
+            <motion.div
+              key={activeSection}
+              custom={slideDirection}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={slideTransition}
+              className="w-full h-full"
+            >
+              <HeroDynamic
+                heroData={activeSlideData}
+                sectionY={sectionY}
+                backgroundY={backgroundY}
+                robotY={robotY}
+                textY={textY}
+              />
+            </motion.div>
+          </AnimatePresence>
+        ) : (
+          <AnimatePresence mode="wait" custom={slideDirection}>
+            <motion.div
+              key={activeSection}
+              custom={slideDirection}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={slideTransition}
+              className="w-full h-full"
+            >
+              <ParticlesComp isDark={isDark} />
 
-            <HeroDynamic
-              heroData={activeSlideData}
-              sectionY={sectionY}
-              hero={heroDataArray}
-              goToSlide={goToSlide}
-              activeSection={activeSection}
-              backgroundY={backgroundY}
-              robotY={robotY}
-              textY={textY}
-            />
-          </motion.div>
-        </AnimatePresence>
-      )}
+              <HeroDynamic
+                heroData={activeSlideData}
+                sectionY={sectionY}
+                hero={heroDataArray}
+                goToSlide={goToSlide}
+                activeSection={activeSection}
+                backgroundY={backgroundY}
+                robotY={robotY}
+                textY={textY}
+              />
+            </motion.div>
+          </AnimatePresence>
+        )}
+      </div>
 
       {/* Slide Indicators */}
       <div className="absolute lg:hidden bottom-4 left-1/2 transform -translate-x-1/2 flex gap-3 items-center z-20">

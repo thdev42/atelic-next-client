@@ -1083,7 +1083,7 @@ export const HeroDynamic = ({
         textWidth: "w-full lg:w-3/4 2xl:w-2/3",
         imageWidth: "w-full lg:w-2/5 2xl:w-1/2",
         textPadding:
-          "px-4 lg:pt-24 xl:pt-36 2xl:pt-36 sm:px-8 md:px-12 lg:px-[120px] 2xl:px-[178px]",
+          "px-4 lg:pt-16 xl:pt-20 2xl:pt-36 sm:px-8 md:px-12 lg:px-[120px] 2xl:px-[178px]",
         imagePadding: "px-4 sm:px-8 md:px-12 lg:px-0 lg:mr-28",
         containerPadding: "",
       };
@@ -1094,7 +1094,7 @@ export const HeroDynamic = ({
         textWidth: "w-full lg:w-3/4 2xl:w-2/3",
         imageWidth: "w-full lg:w-2/5 2xl:w-1/2",
         textPadding:
-          "px-4 lg:pt-24 xl:pt-36 2xl:pt-36 sm:px-8 md:px-12 lg:px-[120px] 2xl:px-[178px]",
+          "px-4 lg:pt-16 xl:pt-20 2xl:pt-36 sm:px-8 md:px-12 lg:px-[120px] 2xl:px-[178px]",
         imagePadding: "px-4 sm:px-8 md:px-12 lg:px-0 lg:mr-28",
         containerPadding: "",
       };
