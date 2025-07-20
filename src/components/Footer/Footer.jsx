@@ -5,7 +5,7 @@ import FooterLogo from "../../../assets/FooterLogo (2).png";
 import LinkedInLogo from "../../../assets/linkedin 1.png";
 import { useEffect, useState } from "react";
 import { fetchFootersData } from "@/lib/api/footer";
-import { fetchUpdatedAt } from "@/lib/updatedAt";
+import { fetchFooterUpdatedAt, fetchUpdatedAt } from "@/lib/updatedAt";
 import { API_BASE_URL } from "@/config/config";
 
 export default function Footer() {
@@ -14,7 +14,7 @@ export default function Footer() {
   let cached = null;
 
   const getNavbarSections = async () => {
-    const latestUpdatedAt = await fetchUpdatedAt("footers");
+    const latestUpdatedAt = await fetchFooterUpdatedAt();
     const cachedPage = cached?.content?.data?.[0];
 
     if (!cached || cachedPage?.updatedAt !== latestUpdatedAt) {

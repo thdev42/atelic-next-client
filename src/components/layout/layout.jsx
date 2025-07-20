@@ -6,7 +6,7 @@ import { NavProvider, useNav } from "@/context/NavContext";
 import { LoaderProvider } from "@/context/useLoader";
 import { useEffect, useState } from "react";
 import { fetchNavbarsData } from "@/lib/api/navbar";
-import { fetchUpdatedAt } from "@/lib/updatedAt";
+import { fetchNavUpdatedAt, fetchUpdatedAt } from "@/lib/updatedAt";
 import { useRouter } from "next/router";
 import { API_BASE_URL } from "@/config/config";
 import { FormProvider } from "@/context/FormContext";
@@ -21,7 +21,7 @@ const Layout = ({ children }) => {
   let cached = null;
 
   const getNavbarSections = async () => {
-    const latestUpdatedAt = await fetchUpdatedAt("navbar");
+    const latestUpdatedAt = await fetchNavUpdatedAt();
     const cachedPage = cached?.content?.data?.[0];
 
     if (!cached || cachedPage?.updatedAt !== latestUpdatedAt) {
