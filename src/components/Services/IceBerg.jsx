@@ -1,5 +1,10 @@
 import React, { useState, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import IceBergBg from "../../../assets/IceBerg2.png";
 import DashedCircle from "../DashedCircle/DashedCircle";
 
@@ -99,11 +104,29 @@ const defaultSolutionsData = [
 ];
 
 const AgenticCard = ({ solution, onClose, index }) => {
+  // Cards 1, 4, 6 (indices 0, 2, 5) come from left, others from right
+  const shouldAnimateFromLeft = [0, 3, 5].includes(index);
+
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.8, y: 50 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.8, y: 50 }}
+      initial={{
+        opacity: 0,
+        scale: 0.8,
+        y: 0,
+        x: shouldAnimateFromLeft ? -100 : 100, // Start from left or right
+      }}
+      animate={{
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        x: 0, // End at center position
+      }}
+      exit={{
+        opacity: 0,
+        scale: 0.8,
+        y: 0,
+        x: shouldAnimateFromLeft ? -100 : 100, // Exit to left or right
+      }}
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="font-sora 2xl:w-[413px] 2xl:h-[120px] lg:w-[300px] h-[100px] rounded-[66.5px] flex items-center px-6 bg-white shadow-lg cursor-pointer hover:shadow-xl transition-shadow duration-300"
       onClick={onClose}
@@ -172,22 +195,24 @@ const ScrollRevealCircle = ({
 
   return (
     <>
-      {showCard && (
-        <div
-          className="absolute z-20 pointer-events-none"
-          style={{
-            left: cardPosition.left,
-            top: cardPosition.top,
-            transform: "translate(-50%, -50%)",
-          }}
-        >
-          <AgenticCard
-            solution={solution}
-            index={index}
-            onClose={() => setShowCard(false)}
-          />
-        </div>
-      )}
+      <div
+        className="absolute z-20 pointer-events-none"
+        style={{
+          left: cardPosition.left,
+          top: cardPosition.top,
+          transform: "translate(-50%, -50%)",
+        }}
+      >
+        <AnimatePresence mode="wait">
+          {showCard && (
+            <AgenticCard
+              solution={solution}
+              index={index}
+              onClose={() => setShowCard(false)}
+            />
+          )}
+        </AnimatePresence>
+      </div>
     </>
   );
 };
@@ -245,9 +270,9 @@ const IceBerg = ({ sections }) => {
       <section
         ref={sectionRef}
         // Provides the scrollable area
-        className="z-10 4min:h-[500vh] 4min:overflow-visible overflow-hidden bg-[#BEF9FD] max-w-[1920px] mx-auto w-full relative"
+        className="z-10 4min:h-[800vh] 4min:overflow-visible overflow-hidden bg-[#BEF9FD] max-w-[1920px] mx-auto w-full relative"
       >
-        <div className="4min:sticky 4min:-top-96  w-full">
+        <div className="4min:sticky 4min:-top-[390px]  w-full">
           <div className="font-sora px-4 sm:px-6 md:px-8 lg:px-[100px] 2xl:px-[178px] mx-auto">
             <div className="pt-8 sm:pt-12 md:pt-16 lg:pt-20 mb-12 sm:mb-16 lg:mb-20">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 xl:gap-12 items-start lg:items-center">
