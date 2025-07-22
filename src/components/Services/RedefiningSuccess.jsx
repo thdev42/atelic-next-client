@@ -90,7 +90,7 @@ export const RedefiningSuccess = ({ sections }) => {
 
               {/* Text Section */}
               <div className="flex-1 flex items-center justify-center">
-                <p className="2xl:text-[16px] lg:text-[14px] font-light leading-loose mt-3">
+                <p className="2xl:text-[16px] lg:text-[15px] text-[14px] font-light leading-loose mt-3">
                   {item.text}
                 </p>
               </div>

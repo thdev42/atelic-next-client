@@ -27,6 +27,9 @@ import {
 } from "@/styles/globalStyles";
 import { useBackground } from "@/context/BackgroundContext";
 
+const consultationHref = "/appointment";
+const approachHref = "/services";
+
 export const HeroComponent1 = ({ sectionY, backgroundY, robotY, textY }) => (
   <motion.section
     initial={{ opacity: 0 }}
@@ -551,22 +554,24 @@ export const HeroServices = ({
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.7 }}
             >
-              <motion.button
-                className="text-xs sm:text-sm lg:text-xs xl:text-sm 2xl:text-[16px] bg-[#335F86] text-white px-6 py-4 rounded-md"
-                whileHover={{ scale: 1.03, backgroundColor: "#082c4e" }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ duration: 0.2 }}
-              >
-                {sections?.primaryButton}
-              </motion.button>
-              <motion.button
+              <a href={consultationHref}>
+                <motion.button
+                  className="text-xs sm:text-sm lg:text-xs xl:text-sm 2xl:text-[16px] bg-[#335F86] text-white px-6 py-4 rounded-md"
+                  whileHover={{ scale: 1.03, backgroundColor: "#082c4e" }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {sections?.primaryButton}
+                </motion.button>
+              </a>
+              {/* <motion.button
                 className="text-xs sm:text-sm lg:text-xs xl:text-sm 2xl:text-[16px] bg-[#E5EAF0] text-[#0A3C66] px-6 py-4 rounded-md"
                 whileHover={{ scale: 1.03, backgroundColor: "#d3dbe3" }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ duration: 0.2 }}
               >
                 {sections?.secondaryButton}
-              </motion.button>
+              </motion.button> */}
             </motion.div>
           </motion.div>
         </div>
@@ -639,14 +644,16 @@ export const HeroAboutUs = ({
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.7 }}
             >
-              <motion.button
-                className="text-xs sm:text-sm lg:text-xs xl:text-sm 2xl:text-[16px] bg-[#F21B2A] text-white px-6 py-4 rounded-md"
-                whileHover={{ scale: 1.03, backgroundColor: "#082c4e" }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ duration: 0.2 }}
-              >
-                {sections?.primaryButton}
-              </motion.button>
+              <a href={consultationHref}>
+                <motion.button
+                  className="text-xs sm:text-sm lg:text-xs xl:text-sm 2xl:text-[16px] bg-[#F21B2A] text-white px-6 py-4 rounded-md"
+                  whileHover={{ scale: 1.03, backgroundColor: "#082c4e" }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {sections?.primaryButton}
+                </motion.button>
+              </a>
             </motion.div>
           </motion.div>
         </div>
@@ -760,7 +767,7 @@ export const HeroPartners = ({
             {data?.subHeading}
           </motion.p>
 
-          <motion.div
+          {/* <motion.div
             className="font-raleway mt-8 flex gap-4 flex-wrap"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -774,7 +781,7 @@ export const HeroPartners = ({
             >
               {data?.primaryButton}
             </motion.button>
-          </motion.div>
+          </motion.div> */}
         </motion.div>
       </div>
 
@@ -865,7 +872,7 @@ export const HeroNews = ({ sectionY, backgroundY, robotY, textY, data }) => {
               {data?.subHeading}
             </motion.p>
 
-            <motion.div
+            {/* <motion.div
               className="font-raleway mt-8 flex gap-4 flex-wrap"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -879,7 +886,7 @@ export const HeroNews = ({ sectionY, backgroundY, robotY, textY, data }) => {
               >
                 Explore Now
               </motion.button>
-            </motion.div>
+            </motion.div> */}
           </motion.div>
         </div>
 
@@ -1221,31 +1228,39 @@ export const HeroDynamic = ({
             >
               {isInnovation || isFullBg ? (
                 <>
-                  <button className={getButtonStyles(true)}>
-                    {primaryButtonText}
-                  </button>
-                  <button className={getButtonStyles(false)}>
-                    {secondaryButtonText}
-                  </button>
+                  <a href={consultationHref}>
+                    <button className={getButtonStyles(true)}>
+                      {primaryButtonText}
+                    </button>
+                  </a>
+                  <a href={approachHref}>
+                    <button className={getButtonStyles(false)}>
+                      {secondaryButtonText}
+                    </button>
+                  </a>
                 </>
               ) : (
                 <>
-                  <motion.button
-                    className={getButtonStyles(true)}
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    {primaryButtonText}
-                  </motion.button>
-                  <motion.button
-                    className={getButtonStyles(false)}
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    {secondaryButtonText}
-                  </motion.button>
+                  <a href={consultationHref}>
+                    <motion.button
+                      className={getButtonStyles(true)}
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.98 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {primaryButtonText}
+                    </motion.button>
+                  </a>
+                  <a href={approachHref}>
+                    <motion.button
+                      className={getButtonStyles(false)}
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.98 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {secondaryButtonText}
+                    </motion.button>
+                  </a>
                 </>
               )}
             </motion.div>
@@ -1361,15 +1376,15 @@ export const HeroDynamic = ({
                           className={`z-50 font-poppins absolute xs:w-[180px] xs:h-[140px] w-[220px] h-[180px] 2xl:w-[240px] 2xl:h-[200px] 
           ${
             index === 0
-              ? "top-6 -right-6 lg:top-14 xl:-right-6"
-              : "bottom-0 left-0 lg:bottom-24 lg:-left-14 2xl:bottom-40 2xl:-left-20"
+              ? "top-8 -right-8 lg:top-12 lg:-right-8 xl:top-16 xl:-right-10 2xl:top-20 2xl:-right-12"
+              : "bottom-8 -left-8 lg:bottom-12 lg:-left-8 xl:bottom-16 xl:-left-10 2xl:bottom-20 2xl:-left-12"
           } 
-          bg-white/40 rounded-[30px] shadow-[0_4px_60px_rgba(0,0,0,0.05)] backdrop-blur-[10px] px-9 py-4 flex flex-col`}
+          bg-white/40 rounded-[30px] shadow-[0_4px_60px_rgba(0,0,0,0.05)] backdrop-blur-[10px] px-9 py-4 flex flex-col text-center`}
                         >
-                          <p className="text-5xl 2xl:text-[50px] font-normal 2xl:mt-2 mb-2 text-black">
+                          <p className="text-left text-5xl 2xl:text-[50px] font-normal 2xl:mt-2 mb-2 text-black">
                             {stat.percentage}
                           </p>
-                          <p className="text-[14px] 2xl:text-[16px] mt-2 font-thin text-black/60 leading-snug">
+                          <p className="text-left text-[14px] 2xl:text-[16px] mt-2 font-thin text-black/60 leading-snug">
                             {stat.description}
                             <span className="underline cursor-pointer ml-1">
                               Learn More

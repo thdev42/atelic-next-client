@@ -6,7 +6,7 @@ const RegionalPartners = () => {
   return (
     <section className="relative bg-[#00172B] max-w-[1920px] mx-auto w-full py-16 lg:py-32 overflow-hidden">
       {/* Blur element only on top-right */}
-      <div className="absolute top-[-500px] right-[-300px] w-[1175px] h-[1175px] bg-[rgba(26,53,186,1)] blur-[1200px] z-0" />
+      {/* <div className="absolute top-[-500px] right-[-300px] w-[1175px] h-[1175px] bg-[rgba(26,53,186,1)] blur-[1200px] z-0" /> */}
 
       {/* Foreground content */}
       <div className="relative z-10 px-4 sm:px-8 md:px-12 xl:px-[178px] mx-auto w-full flex flex-col items-center justify-center text-center">

@@ -138,8 +138,8 @@ const SVGComponent = (props) => (
             r={circle.r || 56}
             stroke={circle.stroke}
             strokeWidth={circle.strokeWidth || 2}
-            strokeDasharray={circle.revealed ? "0" : "7 7"}
-            fill={circle.revealed ? circle.bgColor || "#ffffff" : "transparent"}
+            strokeDasharray={"7 7"}
+            fill={"transparent"}
             className="transition-all duration-500"
           />
           <text

@@ -98,7 +98,8 @@ const NewsPage = () => {
       <NewsHero sections={mainHero} />
       <AiInsights sections={aiInsights} />
       <Blogs sections={blogs} />
-      <NewsLetter sections={newsLetter} />
+      {newsLetter?.showForm == true && <NewsLetter sections={newsLetter} />}
+
       <Footer />
     </>
   );

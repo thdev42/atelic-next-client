@@ -92,10 +92,10 @@ const partners = () => {
   return (
     <div ref={container}>
       <PartnersHero sections={hero} />
+      <Specialism sections={specialism} />
       <Partners data={partnersData} partners={true} />
       <RegionalPartners />
       <Differentiation sections={differentiation} />
-      <Specialism sections={specialism} />
       <Footer />
     </div>
   );

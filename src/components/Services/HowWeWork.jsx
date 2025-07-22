@@ -138,7 +138,7 @@ function CircleProgress({ percentage, label, description }) {
           <div className="absolute inset-0 flex items-center justify-center">
             <span
               ref={textRef}
-              className="2xl:text-[46px] lg:text-[30px] md:text-[30px] sm:text-[28px] text-[24px] font-light text-black"
+              className="2xl:text-[46px] lg:text-[37px] md:text-[30px] sm:text-[28px] text-[24px] font-light text-black"
               style={{ visibility: "visible" }}
             >
               {label}
@@ -149,7 +149,7 @@ function CircleProgress({ percentage, label, description }) {
 
       {/* Description below */}
       <div className="max-w-[600px] px-2">
-        <p className=" text-center 2xl:text-[16px] lg:text-[14px] md:text-[10px] text-sm text-gray-700 leading-snug break-words">
+        <p className=" text-center 2xl:text-[16px] lg:text-[14px] md:text-[13px] lg:mt-0 mt-3 text-sm text-gray-700 leading-snug break-words">
           {description}
         </p>
       </div>
@@ -165,7 +165,7 @@ function SeparatorImage() {
     >
       <Image
         src={separatorImg}
-        className="2xl:w-auto xl:w-[150px] lg:w-[140px] md:w-[50px] w-[40px] h-auto object-contain"
+        className="2xl:w-[180px] xl:w-[150px] lg:w-[140px] md:w-[50px] w-[40px] h-auto object-contain"
         alt="Separator"
       />
     </div>
@@ -242,7 +242,7 @@ const HowWeWork = ({ sections }) => {
             </div>
 
             {/* Right Column - Content */}
-            <div className="space-y-5 lg:relative mb-5 md:mb-0 lg:z-0 lg:ml-8 xl:ml-12 2xl:ml-16">
+            <div className="space-y-5 lg:relative mb-5 md:mb-16  lg:z-0 lg:ml-8 xl:ml-12 2xl:ml-16">
               {/* Heading with fade-in */}
               <div className="space-y-4">
                 <h2 className={`${headingStyle} font-light text-black -mt-2`}>

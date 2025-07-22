@@ -99,9 +99,11 @@ const AnimatedTeamCard = ({
         </p>
         <p className={getDescriptionClasses()}>{member?.description}</p>
       </div>
-      <button className={getLearnMoreButtonClasses()}>
-        {member?.primaryButton}
-      </button>
+      <a href="/about-us">
+        <button className={getLearnMoreButtonClasses()}>
+          {member?.primaryButton}
+        </button>
+      </a>
     </motion.div>
   );
 };
@@ -503,7 +505,7 @@ const AboutAtelic = ({ data }) => {
     <section
       ref={sectionRef}
       className="z-10 font-sora overflow-visible bg-[#f3f3f3] max-w-[1920px] mx-auto w-full relative"
-      style={{ height: "300vh" }} // Provides the scrollable area
+      style={{ height: "210vh" }} // Provides the scrollable area
       onMouseEnter={() => setShowArrows(true)}
       onMouseLeave={() => setShowArrows(false)}
     >
@@ -522,7 +524,7 @@ const AboutAtelic = ({ data }) => {
 
               {/* Navigation Arrows below heading - Desktop only */}
               <motion.div
-                className="flex items-center space-x-4 mt-6"
+                className="flex items-center justify-between mt-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{
                   opacity: showArrows ? 1 : 0,
@@ -530,59 +532,67 @@ const AboutAtelic = ({ data }) => {
                 }}
                 transition={{ duration: 0.3 }}
               >
-                <motion.button
-                  onClick={handlePrevious}
-                  className="w-[62px] h-[62px] bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group relative overflow-hidden"
-                  whileHover={{
-                    scale: 1.1,
-                    backgroundImage:
-                      "linear-gradient(150.45deg, #F21B2A 19.81%, #335F86 90.64%)",
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    className="text-gray-600 group-hover:text-white transition-colors duration-300 relative z-10"
+                <div className="flex items-center space-x-4">
+                  <motion.button
+                    onClick={handlePrevious}
+                    className="w-[62px] h-[62px] bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group relative overflow-hidden"
+                    whileHover={{
+                      scale: 1.1,
+                      backgroundImage:
+                        "linear-gradient(150.45deg, #F21B2A 19.81%, #335F86 90.64%)",
+                    }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    <path
-                      d="M15 18L9 12L15 6"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </motion.button>
-
-                <motion.button
-                  onClick={handleNext}
-                  className="w-[62px] h-[62px] bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group relative overflow-hidden"
-                  whileHover={{
-                    scale: 1.1,
-                    backgroundImage:
-                      "linear-gradient(150.45deg, #F21B2A 19.81%, #335F86 90.64%)",
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    className="text-gray-600 group-hover:text-white transition-colors duration-300"
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      className="text-gray-600 group-hover:text-white transition-colors duration-300 relative z-10"
+                    >
+                      <path
+                        d="M15 18L9 12L15 6"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </motion.button>
+                  <motion.button
+                    onClick={handleNext}
+                    className="w-[62px] h-[62px] bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group relative overflow-hidden"
+                    whileHover={{
+                      scale: 1.1,
+                      backgroundImage:
+                        "linear-gradient(150.45deg, #F21B2A 19.81%, #335F86 90.64%)",
+                    }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    <path
-                      d="M9 18L15 12L9 6"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </motion.button>
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      className="text-gray-600 group-hover:text-white transition-colors duration-300"
+                    >
+                      <path
+                        d="M9 18L15 12L9 6"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </motion.button>
+                </div>
+                <div className="flex items-end">
+                  <a href="/about-us">
+                    <button className="bg-[#ec302f] hover:bg-slate-700 text-[16px] text-white px-9 2xl:w-[180px] py-3 rounded-[8px] font-light transition-colors duration-200 relative z-10">
+                      Read More
+                    </button>
+                  </a>
+                </div>
               </motion.div>
             </div>
 
@@ -617,7 +627,7 @@ const AboutAtelic = ({ data }) => {
                   animate="center"
                   exit="exit"
                   transition={{
-                    x: { type: "spring", stiffness: 150, damping: 30 },
+                    y: { type: "spring", stiffness: 150, damping: 30 },
                     opacity: { duration: 0.4 },
                     scale: { duration: 0.4 },
                     rotateY: { duration: 0.5 },

@@ -53,11 +53,11 @@ export default function TeamSection({ sections }) {
         </div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-10 justify-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-10 justify-center">
           {teamMembers.map((member, index) => (
             <div
               key={index}
-              className="flip-card w-full max-w-[479px] min-w-[390px] mx-auto min-h-[410px] cursor-pointer"
+              className="flip-card w-full max-w-[479px] mx-auto min-h-[410px] cursor-pointer"
             >
               <div className="flip-inner relative w-full h-full">
                 {/* Front */}

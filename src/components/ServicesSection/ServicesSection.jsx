@@ -11,6 +11,7 @@ import {
   headingStylesMobile,
   paragraphStyles,
 } from "@/styles/globalStyles";
+import Link from "next/link";
 const formatHeading = (text) => {
   if (!text) return null;
 
@@ -118,13 +119,18 @@ export default function ServicesSection({ data }) {
               </p>
 
               {/* Button from left */}
-              <button
-                className="bg-[#335F86] hover:bg-slate-700 text-[16px] text-white px-9 2xl:w-[200px] py-3 rounded-[8px] font-light transition-colors duration-200 relative z-10"
-                // data-aos="fade-right"
-                // data-aos-delay="400"
-              >
-                {data?.primaryButton}
-              </button>
+              <div>
+                <a href="/services">
+                  <button
+                    className="bg-[#335F86] hover:bg-slate-700 text-[16px] text-white px-9 2xl:w-[200px] py-3 rounded-[8px] font-light transition-colors duration-200 relative z-10"
+                    // data-aos="fade-right"
+                    // data-aos-delay="400"
+                    // onClick={}
+                  >
+                    {data?.primaryButton}
+                  </button>
+                </a>
+              </div>
             </div>
           </Parallax>
 

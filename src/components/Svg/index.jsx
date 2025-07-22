@@ -325,11 +325,11 @@ const SVGComponent = (props) => {
           Finance
         </text>
       </a>
-      <a className="z-10" style={{ cursor: "pointer" }}>
+      <a style={{ zIndex: 1, cursor: "pointer" }}>
         {/* Rounded Rectangle */}
         <rect
-          x={403}
-          y={1205}
+          x={460}
+          y={1230}
           width={215}
           height={52}
           rx={26}
@@ -339,8 +339,8 @@ const SVGComponent = (props) => {
 
         {/* Centered Text */}
         <text
-          x={403 + 215 / 2} // 403 + 107.5 = 510.5
-          y={1205 + 52 / 2 + 6} // 1205 + 26 + 6 = 1237
+          x={460 + 215 / 2} // 403 + 107.5 = 510.5
+          y={1230 + 52 / 2 + 6} // 1205 + 26 + 6 = 1237
           fill="white"
           fontSize="20"
           textAnchor="middle"
@@ -391,7 +391,7 @@ const SVGComponent = (props) => {
       >
         Services Areas
       </text>
-      <g className="-z-0 ">
+      <g style={{ zIndex: -1 }} className="-z-0">
         <path
           d="M501.644 1031.12C544.876 1085.42 485 1268.5 290 1244"
           stroke="white"

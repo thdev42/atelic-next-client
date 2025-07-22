@@ -18,9 +18,16 @@ const HeroSection = ({ scrollYSProgress, section }) => {
   const sectionRef = useRef(null);
   const [activeSection, setActiveSection] = useState(0);
   const [prevSection, setPrevSection] = useState(0);
-  const [slideDirection, setSlideDirection] = useState(0); // 1 for forward, -1 for backward
+  const [slideDirection, setSlideDirection] = useState(0);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
+
+  // Auto-play states - Enhanced
+  const [isAutoPlay, setIsAutoPlay] = useState(true);
+  const autoPlayRef = useRef(null);
+  const AUTO_PLAY_DELAY = 7000; // 4 seconds
+  const [isPaused, setIsPaused] = useState(false); // Track pause state
+
   const {
     setBackground,
     backgroundType,
@@ -33,12 +40,73 @@ const HeroSection = ({ scrollYSProgress, section }) => {
   const heroDataArray = section?.details || [];
   const [isMobile, setIsMobile] = useState(false);
 
+  // Enhanced auto-play function
+  const startAutoPlay = () => {
+    // Don't start if disabled, paused, or only one slide
+    if (!isAutoPlay || isPaused || heroDataArray.length <= 1) return;
+
+    // Clear any existing timer
+    if (autoPlayRef.current) {
+      clearTimeout(autoPlayRef.current);
+    }
+
+    autoPlayRef.current = setTimeout(() => {
+      setPrevSection((current) => current);
+      setSlideDirection(1);
+      setActiveSection((prev) => {
+        const nextIndex = prev + 1;
+        return nextIndex >= heroDataArray.length ? 0 : nextIndex;
+      });
+    }, AUTO_PLAY_DELAY);
+  };
+
+  // Enhanced reset timer function
+  const resetAutoPlayTimer = () => {
+    // Clear existing timer
+    if (autoPlayRef.current) {
+      clearTimeout(autoPlayRef.current);
+      autoPlayRef.current = null;
+    }
+
+    // Only restart if auto-play is enabled and not paused
+    if (isAutoPlay && !isPaused) {
+      startAutoPlay();
+    }
+  };
+
+  // Auto-play effect - runs when activeSection changes or auto-play settings change
   useEffect(() => {
-    // if (backgroundType === "image") {
-    //   setIsShowNav(false);
-    // } else {
-    //   setIsShowNav(true);
-    // }
+    setPrevSection(activeSection);
+
+    // Start auto-play if conditions are met
+    if (isAutoPlay && !isPaused && heroDataArray.length > 1) {
+      startAutoPlay();
+    }
+
+    // Cleanup on unmount or dependency change
+    return () => {
+      if (autoPlayRef.current) {
+        clearTimeout(autoPlayRef.current);
+      }
+    };
+  }, [activeSection, isAutoPlay, isPaused, heroDataArray.length]);
+
+  // Enhanced mouse handlers for hover pause
+  const handleMouseEnter = () => {
+    setIsPaused(true);
+    if (autoPlayRef.current) {
+      clearTimeout(autoPlayRef.current);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsPaused(false);
+    if (isAutoPlay) {
+      startAutoPlay();
+    }
+  };
+
+  useEffect(() => {
     const handleResize = () => {
       const width =
         typeof window !== "undefined"
@@ -73,6 +141,7 @@ const HeroSection = ({ scrollYSProgress, section }) => {
     isMobile ? ["0%", "0%"] : ["0%", "-90%"]
   );
 
+  // Enhanced touch handlers with timer reset
   const handleTouchStart = (e) => {
     setTouchEnd(null);
     setTouchStart(e.targetTouches[0].clientX);
@@ -84,6 +153,7 @@ const HeroSection = ({ scrollYSProgress, section }) => {
 
   const handleTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
+
     const distance = touchStart - touchEnd;
     const isLeftSwipe = distance > 50;
     const isRightSwipe = distance < -50;
@@ -92,40 +162,44 @@ const HeroSection = ({ scrollYSProgress, section }) => {
       setPrevSection(activeSection);
       setSlideDirection(1);
       setActiveSection(activeSection + 1);
+      resetAutoPlayTimer(); // Reset timer on manual interaction
     }
     if (isRightSwipe && activeSection > 0) {
       setPrevSection(activeSection);
       setSlideDirection(-1);
       setActiveSection(activeSection - 1);
+      resetAutoPlayTimer(); // Reset timer on manual interaction
     }
   };
 
+  // Enhanced keyboard navigation with timer reset
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "ArrowLeft" && activeSection > 0) {
         setPrevSection(activeSection);
         setSlideDirection(-1);
         setActiveSection(activeSection - 1);
+        resetAutoPlayTimer(); // Reset timer on manual interaction
       }
       if (e.key === "ArrowRight" && activeSection < heroDataArray.length - 1) {
         setPrevSection(activeSection);
         setSlideDirection(1);
         setActiveSection(activeSection + 1);
+        resetAutoPlayTimer(); // Reset timer on manual interaction
       }
     };
+
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [activeSection]);
+  }, [activeSection, heroDataArray.length]);
 
+  // Background effect
   useEffect(() => {
     const currentSlide = heroDataArray[activeSection];
 
-    // Handle fullBg type - use bgImage instead of bgColor
     if (currentSlide?.heroType === "fullBg" && currentSlide?.bgImage?.url) {
-      // For fullBg type, pass the background image URL as image type
       setBackground(currentSlide.bgImage.url, "image");
     } else {
-      // For all other types, use bgColor as color type
       const bgColor = currentSlide?.bgColor || "#e9e9e9";
       setBackground(bgColor, "color");
     }
@@ -140,11 +214,19 @@ const HeroSection = ({ scrollYSProgress, section }) => {
     setSlideProgress,
   ]);
 
+  // Enhanced goToSlide with timer reset
   const goToSlide = (newIndex) => {
-    if (newIndex < 0 || newIndex >= heroDataArray.length) return;
+    if (
+      newIndex < 0 ||
+      newIndex >= heroDataArray.length ||
+      newIndex === activeSection
+    )
+      return;
+
     setPrevSection(activeSection);
     setSlideDirection(newIndex > activeSection ? 1 : -1);
     setActiveSection(newIndex);
+    resetAutoPlayTimer(); // Reset timer on manual slide change
   };
 
   const activeSlideData = heroDataArray[activeSection];
@@ -175,48 +257,15 @@ const HeroSection = ({ scrollYSProgress, section }) => {
   return (
     <motion.section
       ref={sectionRef}
-      // style={{ y: isMobile ? 0 : sectionY, willChange: "transform" }}
       className={`overflow-hidden ${
         isMobile ? "relative" : "sticky top-0"
       } max-w-[1920px] mx-auto w-full 2xl:py-5 transition-all duration-1000 ease-in-out z-0`}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
+      onMouseEnter={handleMouseEnter} // Pause on hover
+      onMouseLeave={handleMouseLeave} // Resume on mouse leave
     >
-      {/* Vertical Numbers - Fixed Position */}
-      {/* <div
-        className="font-poppins hidden z-50 lg:flex flex-col gap-4 2xl:ml-20 xl:ml-10 ml-10 items-center fixed left-0 top-1/2 -translate-y-1/2"
-        style={{ transform: "translateY(-50%) translateY(10vh)" }}
-      >
-        {heroDataArray.map((_, idx) => (
-          <div
-            key={idx}
-            className={`relative cursor-pointer transition-all duration-300 ${
-              idx === activeSection ? "w-14 h-14" : "w-11 h-11"
-            } flex items-center justify-center`}
-            onClick={() => goToSlide(idx)}
-          >
-            <span
-              className={`text-sm font-semibold z-10 transition-colors duration-300 ${
-                isDark ? "text-white" : "text-black"
-              }`}
-            >
-              {idx + 1 < 10 ? `0${idx + 1}` : idx + 1}
-            </span>
-            {idx === activeSection && (
-              <motion.span
-                className={`absolute w-14 h-14 rounded-full border-[2px] rotate-[45deg] border-t-transparent transition-colors duration-300 ${
-                  isDark ? "border-white" : "border-black"
-                }`}
-                initial={{ scale: 0, rotate: 0 }}
-                animate={{ scale: 1, rotate: 45 }}
-                transition={{ duration: 0.5, ease: "backOut" }}
-              />
-            )}
-          </div>
-        ))}
-      </div> */}
-
       {/* Slide Component with Animation Container */}
       <div className="relative w-full h-full overflow-hidden">
         {isMobile ? (

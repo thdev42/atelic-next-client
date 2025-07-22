@@ -102,7 +102,7 @@ const Differentiation = ({ sections }) => {
 
                 {/* Text Content */}
                 <div className="flex-1 flex flex-col justify-end">
-                  <p className=" 2xl:text-[16px] lg:text-[14px] text-gray-700 leading-relaxed">
+                  <p className=" 2xl:text-[16px] lg:text-[15px] text-[14px] text-gray-700 leading-relaxed">
                     {feature.text}
                     {/* <span className="underline ml-1 cursor-pointer hover:text-[#F21B2A] transition-colors duration-200">
                       Read More
