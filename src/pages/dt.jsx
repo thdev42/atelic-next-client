@@ -29,7 +29,7 @@ export default function FinalResult() {
   const router = useRouter();
   useEffect(() => {
     setBackground("#fdfdfd", "color");
-    // setIsShowNav(false);
+    setIsShowNav(true);
   }, []);
   const { hydrateFromQuery } = useFormContext();
 
@@ -353,7 +353,7 @@ export default function FinalResult() {
                         style={{ boxShadow: "2px 4px 8.7px 0px #00000030" }}
                       >
                         <p className="leading-relaxed">
-                          {displayedText}
+                          We Recommend {displayedText}
                           {isTyping && <span className="animate-pulse">|</span>}
                         </p>
 
@@ -406,7 +406,7 @@ export default function FinalResult() {
                         style={{ boxShadow: "2px 4px 8.7px 0px #00000030" }}
                       >
                         <p className="leading-relaxed text-center">
-                          {displayedText}
+                          We Recommend {displayedText}
                           {isTyping && <span className="animate-pulse">|</span>}
                         </p>
 

@@ -376,7 +376,7 @@ export default function FinalResult({ data, onBack }) {
                   <div className="w-full max-w-md">
                     <div className="relative bg-white text-black text-base p-6 rounded-3xl shadow-2xl font-medium animate-slideInUp">
                       <p className="leading-relaxed text-center">
-                        {displayedText}
+                        We {displayedText}
                         {isTyping && <span className="animate-pulse">|</span>}
                       </p>
 

@@ -168,6 +168,15 @@ const Navbar = ({ data }) => {
     <>
       {isShowNav && data?.details && (
         <header className="w-full bg-transparent">
+          <div
+            className={`font-poppins ${
+              isDark ? "bg-white" : "bg-[#252525] "
+            } py-3 h-12 text-center my-auto ${
+              isDark ? "text-black" : "text-white"
+            } `}
+          >
+            Come see us at Gitex 2025
+          </div>
           <nav
             className={`z-50 ${
               fixedNav ? "absolute top-0 left-0 right-0 w-full" : ""
@@ -228,9 +237,9 @@ const Navbar = ({ data }) => {
                 </ul>
 
                 {/* RIGHT: Menu Icon */}
-                <div className="z-50 flex-shrink-0">
+                <div className="lg:opacity-0 z-50 flex-shrink-0">
                   <button
-                    className="cursor-pointer menu-button"
+                    className=" menu-button"
                     onClick={toggleDrawer}
                     disabled={!isMobile}
                   >

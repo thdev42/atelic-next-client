@@ -53,6 +53,7 @@ export const fetchHomePageData = async () => {
                   populate: "*",
                 },
                 teamMembers: {
+                  sort: ["order:asc"],
                   populate: "*",
                 },
               },

@@ -25,6 +25,7 @@ import {
   headingStylesHeroMain,
   paragraphStyles,
 } from "@/styles/globalStyles";
+import { useBackground } from "@/context/BackgroundContext";
 
 export const HeroComponent1 = ({ sectionY, backgroundY, robotY, textY }) => (
   <motion.section
@@ -996,12 +997,20 @@ export const HeroDynamic = ({
   const headlines = parseHeadlines(headliness);
   const mainImage = resolveImageSrc(heroImage);
   const backgroundImage = resolveImageSrc(bgImage);
+  const { setIsDark } = useBackground();
   const isDarkTheme = theme === "dark" || isDark;
   const isRobot = heroType === "robot";
   const isChip = heroType === "chip";
   const isInnovation = heroType === "innovation";
   const isFullBg = heroType === "fullBg";
 
+  useEffect(() => {
+    if (isDarkTheme) {
+      setIsDark(true);
+    } else {
+      setIsDark(false);
+    }
+  }, [isDarkTheme]);
   // Smart styling based on hero type and theme
   const getContainerStyles = () => {
     const baseStyles =

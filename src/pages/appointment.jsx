@@ -80,11 +80,11 @@ export default function FinalResult() {
                     className="w-full bg-[#EFEFEF] border border-[#C8C8C8] 2xl:px-6 2xl:h-[80px] 2xl:text-[24px] text-base px-5 py-5 rounded-[50px] transition-colors focus:outline-none focus:ring-0"
                   />
 
-                  <input
+                  {/* <input
                     type="text"
                     placeholder="Industry"
                     className="w-full bg-[#EFEFEF] border border-[#C8C8C8] 2xl:px-6 2xl:h-[80px] 2xl:text-[24px] text-base px-5 py-5 rounded-[50px] transition-colors focus:outline-none focus:ring-0"
-                  />
+                  /> */}
 
                   <button
                     type="submit"

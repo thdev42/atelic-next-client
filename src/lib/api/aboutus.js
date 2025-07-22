@@ -63,6 +63,7 @@ export const fetchAboutPageData = async () => {
                   populate: "*",
                 },
                 teamMembers: {
+                  sort: ["order:asc"],
                   populate: {
                     image: {
                       populate: "*",
