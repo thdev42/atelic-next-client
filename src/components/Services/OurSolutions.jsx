@@ -29,7 +29,7 @@ const OurSolutions = ({ sections }) => {
   const features = Array?.isArray(sections?.details) ? sections?.details : [];
   return (
     <section className="bg-[#EBEBEB] max-w-[1920px] mx-auto w-full py-8 sm:py-10 lg:py-12 xl:py-16 relative overflow-hidden">
-      <div className="font-sora px-4 sm:px-6 md:px-8 lg:px-[100px] 2xl:px-[178px] mx-auto">
+      <div className="font-sora px-8 sm:px-[100px] md:px-8 lg:px-[100px] 2xl:px-[178px] mx-auto">
         {/* Title Section */}
         <div className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 mb-12 sm:mb-16 lg:mb-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 xl:gap-12 items-start lg:items-center">
@@ -56,7 +56,7 @@ const OurSolutions = ({ sections }) => {
           {features?.map((feature, index) => (
             <div
               key={index}
-              className="group relative w-full bg-transparent transition-all duration-300 border border-transparent hover:bg-white rounded-[10px]"
+              className="group relative w-full bg-white md:bg-transparent transition-all duration-300 border border-transparent hover:bg-white rounded-[10px]"
             >
               {/* Gradient Border */}
               <div
@@ -70,9 +70,9 @@ const OurSolutions = ({ sections }) => {
               </div>
 
               {/* Card Content */}
-              <div className="relative z-10 p-6 sm:p-7 md:p-8 h-full flex flex-col">
+              <div className="relative z-10 p-6 sm:p-7 md:p-8 h-full flex flex-col items-center justify-center text-center md:items-start md:justify-start md:text-left">
                 {/* Top Icon */}
-                <div className="flex justify-start mb-8 sm:mb-10 md:mb-12 lg:mb-14">
+                <div className="flex justify-start sm:justify-center md:justify-start mb-8 sm:mb-10 md:mb-12 lg:mb-14">
                   <img
                     src={`${API_BASE_URL}${feature?.image?.url}`}
                     alt="Solution Icon"
@@ -86,9 +86,9 @@ const OurSolutions = ({ sections }) => {
                 </div>
 
                 {/* Text Content */}
-                <div className="flex-1 flex flex-col justify-end">
+                <div className="flex-1 flex flex-col justify-end sm:justify-center md:justify-end">
                   <p
-                    className={`2xl:text-[16px] lg:text-[15px] text-[14px] text-gray-700 leading-relaxed`}
+                    className={`2xl:text-[16px] lg:text-[15px] text-[14px] text-gray-700 leading-relaxed sm:max-w-[390px] md:max-w-none`}
                   >
                     {feature.text}
                     <span className="underline ml-1 cursor-pointer hover:text-[#F21B2A] transition-colors duration-200">

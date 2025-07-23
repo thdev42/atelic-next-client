@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
@@ -78,6 +78,54 @@ export const Advisors = ({ sections }) => {
     ? sections?.teamMembers
     : [];
 
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const sliderRef = useRef(null);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 75; // Increased threshold
+    const isRightSwipe = distance < -75; // Increased threshold
+
+    if (isLeftSwipe && currentSlide < advisors.length - 1) {
+      setCurrentSlide(currentSlide + 1);
+    }
+    if (isRightSwipe && currentSlide > 0) {
+      setCurrentSlide(currentSlide - 1);
+    }
+
+    // Reset touch values
+    setTouchStart(0);
+    setTouchEnd(0);
+  };
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+  };
+
   return (
     <section className="font-sora relative bg-[#E8E8E8] text-black w-full max-w-[1920px] mx-auto overflow-hidden py-16">
       <div className="2xl:px-[178px] md:px-12 lg:px-[100px] mx-auto px-6 sm:px-10 text-left">
@@ -89,12 +137,13 @@ export const Advisors = ({ sections }) => {
           insight. They help us navigate challenges and scale with confidence.
         </p>
 
-        <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Desktop Grid */}
+        <div className="mt-16 hidden lg:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {advisors.map((advisor, index) => (
             <motion.div
               key={index}
               whileHover={{ backgroundColor: "#ffffff" }}
-              className="w-full max-w-[496px] h-[279px]  bg-[#E8E8E8] border border-black/50 hover:border-white hover:shadow-md rounded-[29px] p-6 mx-auto flex flex-col items-start justify-start text-left transition-all duration-100"
+              className="w-full max-w-[496px] h-[279px] bg-[#E8E8E8] border border-black/50 hover:border-white hover:shadow-md rounded-[29px] p-6 mx-auto flex flex-col items-start justify-start text-left transition-all duration-100"
             >
               <div className="space-y-5">
                 <div className="w-full flex items-center justify-between mb-4">
@@ -107,9 +156,8 @@ export const Advisors = ({ sections }) => {
                   />
                   <div className="flex gap-3">
                     {advisor.icons.map((social, i) => (
-                      <a className="cursor-pointer">
+                      <a key={i} className="cursor-pointer">
                         <img
-                          key={i}
                           src={`${API_BASE_URL}${social?.logo?.url}`}
                           alt={social}
                           width={26}
@@ -130,6 +178,80 @@ export const Advisors = ({ sections }) => {
               </div>
             </motion.div>
           ))}
+        </div>
+
+        {/* Mobile Slider */}
+        <div className="mt-16 lg:hidden">
+          <div
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            className="relative overflow-hidden"
+          >
+            <div
+              ref={sliderRef}
+              className="flex transition-transform duration-300 ease-in-out"
+              style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+            >
+              {advisors.map((advisor, index) => (
+                <div key={index} className="w-full flex-shrink-0 px-2">
+                  <div className="w-full max-w-[496px] h-[279px] bg-white border border-white shadow-md rounded-[29px] p-6 mx-auto flex flex-col items-start justify-start text-left">
+                    <div className="space-y-5">
+                      <div className="w-full flex items-center justify-between mb-4">
+                        <img
+                          src={`${API_BASE_URL}${advisor?.image?.url}`}
+                          alt={advisor?.name}
+                          width={48}
+                          height={48}
+                          className="rounded-full object-cover"
+                        />
+                        <div className="flex gap-3">
+                          {advisor.icons.map((social, i) => (
+                            <a key={i} className="cursor-pointer">
+                              <img
+                                src={`${API_BASE_URL}${social?.logo?.url}`}
+                                alt={social}
+                                width={26}
+                                height={26}
+                                className="opacity-100 mix-blend-luminosity"
+                              />
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                      <h3 className="font-medium text-lg mt-1">
+                        {advisor.name}
+                      </h3>
+                      <p className="text-sm font-semibold text-gray-800 mt-1">
+                        {advisor.title}
+                      </p>
+                      <p className="text-sm text-gray-700 mt-3">
+                        {advisor.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Navigation Arrows */}
+          <div className="flex justify-center items-center mt-8 space-x-4">
+            {/* Dots Indicator */}
+            <div className="flex space-x-2">
+              {advisors.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    index === currentSlide
+                      ? "bg-blue-600 scale-110"
+                      : "bg-gray-300"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

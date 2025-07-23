@@ -29,7 +29,7 @@ const Vision = ({ sections }) => {
   return (
     <>
       {/* --- Vision Section --- */}
-      <section className="font-sora relative bg-white text-black w-full max-w-[1920px] mx-auto overflow-hidden py-12">
+      <section className="font-sora relative bg-white text-black w-full max-w-[1920px] mx-auto overflow-hidden sm:py-12">
         {/* Background Box (Fixed Height & Centered) */}
         <div className="z-10 absolute inset-0 flex justify-center 2xl:px-[100px] items-center pointer-events-none">
           <div className="w-[90%] lg:h-[750px] bg-[#E8E8E8]"></div>
@@ -73,7 +73,7 @@ const Vision = ({ sections }) => {
       </section>
 
       {/* --- Mission Section --- */}
-      <section className="w-full bg-[#fdfdfd] text-black py-20 relative font-sora">
+      <section className="w-full bg-[#fdfdfd] text-black relative font-sora">
         <div className="lg:block hidden absolute -top-96 -left-44">
           <Image
             src={BgPattern1}
@@ -119,7 +119,7 @@ const Vision = ({ sections }) => {
 
           {/* RIGHT: Logo Image */}
 
-          <div className="w-full lg:w-1/2 relative h-[300px] flex justify-center lg:justify-start mt-10 lg:mt-0">
+          <div className="w-full lg:w-1/2 relative h-[75px] sm:h-[150px] xl:h-[200px] flex justify-center lg:justify-start mt-10 lg:mt-0">
             <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 w-full max-w-[700px] h-full px-6 sm:px-10 lg:px-0">
               <Image
                 src={MissionImage}

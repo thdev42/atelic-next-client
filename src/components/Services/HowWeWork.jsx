@@ -210,16 +210,11 @@ const HowWeWork = ({ sections }) => {
                   label={item.percentage}
                   description={item.description}
                 />
-                {index < servicesProgress.details.length - 1 && (
-                  <div className="flex justify-center">
-                    <div className="w-full max-w-[200px] h-[1px] bg-gray-300"></div>
-                  </div>
-                )}
               </React.Fragment>
             ))}
           </div>
 
-          <div className="w-full h-[1px] bg-black opacity-20 mt-12 lg:mt-16 xl:mt-20 2xl:mt-24" />
+          <div className="md:block hidden w-full h-[1px] bg-black opacity-20 mt-12 lg:mt-16 xl:mt-20 2xl:mt-24" />
         </div>
       </section>
 
@@ -227,22 +222,8 @@ const HowWeWork = ({ sections }) => {
       <section className="bg-white z-10 font-sora overflow-hidden mx-auto relative">
         <div className="px-4 sm:px-8 md:px-12 mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left Column - Image (Absolute Positioned) */}
-            <div className="flex justify-center 2xl:justify-start lg:relative lg:min-h-[600px] xl:min-h-[650px] 2xl:min-h-[695px]">
-              <div className="relative lg:absolute lg:-left-8 xl:-left-12 2xl:-left-16 lg:top-0 lg:z-10 lg:w-[600px] xl:w-[650px] 2xl:w-[738px] lg:h-[600px] xl:h-[650px] 2xl:h-[695px]">
-                <img
-                  src={`${API_BASE_URL}${servicesWork?.image?.url}`}
-                  alt="AI Solutions Visualization - Digital iceberg showing visible AI solutions above and complex infrastructure below"
-                  width={738}
-                  height={695}
-                  priority
-                  className="w-full h-full object-contain"
-                />
-              </div>
-            </div>
-
-            {/* Right Column - Content */}
-            <div className="space-y-5 lg:relative mb-5 md:mb-16  lg:z-0 lg:ml-8 xl:ml-12 2xl:ml-16">
+            {/* Text Content - Shows first on mobile, second on lg+ */}
+            <div className="space-y-5 lg:relative mb-5 md:mb-16 lg:z-0 lg:ml-8 xl:ml-12 2xl:ml-16 text-center mt-9 lg:mt-0  lg:text-left lg:order-2">
               {/* Heading with fade-in */}
               <div className="space-y-4">
                 <h2 className={`${headingStyle} font-light text-black -mt-2`}>
@@ -264,6 +245,20 @@ const HowWeWork = ({ sections }) => {
               </p>
 
               {/* Button from left */}
+            </div>
+
+            {/* Image - Shows second on mobile, first on lg+ */}
+            <div className="flex justify-center 2xl:justify-start lg:relative lg:min-h-[600px] xl:min-h-[650px] 2xl:min-h-[695px] lg:order-1">
+              <div className="relative lg:absolute lg:-left-8 xl:-left-12 2xl:-left-16 lg:top-0 lg:z-10 lg:w-[600px] xl:w-[650px] 2xl:w-[738px] lg:h-[600px] xl:h-[650px] 2xl:h-[695px] ">
+                <img
+                  src={`${API_BASE_URL}${servicesWork?.image?.url}`}
+                  alt="AI Solutions Visualization - Digital iceberg showing visible AI solutions above and complex infrastructure below"
+                  width={738}
+                  height={695}
+                  priority
+                  className="w-full h-full object-contain"
+                />
+              </div>
             </div>
           </div>
         </div>

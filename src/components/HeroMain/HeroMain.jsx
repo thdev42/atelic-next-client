@@ -39,6 +39,7 @@ const HeroSection = ({ scrollYSProgress, section }) => {
 
   const heroDataArray = section?.details || [];
   const [isMobile, setIsMobile] = useState(false);
+  const [isMid, setIsMid] = useState(false);
 
   // Enhanced auto-play function
   const startAutoPlay = () => {
@@ -113,6 +114,7 @@ const HeroSection = ({ scrollYSProgress, section }) => {
           ? window.visualViewport?.width || window.innerWidth
           : 1024;
       setIsMobile(width < 768);
+      setIsMid(width < 1024);
     };
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -258,7 +260,7 @@ const HeroSection = ({ scrollYSProgress, section }) => {
     <motion.section
       ref={sectionRef}
       className={`overflow-hidden ${
-        isMobile ? "relative" : "sticky top-0"
+        isMid ? "relative" : "sticky top-0"
       } max-w-[1920px] mx-auto w-full 2xl:py-5 transition-all duration-1000 ease-in-out z-0`}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
@@ -283,9 +285,13 @@ const HeroSection = ({ scrollYSProgress, section }) => {
               <HeroDynamic
                 heroData={activeSlideData}
                 sectionY={sectionY}
+                hero={heroDataArray}
                 backgroundY={backgroundY}
+                activeSection={activeSection}
+                goToSlide={goToSlide}
                 robotY={robotY}
                 textY={textY}
+                isDark={isDark}
               />
             </motion.div>
           </AnimatePresence>
@@ -311,6 +317,7 @@ const HeroSection = ({ scrollYSProgress, section }) => {
                 activeSection={activeSection}
                 backgroundY={backgroundY}
                 robotY={robotY}
+                isDark={isDark}
                 textY={textY}
               />
             </motion.div>
@@ -319,7 +326,7 @@ const HeroSection = ({ scrollYSProgress, section }) => {
       </div>
 
       {/* Slide Indicators */}
-      <div className="absolute lg:hidden bottom-4 left-1/2 transform -translate-x-1/2 flex gap-3 items-center z-20">
+      {/* <div className="absolute lg:hidden bottom-4 left-1/2 transform -translate-x-1/2 flex gap-3 items-center z-20">
         {heroDataArray.map((_, idx) => {
           const isActive = idx === activeSection;
           return (
@@ -371,7 +378,7 @@ const HeroSection = ({ scrollYSProgress, section }) => {
             </motion.button>
           );
         })}
-      </div>
+      </div> */}
 
       <style jsx>{`
         @keyframes floatUpDown {

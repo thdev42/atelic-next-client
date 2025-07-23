@@ -1097,10 +1097,11 @@ export const HeroDynamic = ({
     if (isInnovation) {
       return {
         textWidth: "w-full lg:w-3/4 2xl:w-2/3",
-        imageWidth: "w-full lg:w-2/5 2xl:w-1/2",
+        imageWidth: "w-full max-w-[550px]  lg:max-w-max lg:w-2/5 2xl:w-1/2",
         textPadding:
           "px-4 lg:pt-16 xl:pt-20 2xl:pt-36 sm:px-8 md:px-12 lg:px-[120px] 2xl:px-[178px]",
-        imagePadding: "px-4 sm:px-8 md:px-12 lg:px-0 lg:mr-28",
+        imagePadding:
+          "px-4 sm:px-8 2xl:top-16 lg:top-11 md:px-12 lg:px-0 lg:mr-28",
         containerPadding: "",
       };
     }
@@ -1233,7 +1234,7 @@ export const HeroDynamic = ({
                       {primaryButtonText}
                     </button>
                   </a>
-                  <a href={approachHref}>
+                  <a className="lg:block hidden" href={approachHref}>
                     <button className={getButtonStyles(false)}>
                       {secondaryButtonText}
                     </button>
@@ -1251,7 +1252,7 @@ export const HeroDynamic = ({
                       {primaryButtonText}
                     </motion.button>
                   </a>
-                  <a href={approachHref}>
+                  <a className="lg:block hidden" href={approachHref}>
                     <motion.button
                       className={getButtonStyles(false)}
                       whileHover={{ scale: 1.03 }}
@@ -1297,7 +1298,7 @@ export const HeroDynamic = ({
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className={`${layoutConfig.imageWidth} z-50 relative ${layoutConfig.imagePadding}`}
               >
-                <div className="hidden lg:block relative w-full">
+                <div className="relative w-full">
                   <img
                     src={mainImage.src}
                     alt={mainImage.alt}
@@ -1320,7 +1321,7 @@ export const HeroDynamic = ({
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className={`${layoutConfig.imageWidth} z-50 relative ${layoutConfig.imagePadding}`}
               >
-                <div className="hidden lg:block relative w-full flex justify-center">
+                <div className=" relative w-full flex justify-center">
                   <img
                     src={mainImage.src}
                     alt={mainImage.alt}
@@ -1334,12 +1335,18 @@ export const HeroDynamic = ({
             {!isInnovation && !isFullBg && (
               <motion.div
                 style={{ y: robotY }}
-                className={`${layoutConfig.imageWidth} z-50 relative flex justify-end`}
+                className={`${layoutConfig.imageWidth} z-50 ${
+                  isRobot && ""
+                } relative flex justify-end`}
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                <div className="hidden  lg:block relative w-full 2xl:max-w-none lg:max-w-[600px] max-w-[500px]">
+                <div
+                  className={`${
+                    isRobot && "mx-auto relative"
+                  }  w-full 2xl:max-w-none lg:max-w-[600px] max-w-[400px]`}
+                >
                   {/* Show image for mobile on chip type, or always for robot type */}
                   {isRobot && (
                     <img
@@ -1352,15 +1359,26 @@ export const HeroDynamic = ({
                   )}
 
                   {isChip && (
-                    <div className="block lg:hidden ">
-                      <Image
-                        src={mainImage.src}
-                        alt={mainImage.alt}
-                        width={mainImage.width}
-                        height={mainImage.height}
-                        className="w-full"
-                      />
-                    </div>
+                    <>
+                      <div className="block lg:hidden opacity-0">
+                        <Image
+                          src={mainImage.src}
+                          alt={mainImage.alt}
+                          width={mainImage.width}
+                          height={mainImage.height}
+                          className="w-full"
+                        />
+                      </div>
+                      <div className="block lg:hidden absolute max-w-[550px] -bottom-0 -right-16">
+                        <Image
+                          src={mainImage.src}
+                          alt={mainImage.alt}
+                          width={mainImage.width}
+                          height={mainImage.height}
+                          className="w-full"
+                        />
+                      </div>
+                    </>
                   )}
 
                   {/* Statistics Cards - Only for Robot Type */}
@@ -1371,20 +1389,29 @@ export const HeroDynamic = ({
                           key={stat.id}
                           style={{
                             animation: "floatUpDown 11s ease-in-out infinite",
-                            animationDelay: `${index * 0.5}s`, // Stagger animation
+                            animationDelay: `${index * 0.5}s`,
                           }}
-                          className={`z-50 font-poppins absolute xs:w-[180px] xs:h-[140px] w-[220px] h-[180px] 2xl:w-[240px] 2xl:h-[200px] 
-          ${
-            index === 0
-              ? "top-8 -right-8 lg:top-12 lg:-right-8 xl:top-16 xl:-right-10 2xl:top-20 2xl:-right-12"
-              : "bottom-8 -left-8 lg:bottom-12 lg:-left-8 xl:bottom-16 xl:-left-10 2xl:bottom-20 2xl:-left-12"
-          } 
-          bg-white/40 rounded-[30px] shadow-[0_4px_60px_rgba(0,0,0,0.05)] backdrop-blur-[10px] px-9 py-4 flex flex-col text-center`}
+                          className={`z-50 font-poppins absolute 
+                            w-[140px] h-[110px] 
+                            xs:w-[160px] xs:h-[120px] 
+                            sm:w-[180px] sm:h-[140px] 
+                            md:w-[200px] md:h-[160px] 
+                            lg:w-[220px] lg:h-[180px] 
+                            2xl:w-[240px] 2xl:h-[200px]
+                            ${
+                              index === 0
+                                ? "top-4 -right-4 sm:top-6 sm:-right-6 md:top-8 md:-right-8 lg:top-12 lg:-right-8 xl:top-16 xl:-right-10 2xl:top-20 2xl:-right-12"
+                                : "bottom-4 -left-4 sm:bottom-6 sm:-left-6 md:bottom-8 md:-left-8 lg:bottom-12 lg:-left-8 xl:bottom-16 xl:-left-10 2xl:bottom-20 2xl:-left-12"
+                            } 
+                            bg-white/40 rounded-[20px] sm:rounded-[25px] lg:rounded-[30px] 
+                            shadow-[0_4px_60px_rgba(0,0,0,0.05)] backdrop-blur-[10px] 
+                            px-3 py-2 sm:px-6 sm:py-3 lg:px-9 lg:py-4 
+                            flex flex-col text-center`}
                         >
-                          <p className="text-left text-5xl 2xl:text-[50px] font-normal 2xl:mt-2 mb-2 text-black">
+                          <p className="text-left text-2xl sm:text-3xl md:text-4xl lg:text-5xl 2xl:text-[50px] font-normal mb-1 sm:mb-2 2xl:mt-2 text-black">
                             {stat.percentage}
                           </p>
-                          <p className="text-left text-[14px] 2xl:text-[16px] mt-2 font-thin text-black/60 leading-snug">
+                          <p className="text-left text-[10px] sm:text-[12px] md:text-[13px] lg:text-[14px] 2xl:text-[16px] mt-1 sm:mt-2 font-thin text-black/60 leading-snug">
                             {stat.description}
                             <span className="underline cursor-pointer ml-1">
                               Learn More
@@ -1397,6 +1424,59 @@ export const HeroDynamic = ({
                 </div>
               </motion.div>
             )}
+            <div className="relative mx-auto z-50 py-2 lg:hidden  flex gap-3 items-center">
+              {hero?.map((_, idx) => {
+                const isActive = idx === activeSection;
+                return (
+                  <motion.button
+                    key={idx}
+                    onClick={() => goToSlide(idx)}
+                    className="flex items-center justify-center rounded-full transition-all duration-300"
+                    style={{
+                      width: isActive ? "21px" : "9px",
+                      height: isActive ? "21px" : "9px",
+                      borderWidth: isActive ? 1 : 0,
+                      borderColor: isActive
+                        ? isDark
+                          ? "#ffffff"
+                          : "#335F86"
+                        : "transparent",
+                    }}
+                    initial={false}
+                    animate={{
+                      width: isActive ? "21px" : "9px",
+                      height: isActive ? "21px" : "9px",
+                      borderWidth: isActive ? 1 : 0,
+                    }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                  >
+                    <motion.div
+                      className={`rounded-full ${
+                        isActive
+                          ? isDark
+                            ? "bg-white"
+                            : "bg-[#335F86]"
+                          : isDark
+                          ? "bg-white hover:bg-gray-300"
+                          : "bg-[#335F86] hover:bg-gray-400"
+                      }`}
+                      style={{ width: "9px", height: "9px" }}
+                      initial={false}
+                      animate={{
+                        backgroundColor: isActive
+                          ? isDark
+                            ? "#ffffff"
+                            : "#335F86"
+                          : isDark
+                          ? "#ffffff"
+                          : "#335F86",
+                      }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                    />
+                  </motion.button>
+                );
+              })}
+            </div>
           </>
         )}
       </div>
