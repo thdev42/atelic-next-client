@@ -40,7 +40,7 @@ export default function ServicesSection({ data }) {
   // }, []);
 
   return (
-    <section className="z-10 font-sora overflow-hidden bg-[#f3f3f3] max-w-[1920px] mx-auto w-full py-0 lg:py-16  relative">
+    <section className="z-10 font-sora overflow-hidden bg-[#f3f3f3] max-w-[1920px] mx-auto w-full py-0 lg:py-16 relative">
       {/* <Parallax speed={10}> */}
       <div
         style={{
