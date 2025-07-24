@@ -316,19 +316,45 @@ const IceBerg = ({ sections }) => {
             </div>
           </div>
 
-          {/* Iceberg Background with Scroll-Reveal Circles */}
+          {/* Mobile Iceberg Background WITH Cards (No Scroll Reveal) */}
           <div ref={svgContainerRef} className="4min:hidden  relative w-full">
             <MobileIceBerg />
-            {solutionsData.map((solution, index) => (
-              <ScrollRevealCircle
-                key={solution.id}
-                solution={solution}
-                index={index}
-                scrollYProgress={scrollYProgress}
-                containerRef={svgContainerRef}
-              />
-            ))}
+            {solutionsData.map((solution, index) => {
+              // Calculate card position relative to the container
+              const getCardPosition = () => {
+                if (!solution.cx || !solution.cy) return { left: 0, top: 0 };
+                const svgWidth = 1920;
+                const svgHeight = 1562;
+                const leftPercent = (solution.cx / svgWidth) * 100;
+                const topPercent = (solution.cy / svgHeight) * 100;
+                return {
+                  left: `${leftPercent}%`,
+                  top: `${topPercent}%`,
+                };
+              };
+              const cardPosition = getCardPosition();
+
+              return (
+                <div
+                  key={solution.id}
+                  className="absolute z-20 pointer-events-none"
+                  style={{
+                    left: cardPosition.left,
+                    top: cardPosition.top,
+                    transform: "translate(-50%, -50%)",
+                  }}
+                >
+                  <AgenticCard
+                    solution={solution}
+                    index={index}
+                    onClose={() => {}}
+                  />
+                </div>
+              );
+            })}
           </div>
+
+          {/* Desktop Iceberg Background WITH Scroll-Reveal Circles */}
           <div
             ref={svgContainerRef}
             className="4min:block hidden relative w-full"
