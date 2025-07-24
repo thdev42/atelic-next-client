@@ -2,5 +2,5 @@ const ENV = process.env.NEXT_PUBLIC_APP_ENV;
 
 export const API_BASE_URL =
   ENV === "development"
-    ? "https://atelic-strapi.collabdash.io"
-    : "http://138.68.136.194";
+    ? "http://192.168.80.25:1337"
+    : "https://atelic-strapi.collabdash.io";
