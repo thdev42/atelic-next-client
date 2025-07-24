@@ -36,6 +36,11 @@ const nextConfig = {
         hostname: "atelic-strapi.onrender.com",
         pathname: "/uploads/**",
       },
+      {
+        protocol: "https",
+        hostname: "atelic-strapi.collabdash.io",
+        pathname: "/uploads/**",
+      },
     ],
   },
 };
