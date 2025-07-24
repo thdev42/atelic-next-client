@@ -1,7 +1,8 @@
 "use client";
 import { useEffect } from "react";
 import Image from "next/image";
-import Iceberg from "../../../assets/servicesiceberg.png";
+// import Iceberg from "../../../assets/servicesiceberg.png";
+import Iceberg from "../../../assets/homeiceberg.jpg";
 import AOS from "aos";
 // import "aos/dist/aos.css";
 import { Parallax } from "react-scroll-parallax";
@@ -47,10 +48,10 @@ export default function ServicesSection({ data }) {
           background:
             "linear-gradient(89.65deg, #000614 4.13%, #001225 21.3%, #062945 31.31%, #083A5B 50.15%, #031D37 68.66%, #010310 99.19%)",
         }}
-        className="px-5 py-16 block lg:hidden"
+        className="block lg:hidden"
       >
         {/* Mobile version without parallax */}
-        <div className="space-y-14 relative">
+        <div className="px-5 pt-16 text-center space-y-5 relative">
           {/* Heading with fade-in */}
           <div className="space-y-4 relative z-10">
             <h2 className={`${headingStylesMobile} font-light text-white`}>
@@ -67,6 +68,16 @@ export default function ServicesSection({ data }) {
           {/* <button className="bg-[#335F86] hover:bg-slate-700 text-[16px] text-white px-9 2xl:w-[200px] py-3 rounded-[8px] font-light transition-colors duration-200 relative z-10">
             {data?.primaryButton}
           </button> */}
+        </div>
+        <div className="relative mx-auto max-w-none">
+          <img
+            // src={`${API_BASE_URL}${data?.image?.url}`}
+            src={`${Iceberg.src}`}
+            alt="AI Solutions Visualization - Digital iceberg showing visible AI solutions above and complex infrastructure below"
+            // width={1024}
+            // height={1024}
+            priority
+          />
         </div>
       </div>
       <div className="px-4 sm:px-8 2xl:px-[178px] md:px-12 lg:px-[100px] mx-auto">
@@ -126,11 +137,12 @@ export default function ServicesSection({ data }) {
             <div className="relative">
               <div
                 className="relative p-8 aspect-square flex items-center justify-center"
-                style={{ backgroundColor: "#D9D9D9" }}
+                // style={{ backgroundColor: "#D9D9D9" }}
               >
                 <div className="relative">
                   <img
-                    src={`${API_BASE_URL}${data?.image?.url}`}
+                    // src={`${API_BASE_URL}${data?.image?.url}`}
+                    src={`${Iceberg.src}`}
                     alt="AI Solutions Visualization - Digital iceberg showing visible AI solutions above and complex infrastructure below"
                     width={1024}
                     height={1024}

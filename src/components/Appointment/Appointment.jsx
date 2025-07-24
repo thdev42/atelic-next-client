@@ -180,7 +180,7 @@ const Appointment = ({ data }) => {
   return (
     <section
       ref={sectionRef}
-      className="bg-[#e5e5e5] z-10 font-sora overflow-hidden max-w-[1920px] mx-auto w-full py-16 min-h-screen relative "
+      className="bg-[#e5e5e5] z-10 font-sora overflow-hidden max-w-[1920px] mx-auto w-full py-16 relative "
     >
       {/* Background overlay for opacity with parallax */}
       <motion.div

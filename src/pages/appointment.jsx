@@ -31,7 +31,7 @@ export default function FinalResult() {
       >
         <ParticlesComp />
         <div
-          className={`${""} w-full z-50 text-center transition-all duration-300 ease-in-out ${
+          className={`${""} w-full z-30 text-center transition-all duration-300 ease-in-out ${
             slideDirection === "slide-left"
               ? "transform -translate-x-full opacity-0"
               : slideDirection === "slide-right"
@@ -103,7 +103,7 @@ export default function FinalResult() {
             </div>
 
             {/* Mobile Layout */}
-            <div className="lg:hidden flex flex-col items-center justify-center h-full animate-fadeIn">
+            <div className="lg:hidden  flex flex-col items-center justify-center h-full animate-fadeIn">
               <div className="w-full px-4 mt-8">
                 <form className="text-black p-6 rounded-3xl w-full max-w-md mx-auto space-y-4">
                   <h2 className=" text-black text-3xl font-semibold text-center">
@@ -125,11 +125,11 @@ export default function FinalResult() {
                     placeholder="Email"
                     className="w-full bg-[#EFEFEF] border border-[#C8C8C8] px-5 py-4 rounded-[50px] text-base focus:outline-none focus:border-blue-500"
                   />
-                  <input
+                  {/* <input
                     type="text"
                     placeholder="Industry"
                     className="w-full bg-[#EFEFEF] border border-[#C8C8C8] px-5 py-4 rounded-[50px] text-base focus:outline-none focus:border-blue-500"
-                  />
+                  /> */}
 
                   <button
                     type="submit"

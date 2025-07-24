@@ -48,7 +48,7 @@ export const Partners = ({ partners, data }) => {
   return (
     <motion.section
       ref={container} // Added ref to section for scroll detection
-      className={`will-change-transform max-w-[1920px] mx-auto w-full py-10 lg:py-20 relative overflow-hidden`}
+      className={`will-change-transform max-w-[1920px] mx-auto w-full z-50 py-10 lg:py-20 relative overflow-hidden`}
       style={{
         backgroundColor: "#f3f3f3",
         // backgroundAttachment:

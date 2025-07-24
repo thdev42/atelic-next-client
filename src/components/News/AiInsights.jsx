@@ -57,7 +57,7 @@ const AiInsights = ({ sections }) => {
             );
           })}
         </h2>
-        <div className="space-y-24">
+        <div className="sm:space-y-24">
           {teamMembers.map((member, index) => (
             <div
               key={index}

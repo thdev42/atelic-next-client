@@ -6,47 +6,45 @@ import {
   useTransform,
   motion,
   AnimatePresence,
+  useInView,
 } from "framer-motion";
 
 import { useBackground } from "@/context/BackgroundContext";
 import { HeroDynamic } from "../HeroScreens/HeroScreens";
-import Particles, { initParticlesEngine } from "@tsparticles/react";
-import { loadSlim } from "@tsparticles/slim";
 import ParticlesComp from "../Particles/Particles";
 
 const HeroSection = ({ scrollYSProgress, section }) => {
   const sectionRef = useRef(null);
+  const sentinelRef = useRef(null);
+  const [isSentinelInView, setIsSentinelInView] = useState(false);
+
   const [activeSection, setActiveSection] = useState(0);
   const [prevSection, setPrevSection] = useState(0);
   const [slideDirection, setSlideDirection] = useState(0);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
 
-  // Auto-play states - Enhanced
   const [isAutoPlay, setIsAutoPlay] = useState(true);
   const autoPlayRef = useRef(null);
-  const AUTO_PLAY_DELAY = 7000; // 4 seconds
-  const [isPaused, setIsPaused] = useState(false); // Track pause state
+  const AUTO_PLAY_DELAY = 4000;
+  const [isPaused, setIsPaused] = useState(false);
 
-  const {
-    setBackground,
-    backgroundType,
-    setActiveHeroIndex,
-    setSlideProgress,
-    setFixedNav,
-    setIsShowNav,
-  } = useBackground();
+  const { setBackground, setActiveHeroIndex, setSlideProgress } =
+    useBackground();
 
   const heroDataArray = section?.details || [];
   const [isMobile, setIsMobile] = useState(false);
   const [isMid, setIsMid] = useState(false);
 
-  // Enhanced auto-play function
   const startAutoPlay = () => {
-    // Don't start if disabled, paused, or only one slide
-    if (!isAutoPlay || isPaused || heroDataArray.length <= 1) return;
+    if (
+      !isAutoPlay ||
+      isPaused ||
+      heroDataArray.length <= 1 ||
+      !isSentinelInView
+    )
+      return;
 
-    // Clear any existing timer
     if (autoPlayRef.current) {
       clearTimeout(autoPlayRef.current);
     }
@@ -61,38 +59,76 @@ const HeroSection = ({ scrollYSProgress, section }) => {
     }, AUTO_PLAY_DELAY);
   };
 
-  // Enhanced reset timer function
   const resetAutoPlayTimer = () => {
-    // Clear existing timer
     if (autoPlayRef.current) {
       clearTimeout(autoPlayRef.current);
       autoPlayRef.current = null;
     }
 
-    // Only restart if auto-play is enabled and not paused
-    if (isAutoPlay && !isPaused) {
+    if (isAutoPlay && !isPaused && isSentinelInView) {
       startAutoPlay();
     }
   };
 
-  // Auto-play effect - runs when activeSection changes or auto-play settings change
+  // Custom intersection observer for better visibility detection
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const isInView = entry.isIntersecting;
+        setIsSentinelInView(isInView);
+
+        if (isInView && isAutoPlay && !isPaused && heroDataArray.length > 1) {
+          // Clear any existing timer first
+          if (autoPlayRef.current) {
+            clearTimeout(autoPlayRef.current);
+          }
+          // Start autoplay immediately when entering view
+          startAutoPlay();
+        } else if (!isInView) {
+          // Clear autoplay when leaving view
+          if (autoPlayRef.current) {
+            clearTimeout(autoPlayRef.current);
+            autoPlayRef.current = null;
+          }
+        }
+      },
+      { threshold: 0.5, rootMargin: "0px" }
+    );
+
+    if (sentinelRef.current) {
+      observer.observe(sentinelRef.current);
+    }
+
+    return () => {
+      if (sentinelRef.current) {
+        observer.unobserve(sentinelRef.current);
+      }
+    };
+  }, [isAutoPlay, isPaused, heroDataArray.length]);
+
   useEffect(() => {
     setPrevSection(activeSection);
 
-    // Start auto-play if conditions are met
-    if (isAutoPlay && !isPaused && heroDataArray.length > 1) {
+    // Only restart autoplay for active section changes, not visibility changes
+    if (
+      isAutoPlay &&
+      !isPaused &&
+      isSentinelInView &&
+      heroDataArray.length > 1
+    ) {
+      if (autoPlayRef.current) {
+        clearTimeout(autoPlayRef.current);
+      }
       startAutoPlay();
     }
 
-    // Cleanup on unmount or dependency change
     return () => {
       if (autoPlayRef.current) {
         clearTimeout(autoPlayRef.current);
       }
     };
-  }, [activeSection, isAutoPlay, isPaused, heroDataArray.length]);
+  }, [activeSection]);
 
-  // Enhanced mouse handlers for hover pause
   const handleMouseEnter = () => {
     setIsPaused(true);
     if (autoPlayRef.current) {
@@ -102,7 +138,7 @@ const HeroSection = ({ scrollYSProgress, section }) => {
 
   const handleMouseLeave = () => {
     setIsPaused(false);
-    if (isAutoPlay) {
+    if (isAutoPlay && isSentinelInView) {
       startAutoPlay();
     }
   };
@@ -119,9 +155,8 @@ const HeroSection = ({ scrollYSProgress, section }) => {
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [backgroundType]);
+  }, []);
 
-  // Parallax motion transforms
   const sectionY = useTransform(
     scrollYSProgress,
     [0, 1],
@@ -143,7 +178,6 @@ const HeroSection = ({ scrollYSProgress, section }) => {
     isMobile ? ["0%", "0%"] : ["0%", "-90%"]
   );
 
-  // Enhanced touch handlers with timer reset
   const handleTouchStart = (e) => {
     setTouchEnd(null);
     setTouchStart(e.targetTouches[0].clientX);
@@ -164,30 +198,29 @@ const HeroSection = ({ scrollYSProgress, section }) => {
       setPrevSection(activeSection);
       setSlideDirection(1);
       setActiveSection(activeSection + 1);
-      resetAutoPlayTimer(); // Reset timer on manual interaction
+      resetAutoPlayTimer();
     }
     if (isRightSwipe && activeSection > 0) {
       setPrevSection(activeSection);
       setSlideDirection(-1);
       setActiveSection(activeSection - 1);
-      resetAutoPlayTimer(); // Reset timer on manual interaction
+      resetAutoPlayTimer();
     }
   };
 
-  // Enhanced keyboard navigation with timer reset
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "ArrowLeft" && activeSection > 0) {
         setPrevSection(activeSection);
         setSlideDirection(-1);
         setActiveSection(activeSection - 1);
-        resetAutoPlayTimer(); // Reset timer on manual interaction
+        resetAutoPlayTimer();
       }
       if (e.key === "ArrowRight" && activeSection < heroDataArray.length - 1) {
         setPrevSection(activeSection);
         setSlideDirection(1);
         setActiveSection(activeSection + 1);
-        resetAutoPlayTimer(); // Reset timer on manual interaction
+        resetAutoPlayTimer();
       }
     };
 
@@ -195,7 +228,6 @@ const HeroSection = ({ scrollYSProgress, section }) => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [activeSection, heroDataArray.length]);
 
-  // Background effect
   useEffect(() => {
     const currentSlide = heroDataArray[activeSection];
 
@@ -216,7 +248,6 @@ const HeroSection = ({ scrollYSProgress, section }) => {
     setSlideProgress,
   ]);
 
-  // Enhanced goToSlide with timer reset
   const goToSlide = (newIndex) => {
     if (
       newIndex < 0 ||
@@ -228,13 +259,12 @@ const HeroSection = ({ scrollYSProgress, section }) => {
     setPrevSection(activeSection);
     setSlideDirection(newIndex > activeSection ? 1 : -1);
     setActiveSection(newIndex);
-    resetAutoPlayTimer(); // Reset timer on manual slide change
+    resetAutoPlayTimer();
   };
 
   const activeSlideData = heroDataArray[activeSection];
   const isDark = activeSlideData?.theme === "dark";
 
-  // Animation variants for slide transitions
   const slideVariants = {
     enter: (direction) => ({
       x: direction > 0 ? "100%" : "-100%",
@@ -257,20 +287,21 @@ const HeroSection = ({ scrollYSProgress, section }) => {
   };
 
   return (
-    <motion.section
-      ref={sectionRef}
-      className={`overflow-hidden ${
-        isMid ? "relative" : "sticky top-0"
-      } max-w-[1920px] mx-auto w-full 2xl:py-5 transition-all duration-1000 ease-in-out z-0`}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-      onMouseEnter={handleMouseEnter} // Pause on hover
-      onMouseLeave={handleMouseLeave} // Resume on mouse leave
-    >
-      {/* Slide Component with Animation Container */}
-      <div className="relative w-full h-full overflow-hidden">
-        {isMobile ? (
+    <>
+      <div ref={sentinelRef} className="w-full h-[1px]" />
+
+      <motion.section
+        ref={sectionRef}
+        className={`overflow-hidden ${
+          isMid ? "relative" : "sticky top-0"
+        } max-w-[1920px] mx-auto w-full 2xl:py-5 transition-all duration-1000 ease-in-out z-0`}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        <div className="relative w-full h-full overflow-hidden">
           <AnimatePresence mode="wait" custom={slideDirection}>
             <motion.div
               key={activeSection}
@@ -282,6 +313,7 @@ const HeroSection = ({ scrollYSProgress, section }) => {
               transition={slideTransition}
               className="w-full h-full"
             >
+              {!isMobile && <ParticlesComp isDark={isDark} />}
               <HeroDynamic
                 heroData={activeSlideData}
                 sectionY={sectionY}
@@ -295,103 +327,21 @@ const HeroSection = ({ scrollYSProgress, section }) => {
               />
             </motion.div>
           </AnimatePresence>
-        ) : (
-          <AnimatePresence mode="wait" custom={slideDirection}>
-            <motion.div
-              key={activeSection}
-              custom={slideDirection}
-              variants={slideVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={slideTransition}
-              className="w-full h-full"
-            >
-              <ParticlesComp isDark={isDark} />
+        </div>
 
-              <HeroDynamic
-                heroData={activeSlideData}
-                sectionY={sectionY}
-                hero={heroDataArray}
-                goToSlide={goToSlide}
-                activeSection={activeSection}
-                backgroundY={backgroundY}
-                robotY={robotY}
-                isDark={isDark}
-                textY={textY}
-              />
-            </motion.div>
-          </AnimatePresence>
-        )}
-      </div>
-
-      {/* Slide Indicators */}
-      {/* <div className="absolute lg:hidden bottom-4 left-1/2 transform -translate-x-1/2 flex gap-3 items-center z-20">
-        {heroDataArray.map((_, idx) => {
-          const isActive = idx === activeSection;
-          return (
-            <motion.button
-              key={idx}
-              onClick={() => goToSlide(idx)}
-              className="flex items-center justify-center rounded-full transition-all duration-300"
-              style={{
-                width: isActive ? "21px" : "9px",
-                height: isActive ? "21px" : "9px",
-                borderWidth: isActive ? 1 : 0,
-                borderColor: isActive
-                  ? isDark
-                    ? "#ffffff"
-                    : "#335F86"
-                  : "transparent",
-              }}
-              initial={false}
-              animate={{
-                width: isActive ? "21px" : "9px",
-                height: isActive ? "21px" : "9px",
-                borderWidth: isActive ? 1 : 0,
-              }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-            >
-              <motion.div
-                className={`rounded-full ${
-                  isActive
-                    ? isDark
-                      ? "bg-white"
-                      : "bg-[#335F86]"
-                    : isDark
-                    ? "bg-white hover:bg-gray-300"
-                    : "bg-[#335F86] hover:bg-gray-400"
-                }`}
-                style={{ width: "9px", height: "9px" }}
-                initial={false}
-                animate={{
-                  backgroundColor: isActive
-                    ? isDark
-                      ? "#ffffff"
-                      : "#335F86"
-                    : isDark
-                    ? "#ffffff"
-                    : "#335F86",
-                }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-              />
-            </motion.button>
-          );
-        })}
-      </div> */}
-
-      <style jsx>{`
-        @keyframes floatUpDown {
-          0%,
-          100% {
-            transform: translateY(0px);
+        <style jsx>{`
+          @keyframes floatUpDown {
+            0%,
+            100% {
+              transform: translateY(0px);
+            }
+            50% {
+              transform: translateY(-20px);
+            }
           }
-          50% {
-            transform: translateY(-20px);
-          }
-        }
-      `}</style>
-    </motion.section>
+        `}</style>
+      </motion.section>
+    </>
   );
 };
 

@@ -179,7 +179,7 @@ const Navbar = ({ data }) => {
           </div>
           <nav
             className={`z-50 ${
-              fixedNav ? "absolute top-0 left-0 right-0 w-full" : ""
+              fixedNav ? "absolute mt-10 top-0 left-0 right-0 w-full" : ""
             }`}
           >
             {" "}

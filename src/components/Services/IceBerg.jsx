@@ -128,20 +128,20 @@ const AgenticCard = ({ solution, onClose, index }) => {
         x: shouldAnimateFromLeft ? -100 : 100, // Exit to left or right
       }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="font-sora 2xl:w-[413px] 2xl:h-[120px] lg:w-[300px] h-[100px] rounded-[66.5px] flex items-center px-6 bg-white shadow-lg cursor-pointer hover:shadow-xl transition-shadow duration-300"
+      className="font-sora  2xl:w-[413px] 2xl:h-[120px] lg:w-[370px] lg:h-[110px] md:w-[250px] md:h-[80px] sm:w-[200px] w-[150px] h-[50px] rounded-[66.5px] flex items-center  sm:px-6 px-3 bg-white shadow-lg cursor-pointer hover:shadow-xl transition-shadow duration-300"
       onClick={onClose}
     >
       <div
-        className="2xl:w-[75px] 2xl:h-[75px] lg:w-[60px] lg:h-[60px] rounded-full flex items-center justify-center flex-shrink-0 text-white text-2xl font-light"
+        className="2xl:w-[75px] 2xl:h-[75px] lg:w-[60px] lg:h-[60px] md:w-[40px] md:h-[40px] sm:w-[30px] sm:h-[30px] w-[24px] h-[24px] rounded-full md:text-xl flex text-xs sm:text-md sm:items-center sm:justify-center items-center justify-center flex-shrink-0 text-white lg:text-2xl font-light"
         style={{ backgroundColor: solution.circleColor || "#0B2341" }}
       >
         {String(index + 1).padStart(2, "0")}
       </div>
-      <div className="ml-6 text-left">
-        <h3 className="2xl:text-[18px] lg:text-[14px] font-semibold text-black mb-1">
+      <div className=" sm:ml-6 ml-2 text-left">
+        <h3 className="2xl:text-[15px] lg:text-[14px] md:text-[11px] sm:text-[10px] text-[9px] font-semibold text-black mb-1 sm:mb-1 mb-0">
           {solution.title}
         </h3>
-        <p className="2xl:text-[15px] lg:text-[13px] text-black 2xl:leading-relaxed whitespace-pre-line">
+        <p className="4md:hidden block 2xl:text-[14px] lg:text-[13px] text-black leading-normal 2xl:leading-normal  whitespace-pre-line">
           {solution.description}
         </p>
       </div>
@@ -220,6 +220,7 @@ const ScrollRevealCircle = ({
 // ALTERNATIVE SOLUTION: Viewport-based reveal instead of scroll progress
 import { useInView } from "framer-motion";
 import IceBergSvg from "../Svg/IceBerg";
+import MobileIceBerg from "../Svg/MobileIceBerg";
 
 const IceBerg = ({ sections }) => {
   const sectionRef = useRef(null);
@@ -316,6 +317,18 @@ const IceBerg = ({ sections }) => {
           </div>
 
           {/* Iceberg Background with Scroll-Reveal Circles */}
+          <div ref={svgContainerRef} className="4min:hidden  relative w-full">
+            <MobileIceBerg />
+            {solutionsData.map((solution, index) => (
+              <ScrollRevealCircle
+                key={solution.id}
+                solution={solution}
+                index={index}
+                scrollYProgress={scrollYProgress}
+                containerRef={svgContainerRef}
+              />
+            ))}
+          </div>
           <div
             ref={svgContainerRef}
             className="4min:block hidden relative w-full"

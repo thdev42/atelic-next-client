@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import ParticlesComp from "@/components/Particles/Particles";
 import { useFormContext } from "@/context/FormContext";
 import Footer from "@/components/Footer/Footer";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function FinalResult() {
   const { setIsShowNav, setBackground } = useBackground();
@@ -67,7 +68,7 @@ export default function FinalResult() {
 
   const handleFinalSubmit = () => {
     if (!selectedGoal) {
-      alert("Please select a business goal.");
+      toast.error("Please Select a Goal");
       return;
     }
 

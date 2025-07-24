@@ -82,7 +82,10 @@ const AnimatedTeamCard = ({
   const opacity = useTransform(scrollYProgress, [start, end], [0, 1]);
 
   return (
-    <motion.div style={{ y, opacity }} className={getCardClasses()}>
+    <motion.div
+      style={{ y, opacity }}
+      className={`delay-0 ${getCardClasses()}`}
+    >
       <div className={getImageClasses()}>
         <Image
           src={`${API_BASE_URL}${member?.image?.url}`}
@@ -248,7 +251,7 @@ const AboutAtelic = ({ data }) => {
   // Fixed styling functions with proper button positioning
   const getCardClasses = () => {
     const baseClasses =
-      "group pt-4 px-6 text-center rounded-t-[400px] transition duration-200 flex flex-col items-center bg-white hover:bg-gradient-to-b hover:from-[#F21B2A] hover:to-[#335F86] hover:text-white relative overflow-visible";
+      "group pt-4 px-6 text-center rounded-t-[400px] transition duration-100 flex flex-col items-center bg-white hover:bg-gradient-to-b hover:from-[#F21B2A] hover:to-[#335F86] hover:text-white relative overflow-visible";
     const hoverClasses = "hover:scale-105 hover:-translate-y-2";
     switch (screenSize) {
       case "mobile":
@@ -265,7 +268,7 @@ const AboutAtelic = ({ data }) => {
   const getImageClasses = () => {
     const baseClasses =
       "flex-shrink-0 rounded-full overflow-hidden border-[5px] border-white transition-all duration-500 group-hover:border-opacity-80 group-hover:shadow-2xl";
-    const hoverClasses = "group-hover:scale-100";
+    const hoverClasses = "hover:scale-105";
     switch (screenSize) {
       case "mobile":
         return `${baseClasses} w-[190px] h-[190px]`;
@@ -282,7 +285,7 @@ const AboutAtelic = ({ data }) => {
     if (isMobile) {
       return "w-[160px] h-[40px] rounded-[20px] font-medium group-hover:bg-white group-hover:text-[#335F86] hover:transform hover:scale-110 hover:shadow-xl text-sm transition-all duration-300 bg-[#335F86] text-white mt-auto mb-4 mx-auto block hover:bg-white hover:text-black flex-shrink-0";
     } else {
-      return "absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-[186px] h-[47px] rounded-[23.5px] font-medium text-sm transition-all duration-400 bg-[#335F86] text-white group-hover:bg-white group-hover:text-[#335F86] hover:transform hover:scale-110 hover:shadow-xl opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 z-50 pointer-events-auto cursor-pointer flex items-center justify-center";
+      return "absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-[186px] h-[47px] rounded-[23.5px] font-medium border-[1px] border-[#335F86]  text-sm transition-all duration-400  text-white group-hover:bg-white group-hover:text-[#335F86] hover:transform hover:scale-110 hover:shadow-xl opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 z-50 pointer-events-auto cursor-pointer flex items-center justify-center";
     }
   };
 
@@ -509,7 +512,7 @@ const AboutAtelic = ({ data }) => {
       onMouseEnter={() => setShowArrows(true)}
       onMouseLeave={() => setShowArrows(false)}
     >
-      <div className="sticky top-0 w-full min-h-screen py-0 flex flex-col overflow-visible">
+      <div className="sticky top-0 w-full  py-0 flex flex-col overflow-visible">
         <div className="px-4 sm:px-8 2xl:px-[178px] md:px-12 lg:px-[100px] flex flex-col flex-grow h-full">
           <div className="md:flex justify-between items-start pt-10 md:space-x-10 2xl:mb-16 mb-12">
             <div className="relative">

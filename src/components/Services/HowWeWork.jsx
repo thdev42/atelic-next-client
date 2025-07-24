@@ -179,13 +179,13 @@ const HowWeWork = ({ sections }) => {
   console.log(servicesProgress, "SERVICES PROGRESS");
   return (
     <>
-      <section className="bg-white max-w-[1920px] mx-auto w-full py-8 lg:py-12 xl:py-16 2xl:py-20 relative overflow-hidden">
+      <section className="bg-white mx-auto w-full py-8  lg:py-12 xl:py-16 2xl:py-20 relative overflow-hidden">
         <div className="px-4 sm:px-6 md:px-8 lg:px-[100px] 2xl:px-[178px] mx-auto">
           {/* Desktop Layout */}
           <div className="hidden lg:flex items-start justify-between gap-6 xl:gap-8 2xl:gap-12 h-full">
             {servicesProgress?.details?.map((item, index) => (
               <React.Fragment key={item.id}>
-                <div className="flex-1 max-w-[220px] lg:max-w-[240px] 2xl:max-w-[380px]">
+                <div className="flex-1 max-w-[220px] lg:max-w-[220px] 2xl:max-w-[380px]">
                   <CircleProgress
                     percentage={parseInt(item.percentage)}
                     label={item.percentage}

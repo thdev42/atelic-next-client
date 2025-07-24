@@ -18,7 +18,8 @@ import AboutUsHero from "../../../assets/AboutusHero.png";
 import AtelicLogoHero4 from "../../../assets/AtelicLogoHero4.png";
 import HeroBg4 from "../../../assets/Hero4BG.png";
 import PartnersHero from "../../../assets/PartnersHero.jpg";
-import NewsHero from "../../../assets/NewsHero.jpg";
+// import NewsHero from "../../../assets/NewsHero.jpg";
+import NewsHero from "../../../assets/NewImageNews.png";
 import { API_BASE_URL } from "@/config/config";
 import {
   headingStyle,
@@ -584,7 +585,7 @@ export const HeroServices = ({
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <div className="relative 2xl:w-[1100px] lg:w-[900px] mix-blend-lighten scale-125 mt-12 sm:mt-0 sm:scale-100">
+          <div className="relative 2xl:w-[1100px] lg:w-[750px] mix-blend-lighten scale-125 mt-12 sm:mt-0 sm:scale-100">
             <img
               // width={1104}
               // height={736}
@@ -902,11 +903,12 @@ export const HeroNews = ({ sectionY, backgroundY, robotY, textY, data }) => {
    
     relative
     w-full
+    w-[450px]
     sm:w-[500px]
     md:w-[600px]
-    lg:w-[800px]
-    xl:w-[1000px]
-    2xl:w-[1308px]
+    lg:w-[700px]
+    xl:w-[900px]
+    2xl:w-[1130px]
     right-0
     sm:right-10
     md:right-16
@@ -1187,7 +1189,7 @@ export const HeroDynamic = ({
 
         {/* Enhanced Text Content */}
         <div
-          className={`${layoutConfig.textPadding} z-30 flex flex-row ${layoutConfig.textWidth}`}
+          className={`${layoutConfig.textPadding} z-40 flex flex-row ${layoutConfig.textWidth}`}
         >
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -1221,7 +1223,7 @@ export const HeroDynamic = ({
 
             {/* Smart Button Rendering */}
             <motion.div
-              className="font-poppins mt-8 flex gap-4 flex-wrap"
+              className=" font-poppins mt-8 flex gap-4 flex-wrap"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.7 }}
@@ -1229,7 +1231,7 @@ export const HeroDynamic = ({
             >
               {isInnovation || isFullBg ? (
                 <>
-                  <a href={consultationHref}>
+                  <a className="" href={consultationHref}>
                     <button className={getButtonStyles(true)}>
                       {primaryButtonText}
                     </button>
@@ -1252,7 +1254,7 @@ export const HeroDynamic = ({
                       {primaryButtonText}
                     </motion.button>
                   </a>
-                  <a className="lg:block hidden" href={approachHref}>
+                  <a className="z-50 lg:block hidden" href={approachHref}>
                     <motion.button
                       className={getButtonStyles(false)}
                       whileHover={{ scale: 1.03 }}
@@ -1296,7 +1298,7 @@ export const HeroDynamic = ({
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className={`${layoutConfig.imageWidth} z-50 relative ${layoutConfig.imagePadding}`}
+                className={`${layoutConfig.imageWidth} z-30 relative ${layoutConfig.imagePadding}`}
               >
                 <div className="relative w-full">
                   <img
