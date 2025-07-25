@@ -9,6 +9,7 @@ import Azure from "../../../assets/Azure.png";
 import { formatHeading } from "../Partners/Partners";
 import { API_BASE_URL } from "@/config/config";
 import { headingStyle, paragraphStyles } from "@/styles/globalStyles";
+import CloudSpecialism from "../Svg/Specialism";
 
 // const tabs = [
 //   {
@@ -50,36 +51,61 @@ const Specialism = ({ sections }) => {
         >
           {sections?.buttonHeading}
         </p>
+        <div className="lg:block hidden">
+          <div className="flex justify-center  pt-20 flex-wrap gap-3 2xl:gap-0 relative z-0">
+            {tabs.map((tab, index) => (
+              <button
+                key={tab.name}
+                onClick={() => setActiveTab(index)}
+                className={`w-full max-w-[170px]  sm:max-w-[200px] md:max-w-[210px] h-[52px] sm:h-[58px] md:h-[62px] border text-sm sm:text-base font-medium transition-all duration-300 2xl:-ml-[10px] relative z-0 rounded-[10px] ${
+                  activeTab === index
+                    ? "bg-[#336699] text-white z-10"
+                    : "bg-[#D9D9D9] text-[#333] border-gray-300 -z-10"
+                }`}
+              >
+                {tab.name}
+              </button>
+            ))}
+          </div>
 
-        <div className="flex justify-center  pt-20 flex-wrap gap-3 2xl:gap-0 relative z-0">
-          {tabs.map((tab, index) => (
-            <button
-              key={tab.name}
-              onClick={() => setActiveTab(index)}
-              className={`w-full max-w-[170px]  sm:max-w-[200px] md:max-w-[210px] h-[52px] sm:h-[58px] md:h-[62px] border text-sm sm:text-base font-medium transition-all duration-300 2xl:-ml-[10px] relative z-0 rounded-[10px] ${
-                activeTab === index
-                  ? "bg-[#336699] text-white z-10"
-                  : "bg-[#D9D9D9] text-[#333] border-gray-300 -z-10"
-              }`}
-            >
-              {tab.name}
-            </button>
-          ))}
+          <div className="mt-10 flex gap-16  justify-center">
+            {tabs[activeTab]?.tools?.map((tool, i) => {
+              const imageSize = 90;
+
+              return (
+                <div
+                  key={i}
+                  className="lg:my-16 w-[120px] h-[120px] sm:w-[140px] sm:h-[140px] lg:w-[160px] lg:h-[160px] 2xl:w-[180px] 2xl:h-[180px] rounded-full bg-white shadow-[2px_2px_9.9px_-1px_#00000021] flex items-center justify-center"
+                >
+                  <img
+                    src={`${API_BASE_URL}${tool?.logo?.url}`}
+                    alt={`icon-${i}`}
+                    width={imageSize}
+                    height={imageSize}
+                    className=" md:max-w-[100px] md:max-h-[100px] max-w-[80px] max-h-[80px] object-contain"
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
-
-        <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 justify-items-center">
-          {tabs[activeTab]?.tools?.map((tool, i) => (
-            <div
-              key={i}
-              className="lg:my-16 w-[120px] h-[120px] sm:w-[140px] sm:h-[140px] lg:w-[160px] lg:h-[160px] 2xl:w-[180px] 2xl:h-[180px] rounded-full bg-white shadow-[2px_2px_9.9px_-1px_#00000021] flex items-center justify-center"
-            >
-              <img
-                src={`${API_BASE_URL}${tool?.logo?.url}`}
-                alt={`icon-${i}`}
-                className=" md:max-w-[100px] md:max-h-[100px] max-w-[80px] max-h-[80px] object-contain"
-              />
-            </div>
-          ))}
+        <div className="lg:hidden block">
+          <div className="flex justify-center flex-wrap gap-3 2xl:gap-0 relative z-0 py-10">
+            {tabs.map((tab, index) => (
+              <button
+                key={tab.name}
+                onClick={() => setActiveTab(index)}
+                className={`w-full max-w-[170px]  sm:max-w-[200px] md:max-w-[210px] h-[52px] sm:h-[58px] md:h-[62px] border text-sm sm:text-base font-medium transition-all duration-300 2xl:-ml-[10px] relative z-0 rounded-[10px] ${
+                  activeTab === index
+                    ? "bg-[#336699] text-white z-10"
+                    : "bg-[#D9D9D9] text-[#333] border-gray-300 -z-10"
+                }`}
+              >
+                {tab.name}
+              </button>
+            ))}
+          </div>
+          <CloudSpecialism tab={tabs[activeTab]} />
         </div>
       </div>
     </section>
