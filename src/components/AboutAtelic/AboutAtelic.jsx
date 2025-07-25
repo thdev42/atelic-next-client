@@ -458,9 +458,11 @@ const AboutAtelic = ({ data }) => {
                         {member.description}
                       </p>
                     </div>
-                    <button className="w-[160px] h-[40px] rounded-[20px] font-medium group-hover:bg-white group-hover:text-[#335F86] hover:transform hover:scale-110 hover:shadow-xl text-sm transition-all duration-300 bg-[#335F86] text-white mt-auto mb-4 mx-auto block hover:bg-white hover:text-black flex-shrink-0">
-                      Learn More
-                    </button>
+                    <a href="/about-us">
+                      <button className="w-[160px] h-[40px] rounded-[20px] font-medium group-hover:bg-white group-hover:text-[#335F86] hover:transform hover:scale-110 hover:shadow-xl text-sm transition-all duration-300 bg-[#335F86] text-white mt-auto mb-4 mx-auto block hover:bg-white hover:text-black flex-shrink-0">
+                        Learn More
+                      </button>
+                    </a>
                   </motion.div>
                 ))}
               </motion.div>

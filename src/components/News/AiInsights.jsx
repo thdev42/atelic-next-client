@@ -57,7 +57,7 @@ const AiInsights = ({ sections }) => {
             );
           })}
         </h2>
-        <div className="sm:space-y-24">
+        <div className="lg:space-y-24 ">
           {teamMembers.map((member, index) => (
             <div
               key={index}
@@ -71,7 +71,7 @@ const AiInsights = ({ sections }) => {
                   index % 2 !== 0 ? "justify-end" : "justify-start"
                 } md:mx-auto`}
               >
-                <div className="relative w-full max-w-[770px] max-h-[498px] aspect-[614/582]">
+                <div className="relative w-full max-w-[770px] lg:max-w-[770px]  md:mx-auto md:max-w-[550px]  max-h-[498px] aspect-[614/582]">
                   <Image
                     src={`${API_BASE_URL}${member?.image?.url}`}
                     alt={member?.name}
@@ -82,12 +82,12 @@ const AiInsights = ({ sections }) => {
               </div>
 
               {/* Text */}
-              <div className="w-full lg:w-1/2 text-center lg:text-left">
+              <div className="w-full lg:w-1/2 md:mt-6 text-center lg:text-left">
                 <h3 className="text-2xl md:text-3xl font-semibold md:mt-0 mt-6 text-gray-900">
                   {member?.name}
                 </h3>
                 <div
-                  className="mt-3 hidden md:block"
+                  className="mt-3 hidden lg:block"
                   style={{
                     borderWidth: 1,
                     borderColor: "red",
@@ -95,7 +95,7 @@ const AiInsights = ({ sections }) => {
                   }}
                 />
                 <p className="text-sm text-gray-500 py-4">{member.title}</p>
-                <p className="text-black/80 text-base xl:text-lg 2xl:text-[22px] mb-9  mx-auto lg:mx-0 2xl:leading-relaxed font-light">
+                <p className="text-black/80 text-base max-w-xl xl:text-lg 2xl:text-[22px] mb-9  mx-auto lg:mx-0 2xl:leading-relaxed font-light">
                   {member?.description}{" "}
                   <span className="cursor-pointer underline text-base xl:text-md 2xl:text-[19px]">
                     Learn More

@@ -902,8 +902,8 @@ export const HeroNews = ({ sectionY, backgroundY, robotY, textY, data }) => {
             className="
    
     relative
-    w-full
-    w-[450px]
+  
+    w-[550px]
     sm:w-[500px]
     md:w-[600px]
     lg:w-[700px]

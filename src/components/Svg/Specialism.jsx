@@ -1,11 +1,30 @@
 import { API_BASE_URL } from "@/config/config";
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 const CloudSpecialism = (props) => {
   const tab = props?.tab;
   console.log(props.tab, "ACTIVE TAB");
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [displayTools, setDisplayTools] = useState([]);
+
+  // Update tools when tab changes
+  useEffect(() => {
+    if (tab?.tools) {
+      setIsLoading(true);
+
+      // Small delay to ensure smooth transition
+      const timer = setTimeout(() => {
+        setDisplayTools(tab.tools);
+        setIsLoading(false);
+      }, 100);
+
+      return () => clearTimeout(timer);
+    }
+  }, [tab?.tools]);
+
+  if (!tab || !tab.tools) return null;
   return (
     <svg
-      // width={339}
+      // width={700}
       // height={338}
       viewBox="0 0 339 338"
       fill="none"
@@ -32,27 +51,38 @@ const CloudSpecialism = (props) => {
         <circle cx={181.163} cy={300.163} r={26.1628} fill="white" />
       </g>
 
-      {tab?.tools?.map((tool, index) => {
-        console.log(tool);
-
-        const cx = tool?.cx; // X position per circle (you need to define layout)
-        const cy = tool?.cy; // Y position per circle
+      {displayTools.map((tool, index) => {
+        const cx = tool?.cx;
+        const cy = tool?.cy;
         const r = 26.1628;
         const imageSize = tool?.imageSize || 34;
 
         return (
-          <>
-            <g key={tool.id || index} filter={`url(#filter${index}_d_1857_2)`}>
-              <circle cx={cx} cy={cy} r={r} fill="white" />
-            </g>
+          <g key={`${tab.name}-${tool.id || index}`}>
+            {" "}
+            {/* Unique key with tab name */}
+            {/* Circle with filter */}
+            <circle
+              cx={cx}
+              cy={cy}
+              r={r}
+              fill="white"
+              filter={`url(#filter${index}_d_1857_2)`}
+              className="transition-all duration-300 hover:fill-gray-50"
+            />
+            {/* Image */}
             <image
               href={`${API_BASE_URL}${tool.logo?.url}`}
               x={cx - imageSize / 2}
               y={cy - imageSize / 2}
               width={imageSize}
               height={imageSize}
+              className="transition-opacity duration-300"
+              onLoad={() => {
+                // Optional: Handle individual image loading if needed
+              }}
             />
-          </>
+          </g>
         );
       })}
       <rect

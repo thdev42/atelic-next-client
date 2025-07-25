@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Aws from "../../../assets/Aws1.png";
 import googlecloud from "../../../assets/googlecloud.png";
 import openstack from "../../../assets/Openstack.png";
@@ -11,25 +11,24 @@ import { API_BASE_URL } from "@/config/config";
 import { headingStyle, paragraphStyles } from "@/styles/globalStyles";
 import CloudSpecialism from "../Svg/Specialism";
 
-// const tabs = [
-//   {
-//     name: "Agility & DevOps",
-//     tools: [googlecloud, openstack, VmWare, Aws, Azure],
-//   },
-//   {
-//     name: "Cloud & Virtualisation",
-//     tools: [VmWare, openstack, Aws, Azure, googlecloud],
-//   },
-//   {
-//     name: "Big Data & AI",
-//     tools: [openstack, googlecloud, Aws, Azure, VmWare],
-//   },
-// ];
-
 const Specialism = ({ sections }) => {
   const [activeTab, setActiveTab] = useState(1);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const tabs = Array?.isArray(sections?.tabs) ? sections?.tabs : [];
+
+  // Handle tab change with transition
+  const handleTabChange = (index) => {
+    if (index === activeTab) return;
+
+    setIsTransitioning(true);
+
+    // Small delay to allow fade out animation
+    setTimeout(() => {
+      setActiveTab(index);
+      setIsTransitioning(false);
+    }, 150);
+  };
 
   console.log(sections, "ASASSA");
 
@@ -51,13 +50,14 @@ const Specialism = ({ sections }) => {
         >
           {sections?.buttonHeading}
         </p>
+
         <div className="lg:block hidden">
-          <div className="flex justify-center  pt-20 flex-wrap gap-3 2xl:gap-0 relative z-0">
+          <div className="flex justify-center pt-20 flex-wrap gap-3 2xl:gap-0 relative z-0">
             {tabs.map((tab, index) => (
               <button
                 key={tab.name}
-                onClick={() => setActiveTab(index)}
-                className={`w-full max-w-[170px]  sm:max-w-[200px] md:max-w-[210px] h-[52px] sm:h-[58px] md:h-[62px] border text-sm sm:text-base font-medium transition-all duration-300 2xl:-ml-[10px] relative z-0 rounded-[10px] ${
+                onClick={() => handleTabChange(index)}
+                className={`w-full max-w-[170px] sm:max-w-[200px] md:max-w-[210px] h-[52px] sm:h-[58px] md:h-[62px] border text-sm sm:text-base font-medium transition-all duration-300 2xl:-ml-[10px] relative z-0 rounded-[10px] ${
                   activeTab === index
                     ? "bg-[#336699] text-white z-10"
                     : "bg-[#D9D9D9] text-[#333] border-gray-300 -z-10"
@@ -68,34 +68,42 @@ const Specialism = ({ sections }) => {
             ))}
           </div>
 
-          <div className="mt-10 flex gap-16  justify-center">
+          {/* Desktop Icons with transition */}
+          <div
+            className={`mt-10 flex gap-16 justify-center transition-opacity duration-300 ${
+              isTransitioning ? "opacity-0" : "opacity-100"
+            }`}
+          >
             {tabs[activeTab]?.tools?.map((tool, i) => {
               const imageSize = tool?.webImageSize;
 
               return (
                 <div
-                  key={i}
-                  className="lg:my-16 w-[120px] h-[120px] flex-shrink-0 sm:w-[140px] sm:h-[140px] lg:w-[140px]  lg:h-[140px] 2xl:w-[180px] 2xl:h-[180px] rounded-full bg-white shadow-[2px_2px_9.9px_-1px_#00000021] flex items-center justify-center"
+                  key={`${activeTab}-${i}`} // Unique key with tab index
+                  className="lg:my-16 w-[120px] h-[120px] flex-shrink-0 sm:w-[140px] sm:h-[140px] lg:w-[140px] lg:h-[140px] 2xl:w-[180px] 2xl:h-[180px] rounded-full bg-white shadow-[2px_2px_9.9px_-1px_#00000021] flex items-center justify-center transform transition-all duration-300 hover:scale-105"
                 >
                   <img
                     src={`${API_BASE_URL}${tool?.logo?.url}`}
                     alt={`icon-${i}`}
                     width={imageSize}
                     height={imageSize}
-                    className=" "
+                    className="transition-opacity duration-300"
+                    loading="lazy"
                   />
                 </div>
               );
             })}
           </div>
         </div>
+
+        {/* Mobile Version */}
         <div className="lg:hidden block">
           <div className="flex justify-center flex-wrap gap-3 2xl:gap-0 relative z-0 py-10">
             {tabs.map((tab, index) => (
               <button
                 key={tab.name}
-                onClick={() => setActiveTab(index)}
-                className={`w-full max-w-[170px]  sm:max-w-[200px] md:max-w-[210px] h-[52px] sm:h-[58px] md:h-[62px] border text-sm sm:text-base font-medium transition-all duration-300 2xl:-ml-[10px] relative z-0 rounded-[10px] ${
+                onClick={() => handleTabChange(index)}
+                className={`w-full max-w-[140px] sm:max-w-[200px] md:max-w-[210px] h-[52px] sm:h-[58px] md:h-[62px] border text-sm sm:text-base font-medium transition-all duration-300 2xl:-ml-[10px] relative z-0 rounded-[10px] ${
                   activeTab === index
                     ? "bg-[#336699] text-white z-10"
                     : "bg-[#D9D9D9] text-[#333] border-gray-300 -z-10"
@@ -105,7 +113,17 @@ const Specialism = ({ sections }) => {
               </button>
             ))}
           </div>
-          <CloudSpecialism tab={tabs[activeTab]} />
+
+          {/* Mobile CloudSpecialism with transition */}
+          <div
+            className={`transition-opacity duration-300 ${
+              isTransitioning ? "opacity-0" : "opacity-100"
+            }`}
+          >
+            <div className="max-w-[700px] mx-auto">
+              <CloudSpecialism key={activeTab} tab={tabs[activeTab]} />
+            </div>
+          </div>
         </div>
       </div>
     </section>
