@@ -72,7 +72,7 @@ const OurSolutions = ({ sections }) => {
               {/* Card Content */}
               <div className="relative z-10 p-6 sm:p-7 md:p-8 h-full flex flex-col items-center justify-center text-center md:items-start md:justify-start md:text-left">
                 {/* Top Icon */}
-                <div className="flex justify-start sm:justify-center md:justify-start mb-8 sm:mb-10 md:mb-12 lg:mb-14">
+                <div className="flex justify-start sm:justify-center md:justify-start mb-8 sm:mb-10 md:mb-12 lg:mb-8">
                   <img
                     src={`${API_BASE_URL}${feature?.image?.url}`}
                     alt="Solution Icon"
@@ -91,9 +91,9 @@ const OurSolutions = ({ sections }) => {
                     className={`2xl:text-[16px] lg:text-[15px] text-[14px] text-gray-700 leading-relaxed sm:max-w-[390px] md:max-w-none`}
                   >
                     {feature.text}
-                    <span className="underline ml-1 cursor-pointer hover:text-[#F21B2A] transition-colors duration-200">
+                    {/* <span className="underline ml-1 cursor-pointer hover:text-[#F21B2A] transition-colors duration-200">
                       Read More
-                    </span>
+                    </span> */}
                   </p>
                 </div>
               </div>

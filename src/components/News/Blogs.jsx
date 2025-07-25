@@ -167,9 +167,9 @@ const Blogs = ({ sections }) => {
   const isNextDisabled = currentIndex + slidesToShow >= blogData.length;
 
   return (
-    <section className="font-raleway relative bg-[#f3f0f1] text-black w-full max-w-[1920px] mx-auto overflow-hidden py-8 sm:py-12 lg:py-16">
+    <section className="font-raleway relative bg-[#f3f0f1] text-black w-full max-w-[1920px] mx-auto overflow-hidden pb-16">
       <div className="lg:px-[100px] 2xl:px-[178px] mx-auto">
-        <h2 className="text-center text-2xl sm:text-3xl lg:text-4xl font-semibold mb-6 sm:mb-8">
+        <h2 className="text-center text-3xl sm:text-4xl xl:text-5xl 2xl:text-[60px] font-normal mb-6 sm:mb-16">
           Our <span className="font-bold text-black">Blogs</span>
         </h2>
 
@@ -280,31 +280,36 @@ const Blogs = ({ sections }) => {
             />
           </button>
         </div>
+        {blogData.length > 0 && (!isNextDisabled || !isPrevDisabled) && (
+          <div className="flex gap-2 justify-center items-center pt-9">
+            {Array.from({
+              length: Math.ceil(blogData.length / slidesToShow),
+            }).map((_, index) => {
+              const isActive =
+                Math.floor(currentIndex / slidesToShow) === index;
+              return (
+                <button
+                  key={index}
+                  onClick={() => setCurrentIndex(index * slidesToShow)}
+                  className={`flex items-center justify-center rounded-full transition-all duration-300 ${
+                    isActive && "w-[21px] h-[21px] border-[#335F86]"
+                  }`}
+                  style={{ borderWidth: 1 }}
+                >
+                  <div
+                    className={`rounded-full ${
+                      isActive
+                        ? "bg-[#335F86]"
+                        : "bg-[#335F86] hover:bg-gray-400"
+                    } w-[9px] h-[9px]`}
+                  />
+                </button>
+              );
+            })}
+          </div>
+        )}
 
         {/* Dots Indicator */}
-        <div className="flex gap-2 justify-center items-center pt-8 mb-8">
-          {Array.from({
-            length: Math.ceil(blogData.length / slidesToShow),
-          }).map((_, index) => {
-            const isActive = Math.floor(currentIndex / slidesToShow) === index;
-            return (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index * slidesToShow)}
-                className={`flex items-center justify-center rounded-full transition-all duration-300 ${
-                  isActive && "w-[21px] h-[21px] border-[#335F86]"
-                }`}
-                style={{ borderWidth: 1 }}
-              >
-                <div
-                  className={`rounded-full ${
-                    isActive ? "bg-[#335F86]" : "bg-[#335F86] hover:bg-gray-400"
-                  } w-[9px] h-[9px]`}
-                />
-              </button>
-            );
-          })}
-        </div>
       </div>
     </section>
   );

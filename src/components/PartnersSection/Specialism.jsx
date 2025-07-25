@@ -70,19 +70,19 @@ const Specialism = ({ sections }) => {
 
           <div className="mt-10 flex gap-16  justify-center">
             {tabs[activeTab]?.tools?.map((tool, i) => {
-              const imageSize = 90;
+              const imageSize = tool?.webImageSize;
 
               return (
                 <div
                   key={i}
-                  className="lg:my-16 w-[120px] h-[120px] sm:w-[140px] sm:h-[140px] lg:w-[160px] lg:h-[160px] 2xl:w-[180px] 2xl:h-[180px] rounded-full bg-white shadow-[2px_2px_9.9px_-1px_#00000021] flex items-center justify-center"
+                  className="lg:my-16 w-[120px] h-[120px] flex-shrink-0 sm:w-[140px] sm:h-[140px] lg:w-[140px]  lg:h-[140px] 2xl:w-[180px] 2xl:h-[180px] rounded-full bg-white shadow-[2px_2px_9.9px_-1px_#00000021] flex items-center justify-center"
                 >
                   <img
                     src={`${API_BASE_URL}${tool?.logo?.url}`}
                     alt={`icon-${i}`}
                     width={imageSize}
                     height={imageSize}
-                    className=" md:max-w-[100px] md:max-h-[100px] max-w-[80px] max-h-[80px] object-contain"
+                    className=" "
                   />
                 </div>
               );

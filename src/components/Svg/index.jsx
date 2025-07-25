@@ -381,10 +381,10 @@ const SVGComponent = (props) => {
       />
       <path d="M1156 18L1161 2L1172.5 16L1156 18Z" fill="white" />
       <text
-        x={1270} // adjust as needed
-        y={17} // adjust as needed
+        x={1279} // adjust as needed
+        y={70} // adjust as needed
         fill="white"
-        fontSize="22"
+        fontSize="32"
         className="font-raleway"
         fontWeight={800}
         textAnchor="middle"
@@ -405,10 +405,10 @@ const SVGComponent = (props) => {
       <text
         className="font-raleway"
         fontWeight={800}
-        x={50}
+        x={0}
         y={1250}
         fill="white"
-        fontSize="22"
+        fontSize="30"
       >
         Software Dev. Kits
       </text>
@@ -424,13 +424,13 @@ const SVGComponent = (props) => {
         y={1030}
         fontWeight={800}
         fill="white"
-        fontSize="22"
+        fontSize="30"
         textAnchor="middle"
       >
-        <tspan x={1500} dy="0">
+        <tspan x={1480} dy="0">
           Partner
         </tspan>
-        <tspan x={1500} dy="1.2em">
+        <tspan x={1480} dy="1.2em">
           Ecosystem
         </tspan>
       </text>

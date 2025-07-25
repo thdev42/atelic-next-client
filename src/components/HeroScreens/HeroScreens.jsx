@@ -796,7 +796,7 @@ export const HeroPartners = ({
         <div
           className="
     relative
-    w-full
+    w-[550px]
     sm:w-[500px]
     md:w-[600px]
     lg:w-[800px]
