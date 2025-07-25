@@ -180,7 +180,7 @@ const Appointment = ({ data }) => {
   return (
     <section
       ref={sectionRef}
-      className="bg-[#e5e5e5] z-10 font-sora overflow-hidden max-w-[1920px] mx-auto w-full py-16 relative "
+      className="bg-[#e5e5e5] z-10 font-sora overflow-hidden max-w-[1920px] mx-auto w-full pt-10 relative "
     >
       {/* Background overlay for opacity with parallax */}
       <motion.div
@@ -195,22 +195,22 @@ const Appointment = ({ data }) => {
       ></motion.div>
 
       <div className="px-4 sm:px-8 2xl:px-[178px] md:px-12 lg:px-[100px] mx-auto text-center relative z-10">
-        <motion.h1
+        <h1
           ref={headingRef}
-          className={`will-change-transform ${headingStyle} font-light mb-12`}
+          className={`will-change-transform ${headingStyle} font-light mb-4`}
           style={{ y: textY }}
-          initial={{ opacity: 0, x: -100 }}
+          // initial={{ opacity: 0, x: -100 }}
           animate={
-            isHeadingInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -200 }
+            isHeadingInView ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }
           }
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           {formatHeading(data?.heading)}
-        </motion.h1>
+        </h1>
 
         <motion.div
           ref={formRef}
-          className="will-change-transform max-w-[1007px] mx-auto"
+          className="will-change-transform max-w-[800px] 2xl:max-w-[1007px] mx-auto"
           style={{
             y: formY,
             opacity: formOpacity,
