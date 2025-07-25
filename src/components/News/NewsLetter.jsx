@@ -166,7 +166,7 @@ const NewsLetter = ({ sections }) => {
   return (
     <section
       ref={sectionRef}
-      className="bg-[#e5e5e5] z-10 font-sora overflow-hidden max-w-[1920px] mx-auto w-full py-16 min-h-screen relative "
+      className="bg-[#e5e5e5] z-10 font-sora overflow-hidden max-w-[1920px] mx-auto w-full pt-10 relative "
     >
       {/* Background overlay for opacity with parallax */}
       <motion.div
@@ -181,22 +181,22 @@ const NewsLetter = ({ sections }) => {
       ></motion.div>
 
       <div className="px-4 sm:px-8 md:px-12 xl:px-[178px] mx-auto text-center relative z-10">
-        <motion.h1
+        <h1
           ref={headingRef}
-          className="will-change-transform 2xl:text-[60px] text-4xl md:text-5xl font-light mb-12"
-          style={{ y: textY }}
-          initial={{ opacity: 0, x: -100 }}
-          animate={
-            isHeadingInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -200 }
-          }
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="will-change-transform 2xl:text-[60px] text-4xl md:text-5xl font-light mb-0"
+          // style={{ y: textY }}
+          // initial={{ opacity: 0, x: -100 }}
+          // animate={
+          //   isHeadingInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -200 }
+          // }
+          // transition={{ duration: 0.8, ease: "easeOut" }}
         >
           {formatHeading(sections?.heading)}
-        </motion.h1>
+        </h1>
 
         <motion.div
           ref={formRef}
-          className="will-change-transform max-w-[1007px] mx-auto"
+          className="will-change-transform max-w-[800px] 2xl:max-w-[1007px] mx-auto"
           style={{
             y: formY,
             opacity: formOpacity,
