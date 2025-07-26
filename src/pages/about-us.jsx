@@ -17,13 +17,15 @@ import Vision from "@/components/AboutUs/Vision";
 import Footer from "@/components/Footer/Footer";
 import { HeroAboutUs } from "@/components/HeroScreens/HeroScreens";
 import Loader from "@/components/Loader/Loader";
+import { useBackground } from "@/context/BackgroundContext";
 
 const AboutUsPage = () => {
   const container = useRef();
   const [sections, setSections] = useState([]);
 
   const { setLoading, setIsCached, setDataFetched, dataFetched } = useLoader();
-
+  const { setBackground, setIsDark, isDark, setSlideProgress } =
+    useBackground();
   let cached = null;
 
   const getPageSections = async () => {
@@ -50,12 +52,15 @@ const AboutUsPage = () => {
 
   useEffect(() => {
     const lenis = new Lenis();
+    setBackground("#e9e9e9", "color");
+    setIsDark(false);
+    setSlideProgress(0);
     function raf(time) {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }
     requestAnimationFrame(raf);
-  }, []);
+  }, [isDark]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {

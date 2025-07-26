@@ -8,6 +8,9 @@ const PartnersHero = ({ sections }) => {
   useEffect(() => {
     setBackground("#FDFDFD");
     setFixedNav(true);
+    return () => {
+      setFixedNav(false);
+    };
   }, []);
   return (
     <div>

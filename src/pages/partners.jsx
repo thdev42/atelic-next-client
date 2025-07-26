@@ -16,13 +16,14 @@ import Specialism from "@/components/PartnersSection/Specialism";
 import Loader from "@/components/Loader/Loader";
 import SVGComponent from "@/components/Svg";
 import RegionalPartners from "@/components/PartnersSection/RegionalPartners";
+import { useBackground } from "@/context/BackgroundContext";
 
 const partners = () => {
   const container = useRef();
   const [sections, setSections] = useState([]);
 
   const { setLoading, setIsCached, setDataFetched, dataFetched } = useLoader();
-
+  const { setIsDark, isDark, setSlideProgress } = useBackground();
   let cached = null;
 
   const getPageSections = async () => {
@@ -49,12 +50,15 @@ const partners = () => {
 
   useEffect(() => {
     const lenis = new Lenis();
+    // setIsDark(false);
+    setIsDark(false);
+    setSlideProgress(0);
     function raf(time) {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }
     requestAnimationFrame(raf);
-  }, []);
+  }, [isDark]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {

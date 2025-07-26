@@ -11,7 +11,7 @@ export const BackgroundProvider = ({ children }) => {
   const [isShowNav, setIsShowNav] = useState(true);
   const [isDark, setIsDark] = useState(false);
   const [fixedNav, setFixedNav] = useState(false);
-
+  const [isTransitioning, setIsTransitioning] = useState(false);
   // Enhanced setBackground function to handle both colors and images
   const setBackgroundValue = useCallback((value, type = "color") => {
     setBackground(value);
@@ -25,6 +25,8 @@ export const BackgroundProvider = ({ children }) => {
   const value = {
     background,
     backgroundType,
+    isTransitioning,
+    setIsTransitioning,
     setBackground: setBackgroundValue,
     isDark,
     setIsDark,

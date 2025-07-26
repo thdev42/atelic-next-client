@@ -14,12 +14,14 @@ import Blogs from "@/components/News/Blogs";
 import NewsHero from "@/components/News/NewsHero";
 import NewsLetter from "@/components/News/NewsLetter";
 import Loader from "@/components/Loader/Loader";
+import { useBackground } from "@/context/BackgroundContext";
 
 const NewsPage = () => {
   const container = useRef();
   const [sections, setSections] = useState([]);
 
   const { setLoading, setIsCached, setDataFetched, dataFetched } = useLoader();
+  const { setIsDark, setSlideProgress } = useBackground();
 
   let cached = null;
 
@@ -46,9 +48,12 @@ const NewsPage = () => {
   };
 
   useEffect(() => {
+    setIsDark(false);
+    setSlideProgress(0);
     const lenis = new Lenis();
     function raf(time) {
       lenis.raf(time);
+
       requestAnimationFrame(raf);
     }
     requestAnimationFrame(raf);

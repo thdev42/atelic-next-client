@@ -10,6 +10,10 @@ const NewsHero = ({ sections }) => {
   useEffect(() => {
     setBackground("#E9F7FF");
     setFixedNav(true);
+
+    return () => {
+      setFixedNav(false);
+    };
   }, []);
   return (
     <div>

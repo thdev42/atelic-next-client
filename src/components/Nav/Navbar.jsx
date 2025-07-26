@@ -8,6 +8,7 @@ import Image from "next/image";
 import { Sora } from "next/font/google";
 import { useBackground } from "@/context/BackgroundContext";
 import { API_BASE_URL } from "@/config/config";
+import Link from "next/link";
 
 const Navbar = ({ data }) => {
   const router = useRouter();
@@ -91,11 +92,14 @@ const Navbar = ({ data }) => {
 
       return {
         color: `rgb(${r}, ${g}, ${b})`,
-        transition: "color 0s ease-out",
+        transition: "color 0.3s ease-out",
       };
     }
 
-    return {};
+    return {
+      color: `rgb(0, 0, 0)`,
+      transition: "color 0.3s ease-out",
+    };
   };
 
   // Toggle drawer
@@ -220,7 +224,7 @@ const Navbar = ({ data }) => {
 
                     return (
                       <li key={link.link}>
-                        <a
+                        <Link
                           href={link.link}
                           className={`px-3 py-1 rounded-[20.5px] transition-all duration-200 ease-out ${
                             isActive
@@ -230,7 +234,7 @@ const Navbar = ({ data }) => {
                           style={!isActive ? getTextColorStyle() : {}}
                         >
                           {link.text}
-                        </a>
+                        </Link>
                       </li>
                     );
                   })}

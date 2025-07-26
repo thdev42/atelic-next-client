@@ -24,9 +24,6 @@ const Services = () => {
   const { setBackground, setIsDark } = useBackground();
   const { setLoading, setIsCached, setDataFetched, dataFetched } = useLoader();
 
-  setBackground("#00172B");
-  setIsDark(true);
-
   let cached = null;
 
   const getPageSections = async () => {
@@ -61,6 +58,8 @@ const Services = () => {
   }, []);
 
   useEffect(() => {
+    setBackground("#00172B");
+    setIsDark(true);
     if (typeof window !== "undefined") {
       try {
         cached = JSON.parse(localStorage.getItem("services") || "null");
@@ -74,8 +73,10 @@ const Services = () => {
         setDataFetched(true);
       }
     }
-
     getPageSections();
+    return () => {
+      setIsDark(false);
+    };
   }, []);
 
   // Extract components

@@ -26,7 +26,7 @@ const HeroSection = ({ scrollYSProgress, section }) => {
 
   const [isAutoPlay, setIsAutoPlay] = useState(true);
   const autoPlayRef = useRef(null);
-  const AUTO_PLAY_DELAY = 4000;
+  const AUTO_PLAY_DELAY = 7000;
   const [isPaused, setIsPaused] = useState(false);
 
   const { setBackground, setActiveHeroIndex, setSlideProgress } =
