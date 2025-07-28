@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
+  compiler: {
+    removeConsole: true, // removes all console.* in production
+  },
   images: {
     domains: [
       "http://localhost:1337/uploads",
