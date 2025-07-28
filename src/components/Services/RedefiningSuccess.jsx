@@ -74,8 +74,8 @@ export const RedefiningSuccess = ({ sections }) => {
   };
 
   return (
-    <section className="bg-[#f3f3f3] max-w-[1920px] mx-auto w-full py-10 relative overflow-hidden">
-      <div className="font-sora md:mt-10 px-4 text-black sm:px-8 md:px-12 lg:px-[100px] 2xl:px-[178px] mx-auto">
+    <section className="bg-[#f3f3f3] max-w-[1920px] mx-auto w-full sm:py-10 py-10 relative overflow-hidden">
+      <div className="font-sora sm:mt-10 px-4 text-black sm:px-8 md:px-12 lg:px-[100px] 2xl:px-[178px] mx-auto">
         {/* Header Section */}
         <div className="mx-auto max-w-5xl text-center">
           <h1 className={`${headingStyle} font-normal`}>
@@ -150,7 +150,7 @@ export const RedefiningSuccess = ({ sections }) => {
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
             >
               {cardData.map((item, index) => (
-                <div key={index} className="w-full flex-shrink-0 px-2">
+                <div key={index} className="w-full mt-6 flex-shrink-0 px-2">
                   <div className="group w-full max-w-[499px] 2xl:min-h-[367px] bg-white rounded-md shadow-sm transition-all duration-300 hover:bg-[#335F86] text-black hover:text-white relative flex flex-col justify-between items-center text-center px-5 py-7 2xl:px-6 2xl:py-8 mx-auto">
                     {/* Card Number */}
                     <span className="absolute top-4 right-4 text-lg font-light">

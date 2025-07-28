@@ -221,6 +221,7 @@ const ScrollRevealCircle = ({
 import { useInView } from "framer-motion";
 import IceBergSvg from "../Svg/IceBerg";
 import MobileIceBerg from "../Svg/MobileIceBerg";
+import { headingStyle, paragraphStyles } from "@/styles/globalStyles";
 
 const IceBerg = ({ sections }) => {
   const sectionRef = useRef(null);
@@ -281,9 +282,9 @@ const IceBerg = ({ sections }) => {
                   (() => {
                     const words = sections.heading.split(" ");
                     return (
-                      <div className="space-y-3">
+                      <div className="lg:space-y-3">
                         <motion.h2
-                          className="text-3xl sm:text-4xl md:text-[41px] 2xl:text-6xl font-light text-black leading-tight"
+                          className={`${headingStyle}font-light text-black leading-tight`}
                           initial={{ opacity: 0, y: 30 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.6 }}
@@ -291,7 +292,7 @@ const IceBerg = ({ sections }) => {
                           {words[0]}
                         </motion.h2>
                         <motion.h2
-                          className="text-3xl sm:text-4xl md:text-[41px] 2xl:text-6xl font-light text-black leading-tight"
+                          className={`${headingStyle}font-light text-black leading-tight`}
                           initial={{ opacity: 0, y: 30 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.6, delay: 0.2 }}
@@ -308,7 +309,9 @@ const IceBerg = ({ sections }) => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
                 >
-                  <p className="2xl:text-[18px] lg:text-md text-gray-700 leading-relaxed mt-4 lg:mt-0">
+                  <p
+                    className={`${paragraphStyles}  lg:text-md text-gray-700 leading-relaxed mt-4 lg:mt-0`}
+                  >
                     {sections?.subHeading}
                   </p>
                 </motion.div>

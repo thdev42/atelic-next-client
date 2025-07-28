@@ -36,7 +36,7 @@ const Specialism = ({ sections }) => {
     <section className="bg-[#E8E8E8] max-w-[1920px] mx-auto w-full py-8 sm:py-10 lg:py-12 xl:py-16 relative overflow-hidden">
       <div className="font-raleway px-4 sm:px-6 md:px-8 lg:px-[100px] 2xl:px-[178px] mx-auto text-center">
         <h2
-          className={`md:text-left mt-7 ${headingStyle} font-medium text-black leading-tight`}
+          className={`md:text-left  ${headingStyle} font-medium text-black leading-tight`}
         >
           {formatHeading(sections?.heading)}
         </h2>
@@ -52,7 +52,7 @@ const Specialism = ({ sections }) => {
         </p>
 
         <div className="lg:block hidden">
-          <div className="flex justify-center pt-20 flex-wrap gap-3 2xl:gap-0 relative z-0">
+          <div className="flex justify-center py-14 flex-wrap gap-3 2xl:gap-0 relative z-0">
             {tabs.map((tab, index) => (
               <button
                 key={tab.name}
@@ -70,7 +70,7 @@ const Specialism = ({ sections }) => {
 
           {/* Desktop Icons with transition */}
           <div
-            className={`mt-10 flex gap-16 justify-center transition-opacity duration-300 ${
+            className={` flex gap-16 justify-center transition-opacity duration-300 ${
               isTransitioning ? "opacity-0" : "opacity-100"
             }`}
           >
@@ -80,7 +80,7 @@ const Specialism = ({ sections }) => {
               return (
                 <div
                   key={`${activeTab}-${i}`} // Unique key with tab index
-                  className="lg:my-16 w-[120px] h-[120px] flex-shrink-0 sm:w-[140px] sm:h-[140px] lg:w-[140px] lg:h-[140px] 2xl:w-[180px] 2xl:h-[180px] rounded-full bg-white shadow-[2px_2px_9.9px_-1px_#00000021] flex items-center justify-center transform transition-all duration-300 hover:scale-105"
+                  className=" w-[120px] h-[120px] flex-shrink-0 sm:w-[140px] sm:h-[140px] lg:w-[140px] lg:h-[140px] 2xl:w-[180px] 2xl:h-[180px] rounded-full bg-white shadow-[2px_2px_9.9px_-1px_#00000021] flex items-center justify-center transform transition-all duration-300 hover:scale-105"
                 >
                   <img
                     src={`${API_BASE_URL}${tool?.logo?.url}`}

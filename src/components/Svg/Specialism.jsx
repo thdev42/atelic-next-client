@@ -39,13 +39,26 @@ const CloudSpecialism = (props) => {
         fill="#D9D9D9"
         fillOpacity={0.26}
       />
-      <circle
-        cx={160.5}
-        cy={159.5}
-        r={145}
-        stroke="black"
-        strokeOpacity={0.06}
-      />
+      <defs>
+        <linearGradient
+          id="gradient"
+          className="gradient-rotate"
+          x1="0%"
+          y1="0%"
+          x2="100%"
+          y2="0%"
+        >
+          <stop offset="0%" stopColor="#2a2a2a" />
+          <stop offset="25%" stopColor="#ffffff" />
+          <stop offset="50%" stopColor="#c0c0c0" />
+          <stop offset="75%" stopColor="#4a4a4a" />
+          <stop offset="100%" stopColor="#2a2a2a" />
+        </linearGradient>
+      </defs>
+
+      <circle cx={160.5} cy={159.5} r={145} className="animated-circle" />
+
+      <circle cx={160.5} cy={159.5} r={145} className="glow-circle" />
 
       <g filter="url(#filter3_d_1857_2)">
         <circle cx={181.163} cy={300.163} r={26.1628} fill="white" />

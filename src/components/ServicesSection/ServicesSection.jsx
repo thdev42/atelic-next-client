@@ -65,18 +65,28 @@ export default function ServicesSection({ data }) {
           </p>
 
           {/* Button from left */}
-          {/* <button className="bg-[#335F86] hover:bg-slate-700 text-[16px] text-white px-9 2xl:w-[200px] py-3 rounded-[8px] font-light transition-colors duration-200 relative z-10">
-            {data?.primaryButton}
-          </button> */}
+          <div>
+            <a href="/services">
+              <button className="bg-[#ace2fc] hover:bg-[#727678] hover:text-white text-[16px] text-black px-9 2xl:w-[200px] py-3 rounded-[8px] font-light transition-colors duration-200 relative z-10">
+                {data?.primaryButton}
+              </button>
+            </a>
+          </div>
         </div>
         <div className="relative mx-auto max-w-none">
           <img
             // src={`${API_BASE_URL}${data?.image?.url}`}
             src={`${Iceberg.src}`}
             alt="AI Solutions Visualization - Digital iceberg showing visible AI solutions above and complex infrastructure below"
-            // width={1024}
-            // height={1024}
+            // className="mix-blend-lighten"
             priority
+          />
+          <div
+            className="absolute top-0 left-0 w-full h-24 mix-blend-lighten pointer-events-none"
+            style={{
+              background:
+                "linear-gradient(89.65deg, #000614 4.13%, #001225 21.3%, #062945 31.31%, #083A5B 50.15%, #031D37 68.66%, #010310 99.19%)",
+            }}
           />
         </div>
       </div>

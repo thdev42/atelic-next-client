@@ -28,10 +28,10 @@ import { headingStyle, paragraphStyles } from "@/styles/globalStyles";
 const OurSolutions = ({ sections }) => {
   const features = Array?.isArray(sections?.details) ? sections?.details : [];
   return (
-    <section className="bg-[#EBEBEB] max-w-[1920px] mx-auto w-full py-8 sm:py-10 lg:py-12 xl:py-16 relative overflow-hidden">
+    <section className="bg-[#EBEBEB] max-w-[1920px] mx-auto w-full  relative overflow-hidden py-10 lg:py-24">
       <div className="font-sora px-8 sm:px-[100px] md:px-8 lg:px-[100px] 2xl:px-[178px] mx-auto">
         {/* Title Section */}
-        <div className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 mb-12 sm:mb-16 lg:mb-20">
+        <div className="">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 xl:gap-12 items-start lg:items-center">
             <div>
               <h2
@@ -52,7 +52,7 @@ const OurSolutions = ({ sections }) => {
         </div>
 
         {/* Cards Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 xl:gap-6 2xl:gap-8">
+        <div className="grid lg:pt-24 pt-10  grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 xl:gap-6 2xl:gap-8">
           {features?.map((feature, index) => (
             <div
               key={index}

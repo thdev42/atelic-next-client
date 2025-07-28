@@ -119,13 +119,13 @@ const Vision = ({ sections }) => {
 
           {/* RIGHT: Logo Image */}
 
-          <div className="w-full lg:w-1/2 relative h-[75px] sm:h-[150px] xl:h-[200px] flex justify-center lg:justify-start mt-10 lg:mt-0">
+          <div className="w-full z-20 lg:w-1/2 relative h-[105px] sm:h-[190px] xl:h-[200px] flex justify-center lg:justify-start  lg:mt-0">
             <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 w-full max-w-[700px] h-full px-6 sm:px-10 lg:px-0">
               <Image
                 src={MissionImage}
                 alt="Atelic Logo"
                 fill
-                className="lg:object-cover object-none mix-blend-multiply"
+                className="object-cover mix-blend-multiply"
                 priority
               />
             </div>
@@ -133,7 +133,7 @@ const Vision = ({ sections }) => {
         </div>
         <div className="2xl:px-[178px] md:px-12 lg:px-[100px] py-10">
           <div
-            className=" mx-auto mt-16"
+            className=" mx-auto "
             style={{
               borderWidth: 1,
               borderColor: "black",

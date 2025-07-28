@@ -53,6 +53,51 @@ body {
   font-weight: bold;
   font-style: normal;
 } */
+ 
+  .animated-circle {
+          stroke: url(#gradient);
+          stroke-width: 3;
+          fill: none;
+          animation: gradientShift 7s ease-in-out infinite;
+        }
+        
+        .glow-circle {
+          stroke: url(#gradient);
+          stroke-width: 2;
+          fill: none;
+          opacity: 0.6;
+          filter: blur(1px);
+          animation: gradientShift 7s ease-in-out infinite;
+        }
+        
+        @keyframes gradientShift {
+          0% {
+            stroke-dasharray: 0 1000;
+            stroke-dashoffset: 0;
+          }
+          50% {
+            stroke-dasharray: 500 500;
+            stroke-dashoffset: -250;
+          }
+          100% {
+            stroke-dasharray: 0 1000;
+            stroke-dashoffset: -1000;
+          }
+        }
+        
+        .gradient-rotate {
+          animation: rotate 7s linear infinite;
+          transform-origin: 160.5px 159.5px;
+        }
+        
+        @keyframes rotate {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
 
 @layer base {
   :root {

@@ -109,8 +109,8 @@ const Differentiation = ({ sections }) => {
     <section className="bg-[#f3f3f3] max-w-[1920px] mx-auto w-full py-8 sm:py-10 lg:py-12 xl:py-16 relative overflow-hidden">
       <div className="font-sora px-4 sm:px-6 md:px-8 lg:px-[100px] 2xl:px-[178px] mx-auto">
         {/* Title Section */}
-        <div className="font-raleway mt-8 sm:mt-12 md:mt-16 lg:mt-20 mb-12 sm:mb-16 lg:mb-20">
-          <div className="mx-auto text-center lg:items-center">
+        <div className="font-raleway ">
+          <div className="sm:space-y-5 space-y-3 mx-auto text-center lg:items-center">
             <div>
               <h2
                 className={`${headingStyle} font-medium text-black leading-tight`}
@@ -120,7 +120,7 @@ const Differentiation = ({ sections }) => {
             </div>
             <div>
               <p
-                className={`max-w-5xl mx-auto ${paragraphStyles} text-black 2xl:leading-relaxed pt-9 lg:mt-0`}
+                className={`max-w-5xl mx-auto ${paragraphStyles} text-black 2xl:leading-relaxed  lg:mt-0`}
               >
                 {sections?.subHeading}
               </p>
@@ -135,7 +135,7 @@ const Differentiation = ({ sections }) => {
             <div className="relative overflow-hidden">
               <div
                 ref={sliderRef}
-                className="flex transition-transform duration-300 ease-in-out"
+                className="flex pt-5 transition-transform duration-300 ease-in-out"
                 style={{ transform: `translateX(-${currentSlide * 100}%)` }}
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
@@ -200,7 +200,7 @@ const Differentiation = ({ sections }) => {
             </div>
           ) : (
             /* Desktop Grid - Original Layout */
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 xl:gap-6 2xl:gap-8">
+            <div className="grid pt-10 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8 xl:gap-6 2xl:gap-8">
               {features.map((feature, index) => (
                 <div
                   key={index}
