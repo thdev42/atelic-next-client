@@ -261,6 +261,16 @@ export default function Footer() {
             Copyright © {new Date().getFullYear()} Atelic.AI – All rights
             reserved – Privacy Policy
           </p>
+          <p className="2xl:text-[24px] mt-3 font-light text-white text-base">
+            Design & Developed By{" "}
+            <a
+              className="cursor-pointer hover:underline"
+              target="_black"
+              href="https://collabez.ae/"
+            >
+              CollabEz
+            </a>
+          </p>
         </div>
       </div>
     </footer>

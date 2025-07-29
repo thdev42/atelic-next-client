@@ -17,9 +17,10 @@ const HomePage = () => {
 
   const { setLoading, setIsCached, loading, setDataFetched, dataFetched } =
     useLoader();
-  const { setIsShowNav } = useBackground();
+  const { setIsShowNav, setFixedNav } = useBackground();
   useEffect(() => {
     const lenis = new Lenis();
+    setFixedNav(false);
     function raf(time) {
       lenis.raf(time);
       requestAnimationFrame(raf);
