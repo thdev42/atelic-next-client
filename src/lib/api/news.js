@@ -31,6 +31,16 @@ export const fetchNewsPageData = async () => {
                 },
               },
             },
+            "shared.ai-insights": {
+              populate: {
+                heading: {
+                  populate: "*",
+                },
+                details: {
+                  populate: "*",
+                },
+              },
+            },
             "shared.blogs-news": {
               populate: {
                 details: {

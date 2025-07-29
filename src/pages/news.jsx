@@ -87,7 +87,7 @@ const NewsPage = () => {
     (sec) => sec?.__component === "shared.hero-container"
   );
   const aiInsights = sections?.find(
-    (sec) => sec?.__component === "shared.our-team"
+    (sec) => sec?.__component === "shared.ai-insights"
   );
   const blogs = sections?.find(
     (sec) => sec?.__component === "shared.blogs-news"

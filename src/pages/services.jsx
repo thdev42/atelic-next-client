@@ -92,6 +92,9 @@ const Services = () => {
   const solutions = sections?.filter(
     (sec) => sec?.__component === "shared.services-solutions"
   );
+  const redefiningSuccess = sections?.filter(
+    (sec) => sec?.__component === "shared.redefining-success"
+  );
 
   const iceberg = sections?.find((sec) => sec?.__component === "shared.sols2");
   if (!dataFetched) {
@@ -102,7 +105,7 @@ const Services = () => {
       <HeroServices sections={hero} />
       <HowWeWork sections={[howWeWork, servicesWork]} />
       <OurSolutions sections={solutions[0]} />
-      <RedefiningSuccess sections={solutions[1]} />
+      <RedefiningSuccess sections={redefiningSuccess[0]} />
       <IceBerg sections={iceberg} />
       <Footer />
     </section>

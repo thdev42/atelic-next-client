@@ -36,6 +36,13 @@ export const fetchServicesPageData = async () => {
                 },
               },
             },
+            "shared.redefining-success": {
+              populate: {
+                deatils: {
+                  populate: "*",
+                },
+              },
+            },
             "shared.sols2": {
               populate: {
                 details: {

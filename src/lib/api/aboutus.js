@@ -73,6 +73,22 @@ export const fetchAboutPageData = async () => {
                 },
               },
             },
+            "shared.our-advisors": {
+              populate: {
+                heading: {
+                  populate: "*",
+                },
+                teamMembers: {
+                  // sort: ["order:asc"],
+                  populate: {
+                    image: {
+                      populate: "*",
+                    },
+                    icons: { populate: "*" },
+                  },
+                },
+              },
+            },
             "shared.investors": {
               populate: "*",
             },

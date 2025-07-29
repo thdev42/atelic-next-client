@@ -78,6 +78,8 @@ export const Advisors = ({ sections }) => {
     ? sections?.teamMembers
     : [];
 
+  console.log(sections, "SECTIONS");
+
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [touchStart, setTouchStart] = useState(0);

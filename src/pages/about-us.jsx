@@ -93,6 +93,11 @@ const AboutUsPage = () => {
   const teamMembers = sections?.filter(
     (sec) => sec?.__component === "shared.our-team"
   );
+  const ourAdvisors = sections?.filter(
+    (sec) => sec?.__component === "shared.our-advisors"
+  );
+
+  console.log(ourAdvisors, "OUR");
   const investors = sections?.find(
     (sec) => sec?.__component === "shared.investors"
   );
@@ -111,7 +116,7 @@ const AboutUsPage = () => {
       {/* <div className="lg:hidden block">
         <OurTeam sections={teamMembers[1]} />
       </div> */}
-      <Advisors sections={teamMembers[2]} />
+      <Advisors sections={ourAdvisors[0]} />
       <Investors sections={investors} />
       <Footer />
     </section>

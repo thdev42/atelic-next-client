@@ -34,7 +34,7 @@ const cardData = [
 ];
 
 export const RedefiningSuccess = ({ sections }) => {
-  const cardData = Array?.isArray(sections?.details) ? sections?.details : [];
+  const cardData = Array?.isArray(sections?.deatils) ? sections?.deatils : [];
   const [currentSlide, setCurrentSlide] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);

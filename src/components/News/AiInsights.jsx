@@ -33,9 +33,7 @@ const teamMembers = [
 ];
 
 const AiInsights = ({ sections }) => {
-  const teamMembers = Array?.isArray(sections?.teamMembers)
-    ? sections?.teamMembers
-    : [];
+  const aiInsights = Array?.isArray(sections?.details) ? sections?.details : [];
 
   return (
     <section className="font-raleway relative bg-[#f3f0f1] text-black w-full max-w-[1920px] mx-auto overflow-hidden py-16">
@@ -58,7 +56,7 @@ const AiInsights = ({ sections }) => {
           })}
         </h2>
         <div className="lg:space-y-24 ">
-          {teamMembers.map((member, index) => (
+          {aiInsights.map((member, index) => (
             <div
               key={index}
               className={`flex flex-col lg:flex-row ${
