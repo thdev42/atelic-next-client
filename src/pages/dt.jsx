@@ -354,7 +354,7 @@ export default function FinalResult() {
                         style={{ boxShadow: "2px 4px 8.7px 0px #00000030" }}
                       >
                         <p className="leading-relaxed">
-                          We We Recommend an agent that {displayedText}
+                          We Recommend an agent that {displayedText}
                           {isTyping && <span className="animate-pulse">|</span>}
                         </p>
 
@@ -407,7 +407,7 @@ export default function FinalResult() {
                         style={{ boxShadow: "2px 4px 8.7px 0px #00000030" }}
                       >
                         <p className="leading-relaxed text-center">
-                          We We Recommend an agent that {displayedText}
+                          We Recommend an agent that {displayedText}
                           {isTyping && <span className="animate-pulse">|</span>}
                         </p>
 
