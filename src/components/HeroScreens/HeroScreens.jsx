@@ -749,7 +749,7 @@ export const HeroPartners = ({
   >
     <div className="px-4 sm:px-8 md:px-12 lg:px-[100px] 2xl:px-[178px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-8">
       {/* Text Content Section */}
-      <div className="w-full z-50 pt-48 lg:min-w-[50%]">
+      <div className="w-full z-50 pt-16 lg:min-w-[50%]">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -838,7 +838,7 @@ export const HeroNews = ({ sectionY, backgroundY, robotY, textY, data }) => {
     >
       <div className="px-4 sm:px-8 md:px-12 lg:px-[100px] 2xl:px-[178px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-8">
         {/* Text Content Section */}
-        <div className="w-full z-50 pt-48 lg:min-w-[50%]">
+        <div className="w-full z-50 pt-16 lg:min-w-[50%]">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
