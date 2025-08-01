@@ -182,27 +182,27 @@ const Navbar = ({ data }) => {
             Come see us at Gitex 2025
           </div>
           <nav
-            className={`z-50 ${
-              fixedNav ? "absolute mt-10 top-0 left-0 right-0 w-full" : ""
+            className={`z-50 relative h-16 ${
+              fixedNav
+                ? "absolute mt-10 top-0 left-0 right-0 w-full"
+                : "lg:pt-10 lg:pb-20 pt-10 pb-28"
             }`}
           >
             {" "}
-            {/* Conditional fixed positioning */}
+            {/* Added fixed height and relative positioning */}
             <Container>
-              <div className=" px-4 overflow-hidden sm:px-8 md:px-12 lg:px-[100px] 2xl:px-[178px] flex items-center justify-between w-full relative">
-                {/* LEFT: Logo with controlled height */}
+              <div className=" overflow-hidden sm:px-4 md:px-8 lg:px-[80px] 2xl:px-[160px] flex items-center justify-between w-full h-16 relative">
+                {/* LEFT: Logo with absolute positioning */}
                 <div
                   style={getTextColorStyle()}
-                  className=" flex-shrink-0 cursor-pointer z-50"
+                  className="relative cursor-pointer z-50"
                 >
                   {data?.image?.url && (
-                    <div className="2xl:max-w-[173px] max-w-[150px]">
+                    <div className="2xl:max-w-[203px] max-w-[183px]">
                       <a className="" href="/">
                         <img
                           src={`${API_BASE_URL}${data?.image?.url}`}
                           alt="Logo"
-                          // width={173} // Reduced from 173 to 120
-                          // height={120} // Added fixed height
                           className="object-contain z-50" // Maintain aspect ratio
                           style={{
                             filter:
@@ -219,8 +219,8 @@ const Navbar = ({ data }) => {
                   )}
                 </div>
 
-                {/* CENTER: Navigation Links */}
-                <ul className="z-50 hidden flex-shrink-0 lg:flex 2xl:gap-5 lg:gap-1 2xl:text-[20px] lg:text-sm font-sora font-normal">
+                {/* CENTER: Navigation Links - now truly centered */}
+                <ul className="z-50 hidden flex-shrink-0 lg:flex 2xl:gap-5 lg:gap-1 2xl:text-[20px] lg:text-sm font-sora font-normal mx-auto">
                   {navLinks.map((link) => {
                     const isActive = router.pathname == link?.link;
 
@@ -242,10 +242,10 @@ const Navbar = ({ data }) => {
                   })}
                 </ul>
 
-                {/* RIGHT: Menu Icon */}
-                <div className="lg:opacity-0 z-50 flex-shrink-0">
+                {/* RIGHT: Menu Icon - positioned absolutely on the right */}
+                <div className="lg:opacity-0 z-50 absolute right-4 sm:right-8 md:right-12 lg:right-[100px] 2xl:right-[178px] top-1/2 transform -translate-y-1/2">
                   <button
-                    className=" menu-button"
+                    className="menu-button"
                     onClick={toggleDrawer}
                     disabled={!isMobile}
                   >

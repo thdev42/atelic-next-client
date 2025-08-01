@@ -261,7 +261,7 @@ export default function Footer() {
             Copyright © {new Date().getFullYear()} Atelic.AI – All rights
             reserved – Privacy Policy
           </p>
-          <p className="2xl:text-[24px] mt-3 font-light text-white text-base">
+          <p className="2xl:text-[20px] lg:text-[14px] md:text-[14px] text-[12.7px] mt-3 font-light text-white text-base">
             Design & Developed By{" "}
             <a
               className="cursor-pointer hover:underline"
