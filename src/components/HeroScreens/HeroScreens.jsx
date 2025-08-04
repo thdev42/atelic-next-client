@@ -1302,7 +1302,7 @@ export const HeroDynamic = ({
               >
                 <div className="relative w-full">
                   <img
-                    src={mainImage.src}
+                    src={Hero3Bg.src}
                     alt={mainImage.alt}
                     className="w-full 2xl:-mt-24 crisp-edges"
                     style={{
@@ -1321,7 +1321,7 @@ export const HeroDynamic = ({
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className={`${layoutConfig.imageWidth} z-50 relative ${layoutConfig.imagePadding}`}
+                className={`${layoutConfig.imageWidth} mr-8 z-50 relative ${layoutConfig.imagePadding}`}
               >
                 <div className=" relative w-full flex justify-center">
                   <img
