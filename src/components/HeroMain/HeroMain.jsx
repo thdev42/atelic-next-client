@@ -15,19 +15,15 @@ import ParticlesComp from "../Particles/Particles";
 
 const HeroSection = ({ scrollYSProgress, section }) => {
   const sectionRef = useRef(null);
-  const sentinelRef = useRef(null);
-  const [isSentinelInView, setIsSentinelInView] = useState(false);
 
   const [activeSection, setActiveSection] = useState(0);
-  const [prevSection, setPrevSection] = useState(0);
   const [slideDirection, setSlideDirection] = useState(0);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
+  const [shouldAutoPlay, setShouldAutoPlay] = useState(true);
 
-  const [isAutoPlay, setIsAutoPlay] = useState(true);
   const autoPlayRef = useRef(null);
-  const AUTO_PLAY_DELAY = 7000;
-  const [isPaused, setIsPaused] = useState(false);
+  const AUTO_PLAY_DELAY = 6000; // 6 seconds
 
   const { setBackground, setActiveHeroIndex, setSlideProgress } =
     useBackground();
@@ -37,20 +33,13 @@ const HeroSection = ({ scrollYSProgress, section }) => {
   const [isMid, setIsMid] = useState(false);
 
   const startAutoPlay = () => {
-    // if (
-    //   !isAutoPlay ||
-    //   isPaused ||
-    //   // heroDataArray.length <= 1 ||
-    //   !isSentinelInView
-    // )
-    //   return;
+    if (!shouldAutoPlay) return;
 
     if (autoPlayRef.current) {
       clearTimeout(autoPlayRef.current);
     }
 
     autoPlayRef.current = setTimeout(() => {
-      setPrevSection((current) => current);
       setSlideDirection(1);
       setActiveSection((prev) => {
         const nextIndex = prev + 1;
@@ -64,79 +53,25 @@ const HeroSection = ({ scrollYSProgress, section }) => {
       clearTimeout(autoPlayRef.current);
       autoPlayRef.current = null;
     }
-
-    if (isAutoPlay && !isPaused) {
+    if (shouldAutoPlay) {
       startAutoPlay();
     }
   };
 
-  // Custom intersection observer for better visibility detection
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        const isInView = entry.isIntersecting;
-        setIsSentinelInView(isInView);
-
-        if (isInView && isAutoPlay && !isPaused) {
-          // Clear any existing timer first
-          if (autoPlayRef.current) {
-            clearTimeout(autoPlayRef.current);
-          }
-          // Start autoplay immediately when entering view
-          startAutoPlay();
-        } else if (!isInView) {
-          // Clear autoplay when leaving view
-          if (autoPlayRef.current) {
-            clearTimeout(autoPlayRef.current);
-            autoPlayRef.current = null;
-          }
-        }
-      },
-      { threshold: 0.5, rootMargin: "0px" }
-    );
-
-    if (sentinelRef.current) {
-      observer.observe(sentinelRef.current);
-    }
-
-    return () => {
-      if (sentinelRef.current) {
-        observer.unobserve(sentinelRef.current);
-      }
-    };
-  }, [isAutoPlay, isPaused, heroDataArray.length]);
-
-  useEffect(() => {
-    setPrevSection(activeSection);
-
-    // Only restart autoplay for active section changes, not visibility changes
-    if (isAutoPlay && !isPaused) {
-      if (autoPlayRef.current) {
-        clearTimeout(autoPlayRef.current);
-      }
-      startAutoPlay();
-    }
-
-    return () => {
-      if (autoPlayRef.current) {
-        clearTimeout(autoPlayRef.current);
-      }
-    };
-  }, [activeSection]);
-
-  const handleMouseEnter = () => {
-    setIsPaused(true);
     if (autoPlayRef.current) {
       clearTimeout(autoPlayRef.current);
     }
-  };
-
-  const handleMouseLeave = () => {
-    setIsPaused(false);
-    if (isAutoPlay) {
+    if (shouldAutoPlay) {
       startAutoPlay();
     }
-  };
+
+    return () => {
+      if (autoPlayRef.current) {
+        clearTimeout(autoPlayRef.current);
+      }
+    };
+  }, [activeSection, shouldAutoPlay]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -151,6 +86,27 @@ const HeroSection = ({ scrollYSProgress, section }) => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  // Handle scroll to stop auto-play when scrolled down
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const shouldStop = scrollY > 750; // Stop auto-play after 750px scroll
+
+      if (shouldStop !== !shouldAutoPlay) {
+        setShouldAutoPlay(!shouldStop);
+
+        // Clear timeout if stopping auto-play
+        if (shouldStop && autoPlayRef.current) {
+          clearTimeout(autoPlayRef.current);
+          autoPlayRef.current = null;
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [shouldAutoPlay]);
 
   const sectionY = useTransform(
     scrollYSProgress,
@@ -190,38 +146,16 @@ const HeroSection = ({ scrollYSProgress, section }) => {
     const isRightSwipe = distance < -50;
 
     if (isLeftSwipe && activeSection < heroDataArray.length - 1) {
-      setPrevSection(activeSection);
       setSlideDirection(1);
       setActiveSection(activeSection + 1);
       resetAutoPlayTimer();
     }
     if (isRightSwipe && activeSection > 0) {
-      setPrevSection(activeSection);
       setSlideDirection(-1);
       setActiveSection(activeSection - 1);
       resetAutoPlayTimer();
     }
   };
-
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === "ArrowLeft" && activeSection > 0) {
-        setPrevSection(activeSection);
-        setSlideDirection(-1);
-        setActiveSection(activeSection - 1);
-        resetAutoPlayTimer();
-      }
-      if (e.key === "ArrowRight" && activeSection < heroDataArray.length - 1) {
-        setPrevSection(activeSection);
-        setSlideDirection(1);
-        setActiveSection(activeSection + 1);
-        resetAutoPlayTimer();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [activeSection, heroDataArray.length]);
 
   useEffect(() => {
     const currentSlide = heroDataArray[activeSection];
@@ -251,7 +185,6 @@ const HeroSection = ({ scrollYSProgress, section }) => {
     )
       return;
 
-    setPrevSection(activeSection);
     setSlideDirection(newIndex > activeSection ? 1 : -1);
     setActiveSection(newIndex);
     resetAutoPlayTimer();
@@ -283,8 +216,6 @@ const HeroSection = ({ scrollYSProgress, section }) => {
 
   return (
     <>
-      <div ref={sentinelRef} className="w-full h-[1px]" />
-
       <motion.section
         ref={sectionRef}
         className={`overflow-hidden ${
@@ -293,8 +224,6 @@ const HeroSection = ({ scrollYSProgress, section }) => {
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
       >
         <div className="relative w-full h-full overflow-hidden">
           <AnimatePresence mode="wait" custom={slideDirection}>
