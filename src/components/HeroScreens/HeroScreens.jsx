@@ -1416,7 +1416,7 @@ export const HeroDynamic = ({
                           <p className="text-left text-[10px] sm:text-[12px] md:text-[13px] lg:text-[14px] 2xl:text-[16px] mt-1 sm:mt-2 font-thin text-black/60 leading-snug">
                             {stat.description}
                             <span className="underline cursor-pointer ml-1">
-                              Learn More
+                              research source
                             </span>
                           </p>
                         </div>

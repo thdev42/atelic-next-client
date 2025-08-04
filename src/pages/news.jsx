@@ -46,19 +46,6 @@ const NewsPage = () => {
       }
     }
   };
-
-  useEffect(() => {
-    setIsDark(false);
-    setSlideProgress(0);
-    const lenis = new Lenis();
-    function raf(time) {
-      lenis.raf(time);
-
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-  }, []);
-
   useEffect(() => {
     if (typeof window !== "undefined") {
       try {
@@ -75,6 +62,18 @@ const NewsPage = () => {
     }
 
     getPageSections();
+  }, []);
+
+  useEffect(() => {
+    setIsDark(false);
+    setSlideProgress(0);
+    const lenis = new Lenis();
+    function raf(time) {
+      lenis.raf(time);
+
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
   }, []);
 
   const { scrollYProgress } = useScroll({

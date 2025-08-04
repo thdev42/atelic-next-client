@@ -31,7 +31,7 @@ const Vision = ({ sections }) => {
       {/* --- Vision Section --- */}
       <section className="font-sora relative bg-white text-black w-full max-w-[1920px] mx-auto overflow-hidden sm:py-12">
         {/* Background Box (Fixed Height & Centered) */}
-        <div className="z-10 absolute inset-0 flex justify-center 2xl:px-[100px] items-center pointer-events-none">
+        <div className="z-10 absolute 2xl:mt-24 lg:mt-64 inset-0 flex justify-center 2xl:px-[100px] items-center pointer-events-none">
           <div className="w-[90%] lg:h-[750px] bg-[#E8E8E8]"></div>
         </div>
 
@@ -39,7 +39,7 @@ const Vision = ({ sections }) => {
         <div className="relative z-10 flex flex-col lg:flex-row items-center lg:items-stretch 2xl:px-[178px] mx-auto px-4 sm:px-6 xl:px-12">
           {/* LEFT: Image breaking outside the background box */}
           <div className="w-full lg:w-1/2 flex items-center justify-start py-8 relative">
-            <div className="aspect-[4/3] 2xl:aspect-[4/3] lg:aspect-[10/9] relative w-[1044px] max-w-[1044px] overflow-hidden 2xl:-ml-[177px]">
+            <div className="aspect-[4/3] 2xl:aspect-[5/3] lg:aspect-[13/9] relative w-[1044px] max-w-[1044px] overflow-hidden 2xl:-ml-[177px]">
               <Image
                 src={VisionImage}
                 alt="Our Vision"

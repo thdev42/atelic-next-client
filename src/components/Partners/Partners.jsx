@@ -33,6 +33,10 @@ export const Partners = ({ partners, data }) => {
   const logos = Array?.isArray(data?.logos) ? data?.logos : [];
   // const logos = [Aws, Google, IBM, Microsoft, Nvidia];
   console.log(data, "partners");
+
+  // Create infinite array - cleaner approach
+  const infiniteLogos = Array(12).fill(logos).flat();
+
   const container = useRef(null);
 
   const { scrollYProgress } = useScroll({
@@ -90,21 +94,35 @@ export const Partners = ({ partners, data }) => {
           className="w-full"
         >
           <motion.div
-            className="flex gap-8 md:animate-marquee whitespace-nowrap"
+            className="flex gap-8 whitespace-nowrap"
             style={{ y: sm, willChange: "transform" }}
             drag={
               typeof window !== "undefined" && window.innerWidth <= 768
                 ? "x"
                 : false
             }
-            dragConstraints={{ left: -1000, right: 0 }}
-            dragElastic={0.2}
+            dragConstraints={{ left: -2000, right: 0 }}
+            dragElastic={0.9}
             whileTap={{ cursor: "grabbing" }}
+            animate={{
+              x:
+                typeof window !== "undefined" && window.innerWidth > 768
+                  ? [0, -100 * logos.length + "%"]
+                  : 0,
+            }}
+            transition={{
+              x: {
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: logos.length * 40,
+                ease: "linear",
+              },
+            }}
           >
             {Array.isArray(logos) &&
-              [...logos, ...logos]?.map((logo, idx) => (
+              infiniteLogos?.map((logo, idx) => (
                 <motion.div
-                  key={idx}
+                  key={`logo-${idx}`}
                   alt={`partner-${idx}`}
                   className="inline-flex items-center justify-center my-3 px-8 py-4 min-w-[170px] h-[95.39px] sm:min-w-[207px] sm:h-[135.39px] md:min-w-[287px] md:h-[165.39px] bg-[rgba(233,233,233,0.95)] backdrop-blur-sm border border-[rgba(0,0,0,0.18)] transition-all duration-300 hover:bg-white hover:shadow-[3px_4px_9.4px_1px_rgba(0,0,0,0.14)]"
                 >

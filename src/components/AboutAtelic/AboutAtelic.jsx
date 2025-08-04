@@ -510,7 +510,7 @@ const AboutAtelic = ({ data }) => {
     <section
       ref={sectionRef}
       className="z-10 font-sora overflow-visible bg-[#f3f3f3] max-w-[1920px] mx-auto w-full relative"
-      style={{ height: "210vh" }} // Provides the scrollable area
+      style={{ height: "150vh" }} // Provides the scrollable area
       onMouseEnter={() => setShowArrows(true)}
       onMouseLeave={() => setShowArrows(false)}
     >

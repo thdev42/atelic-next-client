@@ -61,7 +61,18 @@ export default function ServicesSection({ data }) {
 
           {/* Paragraph from left */}
           <p className="text-white text-base 2xl:text-[22px] font-light sm:text-lg 2xl:leading-9 relative z-10">
-            {data?.subHeading}
+            {/* {data?.subHeading} */}
+            Just like an iceberg, much of what you see below the surface of AI
+            solutioning takes place in the systems and architecture of data
+            collection, piping & activation.
+            <br />
+            <span className="block mt-4">
+              Atelic’s vision is to create value within this entire AI ecosystem
+              by driving success & trust for our customers. We do this by
+              providing education, problem solving & real business solutions,
+              thus removing he complexity of AI, but still working within the
+              frameworks of our customers.
+            </span>
           </p>
 
           {/* Button from left */}
@@ -122,7 +133,17 @@ export default function ServicesSection({ data }) {
                 // data-aos="fade-right"
                 // data-aos-delay="200"
               >
-                {data?.subHeading}
+                Just like an iceberg, much of what you see below the surface of
+                AI solutioning takes place in the systems and architecture of
+                data collection, piping & activation.
+                <br />
+                <span className="block mt-4">
+                  Atelic’s vision is to create value within this entire AI
+                  ecosystem by driving success & trust for our customers. We do
+                  this by providing education, problem solving & real business
+                  solutions, thus removing he complexity of AI, but still
+                  working within the frameworks of our customers.
+                </span>
               </p>
 
               {/* Button from left */}

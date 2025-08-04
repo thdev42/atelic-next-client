@@ -55,7 +55,6 @@ const Section = ({ scrollYProgress, shouldScrollToForm, data }) => {
       <ServicesSection data={solutions} />
       <AboutAtelic data={ourteam} />
       {appointment?.showForm == true && <Appointment data={appointment} />}
-
       <Footer />
     </div>
   );

@@ -47,3 +47,8 @@ export const fetchFooterUpdatedAt = async (slug) => {
   const res = await axios.get(url);
   return res?.data?.data?.[0]?.updatedAt || null;
 };
+export const fetchPrivacyPolicyUpdatedAt = async () => {
+  const url = `${API_BASE_URL}/api/privacy-policies`;
+  const res = await axios.get(url);
+  return res?.data?.data?.[0]?.updatedAt || null;
+};

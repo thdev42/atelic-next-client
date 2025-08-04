@@ -211,7 +211,7 @@ export default function Footer() {
                   <div key={text} className="flex items-center">
                     <a
                       href={`${text?.link}`}
-                      className="2xl:text-[24px] text-sm lg:text-lg px-2 sm:px-4 lg:px-9 transition-colors relative whitespace-nowrap"
+                      className="2xl:text-[24px] text-sm lg:text-lg px-2  transition-colors relative whitespace-nowrap"
                     >
                       {text?.text}
                     </a>

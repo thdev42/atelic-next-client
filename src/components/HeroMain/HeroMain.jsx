@@ -37,13 +37,13 @@ const HeroSection = ({ scrollYSProgress, section }) => {
   const [isMid, setIsMid] = useState(false);
 
   const startAutoPlay = () => {
-    if (
-      !isAutoPlay ||
-      isPaused ||
-      heroDataArray.length <= 1 ||
-      !isSentinelInView
-    )
-      return;
+    // if (
+    //   !isAutoPlay ||
+    //   isPaused ||
+    //   // heroDataArray.length <= 1 ||
+    //   !isSentinelInView
+    // )
+    //   return;
 
     if (autoPlayRef.current) {
       clearTimeout(autoPlayRef.current);
@@ -65,7 +65,7 @@ const HeroSection = ({ scrollYSProgress, section }) => {
       autoPlayRef.current = null;
     }
 
-    if (isAutoPlay && !isPaused && isSentinelInView) {
+    if (isAutoPlay && !isPaused) {
       startAutoPlay();
     }
   };
@@ -77,7 +77,7 @@ const HeroSection = ({ scrollYSProgress, section }) => {
         const isInView = entry.isIntersecting;
         setIsSentinelInView(isInView);
 
-        if (isInView && isAutoPlay && !isPaused && heroDataArray.length > 1) {
+        if (isInView && isAutoPlay && !isPaused) {
           // Clear any existing timer first
           if (autoPlayRef.current) {
             clearTimeout(autoPlayRef.current);
@@ -110,12 +110,7 @@ const HeroSection = ({ scrollYSProgress, section }) => {
     setPrevSection(activeSection);
 
     // Only restart autoplay for active section changes, not visibility changes
-    if (
-      isAutoPlay &&
-      !isPaused &&
-      isSentinelInView &&
-      heroDataArray.length > 1
-    ) {
+    if (isAutoPlay && !isPaused) {
       if (autoPlayRef.current) {
         clearTimeout(autoPlayRef.current);
       }
@@ -138,7 +133,7 @@ const HeroSection = ({ scrollYSProgress, section }) => {
 
   const handleMouseLeave = () => {
     setIsPaused(false);
-    if (isAutoPlay && isSentinelInView) {
+    if (isAutoPlay) {
       startAutoPlay();
     }
   };
