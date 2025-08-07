@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "@/config/config";
 import Image from "next/image";
 
 export default function BlogPage({ blog }) {
@@ -102,18 +103,12 @@ export default function BlogPage({ blog }) {
     );
   };
 
-  const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337";
-
   return (
     <div className="font-sora min-h-screen bg-white">
       {/* Hero Container */}
       <div className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh] overflow-hidden">
         <Image
-          src={
-            blog?.image?.url
-              ? `${BASE_URL}${blog.image.url}`
-              : "/placeholder.svg?height=800&width=1200"
-          }
+          src={`${API_BASE_URL}${blog?.image?.url}`}
           alt={
             blog?.image?.alternativeText ||
             blog?.title ||
@@ -235,7 +230,7 @@ export default function BlogPage({ blog }) {
                               </div>
                             </div>
                             <a
-                              href={`${BASE_URL}${pdfFile.url}`}
+                              href={`${API_BASE_URL}${pdfFile.url}`}
                               download
                               target="_blank"
                               rel="noopener noreferrer"
@@ -264,7 +259,7 @@ export default function BlogPage({ blog }) {
                     <div className="flex items-center space-x-4">
                       <div className="relative w-16 h-16 rounded-full overflow-hidden">
                         <Image
-                          src={`${BASE_URL}${blog.avatar.url}`}
+                          src={`${API_BASE_URL}${blog?.avatar?.url}`}
                           alt={
                             blog.avatar.alternativeText ||
                             blog.author ||

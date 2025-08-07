@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { API_BASE_URL } from "@/config/config";
 
 const SingleNews = ({ news }) => {
   console.log(news, "NEWS DATA");
@@ -111,11 +112,7 @@ const SingleNews = ({ news }) => {
       {/* Hero Container */}
       <div className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh] overflow-hidden">
         <Image
-          src={
-            news?.images[0]?.url
-              ? `${BASE_URL}${news.images[0].url}`
-              : "/placeholder.svg?height=800&width=1200"
-          }
+          src={`${API_BASE_URL}${news.images[0].url}`}
           alt={
             news?.image?.alternativeText ||
             news?.title ||
