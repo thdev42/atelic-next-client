@@ -229,7 +229,7 @@ export default function BlogPage({ blog }) {
                                 </h4>
                                 <p className="text-sm text-gray-500">
                                   PDF Document •{" "}
-                                  {(pdfFile.size / 1024).toFixed(1)} KB
+                                  {(pdfFile.size / 1024).toFixed(2)} MB
                                 </p>
                               </div>
                             </div>
