@@ -217,44 +217,48 @@ const Blogs = ({ sections }) => {
                     : "scale-100 opacity-100"
                 }`}
               >
-                {/* Image */}
-                <div className="aspect-[492/240] w-full overflow-hidden">
-                  <img
-                    src={`${API_BASE_URL}${item.image.url}`}
-                    alt={item?.title}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                    draggable={false}
-                  />
-                </div>
+                <a href={`/news/blogs/${item.id}`} className="cursor-pointer">
+                  <div>
+                    {/* Image */}
+                    <div className="aspect-[492/240] w-full overflow-hidden">
+                      <img
+                        src={`${API_BASE_URL}${item.image.url}`}
+                        alt={item?.title}
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                        draggable={false}
+                      />
+                    </div>
 
-                {/* Content */}
-                <div className="p-3 sm:p-4 lg:p-5 flex flex-col gap-2 flex-1">
-                  <p className="text-xs sm:text-sm text-purple-700 font-medium">
-                    {item?.category}
-                  </p>
-                  <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-gray-900 line-clamp-2">
-                    {item?.title} <sup className="text-xs">↗</sup>
-                  </h3>
-                  <p className="text-xs sm:text-sm text-gray-500 line-clamp-3 flex-1">
-                    {item?.description}
-                  </p>
-
-                  {/* Author Info */}
-                  <div className="flex items-center gap-2 mt-auto pt-2 sm:pt-4">
-                    <img
-                      src={`${API_BASE_URL}${item?.avatar?.url}`}
-                      alt={item?.author}
-                      className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 bg-gray-300 rounded-full object-cover"
-                      draggable={false}
-                    />
-                    <div className="min-w-0 flex-1">
-                      <p className="text-xs sm:text-sm font-medium text-gray-900 truncate">
-                        {item?.author}
+                    {/* Content */}
+                    <div className="p-3 sm:p-4 lg:p-5 flex flex-col gap-2 flex-1">
+                      <p className="text-xs sm:text-sm text-purple-700 font-medium">
+                        {item?.category}
                       </p>
-                      <p className="text-xs text-gray-500">{item.date}</p>
+                      <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-gray-900 line-clamp-2">
+                        {item?.title} <sup className="text-xs">↗</sup>
+                      </h3>
+                      <p className="text-xs sm:text-sm text-gray-500 line-clamp-3 flex-1">
+                        {item?.description}
+                      </p>
+
+                      {/* Author Info */}
+                      <div className="flex items-center gap-2 mt-auto pt-2 sm:pt-4">
+                        <img
+                          src={`${API_BASE_URL}${item?.avatar?.url}`}
+                          alt={item?.author}
+                          className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 bg-gray-300 rounded-full object-cover"
+                          draggable={false}
+                        />
+                        <div className="min-w-0 flex-1">
+                          <p className="text-xs sm:text-sm font-medium text-gray-900 truncate">
+                            {item?.author}
+                          </p>
+                          <p className="text-xs text-gray-500">{item.date}</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </a>
               </div>
             ))}
           </div>
