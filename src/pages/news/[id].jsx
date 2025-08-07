@@ -12,60 +12,60 @@ import { useLoader } from "@/context/useLoader";
 // Components
 import Loader from "@/components/Loader/Loader";
 import Footer from "@/components/Footer/Footer";
-import BlogPage from "@/components/News/Blog";
 
 // API
-import { fetchNewsPageBlogsOnly } from "@/lib/api/blogs";
-import { fetchUpdatedAt } from "@/lib/updatedAt";
 
-const SingleBlogPage = () => {
+import { fetchUpdatedAt } from "@/lib/updatedAt";
+import SingleNews from "@/components/News/SingleNews";
+import { fetchNewsPageAIInsightsOnly } from "@/lib/api/singleNews";
+
+const SingleNewsPage = () => {
   const container = useRef(null);
   const router = useRouter();
   const { id } = router.query;
 
-  const [blog, setBlog] = useState(null);
+  const [insight, setInsight] = useState(null);
   const { setIsDark, setSlideProgress } = useBackground();
   const { setLoading, setIsCached, setDataFetched, dataFetched } = useLoader();
 
   let cached = null;
 
-  const fetchBlogData = async () => {
+  const fetchInsightData = async () => {
     const latestUpdatedAt = await fetchUpdatedAt("news");
 
-    const cachedBlogPage = cached?.content?.data?.[0];
-    const cachedDetails = cachedBlogPage?.section?.find(
-      (s) => s.__component === "shared.blogs-news"
+    const cachedInsightPage = cached?.content?.data?.[0];
+    const cachedDetails = cachedInsightPage?.section?.find(
+      (s) => s.__component === "shared.ai-insights"
     )?.details;
 
-    console.log(cachedDetails, "cachedDetails");
-    const latestCachedBlog = cachedDetails?.find((b) => b?.handle === id);
+    const latestCachedInsight = cachedDetails?.find((b) => b?.handle === id);
 
     if (
       !cached ||
-      cachedBlogPage?.updatedAt !== latestUpdatedAt ||
-      !latestCachedBlog
+      cachedInsightPage?.updatedAt !== latestUpdatedAt ||
+      !latestCachedInsight
     ) {
       try {
         setLoading(true);
 
-        const res = await fetchNewsPageBlogsOnly(id);
+        const res = await fetchNewsPageAIInsightsOnly(id);
 
         const details = res?.data?.[0]?.section?.find(
-          (s) => s.__component === "shared.blogs-news"
+          (s) => s.__component === "shared.ai-insights"
         )?.details;
 
-        const blogItem = details?.find((b) => b?.handle === id);
+        const insightItem = details?.find((b) => b?.handle === id);
 
-        if (blogItem) {
-          setBlog(blogItem);
+        if (insightItem) {
+          setInsight(insightItem);
         } else {
-          console.warn("No blog found for id:", id);
+          console.warn("No insight found for id:", id);
         }
       } catch (err) {
-        console.error("Failed to fetch blog:", err);
+        console.error("Failed to fetch insight:", err);
 
-        if (latestCachedBlog) {
-          setBlog(latestCachedBlog);
+        if (latestCachedInsight) {
+          setInsight(latestCachedInsight);
         }
       } finally {
         setLoading(false);
@@ -73,7 +73,7 @@ const SingleBlogPage = () => {
       }
     } else {
       // Serve from cache
-      setBlog(latestCachedBlog);
+      setInsight(latestCachedInsight);
       setIsCached(true);
       setDataFetched(true);
     }
@@ -96,14 +96,14 @@ const SingleBlogPage = () => {
     if (typeof window !== "undefined") {
       try {
         cached = JSON.parse(
-          localStorage.getItem(`news-blogs-only_${id}`) || "null"
+          localStorage.getItem(`news-ai-insights-only_${id}`) || "null"
         );
       } catch (e) {
-        console.warn("Error parsing blog cache:", e);
+        console.warn("Error parsing news cache:", e);
       }
     }
 
-    fetchBlogData();
+    fetchInsightData();
   }, [id]);
 
   const { scrollYProgress } = useScroll({
@@ -115,14 +115,14 @@ const SingleBlogPage = () => {
 
   return (
     <div ref={container}>
-      {blog ? (
-        <BlogPage blog={blog} />
+      {insight ? (
+        <SingleNews news={insight} />
       ) : (
-        <div className="text-center py-12">Blog not found.</div>
+        <div className="text-center py-12">Insight not found.</div>
       )}
       <Footer />
     </div>
   );
 };
 
-export default SingleBlogPage;
+export default SingleNewsPage;

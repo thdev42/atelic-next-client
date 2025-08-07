@@ -34,6 +34,7 @@ const teamMembers = [
 
 const AiInsights = ({ sections }) => {
   const aiInsights = Array?.isArray(sections?.details) ? sections?.details : [];
+  console.log(sections, "SECTIONS AI INSIGHTS");
 
   return (
     <section className="font-raleway relative bg-[#f3f0f1] text-black w-full max-w-[1920px] mx-auto overflow-hidden py-16">
@@ -71,8 +72,8 @@ const AiInsights = ({ sections }) => {
               >
                 <div className="relative w-full max-w-[770px] lg:max-w-[770px]  md:mx-auto md:max-w-[550px]  max-h-[498px] aspect-[614/582]">
                   <Image
-                    src={`${API_BASE_URL}${member?.image?.url}`}
-                    alt={member?.name}
+                    src={`${API_BASE_URL}${member?.images[0]?.url}`}
+                    // alt={member?.name}
                     fill
                     className="object-cover rounded-xl shadow-xl"
                   />
@@ -82,7 +83,7 @@ const AiInsights = ({ sections }) => {
               {/* Text */}
               <div className="w-full lg:w-1/2 md:mt-6 text-center lg:text-left">
                 <h3 className="text-2xl md:text-3xl font-semibold md:mt-0 mt-6 text-gray-900">
-                  {member?.name}
+                  {member?.title}
                 </h3>
                 <div
                   className="mt-3 hidden lg:block"
@@ -92,11 +93,11 @@ const AiInsights = ({ sections }) => {
                     maxWidth: 40,
                   }}
                 />
-                <p className="text-sm text-gray-500 py-4">{member.title}</p>
+                <p className="text-sm text-gray-500 py-4"></p>
                 <p className="text-black/80 text-base max-w-xl xl:text-lg 2xl:text-[22px] mb-9  mx-auto lg:mx-0 2xl:leading-relaxed font-light">
                   {member?.description}{" "}
                   <span className="cursor-pointer underline text-base xl:text-md 2xl:text-[19px]">
-                    Learn More
+                    <a href={`/news/${member?.handle}`}>Learn More</a>
                   </span>
                 </p>
               </div>

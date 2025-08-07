@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 export default function BlogPage({ blog }) {
+  console.log(blog, "BLOG DATA");
   const getYouTubeVideoId = (url) => {
     const regExp =
       /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;

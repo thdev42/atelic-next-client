@@ -72,6 +72,7 @@ export const fetchNewsPageData = async () => {
       let latestDate = new Date(res?.data?.[0]?.updatedAt || 0);
 
       sections.forEach((section) => {
+        console.log(section, "NEWS SECTIONS");
         const possibleArrays = [
           section?.headings,
           section?.image,

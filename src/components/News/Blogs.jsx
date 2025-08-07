@@ -210,19 +210,22 @@ const Blogs = ({ sections }) => {
           >
             {visibleSlides.map((item) => (
               <div
-                key={item.id}
+                key={item?.id}
                 className={`flex-1 min-w-0 w-full max-w-none sm:max-w-[350px] lg:max-w-[400px] xl:max-w-[492px] shadow-[0px_4px_6px_-2px_#10182808,0px_12px_16px_-4px_#10182814] bg-white rounded-xl overflow-hidden flex flex-col transform transition-all duration-300 ease-in-out ${
                   isTransitioning
                     ? "scale-95 opacity-90"
                     : "scale-100 opacity-100"
                 }`}
               >
-                <a href={`/news/blogs/${item.id}`} className="cursor-pointer">
+                <a
+                  href={`/news/blogs/${item?.handle}`}
+                  className="cursor-pointer"
+                >
                   <div>
                     {/* Image */}
                     <div className="aspect-[492/240] w-full overflow-hidden">
                       <img
-                        src={`${API_BASE_URL}${item.image.url}`}
+                        src={`${API_BASE_URL}${item?.image?.url}`}
                         alt={item?.title}
                         className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                         draggable={false}
