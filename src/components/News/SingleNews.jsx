@@ -133,7 +133,7 @@ const SingleNews = ({ news }) => {
           <div className="container mx-auto px-4 pt-6 md:pt-8">
             <button
               onClick={handleGoBack}
-              className="flex items-center space-x-2 text-white hover:text-gray-200 transition-colors group"
+              className="flex items-center pb-3 space-x-2 text-white hover:text-gray-200 transition-colors group"
             >
               <svg
                 className="w-5 h-5 md:w-6 md:h-6 transform group-hover:-translate-x-1 transition-transform"

@@ -240,7 +240,7 @@ export default function Footer() {
             </div>
 
             {/* Contact Information */}
-            <div className="text-gray-300 text-center lg:text-right">
+            <div className="text-gray-300 font-sora text-center lg:text-right">
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 text-sm lg:text-base 2xl:text-[24px]">
                 {/* Phone Number */}
                 <div className="flex flex-col sm:flex-row items-center gap-1">
