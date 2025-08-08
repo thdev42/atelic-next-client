@@ -694,7 +694,15 @@ export const HeroAboutUs = ({
               <p className="text-[14px] 2xl:text-[16px] mt-2 font-medium text-black/100 leading-snug">
                 {sections?.stats?.description}
                 <span className="underline cursor-pointer ml-1">
-                  Learn More
+                  <a
+                    href={sections?.stats?.url || "#"}
+                    {...(sections?.stats?.url && {
+                      target: "_blank",
+                      rel: "noopener noreferrer",
+                    })}
+                  >
+                    research source
+                  </a>
                 </span>
               </p>
             </div>
@@ -1416,7 +1424,15 @@ export const HeroDynamic = ({
                           <p className="text-left text-[10px] sm:text-[12px] md:text-[13px] lg:text-[14px] 2xl:text-[16px] mt-1 sm:mt-2 font-thin text-black/60 leading-snug">
                             {stat.description}
                             <span className="underline cursor-pointer ml-1">
-                              research source
+                              <a
+                                href={stat?.url || "#"}
+                                {...(stat?.url && {
+                                  target: "_blank",
+                                  rel: "noopener noreferrer",
+                                })}
+                              >
+                                research source
+                              </a>
                             </span>
                           </p>
                         </div>

@@ -235,7 +235,7 @@ const Blogs = ({ sections }) => {
                     {/* Content */}
                     <div className="p-3 sm:p-4 lg:p-5 flex flex-col gap-2 flex-1">
                       <p className="text-xs sm:text-sm text-purple-700 font-medium">
-                        {item?.category}
+                        {item?.category?.title}
                       </p>
                       <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-gray-900 line-clamp-2">
                         {item?.title} <sup className="text-xs">↗</sup>

@@ -132,7 +132,7 @@ export default function BlogPage({ blog }) {
                 <span className="mx-2">•</span>
                 <span>{blog?.date || "Date not available"}</span>
                 <span className="mx-2">•</span>
-                <span>{blog?.category || "Uncategorized"}</span>
+                <span>{blog?.category?.title || "Uncategorized"}</span>
               </div>
             </div>
           </div>
@@ -274,7 +274,7 @@ export default function BlogPage({ blog }) {
                           {blog.author}
                         </h4>
                         <p className="text-sm text-gray-600">
-                          {blog.category} Expert
+                          {blog?.category?.title} Expert
                         </p>
                       </div>
                     </div>
@@ -290,7 +290,7 @@ export default function BlogPage({ blog }) {
                     <div className="flex justify-between">
                       <span className="text-sm text-gray-600">Category:</span>
                       <span className="text-sm font-medium text-gray-900">
-                        {blog?.category}
+                        {blog?.category?.title}
                       </span>
                     </div>
                     <div className="flex justify-between">

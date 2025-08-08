@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   compiler: {
-    removeConsole: true, // removes all console.* in production
+    // removeConsole: true, // removes all console.* in production
   },
   images: {
     domains: [

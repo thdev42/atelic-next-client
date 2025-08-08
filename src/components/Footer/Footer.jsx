@@ -222,7 +222,7 @@ export default function Footer() {
                 ))}
               </div>
             </div>
-            {/* Icon + Phone Number */}
+            {/* Icon + Phone Number + Email */}
             <div className="flex justify-between items-center mb-6 px-2 sm:px-4  lg:px-9 transition-colors relative">
               {/* LinkedIn Icon */}
               {footer?.icons?.map((icon, i) => (
@@ -239,15 +239,28 @@ export default function Footer() {
                 </a>
               ))}
 
-              {/* Phone Number */}
+              {/* Phone Number and Email */}
               <div className="text-gray-300 text-sm lg:text-base 2xl:text-[24px]">
-                <span className="font-medium">Phone:</span>{" "}
-                <Link
-                  href="tel:+971505188431"
-                  className="transition-colors hover:text-white"
-                >
-                  {footer?.Phone}
-                </Link>
+                {/* Phone Number */}
+                <div className="mb-2">
+                  <span className="font-medium">Phone:</span>{" "}
+                  <Link
+                    href="tel:+971505188431"
+                    className="transition-colors hover:text-white"
+                  >
+                    {footer?.Phone}
+                  </Link>
+                </div>
+                {/* Email Address */}
+                <div>
+                  <span className="font-medium">Email:</span>{" "}
+                  <Link
+                    href={`mailto:${footer?.email || "contact@atelic.ai"}`}
+                    className="transition-colors hover:text-white"
+                  >
+                    {footer?.email || "contact@atelic.ai"}
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

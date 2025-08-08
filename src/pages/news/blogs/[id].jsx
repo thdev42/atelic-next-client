@@ -82,12 +82,12 @@ const SingleBlogPage = () => {
   useEffect(() => {
     setIsDark(false);
     setSlideProgress(0);
-    const lenis = new Lenis();
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
+    // const lenis = new Lenis();
+    // function raf(time) {
+    //   lenis.raf(time);
+    //   requestAnimationFrame(raf);
+    // }
+    // requestAnimationFrame(raf);
   }, []);
 
   useEffect(() => {

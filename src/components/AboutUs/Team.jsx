@@ -135,13 +135,21 @@ export default function TeamSection({ sections }) {
                               {member.title}
                             </p>
                             {member.icons.map((social, key) => (
-                              <Image
-                                key={key}
-                                src={`${API_BASE_URL}${social?.logo?.url}`}
-                                alt="Social Icon"
-                                width={42}
-                                height={42}
-                              />
+                              <a
+                                href={member?.linkedInUrl || "#"}
+                                {...(member?.linkedInUrl && {
+                                  target: "_blank",
+                                  rel: "noopener noreferrer",
+                                })}
+                              >
+                                <Image
+                                  key={key}
+                                  src={`${API_BASE_URL}${social?.logo?.url}`}
+                                  alt="Social Icon"
+                                  width={42}
+                                  height={42}
+                                />
+                              </a>
                             ))}
                             <p className="mb-4">{member.description}</p>
                           </div>
@@ -211,13 +219,21 @@ export default function TeamSection({ sections }) {
                     {member.icons && (
                       <div className="flex gap-4 mt-2">
                         {member.icons.map((social, key) => (
-                          <Image
-                            key={key}
-                            src={`${API_BASE_URL}${social?.logo?.url}`}
-                            alt="Social Icon"
-                            width={42}
-                            height={42}
-                          />
+                          <a
+                            href={member?.linkedInUrl || "#"}
+                            {...(member?.linkedInUrl && {
+                              target: "_blank",
+                              rel: "noopener noreferrer",
+                            })}
+                          >
+                            <Image
+                              key={key}
+                              src={`${API_BASE_URL}${social?.logo?.url}`}
+                              alt="Social Icon"
+                              width={42}
+                              height={42}
+                            />
+                          </a>
                         ))}
                       </div>
                     )}
