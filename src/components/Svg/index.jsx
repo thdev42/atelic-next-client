@@ -389,7 +389,7 @@ const SVGComponent = (props) => {
         fontWeight={800}
         textAnchor="middle"
       >
-        Services Areas
+        Service Areas
       </text>
       <g style={{ zIndex: -1 }} className="-z-0">
         <path
