@@ -143,13 +143,11 @@ import { API_BASE_URL } from "@/config/config";
 
 export default function Footer() {
   const [footer, setFooter] = useState([]);
-
   let cached = null;
 
   const getNavbarSections = async () => {
     const latestUpdatedAt = await fetchFooterUpdatedAt();
     const cachedPage = cached?.content?.data?.[0];
-
     if (!cached || cachedPage?.updatedAt !== latestUpdatedAt) {
       try {
         const res = await fetchFootersData();
@@ -172,91 +170,95 @@ export default function Footer() {
       } catch (e) {
         console.warn("Error parsing navbar cache:", e);
       }
-
       if (cached?.content?.data?.[0]) {
         setFooter(cached.content.data?.[0]);
       }
     }
-
     getNavbarSections();
   }, []);
 
   console.log(`${API_BASE_URL}${footer?.image?.url}}`, "FOOTER");
+
   return (
-    <footer className=" bg-[#212121] max-w-[1920px] text-white py-12 px-4">
-      <div className="max-w-screen-3xl mx-auto px-4 sm:px-8 md:px-12 2xl:px-44">
+    <footer className="bg-[#212121] max-w-[1920px] text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Logo Section */}
-        <div className="flex justify-center mb-16">
-          <a href="/">
+        <div className="flex justify-center mb-12">
+          <a href="/" className="block">
             <img
               src={`${API_BASE_URL}${footer?.image?.url}`}
               alt="Atelic Logo"
               width={247.69}
               height={105}
-              className="object-cover"
+              className="object-contain max-w-full h-auto"
             />
           </a>
         </div>
 
-        {/* Wrapper that controls full width same as nav links */}
-        <div className="w-full flex items-center justify-center mb-8 sm:mb-14">
-          {/* This container defines the width of both nav links and icons section */}
-          <div className="max-w-screen-xl w-full">
-            {" "}
-            {/* Match width to nav links area */}
-            {/* Navigation Links */}
-            <div className="w-full font-sora font-thin text-white mb-8 sm:mb-14">
-              <div className="flex flex-wrap justify-center items-center gap-y-4">
-                {footer?.details?.map((text, index, arr) => (
-                  <div key={text} className="flex items-center">
-                    <a
-                      href={`${text?.link}`}
-                      className="2xl:text-[24px] text-sm lg:text-lg px-2  transition-colors relative whitespace-nowrap"
-                    >
-                      {text?.text}
-                    </a>
-                    {index !== arr.length - 1 && (
-                      <div className="w-px h-7 bg-[#636363] mx-2 sm:mx-4 lg:mx-9 hidden sm:block"></div>
-                    )}
-                  </div>
-                ))}
+        {/* Navigation Links */}
+        <div className="mb-12">
+          <nav className="flex flex-wrap justify-center  items-center gap-y-4 font-sora font-thin">
+            {footer?.details?.map((text, index, arr) => (
+              <div key={text} className="flex items-center">
+                <a
+                  href={`${text?.link}`}
+                  className="text-sm lg:text-lg 2xl:text-[24px] px-3 lg:px-4 hover:text-gray-300 transition-colors duration-200 whitespace-nowrap"
+                >
+                  {text?.text}
+                </a>
+                {index !== arr.length - 1 && (
+                  <div className="w-px h-6 bg-[#636363] mx-3 lg:mx-6 hidden sm:block"></div>
+                )}
               </div>
-            </div>
-            {/* Icon + Phone Number + Email */}
-            <div className="flex justify-between items-center mb-6 px-2 sm:px-4  lg:px-9 transition-colors relative">
-              {/* LinkedIn Icon */}
+            ))}
+          </nav>
+        </div>
+
+        {/* Contact Information and Social Icons */}
+        <div className="mb-8">
+          <div className="flex flex-col lg:flex-row  justify-evenly items-center gap-8 lg:gap-10">
+            {/* Social Icons */}
+            <div className="flex items-center gap-4">
               {footer?.icons?.map((icon, i) => (
                 <a
-                  href="#"
-                  className="text-blue-400 hover:text-blue-300 transition-colors"
+                  key={i}
+                  href={footer?.linkedInUrl || "#"}
+                  {...(footer?.linkedInUrl && {
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                  })}
+                  className="text-blue-400 hover:text-blue-300 transition-colors duration-200"
                   aria-label="LinkedIn"
                 >
                   <img
                     src={`${API_BASE_URL}${icon?.logo?.url}`}
                     alt="LinkedIn Logo"
-                    className="w-[38px] h-[38px]"
+                    className="w-[38px] h-[38px] object-contain"
                   />
                 </a>
               ))}
+            </div>
 
-              {/* Phone Number and Email */}
-              <div className="text-gray-300 text-sm lg:text-base 2xl:text-[24px]">
+            {/* Contact Information */}
+            <div className="text-gray-300 text-center lg:text-right">
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 text-sm lg:text-base 2xl:text-[24px]">
                 {/* Phone Number */}
-                <div className="mb-2">
-                  <span className="font-medium">Phone:</span>{" "}
+                <div className="flex flex-col sm:flex-row items-center gap-1">
+                  <span className="font-medium text-white">Phone:</span>
                   <Link
                     href="tel:+971505188431"
-                    className="transition-colors hover:text-white"
+                    className="hover:text-white transition-colors duration-200"
                   >
                     {footer?.Phone}
                   </Link>
                 </div>
+
                 {/* Email Address */}
-                <div>
-                  <span className="font-medium">Email:</span>{" "}
+                <div className="flex flex-col sm:flex-row items-center gap-1">
+                  <span className="font-medium text-white">Email:</span>
                   <Link
                     href={`mailto:${footer?.email || "contact@atelic.ai"}`}
-                    className="transition-colors hover:text-white"
+                    className="hover:text-white transition-colors duration-200"
                   >
                     {footer?.email || "contact@atelic.ai"}
                   </Link>
@@ -267,19 +269,21 @@ export default function Footer() {
         </div>
 
         {/* Separator Line */}
-        <div className="border-t border-gray-600 mb-9"></div>
+        <div className="border-t border-gray-600 mb-8"></div>
 
-        <div className="2xl:text-[24px] text-base font-sora text-center">
-          <p className="2xl:text-[24px] font-light text-white text-base">
+        {/* Copyright and Credits */}
+        <div className="text-center font-sora">
+          <p className="text-base 2xl:text-[24px] font-light text-white mb-3">
             Copyright © {new Date().getFullYear()} Atelic.AI – All rights
             reserved – Privacy Policy
           </p>
-          <p className="2xl:text-[20px] lg:text-[14px] md:text-[14px] text-[12.7px] mt-3 font-light text-white text-base">
+          <p className="text-[12.7px] md:text-[14px] lg:text-[14px] 2xl:text-[20px] font-light text-gray-400">
             Design & Developed By{" "}
             <a
-              className="cursor-pointer hover:underline"
-              target="_black"
+              className="cursor-pointer hover:underline hover:text-white transition-colors duration-200"
+              target="_blank"
               href="https://collabez.ae/"
+              rel="noopener noreferrer"
             >
               CollabEz
             </a>
