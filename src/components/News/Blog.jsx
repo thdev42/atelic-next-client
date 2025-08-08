@@ -112,7 +112,7 @@ export default function BlogPage({ blog }) {
   };
 
   return (
-    <div className="font-sora min-h-screen bg-white overflow-hidden">
+    <div className="font-sora min-h-screen bg-white">
       {/* Hero Container */}
       <div className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh] overflow-hidden">
         <Image
@@ -286,14 +286,14 @@ export default function BlogPage({ blog }) {
 
             {/* Author Sidebar - Takes up 1/4 of the width */}
             <div className="lg:col-span-1">
-              <div className="sticky top-8">
+              <div className="sticky top-8 space-y-6">
                 {/* Author Info */}
                 {blog?.avatar && (
-                  <div className="bg-gray-50 rounded-lg p-6 mb-8">
+                  <div className="bg-gray-50 rounded-lg p-6">
                     <h3 className="text-lg font-bold text-gray-900 mb-4">
                       About the Author
                     </h3>
-                    <div className="flex  items-center space-x-4">
+                    <div className="flex items-center space-x-4">
                       <div className="relative flex-shrink-0 w-16 h-16 rounded-full overflow-hidden">
                         <Image
                           src={`${API_BASE_URL}${blog?.avatar?.url}`}
