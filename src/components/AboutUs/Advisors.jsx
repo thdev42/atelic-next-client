@@ -78,7 +78,7 @@ export const Advisors = ({ sections }) => {
     ? sections?.teamMembers
     : [];
 
-  console.log(sections, "SECTIONS");
+  console.log(sections, "ABOUT US SECTION");
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
@@ -132,12 +132,20 @@ export const Advisors = ({ sections }) => {
     <section className="font-sora relative bg-[#E8E8E8] text-black w-full max-w-[1920px] mx-auto overflow-hidden py-16">
       <div className="2xl:px-[178px] md:px-12 lg:px-[100px] mx-auto px-6 sm:px-10 text-left">
         <h2 className="text-4xl md:text-5xl font-light">
-          Our <span className="font-bold">Advisors</span>
+          {sections?.heading?.map((part, index) => (
+            <span
+              key={part.id || index}
+              className={`${part.color === "black" ? "text-black" : ""} ${
+                index === sections.heading.length - 1 ? "font-bold" : ""
+              }`}
+            >
+              {part.text}
+              {part.breakAfter ? <br /> : " "}
+            </span>
+          ))}
         </h2>
-        <p className="text-gray-600 mt-4 max-w-3xl">
-          Our advisors bring decades of industry knowledge and strategic
-          insight. They help us navigate challenges and scale with confidence.
-        </p>
+
+        <p className="text-gray-600 mt-4 max-w-3xl">{sections?.subHeading}</p>
 
         {/* Desktop Grid */}
         <div className="mt-16 hidden lg:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -145,7 +153,7 @@ export const Advisors = ({ sections }) => {
             <motion.div
               key={index}
               whileHover={{ backgroundColor: "#ffffff" }}
-              className="w-full max-w-[496px] h-[279px] bg-[#E8E8E8] border border-black/50 hover:border-white hover:shadow-md rounded-[29px] p-6 mx-auto flex flex-col items-start justify-start text-left transition-all duration-100"
+              className="w-full max-w-[496px] h-auto bg-[#E8E8E8] border border-black/50 hover:border-white hover:shadow-md rounded-[29px] p-6 mx-auto flex flex-col items-start justify-start text-left transition-all duration-100"
             >
               <div className="space-y-5">
                 <div className="w-full flex items-center justify-between mb-4">
@@ -157,17 +165,21 @@ export const Advisors = ({ sections }) => {
                     className="rounded-full object-cover"
                   />
                   <div className="flex gap-3">
-                    {advisor.icons.map((social, i) => (
-                      <a key={i} className="cursor-pointer">
-                        <img
-                          src={`${API_BASE_URL}${social?.logo?.url}`}
-                          alt={social}
-                          width={26}
-                          height={26}
-                          className="opacity-100 mix-blend-luminosity hover:opacity-100 transition-opacity duration-200"
-                        />
-                      </a>
-                    ))}
+                    <a
+                      href={advisor?.linkedInUrl || "#"}
+                      {...(advisor?.linkedInUrl && {
+                        target: "_blank",
+                        rel: "noopener noreferrer",
+                      })}
+                    >
+                      <img
+                        src={`${API_BASE_URL}${advisor?.icons?.logo?.url}`}
+                        // alt={social}
+                        width={26}
+                        height={26}
+                        className="opacity-100 mix-blend-luminosity hover:opacity-100 transition-opacity duration-200"
+                      />
+                    </a>
                   </div>
                 </div>
                 <h3 className="font-medium text-lg mt-1">{advisor.name}</h3>
@@ -208,17 +220,21 @@ export const Advisors = ({ sections }) => {
                           className="rounded-full object-cover"
                         />
                         <div className="flex gap-3">
-                          {advisor.icons.map((social, i) => (
-                            <a key={i} className="cursor-pointer">
-                              <img
-                                src={`${API_BASE_URL}${social?.logo?.url}`}
-                                alt={social}
-                                width={26}
-                                height={26}
-                                className="opacity-100 mix-blend-luminosity"
-                              />
-                            </a>
-                          ))}
+                          <a
+                            href={advisor?.linkedInUrl || "#"}
+                            {...(advisor?.linkedInUrl && {
+                              target: "_blank",
+                              rel: "noopener noreferrer",
+                            })}
+                          >
+                            <img
+                              src={`${API_BASE_URL}${advisor?.icons?.logo?.url}`}
+                              // alt={social}
+                              width={26}
+                              height={26}
+                              className="opacity-100 mix-blend-luminosity"
+                            />
+                          </a>
                         </div>
                       </div>
                       <h3 className="font-medium text-lg mt-1">

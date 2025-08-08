@@ -1,8 +1,16 @@
 import { API_BASE_URL } from "@/config/config";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 export default function BlogPage({ blog }) {
+  const router = useRouter();
+
   console.log(blog, "BLOG DATA");
+
+  const handleGoBack = () => {
+    router.back();
+  };
+
   const getYouTubeVideoId = (url) => {
     const regExp =
       /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
@@ -104,7 +112,7 @@ export default function BlogPage({ blog }) {
   };
 
   return (
-    <div className="font-sora min-h-screen bg-white">
+    <div className="font-sora min-h-screen bg-white overflow-hidden">
       {/* Hero Container */}
       <div className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh] overflow-hidden">
         <Image
@@ -118,21 +126,48 @@ export default function BlogPage({ blog }) {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-black bg-opacity-30 flex items-end">
-          <div className="container mx-auto px-4 pb-8 md:pb-12 lg:pb-16">
-            <div className="max-w-4xl">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 leading-tight">
-                {blog?.title || "Blog Title"}
-              </h1>
-              <p className="text-lg md:text-xl text-gray-200 mb-4">
-                {blog?.description || "Blog description"}
-              </p>
-              <div className="flex items-center text-gray-300 text-sm md:text-base">
-                <span>By {blog?.author || "Anonymous"}</span>
-                <span className="mx-2">•</span>
-                <span>{blog?.date || "Date not available"}</span>
-                <span className="mx-2">•</span>
-                <span>{blog?.category?.title || "Uncategorized"}</span>
+        <div className="absolute inset-0 bg-black bg-opacity-30 flex flex-col">
+          {/* Back Arrow */}
+          <div className="container mx-auto px-4 pt-6 md:pt-8">
+            <button
+              onClick={handleGoBack}
+              className="flex items-center space-x-2 text-white hover:text-gray-200 transition-colors group"
+            >
+              <svg
+                className="w-5 h-5 md:w-6 md:h-6 transform group-hover:-translate-x-1 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+              <span className="text-sm md:text-base font-medium">Back</span>
+            </button>
+          </div>
+
+          {/* Existing Hero Content */}
+          <div className="flex-1 flex items-end">
+            <div className="container mx-auto px-4 pb-8 md:pb-12 lg:pb-16">
+              <div className="max-w-4xl">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 leading-tight">
+                  {blog?.title || "Blog Title"}
+                </h1>
+                <p className="text-lg md:text-xl text-gray-200 mb-4">
+                  {blog?.description || "Blog description"}
+                </p>
+                <div className="flex items-center text-gray-300 text-sm md:text-base">
+                  <span>By {blog?.author || "Anonymous"}</span>
+                  <span className="mx-2">•</span>
+                  <span>{blog?.date || "Date not available"}</span>
+                  <span className="mx-2">•</span>
+                  <span>{blog?.category?.title || "Uncategorized"}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -203,10 +238,10 @@ export default function BlogPage({ blog }) {
                         {blog.pdf.map((pdfFile, index) => (
                           <div
                             key={pdfFile.id || index}
-                            className="flex items-center justify-between p-4 bg-white rounded-lg border border-gray-200 hover:border-blue-300 transition-colors"
+                            className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 bg-white rounded-lg border border-gray-200 hover:border-blue-300 transition-colors space-y-3 sm:space-y-0"
                           >
-                            <div className="flex items-center space-x-3">
-                              <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
+                            <div className="flex items-start space-x-3 min-w-0 flex-1">
+                              <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
                                 <svg
                                   className="w-5 h-5 text-red-600"
                                   fill="currentColor"
@@ -219,25 +254,27 @@ export default function BlogPage({ blog }) {
                                   />
                                 </svg>
                               </div>
-                              <div>
-                                <h4 className="font-medium text-gray-900">
+                              <div className="min-w-0 flex-1">
+                                <h4 className="font-medium text-gray-900 break-words text-sm sm:text-base">
                                   {pdfFile.name || "Document"}
                                 </h4>
-                                <p className="text-sm text-gray-500">
+                                <p className="text-xs sm:text-sm text-gray-500 mt-1">
                                   PDF Document •{" "}
                                   {(pdfFile.size / 1024).toFixed(2)} MB
                                 </p>
                               </div>
                             </div>
-                            <a
-                              href={`${API_BASE_URL}${pdfFile.url}`}
-                              download
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
-                            >
-                              Download
-                            </a>
+                            <div className="flex-shrink-0 w-full sm:w-auto">
+                              <a
+                                href={`${API_BASE_URL}${pdfFile.url}`}
+                                download
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
+                              >
+                                Download
+                              </a>
+                            </div>
                           </div>
                         ))}
                       </div>
@@ -256,8 +293,8 @@ export default function BlogPage({ blog }) {
                     <h3 className="text-lg font-bold text-gray-900 mb-4">
                       About the Author
                     </h3>
-                    <div className="flex items-center space-x-4">
-                      <div className="relative w-16 h-16 rounded-full overflow-hidden">
+                    <div className="flex  items-center space-x-4">
+                      <div className="relative flex-shrink-0 w-16 h-16 rounded-full overflow-hidden">
                         <Image
                           src={`${API_BASE_URL}${blog?.avatar?.url}`}
                           alt={
@@ -282,43 +319,51 @@ export default function BlogPage({ blog }) {
                 )}
 
                 {/* Blog Info */}
-                <div className="bg-white border border-gray-200 rounded-lg p-6">
+                <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6">
                   <h3 className="text-lg font-bold text-gray-900 mb-4">
                     Article Info
                   </h3>
                   <div className="space-y-3">
-                    <div className="flex justify-between">
-                      <span className="text-sm text-gray-600">Category:</span>
-                      <span className="text-sm font-medium text-gray-900">
+                    <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-2">
+                      <span className="text-sm text-gray-600 flex-shrink-0">
+                        Category:
+                      </span>
+                      <span className="text-sm font-medium text-gray-900 text-left sm:text-right break-words">
                         {blog?.category?.title}
                       </span>
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-sm text-gray-600">Published:</span>
-                      <span className="text-sm font-medium text-gray-900">
+                    <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-2">
+                      <span className="text-sm text-gray-600 flex-shrink-0">
+                        Published:
+                      </span>
+                      <span className="text-sm font-medium text-gray-900 text-left sm:text-right break-words">
                         {blog?.date}
                       </span>
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-sm text-gray-600">Author:</span>
-                      <span className="text-sm font-medium text-gray-900">
+                    <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-2">
+                      <span className="text-sm text-gray-600 flex-shrink-0">
+                        Author:
+                      </span>
+                      <span className="text-sm font-medium text-gray-900 text-left sm:text-right break-words">
                         {blog?.author}
                       </span>
                     </div>
                     {blog?.youtubeUrl && blog.youtubeUrl.length > 0 && (
-                      <div className="flex justify-between">
-                        <span className="text-sm text-gray-600">Videos:</span>
-                        <span className="text-sm font-medium text-gray-900">
+                      <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-2">
+                        <span className="text-sm text-gray-600 flex-shrink-0">
+                          Videos:
+                        </span>
+                        <span className="text-sm font-medium text-gray-900 text-left sm:text-right">
                           {blog.youtubeUrl.length}
                         </span>
                       </div>
                     )}
                     {blog?.pdf && blog.pdf.length > 0 && (
-                      <div className="flex justify-between">
-                        <span className="text-sm text-gray-600">
+                      <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-2">
+                        <span className="text-sm text-gray-600 flex-shrink-0">
                           Resources:
                         </span>
-                        <span className="text-sm font-medium text-gray-900">
+                        <span className="text-sm font-medium text-gray-900 text-left sm:text-right">
                           {blog.pdf.length} PDFs
                         </span>
                       </div>

@@ -1,9 +1,15 @@
 import React from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { API_BASE_URL } from "@/config/config";
 
 const SingleNews = ({ news }) => {
+  const router = useRouter();
   console.log(news, "NEWS DATA");
+
+  const handleGoBack = () => {
+    router.back();
+  };
 
   const getYouTubeVideoId = (url) => {
     const regExp =
@@ -122,19 +128,46 @@ const SingleNews = ({ news }) => {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 leading-tight">
-                {news?.title || "News Title"}
-              </h1>
-              <p className="text-lg md:text-xl text-gray-200 mb-4">
-                {news?.description || "News description"}
-              </p>
-              <div className="flex items-center justify-center text-gray-300 text-sm md:text-base">
-                {/* <span>{news?.date || "Date not available"}</span> */}
-                {/* <span className="mx-2">•</span> */}
-                {/* <span>{news?.category || "Uncategorized"}</span> */}
+        <div className="absolute inset-0 bg-black bg-opacity-30 flex flex-col">
+          {/* Back Arrow */}
+          <div className="container mx-auto px-4 pt-6 md:pt-8">
+            <button
+              onClick={handleGoBack}
+              className="flex items-center space-x-2 text-white hover:text-gray-200 transition-colors group"
+            >
+              <svg
+                className="w-5 h-5 md:w-6 md:h-6 transform group-hover:-translate-x-1 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+              <span className="text-sm md:text-base font-medium">Back</span>
+            </button>
+          </div>
+
+          {/* Existing Hero Content */}
+          <div className="flex-1 flex items-center">
+            <div className="container mx-auto px-4">
+              <div className="max-w-4xl mx-auto text-center">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 leading-tight">
+                  {news?.title || "News Title"}
+                </h1>
+                <p className="text-lg md:text-xl text-gray-200 mb-4">
+                  {news?.description || "News description"}
+                </p>
+                <div className="flex items-center justify-center text-gray-300 text-sm md:text-base">
+                  {/* <span>{news?.date || "Date not available"}</span> */}
+                  {/* <span className="mx-2">•</span> */}
+                  {/* <span>{news?.category || "Uncategorized"}</span> */}
+                </div>
               </div>
             </div>
           </div>
