@@ -78,7 +78,7 @@ const AnimatedTeamCard = ({
   const end = start + (1 / totalMembers) * 1.5; // Multiply by 1.5 to make animation smoother
 
   // Changed from vertical (y: [100, 0]) to horizontal (x: [100, 0]) - coming from right
-  const y = useTransform(scrollYProgress, [start, end], [300, 0]);
+  const y = useTransform(scrollYProgress, [start, end], [100, 0]);
   const opacity = useTransform(scrollYProgress, [start, end], [0, 1]);
 
   return (
@@ -510,7 +510,7 @@ const AboutAtelic = ({ data }) => {
     <section
       ref={sectionRef}
       className="z-10 font-sora overflow-visible bg-[#f3f3f3] max-w-[1920px] mx-auto w-full relative"
-      style={{ height: "150vh" }} // Provides the scrollable area
+      style={{ height: "210vh" }} // Provides the scrollable area
       onMouseEnter={() => setShowArrows(true)}
       onMouseLeave={() => setShowArrows(false)}
     >
