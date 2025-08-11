@@ -9,6 +9,7 @@ const nextConfig = {
       "http://localhost:1337/uploads",
       "http://138.68.136.194/uploads",
       "http://192.168.80.25:1337/uploads",
+      "https://cms.atelic.ai/uploads",
     ],
     remotePatterns: [
       {
@@ -43,6 +44,11 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "atelic-strapi.collabdash.io",
+        pathname: "/uploads/**",
+      },
+      {
+        protocol: "https",
+        hostname: "cms.atelic.ai",
         pathname: "/uploads/**",
       },
     ],
