@@ -16,6 +16,8 @@ import { RedefiningSuccess } from "@/components/Services/RedefiningSuccess";
 import { useBackground } from "@/context/BackgroundContext";
 import Loader from "@/components/Loader/Loader";
 import Footer from "@/components/Footer/Footer";
+import { NextSeo } from "next-seo";
+import Head from "next/head";
 
 const Services = () => {
   const container = useRef();
@@ -100,8 +102,75 @@ const Services = () => {
   if (!dataFetched) {
     return <Loader />;
   }
+  const servicesSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "Artificial Intelligence Consulting",
+    provider: {
+      "@type": "Organization",
+      name: "Atelic AI",
+      url: "https://atelic.ai",
+    },
+    description:
+      "AI consulting and development services to help businesses automate and innovate.",
+  };
   return (
     <section ref={container}>
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesSchema) }}
+        />
+      </Head>
+      <NextSeo
+        title="Our Services"
+        description="Explore Atelic AI's comprehensive services including cloud computing, AI solutions, machine learning, data analytics, and enterprise technology tailored to empower your business."
+        canonical="https://atelic.ai/services"
+        additionalMetaTags={[
+          {
+            name: "keywords",
+            content:
+              "services, cloud computing, AI solutions, machine learning, data analytics, enterprise solutions, NVIDIA, Microsoft, AWS, GitHub, OpenStack, VMware, Google Cloud, Kubeflow, Apache Druid, Apache Kafka, big data, AI infrastructure, DevOps, cloud migration, software development, data engineering, MLOps, SaaS solutions, container orchestration, Kubernetes, AI-powered analytics, distributed systems, edge computing, neural networks, enterprise AI, hybrid cloud, data visualization",
+          },
+          { name: "robots", content: "index, follow" },
+          { name: "author", content: "Atelic AI Team" },
+          { name: "viewport", content: "width=device-width, initial-scale=1" },
+          { name: "revisit-after", content: "7 days" },
+          { name: "rating", content: "General" },
+          { name: "distribution", content: "global" },
+          { name: "language", content: "English" },
+          { name: "copyright", content: "© 2025 Atelic AI" },
+          { name: "expires", content: "never" },
+          { name: "generator", content: "Next.js & next-seo" },
+          {
+            name: "category",
+            content: "Technology, Artificial Intelligence, Services",
+          },
+        ]}
+        openGraph={{
+          url: "https://atelic.ai/services",
+          title: "Our Services",
+          description:
+            "Explore Atelic AI's comprehensive services including cloud computing, AI solutions, machine learning, data analytics, and enterprise technology tailored to empower your business.",
+          images: [
+            {
+              url: "https://atelic.com/images/services-og-image.jpg",
+              width: 1200,
+              height: 630,
+              alt: "Atelic AI Services",
+            },
+          ],
+          site_name: "Atelic AI",
+          type: "website",
+          locale: "en_US",
+        }}
+        twitter={{
+          handle: "@atelic",
+          site: "@atelic",
+          cardType: "summary_large_image",
+        }}
+      />
+
       <HeroServices sections={hero} />
       <HowWeWork sections={[howWeWork, servicesWork]} />
       <OurSolutions sections={solutions[0]} />

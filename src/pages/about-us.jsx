@@ -18,6 +18,7 @@ import Footer from "@/components/Footer/Footer";
 import { HeroAboutUs } from "@/components/HeroScreens/HeroScreens";
 import Loader from "@/components/Loader/Loader";
 import { useBackground } from "@/context/BackgroundContext";
+import { NextSeo } from "next-seo";
 
 const AboutUsPage = () => {
   const container = useRef();
@@ -107,6 +108,61 @@ const AboutUsPage = () => {
 
   return (
     <section ref={container}>
+      <NextSeo
+        title="About Us"
+        description="Discover Atelic AI’s mission, vision, and expertise in delivering innovative artificial intelligence solutions that empower businesses worldwide."
+        canonical="https://atelic.ai/about"
+        additionalMetaTags={[
+          {
+            name: "keywords",
+            content:
+              "about Atelic AI, AI company profile, artificial intelligence experts, AI innovation, AI solutions provider, Atelic AI mission, AI company vision, AI technology team",
+          },
+          { name: "robots", content: "index, follow" },
+          { name: "author", content: "Atelic AI Team" },
+          { name: "viewport", content: "width=device-width, initial-scale=1" },
+          { name: "revisit-after", content: "7 days" },
+          { name: "rating", content: "General" },
+          { name: "distribution", content: "global" },
+          { name: "language", content: "English" },
+          { name: "copyright", content: "© 2025 Atelic AI" },
+          { name: "expires", content: "never" },
+          { name: "generator", content: "Next.js & next-seo" },
+          {
+            name: "category",
+            content: "Technology, Artificial Intelligence, Company",
+          },
+        ]}
+        openGraph={{
+          url: "https://atelic.ai/about",
+          title: "About Us",
+          description:
+            "Learn about Atelic AI’s mission, vision, and the innovative team driving cutting-edge artificial intelligence solutions worldwide.",
+          images: [
+            {
+              url: "https://atelic.com/images/about-og-image.jpg",
+              width: 1200,
+              height: 630,
+              alt: "Atelic AI Team and Mission",
+            },
+            {
+              url: "https://atelic.com/images/office-photo.jpg",
+              width: 800,
+              height: 600,
+              alt: "Atelic AI Office",
+            },
+          ],
+          site_name: "Atelic AI",
+          type: "website",
+          locale: "en_US",
+        }}
+        twitter={{
+          handle: "@atelic",
+          site: "@atelic",
+          cardType: "summary_large_image",
+        }}
+      />
+
       <HeroAboutUs sections={mainHero} />
       <Vision sections={[solutions[0], solutions[1]]} />
 

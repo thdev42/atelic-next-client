@@ -15,6 +15,8 @@ import NewsHero from "@/components/News/NewsHero";
 import NewsLetter from "@/components/News/NewsLetter";
 import Loader from "@/components/Loader/Loader";
 import { useBackground } from "@/context/BackgroundContext";
+import { NextSeo } from "next-seo";
+import Head from "next/head";
 
 const NewsPage = () => {
   const container = useRef();
@@ -94,11 +96,88 @@ const NewsPage = () => {
   const newsLetter = sections?.find(
     (sec) => sec?.__component === "shared.appointment"
   );
+  const newsArticleSchema = {
+    "@context": "https://schema.org",
+    "@type": "News",
+    headline: "Latest Innovations in Artificial Intelligence at Atelic AI",
+    image: ["https://atelic.ai/images/news-article-image.jpg"],
+
+    author: {
+      "@type": "Person",
+      name: "Atelic AI Team",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Atelic AI",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://atelic.ai/images/logo.png",
+      },
+    },
+    description:
+      "Stay updated with the latest news and breakthroughs in artificial intelligence from Atelic AI.",
+  };
+
   if (!dataFetched) {
     return <Loader />;
   }
   return (
     <>
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(newsArticleSchema),
+          }}
+        />
+      </Head>
+      <NextSeo
+        title="Latest AI News & Updates"
+        description="Stay updated with the latest breakthroughs, trends, and insights in artificial intelligence, machine learning, and technology at Atelic AI."
+        additionalMetaTags={[
+          {
+            name: "keywords",
+            content:
+              "AI news, artificial intelligence updates, machine learning news, AI trends, technology news, AI breakthroughs, deep learning, data science news, AI research, tech industry updates, AI articles, AI developments, AI innovation news",
+          },
+          { name: "robots", content: "index, follow" },
+          { name: "author", content: "Atelic AI Team" },
+          { name: "viewport", content: "width=device-width, initial-scale=1" },
+          { name: "revisit-after", content: "7 days" },
+          { name: "rating", content: "General" },
+          { name: "distribution", content: "global" },
+          { name: "language", content: "English" },
+          { name: "copyright", content: "© 2025 Atelic AI" },
+          { name: "expires", content: "never" },
+          { name: "generator", content: "Next.js & next-seo" },
+          {
+            name: "category",
+            content: "Technology, Artificial Intelligence, News",
+          },
+        ]}
+        openGraph={{
+          title: "Latest AI News & Updates",
+          description:
+            "Stay updated with the latest breakthroughs, trends, and insights in artificial intelligence and technology at Atelic AI.",
+          url: "https://atelic.ai/news",
+          type: "website",
+          locale: "en_US",
+          images: [
+            {
+              url: "https://atelic.ai/images/news-og.jpg",
+              width: 1200,
+              height: 630,
+              alt: "Atelic AI News Preview",
+            },
+          ],
+        }}
+        twitter={{
+          handle: "@atelic",
+          site: "@atelic",
+          cardType: "summary_large_image",
+        }}
+      />
+
       <NewsHero sections={mainHero} />
       <AiInsights sections={aiInsights} />
       <Blogs sections={blogs} />
