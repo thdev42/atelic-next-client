@@ -14,7 +14,8 @@ import Footer from "@/components/Footer/Footer";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function FinalResult() {
-  const { setIsShowNav, setBackground } = useBackground();
+  const { setIsShowNav, setBackground, setIsDark, setSlideProgress } =
+    useBackground();
   const [step, setStep] = useState(2);
   const [selectedCategory, setSelectedCategory] = useState(""); // selected id
   const [selectedGoal, setSelectedGoal] = useState(""); // selected subOption id
@@ -31,6 +32,8 @@ export default function FinalResult() {
   useEffect(() => {
     setBackground("#fdfdfd", "color");
     setIsShowNav(true);
+    setSlideProgress(0);
+    setIsDark(false);
   }, []);
   const { hydrateFromQuery } = useFormContext();
 
@@ -175,9 +178,12 @@ export default function FinalResult() {
           {/* Step 2 */}
           {step === 2 && (
             <>
-              <h1 className="text-2xl md:text-2xl font-medium mb-10">
-                {`Select ${selectedCategoryObj?.label} Support:`}
-              </h1>
+              <div className="text-2xl md:text-2xl font-medium mb-10">
+                <h1>{`Select ${selectedCategoryObj?.label} Support:`}</h1>
+                <span className="text-lg md:text-[20px] font-medium">
+                  (Only Select One)
+                </span>
+              </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-x-7 gap-5 mb-10">
                 {goalsStep2.map((goal) => (
@@ -377,7 +383,7 @@ export default function FinalResult() {
                             }}
                             className="text-white font-semibold text-xl py-5 px-12 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg animate-slideInUp"
                           >
-                            Book an Appointment
+                            Book an Appointment to Get Your Free Ai Assessment
                           </button>
                         </div>
                       )}
@@ -429,7 +435,7 @@ export default function FinalResult() {
                           }}
                           className="text-white font-semibold py-5 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg animate-slideInUp"
                         >
-                          Book an Appointment
+                          Book an Appointment to Get Your Free Ai Assessment
                         </button>
                       </div>
                     )}

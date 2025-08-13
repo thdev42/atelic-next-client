@@ -23,7 +23,7 @@ const HeroSection = ({ scrollYSProgress, section }) => {
   const [shouldAutoPlay, setShouldAutoPlay] = useState(true);
 
   const autoPlayRef = useRef(null);
-  const AUTO_PLAY_DELAY = 6000; // 6 seconds
+  const AUTO_PLAY_DELAY = 15000; // 15 seconds
 
   const { setBackground, setActiveHeroIndex, setSlideProgress } =
     useBackground();
@@ -224,6 +224,7 @@ const HeroSection = ({ scrollYSProgress, section }) => {
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
+        onClick={resetAutoPlayTimer}
       >
         <div className="relative w-full h-full overflow-hidden">
           <AnimatePresence mode="wait" custom={slideDirection}>
