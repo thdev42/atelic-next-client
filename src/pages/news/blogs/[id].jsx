@@ -18,6 +18,7 @@ import BlogPage from "@/components/News/Blog";
 import { fetchNewsPageBlogsOnly } from "@/lib/api/blogs";
 import { fetchUpdatedAt } from "@/lib/updatedAt";
 import Head from "next/head";
+import { NextSeo } from "next-seo";
 
 const SingleBlogPage = () => {
   const container = useRef(null);

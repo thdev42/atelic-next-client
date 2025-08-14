@@ -19,6 +19,7 @@ import { fetchUpdatedAt } from "@/lib/updatedAt";
 import SingleNews from "@/components/News/SingleNews";
 import { fetchNewsPageAIInsightsOnly } from "@/lib/api/singleNews";
 import Head from "next/head";
+import { NextSeo } from "next-seo";
 
 const SingleNewsPage = () => {
   const container = useRef(null);
