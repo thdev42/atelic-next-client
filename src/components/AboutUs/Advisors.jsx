@@ -208,9 +208,9 @@ export const Advisors = ({ sections }) => {
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
             >
               {advisors.map((advisor, index) => (
-                <div key={index} className="w-full flex-shrink-0 px-2">
-                  <div className="w-full max-w-[496px] h-[279px] bg-white border border-white shadow-md rounded-[29px] p-6 mx-auto flex flex-col items-start justify-start text-left">
-                    <div className="space-y-5">
+                <div key={index} className="w-full flex-shrink-0">
+                  <div className="w-full max-w-[496px]  bg-white border border-white shadow-md rounded-[29px] p-6 mx-auto flex flex-col items-start justify-start text-left">
+                    <div className="">
                       <div className="w-full flex items-center justify-between mb-4">
                         <img
                           src={`${API_BASE_URL}${advisor?.image?.url}`}
