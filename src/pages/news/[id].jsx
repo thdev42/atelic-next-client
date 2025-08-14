@@ -18,6 +18,7 @@ import Footer from "@/components/Footer/Footer";
 import { fetchUpdatedAt } from "@/lib/updatedAt";
 import SingleNews from "@/components/News/SingleNews";
 import { fetchNewsPageAIInsightsOnly } from "@/lib/api/singleNews";
+import Head from "next/head";
 
 const SingleNewsPage = () => {
   const container = useRef(null);
@@ -106,6 +107,24 @@ const SingleNewsPage = () => {
     fetchInsightData();
   }, [id]);
 
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Atelic AI",
+    url: `https://atelic.ai/news/${id}`,
+    logo: "https://atelic.com/images/logo.png",
+    sameAs: [
+      "https://www.linkedin.com/company/atelic",
+      "https://twitter.com/atelic",
+    ],
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "+971 50 518 8431",
+      contactType: "Contact Us",
+      email: "info@atelic.ai",
+    },
+  };
+
   const { scrollYProgress } = useScroll({
     target: container,
     offset: ["start start", "end end"],
@@ -115,6 +134,63 @@ const SingleNewsPage = () => {
 
   return (
     <div ref={container}>
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema),
+          }}
+        />
+      </Head>
+
+      <NextSeo
+        title={`${insight?.title}`}
+        description={`${insight?.description}`}
+        canonical="https://atelic.ai/"
+        additionalMetaTags={[
+          {
+            name: "keywords",
+            content:
+              "artificial intelligence solutions, AI development, machine learning, AI automation, AI chatbots, predictive analytics, AI consulting, enterprise AI, data science, AI innovation",
+          },
+          { name: "robots", content: "index, follow" },
+          { name: "author", content: "Atelic AI Team" },
+          { name: "viewport", content: "width=device-width, initial-scale=1" },
+          { name: "revisit-after", content: "7 days" },
+          { name: "rating", content: "General" },
+          { name: "distribution", content: "global" },
+          { name: "language", content: "English" },
+          { name: "copyright", content: "© 2025 Atelic AI" },
+          { name: "expires", content: "never" },
+          { name: "generator", content: "Next.js & next-seo" },
+          {
+            name: "category",
+            content: "Technology, Artificial Intelligence, Web Solutions",
+          },
+        ]}
+        openGraph={{
+          url: "https://atelic.ai/",
+          title: "Atelic AI",
+          description:
+            "Atelic AI delivers innovative AI software, chatbots, and predictive analytics to help businesses automate, innovate, and grow.",
+          images: [
+            {
+              url: "https://atelic.com/images/og-image.jpg",
+              width: 1200,
+              height: 630,
+              alt: "Atelic AI Website Preview",
+            },
+          ],
+          site_name: "Atelic AI",
+          type: "website",
+          locale: "en_US",
+        }}
+        twitter={{
+          handle: "@atelic",
+          site: "@atelic",
+          cardType: "summary_large_image",
+        }}
+      />
       {insight ? (
         <SingleNews news={insight} />
       ) : (
