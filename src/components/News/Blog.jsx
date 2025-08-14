@@ -112,64 +112,67 @@ export default function BlogPage({ blog }) {
   };
 
   return (
-    <div className="font-sora min-h-screen  bg-white">
-      {/* Hero Container */}
-      <div className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh] overflow-hidden">
-        <Image
-          src={`${API_BASE_URL}${blog?.image?.url}`}
-          alt={
-            blog?.image?.alternativeText ||
-            blog?.title ||
-            "Blog post hero image"
-          }
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-black bg-opacity-30 flex flex-col">
-          {/* Back Arrow */}
+    <div className="font-sora min-h-screen bg-white">
+      {/* Hero Container - Dynamic Height Based on Content */}
+      <div className="relative w-full min-h-[400px] md:min-h-[500px] flex flex-col">
+        {/* Background Image Layer */}
+        <div className="absolute inset-0">
+          <Image
+            src={`${API_BASE_URL}${blog?.image?.url}`}
+            alt={
+              blog?.image?.alternativeText ||
+              blog?.title ||
+              "Blog post hero image"
+            }
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-black bg-opacity-30" />
+        </div>
 
-          <div className="px-4 sm:px-8 2xl:px-[178px] md:px-12 lg:px-[100px]">
-            <div className="container mx-auto pb-3 px-4 pt-6 md:pt-8">
-              <button
-                onClick={handleGoBack}
-                className="flex items-center  space-x-2 text-white hover:text-gray-200 transition-colors group"
+        {/* Content Layer */}
+        <div className="relative z-10 flex flex-col flex-1 px-4 sm:px-8 2xl:px-[178px] md:px-12 lg:px-[100px]">
+          {/* Back Button */}
+          <div className="container mx-auto pb-3 px-4 pt-6 md:pt-8">
+            <button
+              onClick={handleGoBack}
+              className="flex items-center space-x-2 text-white hover:text-gray-200 transition-colors group"
+            >
+              <svg
+                className="w-5 h-5 md:w-6 md:h-6 transform group-hover:-translate-x-1 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                <svg
-                  className="w-5 h-5 md:w-6 md:h-6 transform group-hover:-translate-x-1 transition-transform"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 19l-7-7 7-7"
-                  />
-                </svg>
-                <span className="text-sm md:text-base font-medium">Back</span>
-              </button>
-            </div>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+              <span className="text-sm md:text-base font-medium">Back</span>
+            </button>
+          </div>
 
-            {/* Existing Hero Content */}
-            <div className=" flex-1 flex items-end">
-              <div className="container mx-auto px-4 pb-8 md:pb-12 lg:pb-16">
-                <div className="max-w-4xl">
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl font-bold text-white mb-4 leading-tight">
-                    {blog?.title || "Blog Title"}
-                  </h1>
-                  <p className="text-lg md:text-xl text-gray-200 mb-4">
-                    {blog?.description || "Blog description"}
-                  </p>
-                  <div className="flex items-center text-gray-300 text-sm md:text-base">
-                    <span>By {blog?.author || "Anonymous"}</span>
-                    <span className="mx-2">•</span>
-                    <span>{blog?.date || "Date not available"}</span>
-                    <span className="mx-2">•</span>
-                    <span>{blog?.category?.title || "Uncategorized"}</span>
-                  </div>
+          {/* Hero Content - This will determine the height */}
+          <div className="flex-1 flex items-center py-8 md:py-12 lg:py-16">
+            <div className="container mx-auto px-4">
+              <div className="max-w-4xl">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl font-bold text-white mb-4 leading-tight">
+                  {blog?.title || "Blog Title"}
+                </h1>
+                <p className="text-lg md:text-xl text-gray-200 mb-4 max-w-3xl">
+                  {blog?.description || "Blog description"}
+                </p>
+                <div className="flex flex-wrap items-center text-gray-300 text-sm md:text-base gap-2">
+                  <span>By {blog?.author || "Anonymous"}</span>
+                  <span className="hidden sm:inline">•</span>
+                  <span>{blog?.date || "Date not available"}</span>
+                  <span className="hidden sm:inline">•</span>
+                  <span>{blog?.category?.title || "Uncategorized"}</span>
                 </div>
               </div>
             </div>
@@ -178,7 +181,7 @@ export default function BlogPage({ blog }) {
       </div>
 
       {/* Body Copy with Sidebar Layout */}
-      <div className="container px-4 sm:px-8 2xl:px-[178px] md:px-12 lg:px-[100px] mx-auto  py-8 md:py-12 lg:py-16">
+      <div className="container px-4 sm:px-8 2xl:px-[178px] md:px-12 lg:px-[100px] mx-auto py-8 md:py-12 lg:py-16">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12">
             {/* Main Content - Takes up 3/4 of the width */}
