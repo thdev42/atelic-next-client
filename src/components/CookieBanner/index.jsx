@@ -5,10 +5,8 @@ export const CookiesBanner = () => {
   const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
-    // Check if user has already made a choice
-    const cookieConsent = sessionStorage.getItem("cookieConsent");
+    const cookieConsent = localStorage.getItem("cookieConsent");
     if (!cookieConsent) {
-      // Show banner after a small delay for better UX
       setTimeout(() => {
         setShowBanner(true);
       }, 1000);
@@ -16,12 +14,12 @@ export const CookiesBanner = () => {
   }, []);
 
   const handleAccept = () => {
-    sessionStorage.setItem("cookieConsent", "accepted");
+    localStorage.setItem("cookieConsent", "accepted");
     setShowBanner(false);
   };
 
   const handleDecline = () => {
-    sessionStorage.setItem("cookieConsent", "declined");
+    localStorage.setItem("cookieConsent", "declined");
     setShowBanner(false);
   };
 
