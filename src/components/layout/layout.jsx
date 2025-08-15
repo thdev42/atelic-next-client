@@ -88,7 +88,15 @@ const LayoutWrapper = ({ children }) => (
     <NavProvider>
       <LoaderProvider>
         <FormProvider>
-          <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
+          <Toaster
+            position="top-center"
+            toastOptions={{
+              style: {
+                fontFamily: "'Sora', sans-serif",
+              },
+              duration: 3000,
+            }}
+          />
           <Layout>{children}</Layout>
         </FormProvider>
       </LoaderProvider>
