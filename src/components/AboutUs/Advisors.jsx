@@ -131,7 +131,7 @@ export const Advisors = ({ sections }) => {
   return (
     <section className="font-sora relative bg-[#E8E8E8] text-black w-full max-w-[1920px] mx-auto overflow-hidden py-16">
       <div className="2xl:px-[178px] md:px-12 lg:px-[100px] mx-auto px-6 sm:px-10 text-left">
-        <h2 className="text-4xl md:text-5xl font-light">
+        <h2 className="sm:text-left text-center text-4xl md:text-5xl font-light">
           {sections?.heading?.map((part, index) => (
             <span
               key={part.id || index}
@@ -145,7 +145,9 @@ export const Advisors = ({ sections }) => {
           ))}
         </h2>
 
-        <p className="text-gray-600 mt-4 max-w-3xl">{sections?.subHeading}</p>
+        <p className="text-gray-600 sm:text-left text-center mt-4 max-w-3xl">
+          {sections?.subHeading}
+        </p>
 
         {/* Desktop Grid */}
         <div className="mt-16 hidden lg:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">

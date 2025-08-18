@@ -380,7 +380,7 @@ const AboutAtelic = ({ data }) => {
         <div className="px-4 sm:px-8 2xl:px-[178px] md:px-12 lg:px-[100px]">
           <div className="md:flex justify-between items-start md:space-x-10 2xl:mb-16 mb-12">
             <h2
-              className={`${headingStylesMobile} font-semibold whitespace-nowrap`}
+              className={`${headingStylesMobile} sm:text-left text-center font-semibold whitespace-nowrap`}
               data-aos="fade-right"
             >
               {data?.heading?.map((part) => (
@@ -391,7 +391,7 @@ const AboutAtelic = ({ data }) => {
               ))}
             </h2>
             <p
-              className="2xl:text-[22px] text-gray-600 mt-4 md:mt-0 max-w-3xl"
+              className="2xl:text-[22px] sm:text-left text-center text-gray-600 mt-4 md:mt-0 max-w-3xl"
               data-aos="fade-left"
               data-aos-delay="200"
             >
@@ -436,7 +436,7 @@ const AboutAtelic = ({ data }) => {
                     key={`${currentSlide}-${index}`}
                     data-aos="fade-up"
                     data-aos-delay={index * 150}
-                    className="group pt-4 px-6 text-center rounded-t-[400px] transition duration-200 flex flex-col items-center bg-white hover:bg-gradient-to-b hover:from-[#F21B2A] hover:to-[#335F86] hover:text-white relative overflow-visible w-[260px] h-[530px] mx-auto"
+                    className="group pt-4 px-6 text-center rounded-t-[400px] transition duration-200 flex flex-col items-center bg-white hover:bg-gradient-to-b hover:from-[#F21B2A] hover:to-[#335F86] hover:text-white relative overflow-visible w-[260px] mx-auto"
                   >
                     <div className="flex-shrink-0 rounded-full overflow-hidden border-[5px] border-white transition-all duration-500 group-hover:border-opacity-80 group-hover:shadow-2xl w-[190px] h-[190px]">
                       <Image

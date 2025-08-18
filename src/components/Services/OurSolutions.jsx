@@ -35,7 +35,7 @@ const OurSolutions = ({ sections }) => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 xl:gap-12 items-start lg:items-center">
             <div>
               <h2
-                className={`${headingStyle} font-medium text-black leading-tight`}
+                className={`${headingStyle} sm:text-left text-center font-medium text-black leading-tight`}
               >
                 {/* Our <span className="font-bold">Solutions</span> */}
                 {formatHeading(sections?.heading)}
@@ -43,7 +43,7 @@ const OurSolutions = ({ sections }) => {
             </div>
             <div>
               <p
-                className={`${paragraphStyles} text-black leading-relaxed mt-4 lg:mt-0`}
+                className={`${paragraphStyles} sm:text-left text-center text-black leading-relaxed mt-4 lg:mt-0`}
               >
                 {sections?.subHeading}
               </p>

@@ -21,11 +21,13 @@ const OurJourney = ({ sections }) => {
               }}
             ></div>
 
-            <h2 className={`${headingStyle} font-light relative z-10`}>
+            <h2
+              className={`${headingStyle} sm:text-left text-center font-light relative z-10`}
+            >
               {formatHeading(sections?.heading)}
             </h2>
             <p
-              className={`text-black/80 ${paragraphStyles} mb-9  mx-auto lg:mx-0 2xl:leading-relaxed font-light mt-9 relative z-10`}
+              className={`text-black/80 ${paragraphStyles} sm:text-left text-center mb-9  mx-auto lg:mx-0 2xl:leading-relaxed font-light mt-9 relative z-10`}
             >
               {sections?.subHeading}
             </p>

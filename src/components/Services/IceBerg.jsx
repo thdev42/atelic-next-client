@@ -128,7 +128,7 @@ const AgenticCard = ({ solution, onClose, index }) => {
         x: shouldAnimateFromLeft ? -100 : 100, // Exit to left or right
       }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="font-sora  2xl:w-[413px] 2xl:h-[120px] lg:w-[370px] lg:h-[110px] md:w-[250px] md:h-[80px] sm:w-[200px] w-[150px] h-[50px] rounded-[66.5px] flex items-center  sm:px-6 px-3 bg-white shadow-lg cursor-pointer hover:shadow-xl transition-shadow duration-300"
+      className="font-sora  2xl:w-[413px] 2xl:h-[120px] lg:w-[370px] lg:h-[110px] md:w-[250px] md:h-[80px] sm:w-[200px] w-[150px] sm:h-[80px] h-[50px] rounded-[66.5px] flex items-center   sm:px-6 px-3 bg-white shadow-lg cursor-pointer hover:shadow-xl transition-shadow duration-300"
       onClick={onClose}
     >
       <div
@@ -138,7 +138,7 @@ const AgenticCard = ({ solution, onClose, index }) => {
         {String(index + 1).padStart(2, "0")}
       </div>
       <div className=" sm:ml-6 ml-2 text-left">
-        <h3 className="2xl:text-[15px] lg:text-[14px] md:text-[11px] sm:text-[10px] text-[9px] font-semibold text-black mb-1 sm:mb-1 mb-0">
+        <h3 className="2xl:text-[15px] lg:text-[14px] md:text-[11px] sm:text-[10px] text-[8px] font-semibold sm-pt-0 text-black ">
           {solution.title}
         </h3>
         <p className="4md:hidden block 2xl:text-[14px] lg:text-[13px] text-black leading-normal 2xl:leading-normal  whitespace-pre-line">
@@ -282,9 +282,9 @@ const IceBerg = ({ sections }) => {
                   (() => {
                     const words = sections.heading.split(" ");
                     return (
-                      <div className="lg:space-y-3">
+                      <div className="lg:space-y-3 sm:text-left text-center">
                         <motion.h2
-                          className={`${headingStyle}font-light text-black leading-tight`}
+                          className={`${headingStyle}  font-light text-black leading-tight`}
                           initial={{ opacity: 0, y: 30 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.6 }}
@@ -310,7 +310,7 @@ const IceBerg = ({ sections }) => {
                   transition={{ duration: 0.6, delay: 0.4 }}
                 >
                   <p
-                    className={`${paragraphStyles}  lg:text-md text-gray-700 leading-relaxed mt-4 lg:mt-0`}
+                    className={`${paragraphStyles} sm:text-left text-center  lg:text-md text-gray-700 leading-relaxed mt-4 lg:mt-0`}
                   >
                     {sections?.subHeading}
                   </p>
