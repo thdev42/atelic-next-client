@@ -209,12 +209,13 @@ const Appointment = ({ data }) => {
           phone: "",
           industry: "",
         });
+        toast.success("Appointment request submitted successfully!");
       } catch (error) {
         console.error("Submission error:", error);
+        toast.error("Please fix the errors in the form.");
         alert("Failed to submit appointment request. Please try again.");
       } finally {
         setIsSubmitting(false);
-        toast.success("Appointment request submitted successfully!");
       }
     } else {
       setErrors(newErrors);
