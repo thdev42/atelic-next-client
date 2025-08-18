@@ -213,7 +213,6 @@ const Appointment = ({ data }) => {
       } catch (error) {
         console.error("Submission error:", error);
         toast.error("Please fix the errors in the form.");
-        alert("Failed to submit appointment request. Please try again.");
       } finally {
         setIsSubmitting(false);
       }
